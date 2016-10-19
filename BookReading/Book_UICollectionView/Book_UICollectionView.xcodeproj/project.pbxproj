@@ -296,6 +296,7 @@
 				883DC1341DB5BD02009B82E1 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
