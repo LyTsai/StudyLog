@@ -125,6 +125,7 @@ class SampleTwoViewController: UICollectionViewController {
 // MARK: ------------------- Two -----------------------
 class SampleThreeViewController: UICollectionViewController {
     let CellIdentifier = "Cell Identifier"
+    let HeaderIdentifier = "HeaderIdentifier"
     
     var imageArray = [UIImage?]()
     var colorArray = [UIColor]()
@@ -136,6 +137,7 @@ class SampleThreeViewController: UICollectionViewController {
         setupLayout()
         
         collectionView?.registerClass(SampleThreeCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        collectionView?.registerClass(SampleTreeHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderIdentifier)
         collectionView?.allowsMultipleSelection = true
         collectionView?.indicatorStyle = .White
         
@@ -163,6 +165,7 @@ class SampleThreeViewController: UICollectionViewController {
         flowLayout.minimumLineSpacing = 20
         flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
         flowLayout.itemSize = CGSize(width: 100, height: 100)
+        flowLayout.headerReferenceSize = CGSize(width: 60, height: 50)
     }
     
     // dataSource
@@ -179,6 +182,13 @@ class SampleThreeViewController: UICollectionViewController {
         cell.backgroundColor = colorArray[indexPath.section]
         
         return cell
+    }
+    
+    
+    
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: HeaderIdentifier, forIndexPath: indexPath)
+        
     }
 }
 
@@ -207,7 +217,7 @@ class SampleThreeCell: UICollectionViewCell {
         contentView.addSubview(imageView)
         
         let selectedBackgroundView = UIView(frame: CGRectZero)
-        selectedBackgroundView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.7)
+        selectedBackgroundView.backgroundColor = UIColor.whiteColor().colorWithAlphaComponent(0.9)
         self.selectedBackgroundView = selectedBackgroundView
     }
     
@@ -226,4 +236,39 @@ class SampleThreeCell: UICollectionViewCell {
         backgroundColor = UIColor.whiteColor()
         image = nil
     }
+}
+
+class SampleTreeHeaderView: UICollectionReusableView {
+    var text = "This is header" {
+        willSet {
+            textLabel.text = newValue
+        }
+    }
+    
+    private let textLabel = UILabel()
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupUI()
+    }
+    
+    func setupUI() {
+        textLabel.frame = CGRectInset(bounds, 30, 10)
+        textLabel.backgroundColor = UIColor.clearColor()
+        textLabel.textColor = UIColor.whiteColor()
+//        textLabel.autoresizingMask = UIViewAutoresizing.FlexibleHeight|UIViewAutoresizing.FlexibleWidth
+        
+        addSubview(textLabel)
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        text = " "
+    }
+    
 }
