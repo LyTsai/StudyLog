@@ -122,10 +122,9 @@ class SampleTwoViewController: UICollectionViewController {
     }
 }
 
-// MARK: ------------------- Two -----------------------
+// MARK: ------------------- Three -----------------------
 class SampleThreeViewController: UICollectionViewController {
     let CellIdentifier = "Cell Identifier"
-    let HeaderIdentifier = "HeaderIdentifier"
     
     var imageArray = [UIImage?]()
     var colorArray = [UIColor]()
@@ -137,7 +136,6 @@ class SampleThreeViewController: UICollectionViewController {
         setupLayout()
         
         collectionView?.registerClass(SampleThreeCell.self, forCellWithReuseIdentifier: CellIdentifier)
-        collectionView?.registerClass(SampleTreeHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderIdentifier)
         collectionView?.allowsMultipleSelection = true
         collectionView?.indicatorStyle = .White
         
@@ -182,13 +180,6 @@ class SampleThreeViewController: UICollectionViewController {
         cell.backgroundColor = colorArray[indexPath.section]
         
         return cell
-    }
-    
-    
-    
-    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
-        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: HeaderIdentifier, forIndexPath: indexPath)
-        
     }
 }
 
@@ -238,15 +229,45 @@ class SampleThreeCell: UICollectionViewCell {
     }
 }
 
-class SampleTreeHeaderView: UICollectionReusableView {
-    var text = "This is header" {
+// MARK: ------------------- Four -----------------------
+class SampleFourPhotoModel {
+    var name = "Leaves"
+    var image: UIImage!
+    
+    class func photeModelWithName(name: String, image: UIImage) -> SampleFourPhotoModel {
+        let photeModel = SampleFourPhotoModel()
+        photeModel.name = name
+        photeModel.image = image
+        
+        return photeModel
+    }
+}
+
+class SampleFourSectionModel {
+    var selectionModelNoSelectionIndex: Int!
+    
+    var photoModels = [SampleFourPhotoModel]() // readonly
+    var selectedPhotoModelIndex: Int!
+    var hasBeenSelected = true // readonly
+    
+    class func selectionModelWithPhotoModels(photoModels: [SampleFourPhotoModel]) -> SampleFourSectionModel {
+        let sectionModel = SampleFourSectionModel()
+        sectionModel.photoModels = photoModels
+        
+        return sectionModel
+    }
+    
+}
+
+class SampleFourHeaderView: UICollectionReusableView {
+    var text = " " {
         willSet {
             textLabel.text = newValue
         }
     }
     
     private let textLabel = UILabel()
-
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -261,7 +282,8 @@ class SampleTreeHeaderView: UICollectionReusableView {
         textLabel.frame = CGRectInset(bounds, 30, 10)
         textLabel.backgroundColor = UIColor.clearColor()
         textLabel.textColor = UIColor.whiteColor()
-//        textLabel.autoresizingMask = UIViewAutoresizing.FlexibleHeight|UIViewAutoresizing.FlexibleWidth
+        textLabel.font = UIFont.boldSystemFontOfSize(16)
+        textLabel.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
         
         addSubview(textLabel)
     }
@@ -270,5 +292,161 @@ class SampleTreeHeaderView: UICollectionReusableView {
         super.prepareForReuse()
         text = " "
     }
-    
 }
+
+class SampleFourCell: UICollectionViewCell {
+    var image: UIImage! {
+        willSet{
+            imageView.image = newValue
+        }
+    }
+    
+    
+    private let imageView = UIImageView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupUI()
+    }
+    
+    func setupUI() {
+        imageView.frame = CGRectZero
+        imageView.backgroundColor = UIColor.blueColor()
+        contentView.addSubview(imageView)
+        
+        let selectedBackgroundView = UIView(frame: CGRectZero)
+        selectedBackgroundView.backgroundColor = UIColor.orangeColor()
+        self.selectedBackgroundView = selectedBackgroundView
+        
+        backgroundColor = UIColor.whiteColor()
+    }
+    
+    func setDisabled(disabled: Bool) {
+        contentView.alpha = disabled ? 0.5 : 1
+        backgroundColor = disabled ? UIColor.grayColor() : UIColor.whiteColor()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        image = nil
+        selected = false
+    }
+    
+    override func layoutSubviews() {
+        imageView.frame = CGRectInset(bounds, 10, 10)
+    }
+}
+
+// VC
+class SampleFourViewController: UICollectionViewController {
+    let CellIdentifier = "Cell Identifier"
+    let HeaderIdentifier = "HeaderIdentifier"
+    
+    var currentModelArrayIndex: Int = 0
+    var selectionModelArray = [SampleFourSectionModel]()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setModel()
+        
+        let flowLayout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
+        flowLayout.minimumInteritemSpacing = 20
+        flowLayout.minimumLineSpacing = 20
+        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        flowLayout.itemSize = CGSize(width: 100, height: 100)
+        flowLayout.headerReferenceSize = CGSize(width: 60, height: 50)
+        
+        collectionView?.registerClass(SampleFourCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        collectionView?.registerClass(SampleFourHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderIdentifier)
+        
+        collectionView?.allowsMultipleSelection = true
+        collectionView?.indicatorStyle = .White
+    }
+    
+    func setModel() {
+        for _ in 0..<4 {
+            var photoArray = [SampleFourPhotoModel]()
+            for i in 0..<12 {
+                photoArray.append(SampleFourPhotoModel.photeModelWithName("icon\(i)", image: UIImage(named: "icon\(i)")!))
+            }
+            let sectionArray = SampleFourSectionModel.selectionModelWithPhotoModels(photoArray)
+            
+            selectionModelArray.append(sectionArray)
+        }
+
+    }
+    
+    func photoModelForIndexPath(indexPath: NSIndexPath) -> SampleFourPhotoModel {
+        return SampleFourPhotoModel.photeModelWithName("icon\(indexPath.item)", image: UIImage(named: "icon\(indexPath.item)")!)
+    }
+    
+    func configureCell(cell: SampleFourCell, forIndexPath indexPath: NSIndexPath) {
+        cell.image = photoModelForIndexPath(indexPath).image
+        
+        // default
+        cell.selected = false
+        cell.setDisabled(false)
+        
+        if indexPath.section < currentModelArrayIndex {
+            cell.setDisabled(true)
+            
+            if indexPath.row == selectionModelArray[indexPath.section].selectedPhotoModelIndex {
+                cell.selected = true
+            }
+        }
+    }
+
+    
+    // header
+    override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
+        let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: HeaderIdentifier, forIndexPath: indexPath) as! SampleFourHeaderView
+        
+        if indexPath.section == 0 {
+            headerView.text = "Tap on a photo to start the recommendation engine."
+        }else if indexPath.section <= currentModelArrayIndex {
+            let selectionModel = selectionModelArray[indexPath.section - 1]
+            let selectedPhotoModel = photoModelForIndexPath(NSIndexPath(forItem: selectionModel.selectedPhotoModelIndex, inSection: indexPath.section - 1))
+            
+            headerView.text = "Because you liked \(selectedPhotoModel.name) ..."
+        }
+        
+        return headerView
+    }
+    
+    // dataSource
+    override func numberOfSectionsInCollectionView(collectionView: UICollectionView) -> Int {
+        return min(currentModelArrayIndex + 1, selectionModelArray.count)
+    }
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return selectionModelArray[currentModelArrayIndex].photoModels.count
+    }
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier, forIndexPath: indexPath) as! SampleFourCell
+        configureCell(cell, forIndexPath: indexPath)
+     
+        return cell
+    }
+    
+    
+    // delegate
+    override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
+        // no matter what, deselect that cell
+        collectionView.deselectItemAtIndexPath(indexPath, animated: true)
+        
+        if currentModelArrayIndex >= selectionModelArray.count - 1 {
+//            UIAlertController(title: "Recommendation Engine", message: "Based on your selections, we have concluded you have excellent taste in photography", preferredStyle: .Alert)
+            print("yes")
+            
+            return
+        }
+        
+        
+    }
+}
+

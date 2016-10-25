@@ -83,10 +83,10 @@
             </objects>
             <point key="canvasLocation" x="729" y="-1184"/>
         </scene>
-        <!--Sample Three View Controller-->
+        <!--Sample Four View Controller-->
         <scene sceneID="hpL-Qy-kdO">
             <objects>
-                <collectionViewController id="Xxm-KL-1eX" customClass="SampleThreeViewController" customModule="Book_UICollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                <collectionViewController id="Xxm-KL-1eX" customClass="SampleFourViewController" customModule="Book_UICollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="UuW-Zb-Q3Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
