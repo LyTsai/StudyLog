@@ -247,7 +247,7 @@ class SampleFourSectionModel {
     var selectionModelNoSelectionIndex: Int!
     
     var photoModels = [SampleFourPhotoModel]() // readonly
-    var selectedPhotoModelIndex: Int!
+    var selectedPhotoModelIndex: Int = 0
     var hasBeenSelected = true // readonly
     
     class func selectionModelWithPhotoModels(photoModels: [SampleFourPhotoModel]) -> SampleFourSectionModel {
@@ -284,6 +284,7 @@ class SampleFourHeaderView: UICollectionReusableView {
         textLabel.textColor = UIColor.whiteColor()
         textLabel.font = UIFont.boldSystemFontOfSize(16)
         textLabel.autoresizingMask = [.FlexibleHeight, .FlexibleWidth]
+//        backgroundColor = UIColor.greenColor()
         
         addSubview(textLabel)
     }
@@ -301,6 +302,10 @@ class SampleFourCell: UICollectionViewCell {
         }
     }
     
+    func setDisabled(disabled: Bool) {
+        contentView.alpha = disabled ? 0.5 : 1
+        backgroundColor = disabled ? UIColor.grayColor() : UIColor.whiteColor()
+    }
     
     private let imageView = UIImageView()
     
@@ -314,9 +319,9 @@ class SampleFourCell: UICollectionViewCell {
         setupUI()
     }
     
-    func setupUI() {
+    private func setupUI() {
         imageView.frame = CGRectZero
-        imageView.backgroundColor = UIColor.blueColor()
+        imageView.backgroundColor = UIColor.cyanColor()
         contentView.addSubview(imageView)
         
         let selectedBackgroundView = UIView(frame: CGRectZero)
@@ -324,11 +329,6 @@ class SampleFourCell: UICollectionViewCell {
         self.selectedBackgroundView = selectedBackgroundView
         
         backgroundColor = UIColor.whiteColor()
-    }
-    
-    func setDisabled(disabled: Bool) {
-        contentView.alpha = disabled ? 0.5 : 1
-        backgroundColor = disabled ? UIColor.grayColor() : UIColor.whiteColor()
     }
     
     override func prepareForReuse() {
@@ -340,15 +340,18 @@ class SampleFourCell: UICollectionViewCell {
     override func layoutSubviews() {
         imageView.frame = CGRectInset(bounds, 10, 10)
     }
+    
 }
 
 // VC
-class SampleFourViewController: UICollectionViewController {
+let kMaxItemSize =  CGSize(width: 100, height: 100)
+class SampleFourViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     let CellIdentifier = "Cell Identifier"
     let HeaderIdentifier = "HeaderIdentifier"
     
-    var currentModelArrayIndex: Int = 0
+    var currentModelArrayIndex: Int = 0 // which section we’re currently prompting the user for
     var selectionModelArray = [SampleFourSectionModel]()
+    var isFinished = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -370,9 +373,9 @@ class SampleFourViewController: UICollectionViewController {
     }
     
     func setModel() {
-        for _ in 0..<4 {
+        for j in 0..<4 {
             var photoArray = [SampleFourPhotoModel]()
-            for i in 0..<12 {
+            for i in j*3..<3*(j+1) {
                 photoArray.append(SampleFourPhotoModel.photeModelWithName("icon\(i)", image: UIImage(named: "icon\(i)")!))
             }
             let sectionArray = SampleFourSectionModel.selectionModelWithPhotoModels(photoArray)
@@ -383,7 +386,7 @@ class SampleFourViewController: UICollectionViewController {
     }
     
     func photoModelForIndexPath(indexPath: NSIndexPath) -> SampleFourPhotoModel {
-        return SampleFourPhotoModel.photeModelWithName("icon\(indexPath.item)", image: UIImage(named: "icon\(indexPath.item)")!)
+        return selectionModelArray[indexPath.section].photoModels[indexPath.item]
     }
     
     func configureCell(cell: SampleFourCell, forIndexPath indexPath: NSIndexPath) {
@@ -402,7 +405,7 @@ class SampleFourViewController: UICollectionViewController {
         }
     }
 
-    
+
     // header
     override func collectionView(collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionReusableView {
         let headerView = collectionView.dequeueReusableSupplementaryViewOfKind(kind, withReuseIdentifier: HeaderIdentifier, forIndexPath: indexPath) as! SampleFourHeaderView
@@ -412,7 +415,6 @@ class SampleFourViewController: UICollectionViewController {
         }else if indexPath.section <= currentModelArrayIndex {
             let selectionModel = selectionModelArray[indexPath.section - 1]
             let selectedPhotoModel = photoModelForIndexPath(NSIndexPath(forItem: selectionModel.selectedPhotoModelIndex, inSection: indexPath.section - 1))
-            
             headerView.text = "Because you liked \(selectedPhotoModel.name) ..."
         }
         
@@ -433,7 +435,6 @@ class SampleFourViewController: UICollectionViewController {
         return cell
     }
     
-    
     // delegate
     override func collectionView(collectionView: UICollectionView, didSelectItemAtIndexPath indexPath: NSIndexPath) {
         // no matter what, deselect that cell
@@ -441,12 +442,82 @@ class SampleFourViewController: UICollectionViewController {
         
         if currentModelArrayIndex >= selectionModelArray.count - 1 {
 //            UIAlertController(title: "Recommendation Engine", message: "Based on your selections, we have concluded you have excellent taste in photography", preferredStyle: .Alert)
+           isFinished = true
             print("yes")
             
             return
         }
         
+        selectionModelArray[currentModelArrayIndex].selectedPhotoModelIndex = indexPath.item
+        collectionView.performBatchUpdates({ 
+            self.currentModelArrayIndex += 1
+            collectionView.insertSections(NSIndexSet(index: self.currentModelArrayIndex))
+            collectionView.reloadSections(NSIndexSet(index: self.currentModelArrayIndex-1))
+            }) { (true) in
+                collectionView.scrollToItemAtIndexPath(NSIndexPath(forItem: 0, inSection: self.currentModelArrayIndex), atScrollPosition: .Top, animated: true)
+        }
+    }
+    
+    func collectionView(collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAtIndexPath indexPath: NSIndexPath) -> CGSize {
+        let photoModel = photoModelForIndexPath(indexPath)
+        let photoSize = photoModel.image.size
+        let aspectRatio = photoSize.width / photoSize.height
         
+        var itemSize = kMaxItemSize
+        if aspectRatio < 1 {
+            itemSize = CGSize(width: kMaxItemSize.width * aspectRatio, height: kMaxItemSize.height)
+        }else if aspectRatio > 1 {
+            itemSize = CGSize(width: kMaxItemSize.width, height: kMaxItemSize.height/aspectRatio)
+        }
+        
+        return itemSize
+    }
+    
+    override func collectionView(collectionView: UICollectionView, shouldHighlightItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return indexPath.section == currentModelArrayIndex && !isFinished
+    }
+    
+    // menu
+    override func collectionView(collectionView: UICollectionView, shouldShowMenuForItemAtIndexPath indexPath: NSIndexPath) -> Bool {
+        return true
+    }
+    
+    override func collectionView(collectionView: UICollectionView, canPerformAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) -> Bool {
+        
+        if NSStringFromSelector(action) == "copy" {
+            return true
+        }
+        return false
+    }
+    
+    override func collectionView(collectionView: UICollectionView, performAction action: Selector, forItemAtIndexPath indexPath: NSIndexPath, withSender sender: AnyObject?) {
+        if NSStringFromSelector(action) == "copy" {
+            let pasteboard = UIPasteboard.generalPasteboard()
+            pasteboard.string = photoModelForIndexPath(indexPath).name
+            
+        }
     }
 }
 
+// MARK: ------------------- Five -----------------------
+class SampleFiveCollectionFlowLayout: UICollectionViewFlowLayout {
+    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributesArray = super.layoutAttributesForElementsInRect(rect)
+        for attributes in attributesArray! {
+            applyLayoutAttributes(attributes)
+        }
+        
+        return attributesArray
+    }
+    
+    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.layoutAttributesForItemAtIndexPath(indexPath)
+        applyLayoutAttributes(attributes!)
+        
+        return attributes
+    }
+    
+    private func applyLayoutAttributes(attributes: UICollectionViewLayoutAttributes){
+        
+    }
+}
