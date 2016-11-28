@@ -83,10 +83,11 @@
             </objects>
             <point key="canvasLocation" x="729" y="-1184"/>
         </scene>
-        <!--Sample Four View Controller-->
+        <!--Cover Flow Layout View Controller-->
         <scene sceneID="hpL-Qy-kdO">
             <objects>
-                <collectionViewController id="Xxm-KL-1eX" customClass="SampleFourViewController" customModule="Book_UICollectionView" customModuleProvider="target" sceneMemberID="viewController">
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Fmu-VN-cx2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <collectionViewController id="Xxm-KL-1eX" customClass="CoverFlowLayoutViewController" customModule="Book_UICollectionView" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="UuW-Zb-Q3Z">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -113,7 +114,6 @@
                         </connections>
                     </collectionView>
                 </collectionViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Fmu-VN-cx2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-58" y="-443"/>
         </scene>
