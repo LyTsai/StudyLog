@@ -8,10 +8,9 @@
 
 import Foundation
 import UIKit
-//import QuartzCore
 
 class PhotoModel {
-    var name = "Leaves"
+    var name = "icon"
     var image: UIImage!
     
     class func photoModelWithName(name: String, image: UIImage) -> PhotoModel {
@@ -41,8 +40,9 @@ class PhotoModel {
 }
 
 class CoverFlowLayoutViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var layoutChangeSegmentedControl: UISegmentedControl!
+    
     var photoModelArray = PhotoModel.defaultModel()
-    var layoutChangeSegmentedControl = UISegmentedControl(items: ["Boring", "Cover Flow"])
     var coverFlowCollectionViewLayout = AFCoverFlowFlowLayout()
     var boringCollectionViewLayout = UICollectionViewFlowLayout()
     
@@ -58,7 +58,7 @@ class CoverFlowLayoutViewController: UICollectionViewController, UICollectionVie
         photoCollectionView.dataSource = self
         photoCollectionView.delegate = self
         
-        photoCollectionView.registerClass(AFCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        photoCollectionView.registerClass(CoverFlowCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
         
         photoCollectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         photoCollectionView.allowsSelection = false
@@ -71,7 +71,6 @@ class CoverFlowLayoutViewController: UICollectionViewController, UICollectionVie
         super.viewDidLoad()
         
         layoutChangeSegmentedControl.selectedSegmentIndex = 0
-//        layoutChangeSegmentedControl.segmentedControlStyle = UISegmentedControlStyleBar
         layoutChangeSegmentedControl.addTarget(self, action: #selector(layoutChangeSegmentedControlDidChangeValue), forControlEvents: .ValueChanged)
     }
     
@@ -90,28 +89,32 @@ class CoverFlowLayoutViewController: UICollectionViewController, UICollectionVie
         if collectionViewLayout == boringCollectionViewLayout {
             return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
         }else {
-            if UIInterfaceOrientationIsPortrait(interfaceOrientation) {
-                return UIEdgeInsets(top: 0, left: 70, bottom: 0, right: 70)
-            }else {
-                if UIScreen.mainScreen().bounds.height > 480 {
-                    return UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 190)
-                }else {
-                    return UIEdgeInsets(top: 0, left: 150, bottom: 0, right: 150)
-                }
-            }
+            return UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 190)
         }
+    }
+    
+    // dataSource
+    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photoModelArray.count
+    }
+    
+    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCellWithReuseIdentifier(CellIdentifier, forIndexPath: indexPath) as! CoverFlowCollectionViewCell
+        configureCell(cell, forIndexPath: indexPath)
+        return cell
+    }
+    private func configureCell(cell: CoverFlowCollectionViewCell, forIndexPath indexPath: NSIndexPath){
+        cell.image = photoModelArray[indexPath.item].image
     }
 }
 
-class AFCollectionViewCell: UICollectionViewCell {
+class CoverFlowCollectionViewCell: UICollectionViewCell {
     var image: UIImage! {
-        didSet{
-            imageView.image = image
-        }
+        didSet{ imageView.image = image }
     }
     
     private let imageView = UIImageView()
-    
+    private var coverMaskView = UIView() // maskView is a property of UIView
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupUI()
@@ -123,9 +126,14 @@ class AFCollectionViewCell: UICollectionViewCell {
     }
     
     private func setupUI() {
-        imageView.frame = CGRectZero
         imageView.backgroundColor = UIColor.cyanColor()
+        imageView.clipsToBounds = true
         contentView.addSubview(imageView)
+        
+        coverMaskView.backgroundColor = UIColor.blackColor()
+        coverMaskView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        coverMaskView.alpha = 0
+        contentView.insertSubview(coverMaskView, aboveSubview: imageView)
         
         backgroundColor = UIColor.whiteColor()
     }
@@ -135,12 +143,30 @@ class AFCollectionViewCell: UICollectionViewCell {
         image = nil
     }
     
+    override func applyLayoutAttributes(layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.applyLayoutAttributes(layoutAttributes)
+        coverMaskView.alpha = 0
+        layer.shouldRasterize = false
+        
+        if layoutAttributes.isKindOfClass(CoverFlowLayoutAttributes) {
+            let castedLayoutAttributes = layoutAttributes as! CoverFlowLayoutAttributes
+            layer.shouldRasterize = castedLayoutAttributes.shouldRasterize
+            coverMaskView.alpha = castedLayoutAttributes.maskingValue
+        }
+    }
+    
     override func layoutSubviews() {
         imageView.frame = CGRectInset(bounds, 10, 10)
+        coverMaskView.frame = bounds
     }
 }
 
 class AFCoverFlowFlowLayout: UICollectionViewFlowLayout {
+    override func prepareLayout() {
+        super.prepareLayout()
+        setupInit()
+    }
+    
     func setupInit() {
         scrollDirection = .Horizontal
         itemSize = CGSize(width: 180, height: 180)
@@ -149,13 +175,10 @@ class AFCoverFlowFlowLayout: UICollectionViewFlowLayout {
         minimumInteritemSpacing = 200 // only one row
     }
     
-    /*
-     +(Class)layoutAttributesClass
-     {
-     return [AFCollectionViewLayoutAttributes class];
-     }
-     
-     */
+    // now, the attributes is custom
+    override class func layoutAttributesClass() -> AnyClass{
+        return CoverFlowLayoutAttributes.self
+    }
     
     //  re-layout the cells when scrolling
     override func shouldInvalidateLayoutForBoundsChange(newBounds: CGRect) -> Bool {
@@ -183,18 +206,73 @@ class AFCoverFlowFlowLayout: UICollectionViewFlowLayout {
         return attributes
     }
     
-    func applyLayoutAttributes(attributes: UICollectionViewLayoutAttributes, forVisibleRect: CGRect)  {
+    var activeDistance: CGFloat = 100
+    var translateDistance: CGFloat = 100
+    var zoomFactor: CGFloat = 0.2
+    var flowOffset: CGFloat = 40
+    var inactiveGrayValue: CGFloat = 0.6
+    func applyLayoutAttributes(attributes: UICollectionViewLayoutAttributes, forVisibleRect visibleRect: CGRect)  {
         // skip supplementary views
-        if (attributes.representedElementKind != nil) {
-            return
+        if (attributes.representedElementKind != nil) { return }
+        
+        let distanceFromVisibleRectToItem = visibleRect.midX - attributes.center.x
+        let normalizedDistance = distanceFromVisibleRectToItem / activeDistance
+        let isLeft = distanceFromVisibleRectToItem > 0
+        var transform = CATransform3DIdentity
+        var maskAlpha: CGFloat = 0
+        
+        if fabs(distanceFromVisibleRectToItem) < activeDistance {
+            // We're close enough to apply the transform in relation to how far away from the center we are.
+            transform = CATransform3DTranslate(CATransform3DIdentity, (isLeft ? -flowOffset : flowOffset) * abs(distanceFromVisibleRectToItem/translateDistance), 0,  (1 - fabs(normalizedDistance)) * 40000 + (isLeft ? 200 : 0))
+            let zoom = 1 + zoomFactor * (1 - abs(normalizedDistance))
+            transform = CATransform3DRotate(transform, (isLeft ? 1 : -1) * fabs(normalizedDistance) * CGFloat(M_PI_4), 0, 1, 0)
+            transform = CATransform3DScale(transform, zoom, zoom, 1)
+            attributes.zIndex = 1
+            
+            let ratioToCenter = (activeDistance - fabs(distanceFromVisibleRectToItem)) / activeDistance
+            maskAlpha = inactiveGrayValue * (1 - ratioToCenter)
+        }else {
+            // We're too far away - just apply a standard perspective transform.
+            transform.m34 = -1 / (4.6777 * itemSize.width)
+            transform = CATransform3DTranslate(transform, isLeft ? -flowOffset : flowOffset, 0, 0)
+            transform = CATransform3DRotate(transform, (isLeft ? 1 : -1) * CGFloat(M_PI_4), 0, 1, 0)
+            attributes.zIndex = 0
+            maskAlpha = inactiveGrayValue
         }
+        attributes.transform3D = transform
+        
+        // Rasterize the cells for smoother edges.
+        let attribute = attributes as! CoverFlowLayoutAttributes
+        attribute.shouldRasterize = true
+        attribute.maskingValue = maskAlpha
+    }
+
+    override func targetContentOffsetForProposedContentOffset(proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
+        var offsetAdjustment = CGFloat(MAXFLOAT)
+        let horizontalCenter = proposedContentOffset.x + collectionView!.bounds.width * 0.5
+        
+        let proposedRect = CGRect(origin: CGPoint(x: proposedContentOffset.x, y: 0), size: collectionView!.bounds.size)
+        let array = layoutAttributesForElementsInRect(proposedRect)!
+        
+        for layoutAttributes in array {
+            // skip supplementary views
+            if layoutAttributes.representedElementCategory != UICollectionElementCategory.Cell {
+                continue
+            }
+            
+            let itemHorizontalCenter = layoutAttributes.center.x
+            if fabs(itemHorizontalCenter - horizontalCenter) < fabs(offsetAdjustment) {
+                offsetAdjustment = itemHorizontalCenter - horizontalCenter
+            }
+        }
+        
+        return CGPoint(x: proposedContentOffset.x + offsetAdjustment, y: proposedContentOffset.y)
     }
 }
 
 class CoverFlowLayoutAttributes: UICollectionViewLayoutAttributes {
     var shouldRasterize = true
     var maskingValue: CGFloat = 1.0
-    
     
     override func copyWithZone(zone: NSZone) -> AnyObject {
         let attributes = super.copyWithZone(zone) as! CoverFlowLayoutAttributes
@@ -203,8 +281,12 @@ class CoverFlowLayoutAttributes: UICollectionViewLayoutAttributes {
         
         return attributes
     }
+    
     override func isEqual(object: AnyObject?) -> Bool {
-        let other = object as! CoverFlowLayoutAttributes
-        return super.isEqual(other) && (shouldRasterize == other.shouldRasterize) && (maskingValue == other.maskingValue)
+        if object!.isKindOfClass(CoverFlowLayoutAttributes){
+            let other = object as! CoverFlowLayoutAttributes
+            return super.isEqual(other) && (shouldRasterize == other.shouldRasterize) && (maskingValue == other.maskingValue)
+        }
+        return super.isEqual(object)
     }
 }
