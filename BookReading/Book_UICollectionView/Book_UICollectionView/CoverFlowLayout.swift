@@ -43,7 +43,7 @@ class CoverFlowLayoutViewController: UICollectionViewController, UICollectionVie
     @IBOutlet weak var layoutChangeSegmentedControl: UISegmentedControl!
     
     var photoModelArray = PhotoModel.defaultModel()
-    var coverFlowCollectionViewLayout = AFCoverFlowFlowLayout()
+    var coverFlowCollectionViewLayout = CoverFlowFlowLayout()
     var boringCollectionViewLayout = UICollectionViewFlowLayout()
     
     let CellIdentifier = "CellIdentifier"
@@ -55,16 +55,13 @@ class CoverFlowLayoutViewController: UICollectionViewController, UICollectionVie
         boringCollectionViewLayout.minimumInteritemSpacing = 10
         
         let photoCollectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: boringCollectionViewLayout)
-        photoCollectionView.dataSource = self
-        photoCollectionView.delegate = self
-        
         photoCollectionView.registerClass(CoverFlowCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
         
         photoCollectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
         photoCollectionView.allowsSelection = false
         photoCollectionView.indicatorStyle = .White
         
-        self.collectionView = photoCollectionView
+        self.collectionView = photoCollectionView // now, all delegates are finished
     }
     
     override func viewDidLoad() {
@@ -161,7 +158,7 @@ class CoverFlowCollectionViewCell: UICollectionViewCell {
     }
 }
 
-class AFCoverFlowFlowLayout: UICollectionViewFlowLayout {
+class CoverFlowFlowLayout: UICollectionViewFlowLayout {
     override func prepareLayout() {
         super.prepareLayout()
         setupInit()
@@ -223,14 +220,13 @@ class AFCoverFlowFlowLayout: UICollectionViewFlowLayout {
         
         if fabs(distanceFromVisibleRectToItem) < activeDistance {
             // We're close enough to apply the transform in relation to how far away from the center we are.
-            transform = CATransform3DTranslate(CATransform3DIdentity, (isLeft ? -flowOffset : flowOffset) * abs(distanceFromVisibleRectToItem/translateDistance), 0,  (1 - fabs(normalizedDistance)) * 40000 + (isLeft ? 200 : 0))
+            transform = CATransform3DTranslate(CATransform3DIdentity, (-flowOffset * distanceFromVisibleRectToItem / translateDistance), 0,  (1 - fabs(normalizedDistance)) * 40000 + (isLeft ? 200 : 0))
             let zoom = 1 + zoomFactor * (1 - abs(normalizedDistance))
-            transform = CATransform3DRotate(transform, (isLeft ? 1 : -1) * fabs(normalizedDistance) * CGFloat(M_PI_4), 0, 1, 0)
+            transform = CATransform3DRotate(transform, normalizedDistance * CGFloat(M_PI_4), 0, 1, 0)
             transform = CATransform3DScale(transform, zoom, zoom, 1)
             attributes.zIndex = 1
             
-            let ratioToCenter = (activeDistance - fabs(distanceFromVisibleRectToItem)) / activeDistance
-            maskAlpha = inactiveGrayValue * (1 - ratioToCenter)
+            maskAlpha = inactiveGrayValue * fabs(normalizedDistance)
         }else {
             // We're too far away - just apply a standard perspective transform.
             transform.m34 = -1 / (4.6777 * itemSize.width)
