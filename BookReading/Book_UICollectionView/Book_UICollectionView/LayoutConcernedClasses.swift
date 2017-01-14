@@ -22,12 +22,12 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
         minimumLineSpacing = 20
         itemSize = CGSize(width: kMaxItemDimension, height: kMaxItemDimension)
         headerReferenceSize = CGSize(width: 60, height: 70)
-        registerClass(AFDecorationView.self, forDecorationViewOfKind: AFCollectionViewFlowLayoutBackgroundDecoration)
+        register(AFDecorationView.self, forDecorationViewOfKind: AFCollectionViewFlowLayoutBackgroundDecoration)
     }
     
     // called for all types of elements, not just cells
-    override func layoutAttributesForElementsInRect(rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        let attributesArray = super.layoutAttributesForElementsInRect(rect)
+    override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
+        let attributesArray = super.layoutAttributesForElements(in: rect)
         var newAttributesArray = [UICollectionViewLayoutAttributes]()
         
         for attributes in attributesArray! {
@@ -35,8 +35,8 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
 //            if attributes.representedElementCategory == UICollectionElementCategorySupplementaryView {
             // checking the element category of the layout attributes was added.
-            if attributes.representedElementCategory == UICollectionElementCategory.SupplementaryView {
-                let newAttributes = layoutAttributesForDecorationViewOfKind(AFCollectionViewFlowLayoutBackgroundDecoration, atIndexPath: attributes.indexPath)
+            if attributes.representedElementCategory == UICollectionElementCategory.supplementaryView {
+                let newAttributes = layoutAttributesForDecorationView(ofKind: AFCollectionViewFlowLayoutBackgroundDecoration, at: attributes.indexPath)
                 newAttributesArray.append(newAttributes!)
             }
         }
@@ -45,22 +45,22 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
     }
     
     // the default implementation returns nil
-    override func layoutAttributesForItemAtIndexPath(indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        let attributes = super.layoutAttributesForItemAtIndexPath(indexPath)
+    override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let attributes = super.layoutAttributesForItem(at: indexPath)
         applyLayoutAttributes(attributes!) // ?? will crash here, nil
         return attributes
     }
     
     // decoration
-    override func layoutAttributesForDecorationViewOfKind(elementKind: String, atIndexPath indexPath: NSIndexPath) -> UICollectionViewLayoutAttributes? {
-        let layoutAttributes = layoutAttributesForDecorationViewOfKind(elementKind, atIndexPath: indexPath)
+    override func layoutAttributesForDecorationView(ofKind elementKind: String, at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
+        let layoutAttributes = layoutAttributesForDecorationView(ofKind: elementKind, at: indexPath)
         if elementKind == AFCollectionViewFlowLayoutBackgroundDecoration {
             var tallestCellAttributes = UICollectionViewLayoutAttributes()
-            let numberOfCellsInSection = collectionView!.numberOfItemsInSection(indexPath.section)
+            let numberOfCellsInSection = collectionView!.numberOfItems(inSection: indexPath.section)
             
             for i in 0..<numberOfCellsInSection {
-                let cellIndexPath = NSIndexPath(forItem: i, inSection: indexPath.section)
-                let cellAttributes = layoutAttributesForItemAtIndexPath(cellIndexPath)!
+                let cellIndexPath = IndexPath(item: i, section: indexPath.section)
+                let cellAttributes = layoutAttributesForItem(at: cellIndexPath)!
                 
                 if cellAttributes.frame.height > tallestCellAttributes.frame.height{
                     tallestCellAttributes = cellAttributes
@@ -68,8 +68,8 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
             }
             
             let decorationViewHeight = tallestCellAttributes.frame.height + headerReferenceSize.height
-            layoutAttributes?.size = CGSize(width: collectionViewContentSize().width, height: decorationViewHeight)
-            layoutAttributes?.center = CGPoint(x: collectionViewContentSize().width * 0.5, y: tallestCellAttributes.center.y)
+            layoutAttributes?.size = CGSize(width: collectionViewContentSize.width, height: decorationViewHeight)
+            layoutAttributes?.center = CGPoint(x: collectionViewContentSize.width * 0.5, y: tallestCellAttributes.center.y)
             // Place the decoration view behind all the cells
             layoutAttributes!.zIndex = -1
         }
@@ -77,18 +77,18 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
         return layoutAttributes
     }
     
-    private func applyLayoutAttributes(attributes: UICollectionViewLayoutAttributes){
+    fileprivate func applyLayoutAttributes(_ attributes: UICollectionViewLayoutAttributes){
         if attributes.representedElementKind == nil {
-            let width = collectionViewContentSize().width
+            let width = collectionViewContentSize.width
             let leftMargin = sectionInset.left
             let rightMargin = sectionInset.right
             
-            let itemInSection = collectionView!.numberOfItemsInSection(attributes.indexPath.section)
+            let itemInSection = collectionView!.numberOfItems(inSection: attributes.indexPath.section)
             let firstXPosition = (width - (leftMargin + rightMargin)) / CGFloat(2 * itemInSection)
             let xPosition = firstXPosition + 2 * firstXPosition * CGFloat(attributes.indexPath.item)
             
             attributes.center = CGPoint(x: leftMargin + xPosition, y: attributes.center.y)
-            attributes.frame = CGRectIntegral(attributes.frame) // Expand `rect' to the smallest rect containing it with integral origin and size.
+            attributes.frame = attributes.frame.integral // Expand `rect' to the smallest rect containing it with integral origin and size.
         }
     }
     
@@ -102,12 +102,12 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
 }
 
 class AFDecorationView: UICollectionReusableView {
-    private var binderImageView = UIImageView(image: UIImage(named: "Back0"))
+    fileprivate var binderImageView = UIImageView(image: UIImage(named: "Back0"))
     // in init
-    private func setup(){
+    fileprivate func setup(){
         binderImageView.frame = CGRect(x: 10, y: 0, width: frame.width, height: frame.height)
-        binderImageView.contentMode = .Left
-        binderImageView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        binderImageView.contentMode = .left
+        binderImageView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         addSubview(binderImageView)
     }
 }

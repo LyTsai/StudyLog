@@ -20,9 +20,9 @@ class CircleAndFlowCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let collectionView = UICollectionView(frame: CGRectZero, collectionViewLayout: circleLayout)
-        collectionView.registerClass(CollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
-        collectionView.autoresizingMask = [.FlexibleWidth, .FlexibleHeight]
+        let collectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: circleLayout)
+        collectionView.register(CollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        collectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
         
         self.collectionView = collectionView
     }
@@ -30,13 +30,13 @@ class CircleAndFlowCollectionViewController: UICollectionViewController {
     // dataSource
     
     // actions
-    @IBAction func layoutChangeSegmentedControlDidChangeValue(sender: UISegmentedControl) {
+    @IBAction func layoutChangeSegmentedControlDidChangeValue(_ sender: UISegmentedControl) {
     }
     
-    @IBAction func addItem(sender: AnyObject) {
+    @IBAction func addItem(_ sender: AnyObject) {
     }
     
-    @IBAction func deleteItem(sender: AnyObject) {
+    @IBAction func deleteItem(_ sender: AnyObject) {
     }
 }
 
