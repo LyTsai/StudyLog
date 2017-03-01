@@ -279,7 +279,7 @@ class CoverFlowLayoutAttributes: UICollectionViewLayoutAttributes {
     }
     
     override func isEqual(_ object: Any?) -> Bool {
-        if (object! as AnyObject).isKind(of: CoverFlowLayoutAttributes){
+        if (object! as AnyObject).isKind(of: CoverFlowLayoutAttributes.self){
             let other = object as! CoverFlowLayoutAttributes
             return super.isEqual(other) && (shouldRasterize == other.shouldRasterize) && (maskingValue == other.maskingValue)
         }
