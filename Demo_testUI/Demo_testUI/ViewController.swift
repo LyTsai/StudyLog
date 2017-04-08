@@ -38,9 +38,22 @@ class ViewController: UIViewController {
 
 }
 
+
+
+// one menu item
+/*
+ class CarouselItemView: UIView {
+ // image, text and so on
+ }
+ */
+
+
+// carousel-like menu
 class CarouselMenuView: UIView {
     var items = [UIButton]()
     var selectedIndex = 0
+    var scale: CGFloat = 0.8
+    
     
     var numberOfItems: Int {
         return items.count
@@ -54,15 +67,13 @@ class CarouselMenuView: UIView {
         self.frame = frame
         self.items = items
         let ratio = ovalRatio < 1 ? 1.25 : ovalRatio
-
+        
         // no view
         if numberOfItems == 0 {
             return
         }
         
         // calculation
-        let scale: CGFloat = 0.8
-        
         let centerX = bounds.midX
         let centerY = bounds.midY
         
@@ -90,13 +101,76 @@ class CarouselMenuView: UIView {
             addSubview(item)
         }
         
-        
-        
     }
     
     
     func itemClicked(_ button: UIButton) {
+        let item = button.tag - 100
+        selectedIndex = item
+        
+        // go to next view
         
     }
     
+    func angleOfPoint(_ a: CGPoint, center c: CGPoint) -> CGFloat {
+        return atan2(c.y - a.y, c.x - a.x)
+    }
+    
+    override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+        let currentPoint = touches.first!.location(in: self)
+        let lastPoint = touches.first!.previousLocation(in: self)
+        let angle = angleOfPoint(currentPoint, center: center) - angleOfPoint(lastPoint, center: center)
+        transform = transform.rotated(by: angle)
+        
+        
+    }
+    
+    
+    // rotation
+    /*
+     fileprivate var rAngle: CGFloat = 0
+     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
+     let currentPoint = touches.first!.location(in: self)
+     
+     let lastPoint = touches.first!.previousLocation(in: self)
+     let angle = Calculation().angleOfPoint(currentPoint, center: viewCenter) - Calculation().angleOfPoint(lastPoint, center: viewCenter)
+     transform = transform.rotated(by: angle)
+     rAngle += angle
+     
+     var index = 0
+     let total = rAngle / angleGap
+     index = (total > 0 ? Int(total + 0.5) : Int(total - 0.5)) % numberOfSlices
+     index = (index > 0 ? (numberOfSlices - index) : -index)
+     
+     selectedIndex = index
+     }
+     
+     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
+     adjustAngle()
+     }
+     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
+     adjustAngle()
+     }
+     
+     // scroll to center
+     fileprivate func adjustAngle() {
+     var adjust: CGFloat = 0
+     
+     let turn = rAngle.truncatingRemainder(dividingBy: angleGap)
+     if abs(turn) <= angleGap * 0.5 {
+     // still this slice selected
+     adjust = -turn
+     }else {
+     // next one is selected
+     if turn > 0 {
+     adjust = angleGap - turn
+     }else {
+     adjust = -angleGap - turn
+     }
+     }
+     
+     transform = transform.rotated(by: adjust)
+     rAngle += adjust
+     }
+     */
 }
