@@ -1,43 +1,16 @@
 import React, { Component } from 'react';
-import { AppRegistry, StyleSheet, Text, View, Image } from 'react-native';
+import { AppRegistry, Image } from 'react-native';
 
-class HelloWorld extends Component {
+class Hello extends Component {
     render() {
-        let pic = {uri: 'https://upload.wikimedia.org/wikipedia/commons/d/de/Bananavarieties.jpg'};
-        
+        let pic = {
+        url: '/Users/imac/Documents/ANBook_iOS_Version_666/ABook/ABook_Images/BrainAge/BAQ_A.png'
+        };
         return (
-                <View style={styles.container}>
-                <Text style={styles.welcome}>
-                HelloWorld!!
-                </Text>
-                <Image source={pic} style={{width: 190, height: 100}}/>
-                <Text style = {[styles.welcome, styles.blue]}>
-                red, then blue
-                </Text>
-                </View>
-                );
+                <Image source = {pic} style = {{width: 130, height: 130}}/>
+                
+        );
     }
 }
-
-
-const styles = StyleSheet.create({
-                                 container: {
-                                 flex: 1,
-                                 justifyContent: 'center',
-                                 alignItems: 'center'
-                                 },
-                                 welcome: {
-                                 fontSize: 12,
-                                 color: 'red',
-                                 fontWeight: '900',
-                                 textAlign: 'center'
-                                 },
-                                 blue: {
-                                 color: 'blue',
-                                 fontWeight: 'bold',
-                                 fontSize: 34
-                                 }
-                                 });
-
-AppRegistry.registerComponent('demo', () => HelloWorld);
+AppRegistry.registerComponent('demo', () => Hello);
 
