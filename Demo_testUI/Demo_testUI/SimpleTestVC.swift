@@ -12,11 +12,7 @@ import UIKit
 class SimpleTestVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let graph = ANNodeGraph()
-        graph.frame = view.bounds
-        graph.loadTestNodeTree_New()
-        
-        view.addSubview(graph)
+
+
     }
 }
