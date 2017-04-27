@@ -13,6 +13,11 @@ class SimpleTestVC: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-
+        let calendarView = CalendarView.showOnView(UIView.init(frame: CGRect(x: 0, y: 0, width: 350, height: 400)))
+        
+        view.addSubview(calendarView)
+                calendarView.today = Date()
+                calendarView.setMyDate(calendarView.today)
+                calendarView.frame = CGRect(x: 0, y: 64, width: 350, height: 400)
     }
 }

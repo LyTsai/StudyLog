@@ -24,12 +24,16 @@ class WaterfallLayout: UICollectionViewFlowLayout {
         minimumLineSpacing = 0
         minimumInteritemSpacing = 0
         
-        for i in 0..<3 {
-            maxYs[i] = sectionInset.top
-//            maxYs[0] = 20
-//            maxYs[1] = 5
-//            maxYs[2] = 20
-        }
+        let cellWidth = (collectionView!.bounds.width - 10) / 3
+        itemSize = CGSize(width: cellWidth, height: cellWidth * 1.1)
+        
+//        for i in 0..<3 {
+//            maxYs[i] = sectionInset.top
+//        }
+        
+//        maxYs[0] = 20
+//        maxYs[1] = 5
+//        maxYs[2] = 20
         
         // MUST HERE
         let itemCount = collectionView?.numberOfItems(inSection: 0) ?? 0
@@ -55,8 +59,6 @@ class WaterfallLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
-        let collectionWidth = collectionView!.frame.size.width
-        let itemWidth = (collectionWidth - sectionInset.left - sectionInset.right) / 3
         
         // 这个是瀑布流的
 //        var minYItem = 0
@@ -67,7 +69,7 @@ class WaterfallLayout: UICollectionViewFlowLayout {
 //        }
 
         let colNumber = indexPath.item % 3
-        let itemX = sectionInset.left + itemWidth * CGFloat(colNumber)
+        let itemX = sectionInset.left + itemSize.width * CGFloat(colNumber)
         let itemY = maxYs[colNumber]!
         
         
@@ -84,7 +86,7 @@ class WaterfallLayout: UICollectionViewFlowLayout {
 
         
         let attributes = super.layoutAttributesForItem(at: indexPath)
-        attributes?.frame = CGRect(x: itemX, y: itemY, width: itemWidth, height: itemHeight)
+        attributes?.frame = CGRect(x: itemX, y: itemY, width: itemSize.width, height: itemSize.height)
 //        maxYs[minYItem] = attributes?.frame.maxY
         maxYs[colNumber] = attributes?.frame.maxY
         
