@@ -19,5 +19,12 @@ class SimpleTestVC: UIViewController {
                 calendarView.today = Date()
                 calendarView.setMyDate(calendarView.today)
                 calendarView.frame = CGRect(x: 0, y: 64, width: 350, height: 400)
+        
+        
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "MMM yyyy"
+        let date = dateFormatter.string(from: Date())
+        
+        print(date)
     }
 }
