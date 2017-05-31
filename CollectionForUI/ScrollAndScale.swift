@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 // MARK: ScrollCollectionView, looks like a images Scroll View
-class ScrollFlowLayout: UICollectionViewFlowLayout{
+class ScrollFlowLayout: UICollectionViewFlowLayout {
     // called before cell shows, used to set layout
     /*
      - 该方法是准备布局，会在cell显示之前调用，可以在该方法中设置布局的一些属性，比如滚动方向，cell之间的水平间距，以及行间距等
