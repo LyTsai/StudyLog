@@ -7,71 +7,85 @@
 //
 
 import Foundation
+ /*
+ 1. the bottom-center is the center of arc
+ 2. the height is the maxRadius, the outer border
+ 3. angle position is the center angle
+ */
 
 class ArcButtonsView: UIView {
     // calculated
+    // as center
     fileprivate var vertex: CGPoint {
-        return CGPoint(x: bounds.midX, y: bounds.height)
+        return CGPoint(x: bounds.midX, y: bounds.midY)
     }
     fileprivate var maxRadius: CGFloat {
-        return bounds.height
+        return bounds.height * 0.5
     }
     
     fileprivate let floatPi = CGFloat(Double.pi)
     fileprivate var leftAngle: CGFloat = 1.57
     fileprivate var rightAngle: CGFloat = 0
-    fileprivate var midRadius: CGFloat = 0
+    fileprivate var midRadius: CGFloat {
+        return (minRadius + maxRadius) * 0.5
+    }
+    fileprivate var minRadius: CGFloat = 0
     
-    // set up
-//    fileprivate let cartoonImageView = UIImageView(image: UIImage(named: "icon_assess"))
-//    fileprivate let finishImageView = UIImageView(image: UIImage(named: "landing_finish"))
-    func setupWithFrame(_ frame: CGRect, buttons: [UIButton], minRadius: CGFloat, buttonGap: CGFloat, buttonScale: CGFloat) {
+    // set up and add
+    func setupWithFrame(_ frame: CGRect, buttons: [CustomButton], minRadius: CGFloat, buttonGap: CGFloat, buttonScale: CGFloat) {
         if buttons.count == 0 {
             return
         }
         
+        // assgin
         self.frame = frame
-        backgroundColor = UIColor.clear
+        self.minRadius = minRadius
         
+        backgroundColor = UIColor.clear
+        let maxAngle = sinh(frame.width * 0.5 / maxRadius) * 2
+       
         // calculate
-        midRadius = (minRadius + maxRadius) * 0.5
-        let buttonLength = maxRadius - minRadius
-
+        var buttonLength = (maxRadius - minRadius) * buttonScale
+        var buttonAngle = sinh(buttonLength * 0.5 / midRadius) * 2
+        
         // angle
-        let angleGap = sinh(buttonLength * 0.5 / midRadius) * 2 + buttonGap
-        let totalAngle = angleGap * CGFloat(buttons.count - 1)
-        if totalAngle > floatPi {
+        var totalAngle = (buttonAngle + buttonGap) * CGFloat(buttons.count) - buttonGap
+        if totalAngle > maxAngle {
             print("too many")
-            return
+            
+            totalAngle = maxAngle
+            buttonAngle = (totalAngle - (CGFloat(buttons.count) - 1) * buttonGap) / CGFloat(buttons.count)
+
+            buttonLength = 2 * sin(buttonAngle * 0.5) * maxRadius / (1 + sin(buttonAngle * 0.5))
+//            self.minRadius = maxRadius - buttonLength
         }
+        
+        totalAngle -= buttonAngle
         rightAngle = -(floatPi - totalAngle) * 0.5
         leftAngle = rightAngle - totalAngle
         
         // buttons
         var centerAngle = leftAngle
         for button in buttons {
-            let center = Calculation().getPositionByAngle(centerAngle, radius: midRadius, origin: vertex)
-            button.frame = CGRect(center: center, length: buttonLength * buttonScale)
-            addSubview(button)
-            centerAngle += angleGap
+            let center = Calculation().getPositionByAngle(centerAngle, radius: self.midRadius, origin: vertex)
+            button.frame = CGRect(center: center, length: buttonLength)
+
+            // font adjust
+            let labelAdjust = (1 - 1 / sqrt(2)) * buttonLength * 0.5
+            button.labelFrame = button.bounds.insetBy(dx: labelAdjust, dy: labelAdjust)
+            button.textFont = UIFont.systemFont(ofSize: buttonLength * 0.18, weight: UIFontWeightSemibold)
             
+            // add and move to next
+            addSubview(button)
             button.layer.addBlackShadow(4)
+            centerAngle += (buttonAngle + buttonGap)
         }
-        
-        // cartoon character
-//        let cHeight = buttonLength * buttonScale * 0.9
-//        cartoonImageView.contentMode = .scaleAspectFit
-//        cartoonImageView.frame = CGRect(center: buttons[0].frame.origin, length: cHeight)
-//        addSubview(cartoonImageView)
-//        
-//        finishImageView.contentMode = .scaleAspectFit
-//        finishImageView.frame = CGRect(center: CGPoint(x: buttons.last!.frame.midX,y: buttons.last!.frame.minY), width: cHeight * 2, height: cHeight)
-//        addSubview(finishImageView)
         
         // draw lines
         setNeedsDisplay()
     }
     
+    // true is hide
     func setDisplayState(_ hide: Bool) {
         if hide {
             transform = CGAffineTransform(scaleX: 0.3, y: 0.3)
@@ -83,7 +97,8 @@ class ArcButtonsView: UIView {
     
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath(arcCenter: vertex, radius: midRadius, startAngle: leftAngle, endAngle: rightAngle, clockwise: true)
-        path.move(to: vertex)
+      
+        path.move(to: CGPoint(x: vertex.x, y: vertex.y - minRadius))
         path.addLine(to: CGPoint(x: vertex.x, y: vertex.y - midRadius))
         
         path.lineWidth = 2.5

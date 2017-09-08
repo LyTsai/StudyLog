@@ -13,9 +13,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let maskUsage = MaskViewUsageView(frame: view.bounds.insetBy(dx: 0, dy: 64))
-        view.backgroundColor = UIColor.white
-        view.addSubview(maskUsage)
+
         
         
 //        var views = [UIButton]()
