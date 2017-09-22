@@ -29,6 +29,7 @@ class SimpleTestVC: UIViewController {
 class FlipAnimationView: UIView {
     let backImageView = UIImageView(image: #imageLiteral(resourceName: "base"))
     let faceImageView = UIImageView(image: #imageLiteral(resourceName: "background"))
+    let moreImageView = UIImageView(image: #imageLiteral(resourceName: "icon5"))
     
     var faceUp = true
     func demo() {
@@ -37,9 +38,11 @@ class FlipAnimationView: UIView {
         let viewFrame = CGRect(x: 50, y: 50, width: 200, height: 200)
         backImageView.frame = viewFrame
         faceImageView.frame = viewFrame
+        moreImageView.frame = viewFrame.insetBy(dx: 60, dy: 60)
         
         addSubview(backImageView)
         addSubview(faceImageView)
+        faceImageView.addSubview(moreImageView)
     
         // tap GR
         let tapGR = UITapGestureRecognizer(target: self, action: #selector(flip))
@@ -54,6 +57,7 @@ class FlipAnimationView: UIView {
 //        
 //        layer.add(transition, forKey: nil)
         // 整个view的翻转
+        // 只有这两个的时候，OK，可以是其他子视图加在某个上。否则，翻转后消失。
         if faceUp {
             UIView.transition(from: faceImageView, to: backImageView, duration: 0.5, options: .transitionFlipFromRight, completion: nil)
         }else {
