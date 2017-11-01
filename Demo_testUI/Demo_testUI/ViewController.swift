@@ -15,21 +15,6 @@ class ViewController: UIViewController {
         // Do any additional setup after loading the view, typically from a nib.
 
         
-        
-//        var views = [UIButton]()
-//        
-//        for _ in 0..<10 {
-//            let test = UIButton()
-//            test.backgroundColor = UIColor.cyan
-//            views.append(test)
-//            
-//        }
-//        
-//        let menu = CarouselMenuView()
-//        menu.setupWithFrame(CGRect(x: 20, y: 100, width: 250, height: 220), items: views, ovalRatio: 1.5)
-//        view.addSubview(menu)
-        
-//        view.backgroundColor = UIColor.lightGray
     }
 
     override func didReceiveMemoryWarning() {
