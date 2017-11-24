@@ -13,8 +13,9 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
-        
+        view.backgroundColor = UIColor.white
+        let tview = ThickCircleView(frame: view.bounds.insetBy(dx: 4, dy: 4))
+        view.addSubview(tview)
     }
 
     override func didReceiveMemoryWarning() {
