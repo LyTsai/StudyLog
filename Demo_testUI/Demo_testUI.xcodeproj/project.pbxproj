@@ -15,6 +15,9 @@
 		886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */; };
 		886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D81EB1BBD4008657D3 /* CalendarView.swift */; };
 		886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886005D91EB1BBD4008657D3 /* CalendarView.xib */; };
+		8879F5601FB183340009A3F5 /* ThickCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8879F55F1FB183340009A3F5 /* ThickCircleView.swift */; };
+		8879F5611FB183C10009A3F5 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885031551E8E36F6009B21B6 /* Info.plist */; };
+		8879F5631FB184360009A3F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8879F5621FB184360009A3F5 /* Default-568h@2x.png */; };
 		88DEA1D81F31925400000D3A /* ANCircleText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEA1D61F31925400000D3A /* ANCircleText.swift */; };
 		88DEA1D91F31925400000D3A /* CommonDefine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEA1D71F31925400000D3A /* CommonDefine.swift */; };
 		88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */; };
@@ -27,10 +30,12 @@
 		8850314E1E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = Demo_testUI/supportingFiles/Info.plist; sourceTree = SOURCE_ROOT; };
 		886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		886005D81EB1BBD4008657D3 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		886005D91EB1BBD4008657D3 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
+		8879F55F1FB183340009A3F5 /* ThickCircleView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThickCircleView.swift; sourceTree = "<group>"; };
+		8879F5621FB184360009A3F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		88DEA1D61F31925400000D3A /* ANCircleText.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ANCircleText.swift; sourceTree = "<group>"; };
 		88DEA1D71F31925400000D3A /* CommonDefine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CommonDefine.swift; sourceTree = "<group>"; };
 		88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextArcView.swift; sourceTree = "<group>"; };
@@ -50,6 +55,7 @@
 		8850313D1E8E36F6009B21B6 = {
 			isa = PBXGroup;
 			children = (
+				8879F5621FB184360009A3F5 /* Default-568h@2x.png */,
 				885031481E8E36F6009B21B6 /* Demo_testUI */,
 				885031471E8E36F6009B21B6 /* Products */,
 			);
@@ -68,6 +74,7 @@
 			children = (
 				88DEA1D51F31925400000D3A /* Common_swift */,
 				88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */,
+				8879F55F1FB183340009A3F5 /* ThickCircleView.swift */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
 				88B85C3E1FA9C32E00BA13B9 /* calendar */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
@@ -133,7 +140,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0900;
 				ORGANIZATIONNAME = LyTsai;
 				TargetAttributes = {
 					885031451E8E36F6009B21B6 = {
@@ -169,7 +176,9 @@
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
 				886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */,
+				8879F5611FB183C10009A3F5 /* Info.plist in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
+				8879F5631FB184360009A3F5 /* Default-568h@2x.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,6 +189,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8879F5601FB183340009A3F5 /* ThickCircleView.swift in Sources */,
 				886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */,
 				88DEA1D91F31925400000D3A /* CommonDefine.swift in Sources */,
 				88DEA1D81F31925400000D3A /* ANCircleText.swift in Sources */,
@@ -221,7 +231,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -229,7 +241,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -252,7 +268,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -271,7 +287,9 @@
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
 				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -279,7 +297,11 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
@@ -296,7 +318,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
