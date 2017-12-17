@@ -9,13 +9,33 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var transformView: TransformView!
+    override func awakeFromNib() {
+        print("2")
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        view.backgroundColor = UIColor.white
-        let tview = ThickCircleView(frame: view.bounds.insetBy(dx: 4, dy: 4))
-        view.addSubview(tview)
+        print("1")
+        
+        let t = UIView(frame: transformView.frame)
+        t.backgroundColor = UIColor.red
+        view.insertSubview(t, belowSubview: transformView)
+        
+        
+        transformView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
+        transformView.center = CGPoint(x: t.center.x, y: t.frame.maxY)
+
+        
+        transformView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 6))
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        print("vc layout")
     }
 
     override func didReceiveMemoryWarning() {
