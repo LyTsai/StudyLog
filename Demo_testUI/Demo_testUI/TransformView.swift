@@ -20,4 +20,9 @@ class TransformView: UIView {
         
         print("layout")
     }
+    
+    override func layoutIfNeeded() {
+        super.layoutIfNeeded()
+        print("Needed")
+    }
 }

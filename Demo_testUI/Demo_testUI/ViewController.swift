@@ -12,30 +12,37 @@ class ViewController: UIViewController {
     @IBOutlet weak var transformView: TransformView!
     override func awakeFromNib() {
         print("2")
+//        print(transformView.frame)
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("will app")
+        print(transformView.frame)
+       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("did app")
+        print(transformView.frame)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print("1")
+        print("a vc didL")
         
-        let t = UIView(frame: transformView.frame)
-        t.backgroundColor = UIColor.red
-        view.insertSubview(t, belowSubview: transformView)
-        
-        
-        transformView.layer.anchorPoint = CGPoint(x: 0.5, y: 1)
-        transformView.center = CGPoint(x: t.center.x, y: t.frame.maxY)
-
-        
-        transformView.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 6))
+  
+        print(transformView.frame)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
         print("vc layout")
+        print(transformView.frame)
+        transformView.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
