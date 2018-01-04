@@ -19,6 +19,7 @@ class ViewController: UIViewController {
         super.viewWillAppear(animated)
         print("will app")
         print(transformView.frame)
+        print(Int(5.90))
        
     }
     
