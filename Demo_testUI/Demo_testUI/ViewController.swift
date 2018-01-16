@@ -9,27 +9,41 @@
 import UIKit
 
 class ViewController: UIViewController {
+    @IBOutlet weak var transformView: TransformView!
+    override func awakeFromNib() {
+        print("2")
+//        print(transformView.frame)
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        print("will app")
+        print(transformView.frame)
+        print(Int(5.90))
+       
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        print("did app")
+        print(transformView.frame)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-
+        print("a vc didL")
         
+  
+        print(transformView.frame)
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-//        var views = [UIButton]()
-//        
-//        for _ in 0..<10 {
-//            let test = UIButton()
-//            test.backgroundColor = UIColor.cyan
-//            views.append(test)
-//            
-//        }
-//        
-//        let menu = CarouselMenuView()
-//        menu.setupWithFrame(CGRect(x: 20, y: 100, width: 250, height: 220), items: views, ovalRatio: 1.5)
-//        view.addSubview(menu)
-        
-//        view.backgroundColor = UIColor.lightGray
+        print("vc layout")
+        print(transformView.frame)
+        transformView.layoutIfNeeded()
     }
 
     override func didReceiveMemoryWarning() {
