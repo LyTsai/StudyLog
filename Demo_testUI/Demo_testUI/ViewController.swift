@@ -9,25 +9,12 @@
 import UIKit
 
 class ViewController: UIViewController {
-    @IBOutlet weak var transformView: TransformView!
     override func awakeFromNib() {
         print("2")
 //        print(transformView.frame)
     }
     
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        print("will app")
-        print(transformView.frame)
-        print(Int(5.90))
-       
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        print("did app")
-        print(transformView.frame)
-    }
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,21 +22,8 @@ class ViewController: UIViewController {
         print("a vc didL")
         
   
-        print(transformView.frame)
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-        print("vc layout")
-        print(transformView.frame)
-        transformView.layoutIfNeeded()
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 
 }
