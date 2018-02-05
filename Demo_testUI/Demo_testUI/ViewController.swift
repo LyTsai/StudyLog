@@ -9,19 +9,21 @@
 import UIKit
 
 class ViewController: UIViewController {
+    override func awakeFromNib() {
+        print("2")
+//        print(transformView.frame)
+    }
+    
+
 
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        view.backgroundColor = UIColor.white
-        let tview = ThickCircleView(frame: view.bounds.insetBy(dx: 4, dy: 4))
-        view.addSubview(tview)
+        print("a vc didL")
+        
+  
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
 
 }
