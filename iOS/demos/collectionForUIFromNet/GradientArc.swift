@@ -99,11 +99,11 @@ class GradientArc: UIView {
     // MARK: ------------ drawRect
     override func draw(_ rect: CGRect) {
         let path = UIBezierPath()
-        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: 300, startAngle: degreeToRadians(150), endAngle: degreeToRadians(30), clockwise: true)
+        path.addArc(withCenter: CGPoint(x: bounds.midX, y: bounds.midY), radius: 150, startAngle: degreeToRadians(180), endAngle: degreeToRadians(0), clockwise: true)
         
         drawBackgroundArcWithPath(path)                     // 1. background arc
         
-        let  progressLayer = createMaskLayerWithPath(path, percent: 0.85, animated: true)  // 2. progress prepared
+        let  progressLayer = createMaskLayerWithPath(path, percent: 1, animated: true)  // 2. progress prepared
         
         addGradientLayerWithMaskLayer(progressLayer)        // 3. gradient and mask: foreground colors
     }
