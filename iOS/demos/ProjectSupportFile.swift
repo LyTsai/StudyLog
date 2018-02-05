@@ -87,6 +87,16 @@ extension CGRect {
 
 // MARK: ------------ UIColor
 extension UIColor {
+    // green, blue, alpha为1， 2， 3
+    class func getRedFromColor(_ color: UIColor) -> CGFloat! {
+        if color.cgColor.numberOfComponents >= 3 {
+            return color.cgColor.components![0]
+        }else {
+            return nil
+        }
+    }
+    
+    // set up color
     class func colorFromHexRGB(_ rgbValue: Int) -> UIColor {
         return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0xFF00) >> 8) / 255.0, blue: CGFloat((rgbValue & 0xFF) >> 16) / 255.0, alpha: 1)
     }
