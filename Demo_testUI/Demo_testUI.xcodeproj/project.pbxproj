@@ -8,13 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		1901705A1FE66FB700EAD1EB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885031551E8E36F6009B21B6 /* Info.plist */; };
+		883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E92EC202C2AE800B9D5D5 /* CardTagView.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
-		88511E07202AA78A00B069F7 /* CardBackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88511E06202AA78A00B069F7 /* CardBackView.swift */; };
 		88511E09202ACB8F00B069F7 /* RadialGradientView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88511E08202ACB8F00B069F7 /* RadialGradientView.swift */; };
+		885331E6202C46D200D72BBF /* ProjectSupportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885331E5202C46D200D72BBF /* ProjectSupportFile.swift */; };
 		886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */; };
 		886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D81EB1BBD4008657D3 /* CalendarView.swift */; };
 		886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886005D91EB1BBD4008657D3 /* CalendarView.xib */; };
@@ -23,6 +24,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		883E92EC202C2AE800B9D5D5 /* CardTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTagView.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8850314B1E8E36F6009B21B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -30,8 +32,8 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		88511E06202AA78A00B069F7 /* CardBackView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBackView.swift; sourceTree = "<group>"; };
 		88511E08202ACB8F00B069F7 /* RadialGradientView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RadialGradientView.swift; sourceTree = "<group>"; };
+		885331E5202C46D200D72BBF /* ProjectSupportFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectSupportFile.swift; path = ../../../iOS/demos/ProjectSupportFile.swift; sourceTree = "<group>"; };
 		886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		886005D81EB1BBD4008657D3 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		886005D91EB1BBD4008657D3 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
@@ -70,9 +72,9 @@
 		885031481E8E36F6009B21B6 /* Demo_testUI */ = {
 			isa = PBXGroup;
 			children = (
+				883E92EC202C2AE800B9D5D5 /* CardTagView.swift */,
 				88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
-				88511E06202AA78A00B069F7 /* CardBackView.swift */,
 				88511E08202ACB8F00B069F7 /* RadialGradientView.swift */,
 				88B85C3E1FA9C32E00BA13B9 /* calendar */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
@@ -85,6 +87,7 @@
 			children = (
 				885031491E8E36F6009B21B6 /* AppDelegate.swift */,
 				8850314D1E8E36F6009B21B6 /* Main.storyboard */,
+				885331E5202C46D200D72BBF /* ProjectSupportFile.swift */,
 				885031501E8E36F6009B21B6 /* Assets.xcassets */,
 				885031551E8E36F6009B21B6 /* Info.plist */,
 				885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */,
@@ -183,8 +186,9 @@
 				886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */,
-				88511E07202AA78A00B069F7 /* CardBackView.swift in Sources */,
 				88511E09202ACB8F00B069F7 /* RadialGradientView.swift in Sources */,
+				883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */,
+				885331E6202C46D200D72BBF /* ProjectSupportFile.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
