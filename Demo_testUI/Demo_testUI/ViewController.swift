@@ -10,8 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     override func awakeFromNib() {
-        print("2")
-//        print(transformView.frame)
+        print("from nib")
     }
     
 
@@ -19,9 +18,7 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        print("a vc didL")
-        
-  
+        print("didLoad")
     }
 
 
