@@ -51,7 +51,7 @@ class CardTagView: UIView {
         // decoImage
         if decoImage != nil {
             let whRatio = decoImage.size.width / decoImage.size.height
-            decoImage.changeImageSizeTo(CGSize(width: bounds.height * 0.3 * whRatio, height: bounds.height * 0.3)).drawAsPattern(in: bounds)
+            decoImage.changeImageSizeTo(CGSize(width: bounds.height / 3 * whRatio, height: bounds.height * 0.3)).drawAsPattern(in: bounds)
         }
         
         ctx?.restoreGState()
