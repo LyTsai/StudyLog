@@ -159,6 +159,17 @@ extension UIImage {
         return changedImage!
     }
     
+    
+    func changeImageSizeTo(_ size: CGSize, alpha: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(origin: CGPoint.zero, size: size), blendMode: .normal, alpha: alpha)
+        let changedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return changedImage!
+    }
+    
+    
     // MARK: if the color's alpha is 0, it will turn to black
     func convertImageToGrayScale() -> UIImage {
         let imageRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
