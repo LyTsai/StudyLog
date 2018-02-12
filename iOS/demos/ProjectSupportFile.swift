@@ -71,8 +71,8 @@ extension CGRect {
     }
     
     init(center: CGPoint, size: CGSize) {
-        let originX = center.x - length * 0.5
-        let originY = center.y - length * 0.5
+        let originX = center.x - size.width * 0.5
+        let originY = center.y - size.height * 0.5
         self.origin = CGPoint(x: originX, y: originY)
         self.size = size
     }
@@ -110,7 +110,7 @@ extension UIColor {
     }
     
     class func grayColorFrom(_ one: Int) -> UIColor {
-        return UIColorFromRGB(one, green: one, blue: one)
+        return colorFromRGB(one, green: one, blue: one)
     }
 }
 
@@ -159,6 +159,17 @@ extension UIImage {
         return changedImage!
     }
     
+    
+    func changeImageSizeTo(_ size: CGSize, alpha: CGFloat) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        draw(in: CGRect(origin: CGPoint.zero, size: size), blendMode: .normal, alpha: alpha)
+        let changedImage = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return changedImage!
+    }
+    
+    
     // MARK: if the color's alpha is 0, it will turn to black
     func convertImageToGrayScale() -> UIImage {
         let imageRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -190,22 +201,18 @@ extension UIImage {
         return image!
     }
     
-    func clipToRoundWithBorder(_ color: UIColor, borderWidth: CGFloat) -> UIImage {
+    func clipRoundImageWithBorderColor(_ color: UIColor, borderWidth: CGFloat) -> UIImage {
         let radius = min(size.width, size.height) / 2 + borderWidth
         let totalSize = CGSize(width: radius * 2, height: radius * 2)
 
         UIGraphicsBeginImageContextWithOptions(totalSize, false, 0)
+        
         let ctx = UIGraphicsGetCurrentContext()
-
-        if ctx == nil {
-            return self
-        }
-
-        ctx!.addEllipse(in: CGRect(origin: CGPoint.zero, size: totalSize))
+        ctx!.addEllipse(in: CGRect(origin: CGPoint.zero, size: totalSize)) // an oval path
         ctx!.clip()
 
         let changedImage = UIGraphicsGetImageFromCurrentImageContext()!
-
+        
         return changedImage
     }
 }
