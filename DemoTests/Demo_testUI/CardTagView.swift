@@ -7,7 +7,7 @@
 //
 
 import Foundation
-import UIKit
+//import UIKit
 
 class CardTagView: UIView {
     var mainColor = UIColor.magenta
