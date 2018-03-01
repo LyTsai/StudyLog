@@ -60,6 +60,64 @@ var maxOneP: CGFloat {
     return max(standWP, standHP)
 }
 
+// MARK: --------- only objects for subclasses of NSObject
+// runTime
+// all
+func getIvarNames(_ model: AnyObject) -> [String] {
+    var propertyCount: UInt32 = 0
+    var names = [String]()
+    if let properties = class_copyIvarList(model.classForCoder, &propertyCount) {
+        for i in 0..<Int(propertyCount) {
+            if let property = properties[i] {
+                if let nameString = String(validatingUTF8: ivar_getName(property)) {
+                    names.append(nameString)
+                }
+            }
+        }
+    }
+    
+    return names
+}
+
+// int is not included
+func getPropertyNames(_ model: AnyObject) -> [String] {
+    var propertyCount: UInt32 = 0
+    var names = [String]()
+    if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
+        for i in 0..<Int(propertyCount) {
+            if let property = properties[i] {
+                if let nameString = String(validatingUTF8: property_getName(property)) {
+                    names.append(nameString)
+                }
+            }
+        }
+    }
+    
+    return names
+}
+
+func getTypeOfProperty(_ name: String, model: AnyObject) {
+    var propertyCount: UInt32 = 0
+    if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
+        for i in 0..<Int(propertyCount) {
+            if let property = properties[i] {
+                if let nameString = String(validatingUTF8: property_getName(property)) {
+                    if nameString == name {
+                        let attrString = String(validatingUTF8: property_getAttributes(property))
+                        // string compare
+                        
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+
+
+
+
 // MARK: ------------- Extensions --------------
 // MARK: ------------ CGRect
 extension CGRect {
