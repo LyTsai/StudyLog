@@ -1,5 +1,5 @@
 //
-//  TestModek.swift
+//  TestModel.swift
 //  Demo_testUI
 //
 //  Created by iMac on 2018/2/27.
@@ -12,4 +12,7 @@ class TestModel: NSObject {
     var key: String!
     var factors = [String]()
     var name: UIImage!
+    var seqNumber: Int! // ???? can not get??
+    var sD: String!
+    var line: Float!
 }

@@ -60,9 +60,27 @@ var maxOneP: CGFloat {
     return max(standWP, standHP)
 }
 
+// MARK: --------- only objects for subclasses of NSObject
 // runTime
-// MARK: --------- only properties for subclasses of NSObject
-func getModelNames(_ model: AnyObject) -> [String] {
+// all
+func getIvarNames(_ model: AnyObject) -> [String] {
+    var propertyCount: UInt32 = 0
+    var names = [String]()
+    if let properties = class_copyIvarList(model.classForCoder, &propertyCount) {
+        for i in 0..<Int(propertyCount) {
+            if let property = properties[i] {
+                if let nameString = String(validatingUTF8: ivar_getName(property)) {
+                    names.append(nameString)
+                }
+            }
+        }
+    }
+    
+    return names
+}
+
+// int is not included
+func getPropertyNames(_ model: AnyObject) -> [String] {
     var propertyCount: UInt32 = 0
     var names = [String]()
     if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
