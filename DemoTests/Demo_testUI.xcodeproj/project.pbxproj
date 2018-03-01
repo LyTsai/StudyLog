@@ -19,7 +19,7 @@
 		886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */; };
 		886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D81EB1BBD4008657D3 /* CalendarView.swift */; };
 		886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886005D91EB1BBD4008657D3 /* CalendarView.xib */; };
-		8861CB8A204556AE008CCF29 /* TestModek.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8861CB89204556AE008CCF29 /* TestModek.swift */; };
+		8861CB8A204556AE008CCF29 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8861CB89204556AE008CCF29 /* TestModel.swift */; };
 		8879F5631FB184360009A3F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8879F5621FB184360009A3F5 /* Default-568h@2x.png */; };
 		88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */; };
 /* End PBXBuildFile section */
@@ -39,7 +39,7 @@
 		886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		886005D81EB1BBD4008657D3 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		886005D91EB1BBD4008657D3 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
-		8861CB89204556AE008CCF29 /* TestModek.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModek.swift; sourceTree = "<group>"; };
+		8861CB89204556AE008CCF29 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		8879F5621FB184360009A3F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
 		88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextArcView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -75,7 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				883E92EC202C2AE800B9D5D5 /* CardTagView.swift */,
-				8861CB89204556AE008CCF29 /* TestModek.swift */,
+				8861CB89204556AE008CCF29 /* TestModel.swift */,
 				88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
 				88511E08202ACB8F00B069F7 /* RadialGradientView.swift */,
@@ -189,7 +189,7 @@
 				886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */,
-				8861CB8A204556AE008CCF29 /* TestModek.swift in Sources */,
+				8861CB8A204556AE008CCF29 /* TestModel.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */,
 				88511E09202ACB8F00B069F7 /* RadialGradientView.swift in Sources */,
