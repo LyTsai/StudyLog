@@ -10,7 +10,7 @@ import UIKit
 
 class ViewController: UIViewController {
     override func awakeFromNib() {
-        print("from nib")
+  
     }
     
 
@@ -19,8 +19,6 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
       
-        getIvarNames(TestModel())
-        getPropertyNames(TestModel())
     }
 
 
