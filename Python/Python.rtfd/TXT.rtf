@@ -9,7 +9,7 @@
 \csgenericrgb\c100000\c0\c0;\cssrgb\c98039\c98039\c98039;\csgenericrgb\c0\c0\c0;\cssrgb\c0\c50196\c50196;\cssrgb\c26667\c26667\c26667;
 \csgray\c0;\csgray\c100000;\cssrgb\c86667\c0\c33333;\cssrgb\c1961\c57647\c82745;\cssrgb\c86667\c6667\c26667;
 \cssrgb\c0\c60000\c60000;\cssrgb\c60000\c0\c45098;}
-\paperw11900\paperh16840\margl1440\margr1440\vieww12600\viewh10200\viewkind0
+\paperw11900\paperh16840\margl1440\margr1440\vieww20040\viewh17240\viewkind0
 \pard\tx566\tx1133\tx1700\tx2267\tx2834\tx3401\tx3968\tx4535\tx5102\tx5669\tx6236\tx6803\pardirnatural\partightenfactor0
 
 \f0\fs28 \cf0 www.kernel.org
@@ -717,12 +717,10 @@ str.replace(
 \f1 \'a3\'ac\'b2\'a2\'b2\'bb\'ca\'c7\'b8\'c4\'b1\'e4\'c1\'cb
 \f0 str
 \f1 \'a3\'ac\'b6\'f8\'ca\'c7\'c9\'fa\'b3\'c9\'c1\'cb\'d2\'bb\'b8\'f6\'d0\'c2\'b5\'c4\
-\pard\pardeftab720\partightenfactor0
-\cf3 \'b6\'d4\'d3\'da\'b2\'bb\'b1\'e4\'b6\'d4\'cf\'f3\'c0\'b4\'cb\'b5\'a3\'ac\'b5\'f7\'d3\'c3\'b6\'d4\'cf\'f3\'d7\'d4\'c9\'ed\'b5\'c4\'c8\'ce\'d2\'e2\'b7\'bd\'b7\'a8\'a3\'ac\'d2\'b2\'b2\'bb\'bb\'e1\'b8\'c4\'b1\'e4\'b8\'c3\'b6\'d4\'cf\'f3\'d7\'d4\'c9\'ed\'b5\'c4\'c4\'da\'c8\'dd\'a1\'a3\'cf\'e0\'b7\'b4\'a3\'ac\'d5\'e2\'d0\'a9\'b7\'bd\'b7\'a8\'bb\'e1\'b4\'b4\'bd\'a8\'d0\'c2\'b5\'c4\'b6\'d4\'cf\'f3\'b2\'a2\'b7\'b5\'bb\'d8\'a3\'ac\'d5\'e2\'d1\'f9\'a3\'ac\'be\'cd\'b1\'a3\'d6\'a4\'c1\'cb\'b2\'bb\'bf\'c9\'b1\'e4\'b6\'d4\'cf\'f3\'b1\'be\'c9\'ed\'d3\'c0\'d4\'b6\'ca\'c7\'b2\'bb\'bf\'c9\'b1\'e4\'b5\'c4\'a1\'a3
-\f0 \cf3 \
+\'b6\'d4\'d3\'da\'b2\'bb\'b1\'e4\'b6\'d4\'cf\'f3\'c0\'b4\'cb\'b5\'a3\'ac\'b5\'f7\'d3\'c3\'b6\'d4\'cf\'f3\'d7\'d4\'c9\'ed\'b5\'c4\'c8\'ce\'d2\'e2\'b7\'bd\'b7\'a8\'a3\'ac\'d2\'b2\'b2\'bb\'bb\'e1\'b8\'c4\'b1\'e4\'b8\'c3\'b6\'d4\'cf\'f3\'d7\'d4\'c9\'ed\'b5\'c4\'c4\'da\'c8\'dd\'a1\'a3\'cf\'e0\'b7\'b4\'a3\'ac\'d5\'e2\'d0\'a9\'b7\'bd\'b7\'a8\'bb\'e1\'b4\'b4\'bd\'a8\'d0\'c2\'b5\'c4\'b6\'d4\'cf\'f3\'b2\'a2\'b7\'b5\'bb\'d8\'a3\'ac\'d5\'e2\'d1\'f9\'a3\'ac\'be\'cd\'b1\'a3\'d6\'a4\'c1\'cb\'b2\'bb\'bf\'c9\'b1\'e4\'b6\'d4\'cf\'f3\'b1\'be\'c9\'ed\'d3\'c0\'d4\'b6\'ca\'c7\'b2\'bb\'bf\'c9\'b1\'e4\'b5\'c4\'a1\'a3
+\f0 \
 ------------------------------------\
 ------------------------------------\
-\pard\pardeftab720\partightenfactor0
 
 \f1 \cf7 \'ba\'af\'ca\'fd 
 \f2 \cf13 http://docs.python.org/3/library/functions.html#abs\
@@ -738,15 +736,35 @@ int(), float(), str(), bool()\
 hex()\'d7\'aa\'b3\'c9\'ca\'ae\'c1\'f9\'bd\'f8\'d6\'c6\'d7\'d6\'b7\'fb\'b4\'ae\
 \pard\pardeftab720\partightenfactor0
 \cf3 \'ba\'af\'ca\'fd\'c3\'fb\'c6\'e4\'ca\'b5\'be\'cd\'ca\'c7\'d6\'b8\'cf\'f2\'d2\'bb\'b8\'f6\'ba\'af\'ca\'fd\'b6\'d4\'cf\'f3\'b5\'c4\'d2\'fd\'d3\'c3\'a3\'ac\'cd\'ea\'c8\'ab\'bf\'c9\'d2\'d4\'b0\'d1\'ba\'af\'ca\'fd\'c3\'fb\'b8\'b3\'b8\'f8\'d2\'bb\'b8\'f6\'b1\'e4\'c1\'bf\'a3\'ac\'cf\'e0\'b5\'b1\'d3\'da\'b8\'f8\'d5\'e2\'b8\'f6\'ba\'af\'ca\'fd\'c6\'f0\'c1\'cb\'d2\'bb\'b8\'f6
-\f2 \cf3 \'93
-\f1 \cf3 \'b1\'f0\'c3\'fb
-\f2 \cf3 \'94
-\f1 \cf3 \'a1\'a3
-\f2 \cf3 a = abs
-\f1 \cf3 \'c8\'bb\'ba\'f3
-\f2 \cf3 a(-1)
+\f2 \'93
+\f1 \'b1\'f0\'c3\'fb
+\f2 \'94
+\f1 \'a1\'a3
+\f2 a = abs
+\f1 \'c8\'bb\'ba\'f3
+\f2 a(-1)
 \f1 \cf7 \
 \
+\'d7\'d4\'b6\'a8\'d2\'e5\'ba\'af\'ca\'fd\
+def \'ba\'af\'ca\'fd\'c3\'fb(\'b2\'ce\'ca\'fd):\
+    \'cb\'f5\'bd\'f8\'bf\'e9\'a3\'a8\'c8\'e7\'b9\'fb\'d3\'d0\'b7\'b5\'bb\'d8\'d6\'b5\'a3\'acreturn xxx\'a3\'ac\'c8\'e7\'b9\'fb\'c3\'bb\'d3\'d0return\'a3\'ac\'d6\'b4\'d0\'d0\'cd\'ea\'b1\'cf\'d2\'b2\'bb\'e1\'b7\'b5\'bb\'d8\'bd\'e1\'b9\'fbNone\'a3\'acreturn None\'bf\'c9\'d2\'d4\'bc\'f2\'d0\'b4\'ce\'aareturn\'a3\'a9\
+\
+\pard\pardeftab720\partightenfactor0
+\cf3 \'c8\'e7\'b9\'fb\'d2\'d1\'be\'ad\'b0\'d1\'ba\'af\'ca\'fd\'b6\'a8\'d2\'e5\'b1\'a3\'b4\'e6\'ce\'aa
+\f3\fs24 \cf12 \cb6 xxx.py
+\f1\fs28 \cf3 \cb1 \'ce\'c4\'bc\'fe\'c1\'cb\'a3\'ac\'bf\'c9\'d2\'d4\'d4\'da\'b8\'c3\'ce\'c4\'bc\'fe\'b5\'c4\'b5\'b1\'c7\'b0\'c4\'bf\'c2\'bc\'cf\'c2\'c6\'f4\'b6\'af
+\f2 Python
+\f1 \'bd\'e2\'ca\'cd\'c6\'f7\'a3\'ac\'d3\'c3
+\f3\fs24 \cf12 \cb6 from xxx import 
+\f1 \'ba\'af\'ca\'fd\'c3\'fb
+\fs28 \cf3 \cb1 \'c0\'b4\'b5\'bc\'c8\'eb\'ba\'af\'ca\'fd\'a3\'ac\'d7\'a2\'d2\'e2
+\f3\fs24 \cf12 \cb6 xxx
+\f1\fs28 \cf3 \cb1 \'ca\'c7\'ce\'c4\'bc\'fe\'c3\'fb\'a3\'a8\'b2\'bb\'ba\'ac
+\f3\fs24 \cf12 \cb6 .py
+\f1\fs28 \cf3 \cb1 \'c0\'a9\'d5\'b9\'c3\'fb\'a3\'a9\'a1\'a3\
+\
+\pard\pardeftab720\partightenfactor0
+\cf7 \
 \pard\pardeftab720\partightenfactor0
 
 \f3\fs24 \cf14 \cb6 \
