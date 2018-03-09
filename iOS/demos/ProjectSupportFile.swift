@@ -217,7 +217,6 @@ extension UIImage {
         return changedImage!
     }
     
-    
     func changeImageSizeTo(_ size: CGSize, alpha: CGFloat) -> UIImage {
         UIGraphicsBeginImageContext(size)
         draw(in: CGRect(origin: CGPoint.zero, size: size), blendMode: .normal, alpha: alpha)
@@ -273,6 +272,8 @@ extension UIImage {
         
         return changedImage
     }
+    
+ 
 }
 
 
