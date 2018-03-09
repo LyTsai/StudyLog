@@ -14,11 +14,32 @@ class ViewController: UIViewController {
     }
     
 
-
+    @IBOutlet weak var imageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-      
+        let image = UIImage(named: "twtr-heart-animation-sheet-large")!
+        let size = CGSize(width: image.size.width / 4, height: image.size.height / 4)
+        var i: CGFloat = 3
+        var j: CGFloat = 3
+        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: true) { (timer) in
+            let frame = CGRect(x: 0 ,y:0, width: image.size.width, height: image.size.height)
+//                CGRect(x: i * size.width ,y: j * size.height, width:  size.width, height: size.height)
+            
+            self.imageView.image = UIImage(cgImage: image.cgImage!.cropping(to: frame)!)
+            
+            
+//            j += 1
+//
+//            if i > 7 {
+//                i = 0
+//                j += 1
+//            }
+//            if j > 7 {
+//                j = 0
+//            }
+        }
     }
 
 
