@@ -273,6 +273,22 @@ extension UIImage {
         return changedImage
     }
     
+    func getImageAtFrame(_ frame: CGRect) -> UIImage {
+        UIGraphicsBeginImageContext(size)
+        
+//        UIGraphicsBeginImageContextWithOptions(size, false, 0)
+        
+        let ctx = UIGraphicsGetCurrentContext()
+        ctx!.addRect(frame)
+        
+        ctx!.clip()
+        
+        let changedImage = UIGraphicsGetImageFromCurrentImageContext()!
+        
+        return changedImage
+    }
+    
+
  
 }
 
