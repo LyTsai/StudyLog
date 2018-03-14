@@ -274,18 +274,10 @@ extension UIImage {
     }
     
     func getImageAtFrame(_ frame: CGRect) -> UIImage {
-        UIGraphicsBeginImageContext(size)
+      
+        let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
         
-//        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        
-        let ctx = UIGraphicsGetCurrentContext()
-        ctx!.addRect(frame)
-        
-        ctx!.clip()
-        
-        let changedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
-        return changedImage
+        return  UIImage(cgImage: self.cgImage!.cropping(to: cgFrame)!)
     }
     
 
