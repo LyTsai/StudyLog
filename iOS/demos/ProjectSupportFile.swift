@@ -7,7 +7,6 @@
 import Foundation
 import UIKit
 
-
 /** path for a file */
 let filePath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!.appending("/fileName.data")
 
@@ -17,15 +16,12 @@ let ACCOUNT = "AccountName"
 
 // MARK: ---------- Adaptation
 // statusBar + navigaitonBar
-var topLength: CGFloat {
-    // iPhoneX - 44 + 44
-    // others  - 20 + 44
-    return UIApplication.shared.statusBarFrame.size.height + 44
-}
+// iPhoneX - 44 + 44
+// others  - 20 + 44
+let topLength = UIApplication.shared.statusBarFrame.size.height + 44
 
 // tabBar
 var bottomLength: CGFloat {
-    // TODO: ---------- not a best solution
     if UIScreen.main.bounds.height == 812 {
         return 34 + 49
     }
@@ -34,15 +30,12 @@ var bottomLength: CGFloat {
 }
 
 /** the width of the viewController */
-var width: CGFloat {
-    return UIScreen.main.bounds.width
-}
-/** the height of the viewController */
-var height: CGFloat {
-    return UIScreen.main.bounds.height
-}
+let width = UIScreen.main.bounds.width
 
-// standard point
+/** the height of the viewController */
+let height = UIScreen.main.bounds.height
+
+// standard point, for design of 375 * 667
 var standWP: CGFloat {
     return width / 375
 }
@@ -59,6 +52,17 @@ var minOneP: CGFloat {
 var maxOneP: CGFloat {
     return max(standWP, standHP)
 }
+
+
+let currentLanguage = Locale.preferredLanguages.first // ex: Optional("en")
+let isPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone) // let deviceModel = UIDevice.current.model
+let isPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad)
+
+let deviceVersion = UIDevice.current.systemVersion // String, ex: 11.1
+
+// singletion
+let notificationCenter = NotificationCenter.default
+
 
 // MARK: --------- only objects for subclasses of NSObject
 // runTime
@@ -112,9 +116,6 @@ func getTypeOfProperty(_ name: String, model: AnyObject) {
         }
     }
 }
-
-
-
 
 
 
@@ -274,24 +275,12 @@ extension UIImage {
     }
     
     func getImageAtFrame(_ frame: CGRect) -> UIImage {
-        UIGraphicsBeginImageContext(size)
+      
+        let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
         
-//        UIGraphicsBeginImageContextWithOptions(size, false, 0)
-        
-        let ctx = UIGraphicsGetCurrentContext()
-        ctx!.addRect(frame)
-        
-        ctx!.clip()
-        
-        let changedImage = UIGraphicsGetImageFromCurrentImageContext()!
-        
-        return changedImage
+        return  UIImage(cgImage: self.cgImage!.cropping(to: cgFrame)!)
     }
-    
-
- 
 }
-
 
 // MARK: ------------ UILabel
 extension UILabel {

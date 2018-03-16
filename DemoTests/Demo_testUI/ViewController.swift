@@ -19,30 +19,24 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let image = UIImage(named: "twtr-heart-animation-sheet-large")!
-        let size = CGSize(width: (image.cgImage?.width)! / 8, height: (image.cgImage?.height)! / 8)
-        var i: CGFloat = 0
-        var j: CGFloat = 0
-//        print(image.size.width)
-//        print(image.cgImage?.width)
-        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (timer) in
-            let frame = CGRect(x: i * size.width ,y: j * size.height, width:  size.width, height: size.height)
-//                CGRect(x: 0 ,y:0, width: image.size.width, height: image.size.height)
+     
+//        let image = UIImage(named: "twtr-heart-animation-sheet-large")!
+//        let size = CGSize(width: (image.cgImage?.width)! / 8, height: (image.cgImage?.height)! / 8)
+//        var i: CGFloat = 0
+//        var j: CGFloat = 0
+//        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (timer) in
+//            let frame = CGRect(x: i * size.width ,y: j * size.height, width:  size.width, height: size.height)
+//            self.imageView.image = UIImage(cgImage: image.cgImage!.cropping(to: frame)!)
 //
-            
-            self.imageView.image = UIImage(cgImage: image.cgImage!.cropping(to: frame)!)
-            
-            
-            j += 1
-
-            if i > 7 {
-                i = 0
-                j += 1
-            }
-            if j > 7 {
-                j = 0
-            }
-        }
+//            j += 1
+//            if i > 7 {
+//                i = 0
+//                j += 1
+//            }
+//            if j > 7 {
+//                j = 0
+//            }
+//        }
     }
 
 
@@ -69,7 +63,7 @@ class CarouselMenuView: UIView {
         return items.count
     }
     var angleGap: CGFloat {
-        return CGFloat(M_PI * 2) / CGFloat(numberOfItems)
+        return CGFloat(Double.pi * 2) / CGFloat(numberOfItems)
     }
     
     func setupWithFrame(_ frame: CGRect, items: [UIButton], ovalRatio: CGFloat) {
