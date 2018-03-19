@@ -53,7 +53,7 @@ var maxOneP: CGFloat {
     return max(standWP, standHP)
 }
 
-
+// device
 let currentLanguage = Locale.preferredLanguages.first // ex: Optional("en")
 let isPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone) // let deviceModel = UIDevice.current.model
 let isPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad)
@@ -100,22 +100,22 @@ func getPropertyNames(_ model: AnyObject) -> [String] {
     return names
 }
 
-func getTypeOfProperty(_ name: String, model: AnyObject) {
-    var propertyCount: UInt32 = 0
-    if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
-        for i in 0..<Int(propertyCount) {
-            if let property = properties[i] {
-                if let nameString = String(validatingUTF8: property_getName(property)) {
-                    if nameString == name {
-                        let attrString = String(validatingUTF8: property_getAttributes(property))
-                        // string compare
-                        
-                    }
-                }
-            }
-        }
-    }
-}
+//func getTypeOfProperty(_ name: String, model: AnyObject) {
+//    var propertyCount: UInt32 = 0
+//    if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
+//        for i in 0..<Int(propertyCount) {
+//            if let property = properties[i] {
+//                if let nameString = String(validatingUTF8: property_getName(property)) {
+//                    if nameString == name {
+//                        let attrString = String(validatingUTF8: property_getAttributes(property))
+//                        // string compare
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 
