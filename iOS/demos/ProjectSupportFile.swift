@@ -185,6 +185,21 @@ extension CALayer {
 
 // MARK: ----------- UIView --------
 extension UIView {
+    func getNavigationController() -> UINavigationController! {
+        var nextView = self.superview
+        while nextView != nil {
+            if let responder = nextView!.next {
+                if responder.isKind(of: UINavigationController.self) {
+                    return responder as! UINavigationController
+                }
+                nextView = nextView!.superview
+            }
+        }
+        
+        return nil
+    }
+    
+    
     func drawString(_ aString: NSAttributedString, inRect rect: CGRect) {
         let sSize = aString.boundingRect(with: rect.size, options: .usesLineFragmentOrigin, context: nil)
         let cRect = CGRect(center: CGPoint(x: rect.midX, y: rect.midY), width: sSize.width, height: sSize.height)
