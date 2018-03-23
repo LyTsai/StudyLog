@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11762" systemVersion="15G1108" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <capability name="Alignment constraints with different attributes" minToolsVersion="5.1"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="7gZ-k6-7w6" customClass="PlayForOthersUserInfoView" customModule="ABook_iPhone_V1" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="315" height="82"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <subviews>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="5ek-Sm-vVH">
+                    <rect key="frame" x="15" y="7" width="40" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="5ek-Sm-vVH" secondAttribute="height" multiplier="1:1" id="9bA-ID-wvc"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="User 1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="9dL-ig-68d">
+                    <rect key="frame" x="63" y="7" width="173.5" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="13"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="02/08/2017" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="puF-ax-Bog">
+                    <rect key="frame" x="222" y="27" width="68" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
+                    <color key="textColor" red="0.50980392156862742" green="0.50980392156862742" blue="0.50980392156862742" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsVerticalScrollIndicator="NO" dataMode="none" translatesAutoresizingMaskIntoConstraints="NO" id="obu-2I-98N" customClass="RecentGamesCollectionView" customModule="ABook_iPhone_V1" customModuleProvider="target">
+                    <rect key="frame" x="63" y="52" width="227" height="26"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Okl-ID-are">
+                        <size key="itemSize" width="23" height="23"/>
+                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    </collectionViewFlowLayout>
+                </collectionView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="recent games played" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="TbL-Vr-pDL">
+                    <rect key="frame" x="63" y="27" width="113" height="20"/>
+                    <fontDescription key="fontDescription" type="system" weight="light" pointSize="10"/>
+                    <color key="textColor" red="0.46666666666666667" green="0.46666666666666667" blue="0.47058823529411764" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="puF-ax-Bog" firstAttribute="height" secondItem="TbL-Vr-pDL" secondAttribute="height" id="270-al-HAF"/>
+                <constraint firstItem="5ek-Sm-vVH" firstAttribute="leading" secondItem="7gZ-k6-7w6" secondAttribute="leading" constant="15" id="3oR-01-jXh"/>
+                <constraint firstItem="obu-2I-98N" firstAttribute="leading" secondItem="TbL-Vr-pDL" secondAttribute="leading" id="4jr-Ul-Fcs"/>
+                <constraint firstItem="9dL-ig-68d" firstAttribute="leading" secondItem="5ek-Sm-vVH" secondAttribute="trailing" constant="8" id="ACG-fv-c5g"/>
+                <constraint firstItem="obu-2I-98N" firstAttribute="top" secondItem="puF-ax-Bog" secondAttribute="bottom" constant="5" id="B18-OG-uck"/>
+                <constraint firstItem="5ek-Sm-vVH" firstAttribute="height" secondItem="7gZ-k6-7w6" secondAttribute="height" multiplier="0.4878" id="DMR-4G-WDC"/>
+                <constraint firstItem="TbL-Vr-pDL" firstAttribute="width" secondItem="9dL-ig-68d" secondAttribute="width" multiplier="0.65" id="DW2-Qd-fAc"/>
+                <constraint firstItem="9dL-ig-68d" firstAttribute="top" secondItem="5ek-Sm-vVH" secondAttribute="top" id="E9j-Z0-RSz"/>
+                <constraint firstItem="9dL-ig-68d" firstAttribute="width" secondItem="7gZ-k6-7w6" secondAttribute="width" multiplier="0.55" id="EyY-3Y-beg"/>
+                <constraint firstItem="puF-ax-Bog" firstAttribute="width" secondItem="TbL-Vr-pDL" secondAttribute="width" multiplier="0.6" id="IRU-ai-uxm"/>
+                <constraint firstItem="TbL-Vr-pDL" firstAttribute="top" secondItem="9dL-ig-68d" secondAttribute="bottom" id="JTc-dD-ntB"/>
+                <constraint firstItem="5ek-Sm-vVH" firstAttribute="bottom" secondItem="7gZ-k6-7w6" secondAttribute="centerY" constant="6" id="RzV-Td-cv6"/>
+                <constraint firstItem="9dL-ig-68d" firstAttribute="height" secondItem="5ek-Sm-vVH" secondAttribute="height" multiplier="0.48" id="Rzs-3G-3X3"/>
+                <constraint firstItem="puF-ax-Bog" firstAttribute="bottom" secondItem="TbL-Vr-pDL" secondAttribute="bottom" id="UOg-BT-hr2"/>
+                <constraint firstItem="TbL-Vr-pDL" firstAttribute="leading" secondItem="9dL-ig-68d" secondAttribute="leading" id="VR1-Ul-9ZD"/>
+                <constraint firstAttribute="trailing" secondItem="puF-ax-Bog" secondAttribute="trailing" constant="25" id="YF3-up-hyl"/>
+                <constraint firstItem="TbL-Vr-pDL" firstAttribute="height" secondItem="9dL-ig-68d" secondAttribute="height" id="ccN-L5-Q3s"/>
+                <constraint firstItem="obu-2I-98N" firstAttribute="trailing" secondItem="puF-ax-Bog" secondAttribute="trailing" id="n3M-RQ-7Pe"/>
+                <constraint firstAttribute="bottom" secondItem="obu-2I-98N" secondAttribute="bottom" constant="4" id="xHe-Qh-5kq"/>
+            </constraints>
+            <nil key="simulatedStatusBarMetrics"/>
+            <nil key="simulatedTopBarMetrics"/>
+            <nil key="simulatedBottomBarMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="lastDateLabel" destination="puF-ax-Bog" id="PRP-U8-TtE"/>
+                <outlet property="recentGamesView" destination="obu-2I-98N" id="6dh-l5-cXh"/>
+                <outlet property="userIconView" destination="5ek-Sm-vVH" id="7Yf-Lq-Ovd"/>
+                <outlet property="userNameLabel" destination="9dL-ig-68d" id="eaO-Dw-1kB"/>
+            </connections>
+            <point key="canvasLocation" x="-125.5" y="38"/>
+        </view>
+        <searchDisplayController id="8Yj-qe-rAW"/>
+    </objects>
+</document>
