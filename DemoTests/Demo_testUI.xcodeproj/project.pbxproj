@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		1901705A1FE66FB700EAD1EB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885031551E8E36F6009B21B6 /* Info.plist */; };
 		883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E92EC202C2AE800B9D5D5 /* CardTagView.swift */; };
+		8845E35B2064D6C9001C18F6 /* MapBoardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845E35A2064D6C9001C18F6 /* MapBoardView.swift */; };
+		8845E35D2064DF2A001C18F6 /* MapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8845E35C2064DF2A001C18F6 /* MapNode.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
@@ -30,6 +32,8 @@
 
 /* Begin PBXFileReference section */
 		883E92EC202C2AE800B9D5D5 /* CardTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTagView.swift; sourceTree = "<group>"; };
+		8845E35A2064D6C9001C18F6 /* MapBoardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapBoardView.swift; sourceTree = "<group>"; };
+		8845E35C2064DF2A001C18F6 /* MapNode.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapNode.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8850314B1E8E36F6009B21B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -63,6 +67,21 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		8845E35E2064DF36001C18F6 /* test */ = {
+			isa = PBXGroup;
+			children = (
+				88511E08202ACB8F00B069F7 /* RadialGradientView.swift */,
+				8853A94B205BBF2800A488BC /* AnimationSample.swift */,
+				8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */,
+				883E92EC202C2AE800B9D5D5 /* CardTagView.swift */,
+				8861CB89204556AE008CCF29 /* TestModel.swift */,
+				8853A94D205BC79800A488BC /* AnimationView.swift */,
+				88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */,
+				88885E24204D2200006F99F7 /* FlowerView.swift */,
+			);
+			path = test;
+			sourceTree = "<group>";
+		};
 		8850313D1E8E36F6009B21B6 = {
 			isa = PBXGroup;
 			children = (
@@ -82,15 +101,10 @@
 		885031481E8E36F6009B21B6 /* Demo_testUI */ = {
 			isa = PBXGroup;
 			children = (
-				8853A94B205BBF2800A488BC /* AnimationSample.swift */,
-				8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */,
-				883E92EC202C2AE800B9D5D5 /* CardTagView.swift */,
-				8861CB89204556AE008CCF29 /* TestModel.swift */,
-				8853A94D205BC79800A488BC /* AnimationView.swift */,
-				88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */,
-				88885E24204D2200006F99F7 /* FlowerView.swift */,
+				8845E35E2064DF36001C18F6 /* test */,
+				8845E35A2064D6C9001C18F6 /* MapBoardView.swift */,
+				8845E35C2064DF2A001C18F6 /* MapNode.swift */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
-				88511E08202ACB8F00B069F7 /* RadialGradientView.swift */,
 				88B85C3E1FA9C32E00BA13B9 /* calendar */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
@@ -207,7 +221,9 @@
 				88511E09202ACB8F00B069F7 /* RadialGradientView.swift in Sources */,
 				8853A94C205BBF2800A488BC /* AnimationSample.swift in Sources */,
 				88885E25204D2200006F99F7 /* FlowerView.swift in Sources */,
+				8845E35D2064DF2A001C18F6 /* MapNode.swift in Sources */,
 				8853A94E205BC79800A488BC /* AnimationView.swift in Sources */,
+				8845E35B2064D6C9001C18F6 /* MapBoardView.swift in Sources */,
 				883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */,
 				885331E6202C46D200D72BBF /* ProjectSupportFile.swift in Sources */,
 				8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */,
