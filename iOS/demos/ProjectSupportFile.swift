@@ -199,7 +199,6 @@ extension UIView {
         return nil
     }
     
-    
     func drawString(_ aString: NSAttributedString, inRect rect: CGRect) {
         let sSize = aString.boundingRect(with: rect.size, options: .usesLineFragmentOrigin, context: nil)
         let cRect = CGRect(center: CGPoint(x: rect.midX, y: rect.midY), width: sSize.width, height: sSize.height)
@@ -219,6 +218,15 @@ extension UIView {
         }
         
         aString.draw(in: cRect)
+    }
+    
+    func addBorder(_ color: UIColor!, cornerRadius: CGFloat, borderWidth: CGFloat, masksToBounds: Bool) {
+        if color != nil {
+            layer.borderColor = color.cgColor
+        }
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = masksToBounds
     }
 }
 
