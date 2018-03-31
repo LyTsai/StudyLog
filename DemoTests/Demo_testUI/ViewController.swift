@@ -14,16 +14,50 @@ class ViewController: UIViewController {
   
     }
     
-
-    @IBOutlet weak var imageView: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
-        print(UIDevice.current.localizedModel)
+       
+        
+        
     }
 
-
+    // encode and decode
+    func convertToBase64(_ string: String) -> String {
+        return string.data(using: .utf8)!.base64EncodedString() // base64 string
+    }
+    
+    func convertBase64String(_ base64: String) -> String {
+        let tData = Data(base64Encoded: base64)
+        return String(data: tData!, encoding: .utf8)! // string
+    }
+    
+    func covertJSONData(_ jsonData: Data) -> Any! {
+        var jsonObject: Any!
+        do {
+            jsonObject = try JSONSerialization.jsonObject(with: jsonData, options: .allowFragments)
+        }catch {
+            print(error.localizedDescription)
+        }
+        
+        return jsonObject
+    }
+    
+    func covertToJSONData(_ jsonOject: Any) -> Data! {
+        if JSONSerialization.isValidJSONObject(jsonOject) {
+            var jsonData: Data!
+            do {
+                jsonData = try JSONSerialization.data(withJSONObject: jsonOject, options: .prettyPrinted)
+            }catch {
+                print(error.localizedDescription)
+            }
+            
+            return jsonData
+        }
+        
+        return nil
+    }
 }
 
 
