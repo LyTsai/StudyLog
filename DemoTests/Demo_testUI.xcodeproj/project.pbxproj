@@ -23,9 +23,6 @@
 		886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886005D91EB1BBD4008657D3 /* CalendarView.xib */; };
 		8861CB8A204556AE008CCF29 /* TestModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8861CB89204556AE008CCF29 /* TestModel.swift */; };
 		8879F5631FB184360009A3F5 /* Default-568h@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = 8879F5621FB184360009A3F5 /* Default-568h@2x.png */; };
-		887BC78A2068E36600C1019E /* VisualMapNode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC7872068E36600C1019E /* VisualMapNode.swift */; };
-		887BC78B2068E36600C1019E /* VisualMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC7882068E36600C1019E /* VisualMapView.swift */; };
-		887BC78C2068E36600C1019E /* VisualMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC7892068E36600C1019E /* VisualMapViewController.swift */; };
 		887BC78E2068E4BD00C1019E /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC78D2068E4BD00C1019E /* Temp.swift */; };
 		8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */; };
 		88885E25204D2200006F99F7 /* FlowerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88885E24204D2200006F99F7 /* FlowerView.swift */; };
@@ -51,9 +48,6 @@
 		886005D91EB1BBD4008657D3 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
 		8861CB89204556AE008CCF29 /* TestModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestModel.swift; sourceTree = "<group>"; };
 		8879F5621FB184360009A3F5 /* Default-568h@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "Default-568h@2x.png"; sourceTree = "<group>"; };
-		887BC7872068E36600C1019E /* VisualMapNode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMapNode.swift; sourceTree = "<group>"; };
-		887BC7882068E36600C1019E /* VisualMapView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMapView.swift; sourceTree = "<group>"; };
-		887BC7892068E36600C1019E /* VisualMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisualMapViewController.swift; sourceTree = "<group>"; };
 		887BC78D2068E4BD00C1019E /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		88885E24204D2200006F99F7 /* FlowerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FlowerView.swift; sourceTree = "<group>"; };
@@ -105,7 +99,6 @@
 		885031481E8E36F6009B21B6 /* Demo_testUI */ = {
 			isa = PBXGroup;
 			children = (
-				887BC7862068E36600C1019E /* VisualMap */,
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
 				887BC78D2068E4BD00C1019E /* Temp.swift */,
@@ -113,17 +106,6 @@
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
 			path = Demo_testUI;
-			sourceTree = "<group>";
-		};
-		887BC7862068E36600C1019E /* VisualMap */ = {
-			isa = PBXGroup;
-			children = (
-				887BC7872068E36600C1019E /* VisualMapNode.swift */,
-				887BC7882068E36600C1019E /* VisualMapView.swift */,
-				887BC7892068E36600C1019E /* VisualMapViewController.swift */,
-			);
-			name = VisualMap;
-			path = ../../../ANBook_iOS_Version_One_623/ABook/ABook_iPhone_V1/ABook_iPhone_V1/Classes/VisualMap;
 			sourceTree = "<group>";
 		};
 		88B85C3D1FA9C2D200BA13B9 /* supportingFiles */ = {
@@ -233,17 +215,14 @@
 				8861CB8A204556AE008CCF29 /* TestModel.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */,
-				887BC78A2068E36600C1019E /* VisualMapNode.swift in Sources */,
 				88511E09202ACB8F00B069F7 /* RadialGradientView.swift in Sources */,
 				8853A94C205BBF2800A488BC /* AnimationSample.swift in Sources */,
 				88885E25204D2200006F99F7 /* FlowerView.swift in Sources */,
 				8853A94E205BC79800A488BC /* AnimationView.swift in Sources */,
 				883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */,
-				887BC78B2068E36600C1019E /* VisualMapView.swift in Sources */,
 				885331E6202C46D200D72BBF /* ProjectSupportFile.swift in Sources */,
 				8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */,
 				887BC78E2068E4BD00C1019E /* Temp.swift in Sources */,
-				887BC78C2068E36600C1019E /* VisualMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
