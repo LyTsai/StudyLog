@@ -8,6 +8,7 @@
 
 import UIKit
 
+
 class ViewController: UIViewController {
     override func awakeFromNib() {
   
@@ -19,29 +20,11 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-     
-//        let image = UIImage(named: "twtr-heart-animation-sheet-large")!
-//        let size = CGSize(width: (image.cgImage?.width)! / 8, height: (image.cgImage?.height)! / 8)
-//        var i: CGFloat = 0
-//        var j: CGFloat = 0
-//        Timer.scheduledTimer(withTimeInterval: 0.2, repeats: true) { (timer) in
-//            let frame = CGRect(x: i * size.width ,y: j * size.height, width:  size.width, height: size.height)
-//            self.imageView.image = UIImage(cgImage: image.cgImage!.cropping(to: frame)!)
-//
-//            j += 1
-//            if i > 7 {
-//                i = 0
-//                j += 1
-//            }
-//            if j > 7 {
-//                j = 0
-//            }
-//        }
+        print(UIDevice.current.localizedModel)
     }
 
 
 }
-
 
 
 // one menu item

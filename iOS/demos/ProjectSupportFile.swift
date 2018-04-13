@@ -53,7 +53,7 @@ var maxOneP: CGFloat {
     return max(standWP, standHP)
 }
 
-
+// device
 let currentLanguage = Locale.preferredLanguages.first // ex: Optional("en")
 let isPhone = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.phone) // let deviceModel = UIDevice.current.model
 let isPad = (UI_USER_INTERFACE_IDIOM() == UIUserInterfaceIdiom.pad)
@@ -100,22 +100,22 @@ func getPropertyNames(_ model: AnyObject) -> [String] {
     return names
 }
 
-func getTypeOfProperty(_ name: String, model: AnyObject) {
-    var propertyCount: UInt32 = 0
-    if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
-        for i in 0..<Int(propertyCount) {
-            if let property = properties[i] {
-                if let nameString = String(validatingUTF8: property_getName(property)) {
-                    if nameString == name {
-                        let attrString = String(validatingUTF8: property_getAttributes(property))
-                        // string compare
-                        
-                    }
-                }
-            }
-        }
-    }
-}
+//func getTypeOfProperty(_ name: String, model: AnyObject) {
+//    var propertyCount: UInt32 = 0
+//    if let properties = class_copyPropertyList(model.classForCoder, &propertyCount) {
+//        for i in 0..<Int(propertyCount) {
+//            if let property = properties[i] {
+//                if let nameString = String(validatingUTF8: property_getName(property)) {
+//                    if nameString == name {
+//                        let attrString = String(validatingUTF8: property_getAttributes(property))
+//                        // string compare
+//
+//                    }
+//                }
+//            }
+//        }
+//    }
+//}
 
 
 
@@ -185,6 +185,20 @@ extension CALayer {
 
 // MARK: ----------- UIView --------
 extension UIView {
+    func getNavigationController() -> UINavigationController! {
+        var nextView = self.superview
+        while nextView != nil {
+            if let responder = nextView!.next {
+                if responder.isKind(of: UINavigationController.self) {
+                    return responder as! UINavigationController
+                }
+                nextView = nextView!.superview
+            }
+        }
+        
+        return nil
+    }
+    
     func drawString(_ aString: NSAttributedString, inRect rect: CGRect) {
         let sSize = aString.boundingRect(with: rect.size, options: .usesLineFragmentOrigin, context: nil)
         let cRect = CGRect(center: CGPoint(x: rect.midX, y: rect.midY), width: sSize.width, height: sSize.height)
@@ -204,6 +218,15 @@ extension UIView {
         }
         
         aString.draw(in: cRect)
+    }
+    
+    func addBorder(_ color: UIColor!, cornerRadius: CGFloat, borderWidth: CGFloat, masksToBounds: Bool) {
+        if color != nil {
+            layer.borderColor = color.cgColor
+        }
+        layer.borderWidth = borderWidth
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = masksToBounds
     }
 }
 
