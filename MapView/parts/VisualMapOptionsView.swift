@@ -81,7 +81,7 @@ class VisualMapOptionCell: UICollectionViewCell {
 
     }
     
-    func configureCellWithText(_ text: String!, imageUrl: URL!, chosen: Bool, color: UIColor) {
+    func configureCellWithText(_ text: String?, imageUrl: URL?, chosen: Bool, color: UIColor) {
         imageView.sd_setImage(with: imageUrl, placeholderImage: ProjectImages.sharedImage.placeHolder, options: .refreshCached, completed: nil)
         backView.layer.borderColor = color.cgColor
         labelBack.backgroundColor = color.withAlphaComponent(0.7)
