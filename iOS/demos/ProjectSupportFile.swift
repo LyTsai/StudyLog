@@ -185,7 +185,7 @@ extension CALayer {
 
 // MARK: ----------- UIView --------
 extension UIView {
-    func getNavigationController() -> UINavigationController! {
+    var navigation: UINavigationController! {
         var nextView = self.superview
         while nextView != nil {
             if let responder = nextView!.next {
@@ -199,10 +199,31 @@ extension UIView {
         return nil
     }
     
+    var viewController: UIViewController! {
+        var nextView = self.superview
+        while nextView != nil {
+            if let responder = nextView!.next {
+                if responder.isKind(of: UIViewController.self) {
+                    return responder as! UIViewController
+                }
+                nextView = nextView!.superview
+            }
+        }
+        
+        return nil
+    }
+    
+    // draw rect
+    func drawAspectFitImage(_ image: UIImage, inRect rect: CGRect) {
+        let imageSize = image.size
+        let imageW = min(rect.width, rect.height * imageSize.width / imageSize.height)
+        
+        image.draw(in: CGRect(center: CGPoint(x: rect.midX, y: rect.midY), width: imageW, height: imageW * imageSize.height / imageSize.width))
+    }
+    
+    //  .center
     func drawString(_ aString: NSAttributedString, inRect rect: CGRect) {
-        let sSize = aString.boundingRect(with: rect.size, options: .usesLineFragmentOrigin, context: nil)
-        let cRect = CGRect(center: CGPoint(x: rect.midX, y: rect.midY), width: sSize.width, height: sSize.height)
-        aString.draw(in: cRect)
+        drawString(aString, inRect: rect, alignment: .center)
     }
     
     func drawString(_ aString: NSAttributedString, inRect rect: CGRect, alignment: NSTextAlignment) {
@@ -218,6 +239,14 @@ extension UIView {
         }
         
         aString.draw(in: cRect)
+    }
+    
+    func getFanPath(_ radius: CGFloat, innerRadius: CGFloat, vertex: CGPoint, sAngle: CGFloat, eAngle: CGFloat, clockwise: Bool) -> UIBezierPath {
+        let path = UIBezierPath(arcCenter: vertex, radius: radius, startAngle: eAngle, endAngle: sAngle, clockwise: !clockwise)
+        path.addArc(withCenter: vertex, radius: innerRadius, startAngle: sAngle, endAngle: eAngle, clockwise: clockwise)
+        path.close()
+        
+        return path
     }
     
     func addBorder(_ color: UIColor!, cornerRadius: CGFloat, borderWidth: CGFloat, masksToBounds: Bool) {
