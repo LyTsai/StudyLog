@@ -8,6 +8,34 @@
 
 import Foundation
 
+let stretchExplainCellID = "Stretch Explain Cell ID"
+class StretchExplainCell: UITableViewCell {
+    class func cellWithTable(_ table: UITableView, text: String, backgroundColor: UIColor) -> StretchExplainCell {
+        var cell = table.dequeueReusableCell(withIdentifier: stretchExplainCellID) as? StretchExplainCell
+        if cell == nil {
+            cell = StretchExplainCell(style: .default, reuseIdentifier: "StretchExplainTableCellID")
+            
+            cell?.textLabel?.numberOfLines = 0
+            cell?.textLabel?.textColor = UIColorGray(74)
+            cell?.selectionStyle = .none
+        }
+        
+        
+        cell?.textLabel?.text = text
+        cell?.backgroundColor = backgroundColor
+        cell?.textLabel?.backgroundColor = UIColor.white
+        
+        return cell!
+        
+    }
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        textLabel?.frame = bounds
+        textLabel?.font = UIFont.systemFont(ofSize: 12 * bounds.width / 315, weight: UIFontWeightMedium)
+    }
+}
+
 class StretchExplainHeaderView: UIView {
     override init(frame: CGRect) {
         super.init(frame: frame)

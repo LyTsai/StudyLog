@@ -29,16 +29,19 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
         self.separatorStyle = .none
         backgroundView = nil
         backgroundColor = UIColor.clear
-//        isScrollEnabled = false
-        
-        backgroundColor = UIColor.red
+        isScrollEnabled = false
+    
         
         dataSource = self
         delegate = self
         
-        sectionFooterHeight = 0.001
+        estimatedSectionHeaderHeight = 0.001
+        estimatedSectionFooterHeight = 0.001
+        
+        sectionFooterHeight = frame.width / 315
         sectionHeaderHeight = 0.001
-        contentInset = UIEdgeInsets.zero
+
+        
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
         } else {
@@ -55,23 +58,9 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
         return 1
     }
     
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: "StretchExplainTableCellID")
-        if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "StretchExplainTableCellID")
-           
-            cell?.textLabel?.numberOfLines = 0
-            cell?.textLabel?.textColor = UIColorGray(74)
-            cell?.selectionStyle = .none
-        }
-        cell?.textLabel?.backgroundColor = UIColor.white
-        
-        cell?.textLabel?.frame = cell!.bounds
-        cell?.textLabel?.font = UIFont.systemFont(ofSize: 12 * bounds.width / 315, weight: UIFontWeightMedium)
-        cell?.textLabel?.text = texts[indexPath.section]
-        cell?.backgroundColor = colors[indexPath.section % 6].cFill.withAlphaComponent(0.8)
-        
-        return cell!
+        return StretchExplainCell.cellWithTable(tableView, text: texts[indexPath.section], backgroundColor: colors[indexPath.section % 6].cFill.withAlphaComponent(0.8))
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
