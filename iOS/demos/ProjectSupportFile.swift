@@ -125,6 +125,7 @@ extension CGRect {
     init(center: CGPoint, length: CGFloat) {
         let originX = center.x - length * 0.5
         let originY = center.y - length * 0.5
+        self.init()
         self.origin = CGPoint(x: originX, y: originY)
         self.size = CGSize(width: length, height: length)
     }
@@ -132,6 +133,7 @@ extension CGRect {
     init(center: CGPoint, size: CGSize) {
         let originX = center.x - size.width * 0.5
         let originY = center.y - size.height * 0.5
+        self.init()
         self.origin = CGPoint(x: originX, y: originY)
         self.size = size
     }
@@ -139,6 +141,7 @@ extension CGRect {
     init(center: CGPoint, width: CGFloat, height: CGFloat) {
         let originX = center.x - width * 0.5
         let originY = center.y - height * 0.5
+        self.init()
         self.origin = CGPoint(x: originX, y: originY)
         self.size = CGSize(width: width, height: height)
     }
@@ -156,16 +159,16 @@ extension UIColor {
     }
     
     // set up color
-    class func colorFromHexRGB(_ rgbValue: Int) -> UIColor {
-        return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0xFF00) >> 8) / 255.0, blue: CGFloat((rgbValue & 0xFF) >> 16) / 255.0, alpha: 1)
+    class func colorFromHex(_ hexValue: Int) -> UIColor {
+        return UIColor(red: CGFloat((hexValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((hexValue & 0xFF00) >> 8) / 255.0, blue: CGFloat(hexValue & 0xFF) / 255.0, alpha: 1)
     }
     
     class func colorFromRGBA(_ red: Int, green: Int, blue: Int, alpha: Int) -> UIColor {
-        return UIColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha)/100.0)
+        return UIColor(red: CGFloat(red) / 255.0, green: CGFloat(green) / 255.0, blue: CGFloat(blue) / 255.0, alpha: CGFloat(alpha) / 100.0)
     }
     
     class func colorFromRGB(_ red: Int, green: Int, blue: Int) -> UIColor {
-        return UIColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: 1.0)
+        return colorFromRGBA(red, green: green, blue: blue, alpha: 1)
     }
     
     class func grayColorFrom(_ one: Int) -> UIColor {
@@ -336,6 +339,9 @@ extension UIImage {
 
 // MARK: ------------ UILabel
 extension UILabel {
+//    class func custom
+    
+    
     // fixed size, variable font
     func adjustFontToFit() {
         adjustsFontSizeToFitWidth = true

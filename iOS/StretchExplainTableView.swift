@@ -11,12 +11,12 @@ import Foundation
 class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
 //    weak var hostScroll: BrainAgeReferenceView!
     
-    let colors = [(fill: UIColorFromRGB(0x7fb7e7), cBorder:UIColorFromRGB(0x70a2ca), cFill: UIColorFromRGB(0x97ceff)),
-                  (fill: UIColorFromRGB(0xa08ac9), cBorder:UIColorFromRGB(0x8d78b0), cFill: UIColorFromRGB(0xc4a4ff)),
-                  (fill: UIColorFromRGB(0xff8f55), cBorder:UIColorFromRGB(0xe07e4b), cFill: UIColorFromRGB(0xffa87b)),
-                  (fill: UIColorFromRGB(0xeac536), cBorder:UIColorFromRGB(0xcdad2f), cFill: UIColorFromRGB(0xf7db6f)),
-                  (fill: UIColorFromRGB(0x7fb7e7), cBorder:UIColorFromRGB(0x70a2ca), cFill: UIColorFromRGB(0x97ceff)),
-                  (fill: UIColorFromRGB(0x7fb7e7), cBorder:UIColorFromRGB(0x70a2ca), cFill: UIColorFromRGB(0x97ceff))]
+    let colors = [(fill: UIColorFromHex(0x7FB7E7), cBorder:UIColorFromHex(0x70a2ca), cFill: UIColorFromHex(0x97ceff)),
+                  (fill: UIColorFromHex(0xa08ac9), cBorder:UIColorFromHex(0x8d78b0), cFill: UIColorFromHex(0xc4a4ff)),
+                  (fill: UIColorFromHex(0xff8f55), cBorder:UIColorFromHex(0xe07e4b), cFill: UIColorFromHex(0xffa87b)),
+                  (fill: UIColorFromHex(0xeac536), cBorder:UIColorFromHex(0xcdad2f), cFill: UIColorFromHex(0xf7db6f)),
+                  (fill: UIColorFromHex(0x9BC280), cBorder:UIColorFromHex(0x88AA70), cFill: UIColorFromHex(0xBDE6A0)),
+                  (fill: UIColorFromHex(0x80CBD8), cBorder:UIColorFromHex(0x6FB1BC), cFill: UIColorFromHex(0x92DEEB))]
     
     fileprivate var titles = [String]()
     fileprivate var texts = [String]()
@@ -30,22 +30,20 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
         backgroundView = nil
         backgroundColor = UIColor.clear
         isScrollEnabled = false
-    
         
         dataSource = self
         delegate = self
         
-        estimatedSectionHeaderHeight = 0.001
-        estimatedSectionFooterHeight = 0.001
+     
         
-        sectionFooterHeight = frame.width / 315
-        sectionHeaderHeight = 0.001
-
+        //        sectionFooterHeight = frame.width / 315
+        //        sectionHeaderHeight = 0.001
         
         if #available(iOS 11.0, *) {
             contentInsetAdjustmentBehavior = .never
         } else {
             // Fallback on earlier versions
+            viewController.automaticallyAdjustsScrollViewInsets = false
         }
     }
     
@@ -57,7 +55,6 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
-    
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         return StretchExplainCell.cellWithTable(tableView, text: texts[indexPath.section], backgroundColor: colors[indexPath.section % 6].cFill.withAlphaComponent(0.8))
@@ -73,6 +70,10 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
         return header
     }
     
+    func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
+        return UIView()
+    }
+    
     // delegate
     // heights
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -80,7 +81,7 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
         
         // height
         if onShow {
-            let cH = NSAttributedString(string: texts[indexPath.section], attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12 * bounds.width / 315, weight: UIFontWeightMedium)]).boundingRect(with: CGSize(width: bounds.width, height: height), options: .usesLineFragmentOrigin, context: nil).height + 10 * bounds.width / 315
+            let cH = NSAttributedString(string: texts[indexPath.section], attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 12 * bounds.width / 315, weight: UIFontWeightMedium)]).boundingRect(with: CGSize(width: bounds.width - bounds.width / 315 * 20, height: height), options: .usesLineFragmentOrigin, context: nil).height + 15 * bounds.width / 315
             return cH
         }
         
@@ -90,7 +91,9 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return tableView.bounds.width * 55 / 315
     }
-    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return (section == texts.count - 1) ? 0.001 : frame.width / 315
+    }
     
     func showOrHide(_ tap: UITapGestureRecognizer) {
         let header = tap.view as! StretchExplainHeaderView
@@ -107,9 +110,10 @@ class StretchExplainTableView: UITableView, UITableViewDataSource, UITableViewDe
             
             // scrollView
             self.reloadRows(at: [IndexPath(row: 0, section: section)], with: .automatic)
-//            self.hostScroll.adjustCheckFrame()
+            self.frame = CGRect(origin: self.frame.origin, size: self.contentSize)
+//            self.hostScroll.adjustFrame()
         }
         
     }
-
+    
 }

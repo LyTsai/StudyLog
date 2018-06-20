@@ -19,8 +19,8 @@ class ProjectImages {
     let placeHolder = UIImage(named: "cache")
     let indicator = UIImage(named: "cache-image")
 }
-func UIColorFromRGB(_ rgbValue: Int) -> UIColor {
-    return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0xFF00) >> 8) / 255.0, blue: CGFloat((rgbValue & 0xFF) >> 16) / 255.0, alpha: 1)
+func UIColorFromHex(_ rgbValue: Int) -> UIColor {
+    return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0xFF00) >> 8) / 255.0, blue: CGFloat((rgbValue & 0xFF)) / 255.0, alpha: 1)
 }
 func UIColorFromRGBA(_ red: Int, green: Int, blue: Int, alpha: Int) -> UIColor {
     return UIColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha)/100.0)

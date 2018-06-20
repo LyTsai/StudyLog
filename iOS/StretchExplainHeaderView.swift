@@ -23,7 +23,6 @@ class StretchExplainCell: UITableViewCell {
         
         cell?.textLabel?.text = text
         cell?.backgroundColor = backgroundColor
-        cell?.textLabel?.backgroundColor = UIColor.white
         
         return cell!
         
@@ -31,7 +30,7 @@ class StretchExplainCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        textLabel?.frame = bounds
+        textLabel?.frame = bounds.insetBy(dx: bounds.width / 315 * 10, dy: 0)
         textLabel?.font = UIFont.systemFont(ofSize: 12 * bounds.width / 315, weight: UIFontWeightMedium)
     }
 }

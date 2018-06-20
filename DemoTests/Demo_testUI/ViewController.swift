@@ -12,12 +12,7 @@ import UIKit
 class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let shield = ["Sleep - 8 hours", "Handle – Manage Stres", "Interact -Socialize", "Exercise -8000 steps", "Learn -New Things", "Diet -Mediterranean/Veg"]
-        let detail = ["You should strive for eight hours of shuteye per night. If you can’t get it done continuously, take naps.", "Don’t let stress overwhelm you.", "Stay social. Loneliness is a stress factor.", "It removes inflammation and plaque from the brain. Working out also causes new nerve cells to be born in the hippocampus—the battle zone for Alzheimer’s.", "The more synapses you make, the more you can lose before you lose it.", "The Mediterranean Diet, which is high in fruits, vegetables, olive oil, and whole grains and involves eating proteins occasionally, is best for your brain-  your diet, and its effect on your microbiome, matters a lot as it has a profound effect on neuroinflammation."]
-        let table = StretchExplainTableView(frame: CGRect.zero, style: .grouped)
-        table.setupWithFrame(CGRect(x: 0, y: 40, width: 315, height: 335), titles: shield, texts: detail)
-        self.view.addSubview(table)
+
     }
 
 
