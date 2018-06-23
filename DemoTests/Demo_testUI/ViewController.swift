@@ -10,17 +10,37 @@ import UIKit
 
 
 class ViewController: UIViewController {
-    override func awakeFromNib() {
-  
-    }
-    
-
-    @IBOutlet weak var imageView: UIImageView!
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
-        print(UIDevice.current.localizedModel)
+        
+        view.backgroundColor = UIColor.cyan
+        
+        let arrowMaskLayer = CAShapeLayer()
+        view.layer.mask = arrowMaskLayer
+        let arrowW = view.bounds.width
+        arrowMaskLayer.backgroundColor = UIColor.clear.cgColor
+//        arrowMaskLayer.frame = view.bounds
+        
+        let path = UIBezierPath()
+        path.move(to: CGPoint(x: arrowW * 0.5, y: 0))
+        path.addLine(to: CGPoint(x: arrowW * 0.5, y: view.bounds.maxY))
+//        path.lineWidth = view.bounds.width
+//        UIColor.red.setStroke()
+//        path.stroke()
+        arrowMaskLayer.strokeColor = UIColor.red.cgColor
+        arrowMaskLayer.lineWidth = arrowW
+        
+//        let path = UIBezierPath(rect: view.bounds)
+//        path.fill()
+        
+        arrowMaskLayer.path = path.cgPath
+        
+        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
+        basicAnimation.duration = 3
+        basicAnimation.fromValue = 0
+        basicAnimation.toValue = 1
+        arrowMaskLayer.add(basicAnimation, forKey: nil)
+
     }
 
 
