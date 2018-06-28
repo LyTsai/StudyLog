@@ -14,7 +14,6 @@
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
-		885331E6202C46D200D72BBF /* ProjectSupportFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885331E5202C46D200D72BBF /* ProjectSupportFile.swift */; };
 		8853A94C205BBF2800A488BC /* AnimationSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853A94B205BBF2800A488BC /* AnimationSample.swift */; };
 		8853A94E205BC79800A488BC /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853A94D205BC79800A488BC /* AnimationView.swift */; };
 		886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */; };
@@ -22,6 +21,8 @@
 		886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886005D91EB1BBD4008657D3 /* CalendarView.xib */; };
 		887BC78E2068E4BD00C1019E /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC78D2068E4BD00C1019E /* Temp.swift */; };
 		8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */; };
+		8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817D20E47F9F00A71EAC /* DefAndMethods.swift */; };
+		8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817E20E47F9F00A71EAC /* ExtensionFile.swift */; };
 		88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,15 +35,16 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		885331E5202C46D200D72BBF /* ProjectSupportFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ProjectSupportFile.swift; path = ../../../iOS/demos/ProjectSupportFile.swift; sourceTree = "<group>"; };
 		8853A94B205BBF2800A488BC /* AnimationSample.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimationSample.swift; sourceTree = "<group>"; };
 		8853A94D205BC79800A488BC /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
-		885D8D6E2042597800216CC6 /* PrefixHeader.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
 		886005D41EB1BAE9008657D3 /* CalendarCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarCollectionViewCell.swift; sourceTree = "<group>"; };
 		886005D81EB1BBD4008657D3 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		886005D91EB1BBD4008657D3 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
 		887BC78D2068E4BD00C1019E /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
+		8893817D20E47F9F00A71EAC /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
+		8893817E20E47F9F00A71EAC /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
+		8893817F20E47F9F00A71EAC /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
 		88DEA1DA1F31B85500000D3A /* CoreTextArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextArcView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -97,16 +99,26 @@
 			path = Demo_testUI;
 			sourceTree = "<group>";
 		};
+		8893817C20E47F9F00A71EAC /* BasicSupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				8893817D20E47F9F00A71EAC /* DefAndMethods.swift */,
+				8893817E20E47F9F00A71EAC /* ExtensionFile.swift */,
+				8893817F20E47F9F00A71EAC /* PrefixHeader.h */,
+			);
+			name = BasicSupportingFiles;
+			path = ../../../iOS/BasicSupportingFiles;
+			sourceTree = "<group>";
+		};
 		88B85C3D1FA9C2D200BA13B9 /* supportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				8893817C20E47F9F00A71EAC /* BasicSupportingFiles */,
 				885031491E8E36F6009B21B6 /* AppDelegate.swift */,
 				8850314D1E8E36F6009B21B6 /* Main.storyboard */,
-				885331E5202C46D200D72BBF /* ProjectSupportFile.swift */,
 				885031501E8E36F6009B21B6 /* Assets.xcassets */,
 				885031551E8E36F6009B21B6 /* Info.plist */,
 				885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */,
-				885D8D6E2042597800216CC6 /* PrefixHeader.h */,
 			);
 			path = supportingFiles;
 			sourceTree = "<group>";
@@ -200,11 +212,12 @@
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
+				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */,
 				8853A94C205BBF2800A488BC /* AnimationSample.swift in Sources */,
+				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
 				8853A94E205BC79800A488BC /* AnimationView.swift in Sources */,
 				883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */,
-				885331E6202C46D200D72BBF /* ProjectSupportFile.swift in Sources */,
 				8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */,
 				887BC78E2068E4BD00C1019E /* Temp.swift in Sources */,
 			);
@@ -342,13 +355,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8D66FRV9W5;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Demo_testUI/supportingFiles/PrefixHeader.h";
+				GCC_PREFIX_HEADER = /Users/imac/Desktop/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
 				INFOPLIST_FILE = Demo_testUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "minghui.Demo-testUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Demo_testUI/supportingFiles/PrefixHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/imac/Desktop/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
@@ -358,13 +371,13 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				DEVELOPMENT_TEAM = 8D66FRV9W5;
-				GCC_PREFIX_HEADER = "$(SRCROOT)/Demo_testUI/supportingFiles/PrefixHeader.h";
+				GCC_PREFIX_HEADER = /Users/imac/Desktop/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
 				INFOPLIST_FILE = Demo_testUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "minghui.Demo-testUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = "$(SRCROOT)/Demo_testUI/supportingFiles/PrefixHeader.h";
+				SWIFT_OBJC_BRIDGING_HEADER = /Users/imac/Desktop/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
 				SWIFT_VERSION = 3.0;
 			};
 			name = Release;

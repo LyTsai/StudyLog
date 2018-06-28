@@ -10,28 +10,55 @@ import UIKit
 
 
 class ViewController: UIViewController {
+    var timer: Timer!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.cyan
-        
+        let sub = CloudTopView(frame: view.bounds.insetBy(dx: 0, dy: 64))
+        sub.backgroundColor = UIColor.clear
+        view.addSubview(sub)
+//        let block = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
+//        block.backgroundColor = UIColor.red
+//        view.addSubview(block)
+//
+//        var right = true
+//        var down = true
+//        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
+//            self.moveRandomly(block, bounding: self.view.bounds, dx: right ? 10: -10, dy: down ? 10: -10)
+//            if arc4random() % 2 == 0 {
+//                right = false
+//            }else {
+//                right = true
+//            }
+//
+//            if arc4random() % 2 == 0 {
+//                down = false
+//            }else {
+//                down = true
+//            }
+//        }
+    }
+
+//    fileprivate func moveRandomly(_ view: UIView, bounding: CGRect, dx: CGFloat, dy: CGFloat) {
+//        let centerBounding = bounding.insetBy(dx: view.frame.width * 0.5, dy: view.frame.height * 0.5)
+//
+//        view.center.x = max(min(view.center.x + dx, centerBounding.maxX), centerBounding.minX)
+//        view.center.y = max(min(view.center.y + dy, centerBounding.maxY), centerBounding.minY)
+//    }
+
+    
+    func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()
         view.layer.mask = arrowMaskLayer
         let arrowW = view.bounds.width
         arrowMaskLayer.backgroundColor = UIColor.clear.cgColor
-//        arrowMaskLayer.frame = view.bounds
         
         let path = UIBezierPath()
         path.move(to: CGPoint(x: arrowW * 0.5, y: 0))
         path.addLine(to: CGPoint(x: arrowW * 0.5, y: view.bounds.maxY))
-//        path.lineWidth = view.bounds.width
-//        UIColor.red.setStroke()
-//        path.stroke()
         arrowMaskLayer.strokeColor = UIColor.red.cgColor
         arrowMaskLayer.lineWidth = arrowW
-        
-//        let path = UIBezierPath(rect: view.bounds)
-//        path.fill()
         
         arrowMaskLayer.path = path.cgPath
         
@@ -40,10 +67,7 @@ class ViewController: UIViewController {
         basicAnimation.fromValue = 0
         basicAnimation.toValue = 1
         arrowMaskLayer.add(basicAnimation, forKey: nil)
-
     }
-
-
 }
 
 
