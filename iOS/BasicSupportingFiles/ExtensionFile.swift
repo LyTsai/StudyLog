@@ -264,7 +264,6 @@ extension UIButton {
         let button = UIButton(type: .custom)
         button.setTitle(text, for: .normal)
         button.setTitleColor(textColor, for: .normal)
-        //        button.setTitle(text, for: .selected)
         button.setTitleColor(selectedTextColor, for: .selected)
         button.setBackgroundImage(backImage, for: .normal)
         button.setBackgroundImage(selectedBackImage ?? backImage, for: .selected)

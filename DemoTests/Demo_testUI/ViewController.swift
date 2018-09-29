@@ -7,46 +7,77 @@
 //
 
 import UIKit
-
+import AVFoundation
 
 class ViewController: UIViewController {
-    var timer: Timer!
+
+    fileprivate var playerItem: AVPlayerItem!
+    fileprivate var player: AVPlayer!
+    fileprivate var timeObserver: Any!
     override func viewDidLoad() {
         super.viewDidLoad()
         
         view.backgroundColor = UIColor.cyan
-        let sub = CloudTopView(frame: view.bounds.insetBy(dx: 0, dy: 64))
-        sub.backgroundColor = UIColor.clear
-        view.addSubview(sub)
-//        let block = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
-//        block.backgroundColor = UIColor.red
-//        view.addSubview(block)
-//
-//        var right = true
-//        var down = true
-//        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
-//            self.moveRandomly(block, bounding: self.view.bounds, dx: right ? 10: -10, dy: down ? 10: -10)
-//            if arc4random() % 2 == 0 {
-//                right = false
-//            }else {
-//                right = true
-//            }
-//
-//            if arc4random() % 2 == 0 {
-//                down = false
-//            }else {
-//                down = true
-//            }
-//        }
+        
+        let urlString = "https://annielyticx-content.azurewebsites.net/voice/BrainAge/Q1%20sleep%20m.mp3"
+        
+        player = AVPlayer(url: URL(string: urlString)!)
+        playerItem = player.currentItem!
+        player.play()
+        
+        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: DispatchQueue.main) { (time) in
+            let current = CMTimeGetSeconds(time)
+            let total = CMTimeGetSeconds(self.playerItem.duration)
+            
+            print("current: \(current), total: \(total)")
+        }
+        
+        playerItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
+        playerItem.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
+        notificationCenter.addObserver(self, selector: #selector(playFinished), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        
+        
     }
-
-//    fileprivate func moveRandomly(_ view: UIView, bounding: CGRect, dx: CGFloat, dy: CGFloat) {
-//        let centerBounding = bounding.insetBy(dx: view.frame.width * 0.5, dy: view.frame.height * 0.5)
-//
-//        view.center.x = max(min(view.center.x + dx, centerBounding.maxX), centerBounding.minX)
-//        view.center.y = max(min(view.center.y + dy, centerBounding.maxY), centerBounding.minY)
-//    }
-
+    
+    
+    override var canBecomeFirstResponder: Bool {
+        return true
+    }
+    
+    
+    override func remoteControlReceived(with event: UIEvent?) {
+        switch event!.subtype {
+        case UIEventSubtype.remoteControlPlay:
+            print({"hello"})
+        default:
+            break
+        }
+    }
+    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
+        if keyPath == "loadedTimeRanges" {
+            let ranges = playerItem.loadedTimeRanges // [NSValue]
+            let timeRange = ranges.first!.timeRangeValue
+            let totalBuffer = CMTimeGetSeconds(timeRange.start) + CMTimeGetSeconds(timeRange.duration)
+            print("total: \(CMTimeGetSeconds(playerItem.duration)), buffer: \(totalBuffer)")
+        }else if keyPath == "status" {
+            switch playerItem.status {
+            case .readyToPlay: print("ready to play")
+            case .unknown: print("unknow")
+            case .failed: print("failed")
+            }
+        }
+    }
+    
+    func playFinished() {
+        print("play finished")
+        playerItem.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
+    }
+    
+    deinit {
+        player.removeTimeObserver(timeObserver)
+        timeObserver = nil
+    }
+    
     
     func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()
@@ -156,52 +187,4 @@ class CarouselMenuView: UIView {
         
     }
     
-    
-    // rotation
-    /*
-     fileprivate var rAngle: CGFloat = 0
-     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-     let currentPoint = touches.first!.location(in: self)
-     
-     let lastPoint = touches.first!.previousLocation(in: self)
-     let angle = Calculation().angleOfPoint(currentPoint, center: viewCenter) - Calculation().angleOfPoint(lastPoint, center: viewCenter)
-     transform = transform.rotated(by: angle)
-     rAngle += angle
-     
-     var index = 0
-     let total = rAngle / angleGap
-     index = (total > 0 ? Int(total + 0.5) : Int(total - 0.5)) % numberOfSlices
-     index = (index > 0 ? (numberOfSlices - index) : -index)
-     
-     selectedIndex = index
-     }
-     
-     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-     adjustAngle()
-     }
-     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-     adjustAngle()
-     }
-     
-     // scroll to center
-     fileprivate func adjustAngle() {
-     var adjust: CGFloat = 0
-     
-     let turn = rAngle.truncatingRemainder(dividingBy: angleGap)
-     if abs(turn) <= angleGap * 0.5 {
-     // still this slice selected
-     adjust = -turn
-     }else {
-     // next one is selected
-     if turn > 0 {
-     adjust = angleGap - turn
-     }else {
-     adjust = -angleGap - turn
-     }
-     }
-     
-     transform = transform.rotated(by: adjust)
-     rAngle += adjust
-     }
-     */
 }
