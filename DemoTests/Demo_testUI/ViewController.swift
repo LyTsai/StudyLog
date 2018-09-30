@@ -7,77 +7,30 @@
 //
 
 import UIKit
-import AVFoundation
+
 
 class ViewController: UIViewController {
 
-    fileprivate var playerItem: AVPlayerItem!
-    fileprivate var player: AVPlayer!
-    fileprivate var timeObserver: Any!
+    @IBOutlet weak var resultImageView: UIImageView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.cyan
-        
-        let urlString = "https://annielyticx-content.azurewebsites.net/voice/BrainAge/Q1%20sleep%20m.mp3"
-        
-        player = AVPlayer(url: URL(string: urlString)!)
-        playerItem = player.currentItem!
-        player.play()
-        
-        timeObserver = player.addPeriodicTimeObserver(forInterval: CMTimeMake(1, 1), queue: DispatchQueue.main) { (time) in
-            let current = CMTimeGetSeconds(time)
-            let total = CMTimeGetSeconds(self.playerItem.duration)
-            
-            print("current: \(current), total: \(total)")
-        }
-        
-        playerItem.addObserver(self, forKeyPath: "status", options: .new, context: nil)
-        playerItem.addObserver(self, forKeyPath: "loadedTimeRanges", options: .new, context: nil)
-        notificationCenter.addObserver(self, selector: #selector(playFinished), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
         
     }
     
     
-    override var canBecomeFirstResponder: Bool {
-        return true
+    @IBAction func beginChoose(_ sender: Any) {
+//        let sourceSheet = 
+//        
+//        let imagePicker = UIImagePickerController()
+//        imagePicker.sourceType = .photoLibrary
     }
     
     
-    override func remoteControlReceived(with event: UIEvent?) {
-        switch event!.subtype {
-        case UIEventSubtype.remoteControlPlay:
-            print({"hello"})
-        default:
-            break
-        }
-    }
-    override func observeValue(forKeyPath keyPath: String?, of object: Any?, change: [NSKeyValueChangeKey : Any]?, context: UnsafeMutableRawPointer?) {
-        if keyPath == "loadedTimeRanges" {
-            let ranges = playerItem.loadedTimeRanges // [NSValue]
-            let timeRange = ranges.first!.timeRangeValue
-            let totalBuffer = CMTimeGetSeconds(timeRange.start) + CMTimeGetSeconds(timeRange.duration)
-            print("total: \(CMTimeGetSeconds(playerItem.duration)), buffer: \(totalBuffer)")
-        }else if keyPath == "status" {
-            switch playerItem.status {
-            case .readyToPlay: print("ready to play")
-            case .unknown: print("unknow")
-            case .failed: print("failed")
-            }
-        }
-    }
     
-    func playFinished() {
-        print("play finished")
-        playerItem.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
-    }
-    
-    deinit {
-        player.removeTimeObserver(timeObserver)
-        timeObserver = nil
-    }
-    
+
     
     func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()
