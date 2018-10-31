@@ -20,6 +20,7 @@
 		886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 886005D81EB1BBD4008657D3 /* CalendarView.swift */; };
 		886005DB1EB1BBD4008657D3 /* CalendarView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 886005D91EB1BBD4008657D3 /* CalendarView.xib */; };
 		887BC78E2068E4BD00C1019E /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC78D2068E4BD00C1019E /* Temp.swift */; };
+		888215F5216C873F00C50FFD /* SearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888215F4216C873F00C50FFD /* SearchTable.swift */; };
 		8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */; };
 		8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817D20E47F9F00A71EAC /* DefAndMethods.swift */; };
 		8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817E20E47F9F00A71EAC /* ExtensionFile.swift */; };
@@ -42,6 +43,7 @@
 		886005D81EB1BBD4008657D3 /* CalendarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarView.swift; sourceTree = "<group>"; };
 		886005D91EB1BBD4008657D3 /* CalendarView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CalendarView.xib; sourceTree = "<group>"; };
 		887BC78D2068E4BD00C1019E /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
+		888215F4216C873F00C50FFD /* SearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTable.swift; sourceTree = "<group>"; };
 		8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		8893817D20E47F9F00A71EAC /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
 		8893817E20E47F9F00A71EAC /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
@@ -94,6 +96,7 @@
 			children = (
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
+				888215F4216C873F00C50FFD /* SearchTable.swift */,
 				88E1E36B2160A46F00E4F877 /* AVPlayerSample.swift */,
 				887BC78D2068E4BD00C1019E /* Temp.swift */,
 				88B85C3E1FA9C32E00BA13B9 /* calendar */,
@@ -219,6 +222,7 @@
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				88DEA1DB1F31B85500000D3A /* CoreTextArcView.swift in Sources */,
 				8853A94C205BBF2800A488BC /* AnimationSample.swift in Sources */,
+				888215F5216C873F00C50FFD /* SearchTable.swift in Sources */,
 				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
 				8853A94E205BC79800A488BC /* AnimationView.swift in Sources */,
 				883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */,

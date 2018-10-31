@@ -11,7 +11,7 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    @IBOutlet weak var resultImageView: UIImageView!
+    @IBOutlet weak var searchTable: SearchTableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -20,17 +20,6 @@ class ViewController: UIViewController {
         
     }
     
-    
-    @IBAction func beginChoose(_ sender: Any) {
-//        let sourceSheet = 
-//        
-//        let imagePicker = UIImagePickerController()
-//        imagePicker.sourceType = .photoLibrary
-    }
-    
-    
-    
-
     
     func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()

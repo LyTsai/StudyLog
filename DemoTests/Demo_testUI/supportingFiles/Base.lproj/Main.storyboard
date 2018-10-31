@@ -6,7 +6,6 @@
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -22,33 +21,22 @@
                         <rect key="frame" x="0.0" y="0.0" width="834" height="1112"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="r33-Dh-y7H">
-                                <rect key="frame" x="292" y="445" width="250" height="222"/>
-                                <color key="backgroundColor" red="0.41568627450000001" green="0.63529411759999999" blue="0.30980392159999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="beginChoose:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Bpz-gA-m1f"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AyK-BP-EaU">
-                                <rect key="frame" x="20" y="64" width="794" height="381"/>
-                            </imageView>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QEk-3h-4zK" customClass="SearchTableView" customModule="Demo_testUI" customModuleProvider="target">
+                                <rect key="frame" x="20" y="64" width="794" height="1048"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="1" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="r33-Dh-y7H" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.2" id="Fm2-YM-9Bc"/>
-                            <constraint firstItem="AyK-BP-EaU" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="Ihc-Kr-Yve"/>
-                            <constraint firstItem="r33-Dh-y7H" firstAttribute="top" secondItem="AyK-BP-EaU" secondAttribute="bottom" id="Wbv-00-POr"/>
-                            <constraint firstItem="r33-Dh-y7H" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="c03-Eg-i3i"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="AyK-BP-EaU" secondAttribute="trailing" id="dKz-mD-2YI"/>
-                            <constraint firstItem="AyK-BP-EaU" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="nth-wQ-bDT"/>
-                            <constraint firstItem="r33-Dh-y7H" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="pR9-dn-mRW"/>
-                            <constraint firstItem="r33-Dh-y7H" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.3" id="psS-Fd-DqJ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="QEk-3h-4zK" secondAttribute="trailing" id="AND-he-fBU"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="QEk-3h-4zK" secondAttribute="bottom" id="RJ5-h3-6ES"/>
+                            <constraint firstItem="QEk-3h-4zK" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="gWf-zt-ite"/>
+                            <constraint firstItem="QEk-3h-4zK" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="ldS-pj-Mff"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T1q-Ol-3Z3"/>
                     <connections>
-                        <outlet property="resultImageView" destination="AyK-BP-EaU" id="g3d-MB-LR2"/>
+                        <outlet property="searchTable" destination="QEk-3h-4zK" id="lKu-Za-zSo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

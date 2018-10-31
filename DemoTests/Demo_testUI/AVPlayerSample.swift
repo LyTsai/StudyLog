@@ -9,13 +9,12 @@
 import Foundation
 import AVFoundation
 
-class AVPlayerSample: NSObject {
+class AVPlayerSample: NSObject, AVAssetResourceLoaderDelegate {
     fileprivate var playerItem: AVPlayerItem!
     fileprivate var player: AVPlayer!
     fileprivate var timeObserver: Any!
+    fileprivate let urlString = "https://annielyticx-content.azurewebsites.net/voice/BrainAge/Q1%20sleep%20m.mp3"
     func create() {
-        let urlString = "https://annielyticx-content.azurewebsites.net/voice/BrainAge/Q1%20sleep%20m.mp3"
-        
         player = AVPlayer(url: URL(string: urlString)!)
         playerItem = player.currentItem!
         player.play()
@@ -70,6 +69,29 @@ class AVPlayerSample: NSObject {
         playerItem.removeObserver(self, forKeyPath: "loadedTimeRanges", context: nil)
     }
     
-
+    // ------------------------ scheme----------------
+    func createWithDelegate() {
+        let asset = AVURLAsset(url: URL(string: urlString)!)
+//        let resourceLoader = AVAssetResourceLoader()
+        asset.resourceLoader.setDelegate(self, queue: DispatchQueue.main)
+        playerItem = AVPlayerItem(asset: asset)
+        player = AVPlayer(playerItem: playerItem)
+    }
     
+    func resourceLoader(_ resourceLoader: AVAssetResourceLoader, shouldWaitForLoadingOfRequestedResource loadingRequest: AVAssetResourceLoadingRequest) -> Bool {
+        addLoadingRequest(loadingRequest)
+        return true
+    }
+    
+    func resourceLoader(_ resourceLoader: AVAssetResourceLoader, didCancel loadingRequest: AVAssetResourceLoadingRequest) {
+        removeLoadingRequest(loadingRequest)
+    }
+    
+    func addLoadingRequest(_ loadingRequest: AVAssetResourceLoadingRequest) {
+        
+    }
+    func removeLoadingRequest(_ loadingRequest: AVAssetResourceLoadingRequest) {
+        
+    }
 }
+
