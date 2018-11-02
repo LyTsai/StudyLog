@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina5_5" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController id="Lft-d0-Wmq" customClass="VisualMapViewController" customModule="AnnielyticX" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="Q6e-Qn-uYs">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="visualMap" translatesAutoresizingMaskIntoConstraints="NO" id="efR-1M-Gaj">
+                        <rect key="frame" x="114" y="30" width="186" height="55"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="efR-1M-Gaj" secondAttribute="height" multiplier="159:47" id="OZV-a6-6U6"/>
+                        </constraints>
+                    </imageView>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gtb-lo-fmA" customClass="VisualMapView" customModule="AnnielyticX" customModuleProvider="target">
+                        <rect key="frame" x="10.666666666666657" y="90" width="393.33333333333337" height="641"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dc8-CZ-Jup">
+                        <rect key="frame" x="371.66666666666669" y="41" width="32.333333333333314" height="33"/>
+                        <constraints>
+                            <constraint firstAttribute="width" secondItem="dc8-CZ-Jup" secondAttribute="height" multiplier="1:1" id="ogo-r7-8aa"/>
+                        </constraints>
+                        <state key="normal" backgroundImage="dismissGray"/>
+                        <connections>
+                            <action selector="dismissVC:" destination="Lft-d0-Wmq" eventType="touchUpInside" id="klf-Uu-ill"/>
+                        </connections>
+                    </button>
+                </subviews>
+                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                <constraints>
+                    <constraint firstItem="dc8-CZ-Jup" firstAttribute="centerY" secondItem="efR-1M-Gaj" secondAttribute="centerY" id="4gp-5L-6Rj"/>
+                    <constraint firstItem="efR-1M-Gaj" firstAttribute="top" secondItem="wn8-cb-DQr" secondAttribute="top" constant="10" id="6C7-0w-gee"/>
+                    <constraint firstItem="wn8-cb-DQr" firstAttribute="bottom" secondItem="gtb-lo-fmA" secondAttribute="bottom" constant="5" id="9xf-9D-sL8"/>
+                    <constraint firstItem="dc8-CZ-Jup" firstAttribute="height" secondItem="efR-1M-Gaj" secondAttribute="height" multiplier="0.6" id="DUx-v8-fDD"/>
+                    <constraint firstItem="gtb-lo-fmA" firstAttribute="top" secondItem="efR-1M-Gaj" secondAttribute="bottom" constant="5" id="H3X-fl-Sj1"/>
+                    <constraint firstItem="efR-1M-Gaj" firstAttribute="centerX" secondItem="wn8-cb-DQr" secondAttribute="centerX" id="P21-PD-DP1"/>
+                    <constraint firstItem="gtb-lo-fmA" firstAttribute="centerX" secondItem="wn8-cb-DQr" secondAttribute="centerX" id="R1a-Zg-Q5r"/>
+                    <constraint firstItem="efR-1M-Gaj" firstAttribute="width" secondItem="Q6e-Qn-uYs" secondAttribute="width" multiplier="0.45" id="Szk-nK-KG2"/>
+                    <constraint firstItem="dc8-CZ-Jup" firstAttribute="trailing" secondItem="gtb-lo-fmA" secondAttribute="trailing" id="cwS-wh-yVD"/>
+                    <constraint firstItem="gtb-lo-fmA" firstAttribute="width" secondItem="wn8-cb-DQr" secondAttribute="width" multiplier="0.95" id="pyo-Ld-nzR"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="wn8-cb-DQr"/>
+            </view>
+            <connections>
+                <outlet property="mapView" destination="gtb-lo-fmA" id="QDd-0v-dzO"/>
+            </connections>
+            <point key="canvasLocation" x="-146.5" y="-143"/>
+        </viewController>
+    </objects>
+    <resources>
+        <image name="dismissGray" width="34" height="34"/>
+        <image name="visualMap" width="159" height="47"/>
+    </resources>
+</document>
