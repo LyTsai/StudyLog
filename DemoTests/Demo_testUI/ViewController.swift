@@ -10,43 +10,16 @@ import UIKit
 
 
 class ViewController: UIViewController {
-    var timer: Timer!
+
+    @IBOutlet weak var searchTable: SearchTableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        view.backgroundColor = UIColor.cyan
-        let sub = CloudTopView(frame: view.bounds.insetBy(dx: 0, dy: 64))
-        sub.backgroundColor = UIColor.clear
-        view.addSubview(sub)
-//        let block = UIView(frame: CGRect(x: 50, y: 50, width: 50, height: 50))
-//        block.backgroundColor = UIColor.red
-//        view.addSubview(block)
-//
-//        var right = true
-//        var down = true
-//        timer = Timer.scheduledTimer(withTimeInterval: 0.5, repeats: true) { (timer) in
-//            self.moveRandomly(block, bounding: self.view.bounds, dx: right ? 10: -10, dy: down ? 10: -10)
-//            if arc4random() % 2 == 0 {
-//                right = false
-//            }else {
-//                right = true
-//            }
-//
-//            if arc4random() % 2 == 0 {
-//                down = false
-//            }else {
-//                down = true
-//            }
-//        }
+        
+        
     }
-
-//    fileprivate func moveRandomly(_ view: UIView, bounding: CGRect, dx: CGFloat, dy: CGFloat) {
-//        let centerBounding = bounding.insetBy(dx: view.frame.width * 0.5, dy: view.frame.height * 0.5)
-//
-//        view.center.x = max(min(view.center.x + dx, centerBounding.maxX), centerBounding.minX)
-//        view.center.y = max(min(view.center.y + dy, centerBounding.maxY), centerBounding.minY)
-//    }
-
+    
     
     func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()
@@ -156,52 +129,4 @@ class CarouselMenuView: UIView {
         
     }
     
-    
-    // rotation
-    /*
-     fileprivate var rAngle: CGFloat = 0
-     override func touchesMoved(_ touches: Set<UITouch>, with event: UIEvent?) {
-     let currentPoint = touches.first!.location(in: self)
-     
-     let lastPoint = touches.first!.previousLocation(in: self)
-     let angle = Calculation().angleOfPoint(currentPoint, center: viewCenter) - Calculation().angleOfPoint(lastPoint, center: viewCenter)
-     transform = transform.rotated(by: angle)
-     rAngle += angle
-     
-     var index = 0
-     let total = rAngle / angleGap
-     index = (total > 0 ? Int(total + 0.5) : Int(total - 0.5)) % numberOfSlices
-     index = (index > 0 ? (numberOfSlices - index) : -index)
-     
-     selectedIndex = index
-     }
-     
-     override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
-     adjustAngle()
-     }
-     override func touchesCancelled(_ touches: Set<UITouch>, with event: UIEvent?) {
-     adjustAngle()
-     }
-     
-     // scroll to center
-     fileprivate func adjustAngle() {
-     var adjust: CGFloat = 0
-     
-     let turn = rAngle.truncatingRemainder(dividingBy: angleGap)
-     if abs(turn) <= angleGap * 0.5 {
-     // still this slice selected
-     adjust = -turn
-     }else {
-     // next one is selected
-     if turn > 0 {
-     adjust = angleGap - turn
-     }else {
-     adjust = -angleGap - turn
-     }
-     }
-     
-     transform = transform.rotated(by: adjust)
-     rAngle += adjust
-     }
-     */
 }
