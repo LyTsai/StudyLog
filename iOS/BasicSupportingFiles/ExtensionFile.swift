@@ -156,6 +156,39 @@ extension UIView {
     }
 }
 
+// MARK: ------ UIBezierPath
+extension UIBezierPath {
+    class func getFanPath(_ radius: CGFloat, innerRadius: CGFloat, vertex: CGPoint, sAngle: CGFloat, eAngle: CGFloat, clockwise: Bool) -> UIBezierPath {
+        let path = UIBezierPath(arcCenter: vertex, radius: radius, startAngle: eAngle, endAngle: sAngle, clockwise: !clockwise)
+        path.addArc(withCenter: vertex, radius: innerRadius, startAngle: sAngle, endAngle: eAngle, clockwise: clockwise)
+        path.close()
+        
+        return path
+    }
+    
+    class func getTopRectConnectionBetweenLeftPoint(_ leftPoint: CGPoint, rightPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let path = UIBezierPath()
+        
+        path.move(to: leftPoint)
+        path.addArc(withCenter: CGPoint(x: leftPoint.x + radius, y: leftPoint.y), radius: radius, startAngle: -CGFloat(Double.pi), endAngle: -CGFloat(Double.pi * 0.5), clockwise: true)
+        path.addLine(to: CGPoint(x: rightPoint.x - radius, y: leftPoint.y - radius))
+        path.addArc(withCenter: CGPoint(x: rightPoint.x - radius, y: leftPoint.y), radius: radius, startAngle: -CGFloat(Double.pi) * 0.5, endAngle: 0, clockwise: true)
+        
+        return path
+    }
+    
+    class func getBottomRectConnectionBetweenLeftPoint(_ leftPoint: CGPoint, rightPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let path = UIBezierPath()
+        
+        path.move(to: leftPoint)
+        path.addArc(withCenter: CGPoint(x: leftPoint.x + radius, y: leftPoint.y), radius: radius, startAngle: CGFloat(Double.pi), endAngle: CGFloat(Double.pi * 0.5), clockwise: false)
+        path.addLine(to: CGPoint(x: rightPoint.x - radius, y: leftPoint.y + radius))
+        path.addArc(withCenter: CGPoint(x: rightPoint.x - radius, y: leftPoint.y), radius: radius, startAngle: CGFloat(Double.pi) * 0.5, endAngle: 0, clockwise: false)
+        
+        return path
+    }
+}
+
 // MARK: --------- UIImage
 extension UIImage {
     func changeImageSizeTo(_ size: CGSize) -> UIImage {
@@ -233,9 +266,6 @@ extension UIImage {
 
 // MARK: ------------ UILabel
 extension UILabel {
-    //    class func custom
-    
-    
     // fixed size, variable font
     func adjustFontToFit() {
         adjustsFontSizeToFitWidth = true
