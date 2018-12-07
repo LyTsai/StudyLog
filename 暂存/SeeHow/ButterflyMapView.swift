@@ -172,10 +172,7 @@ class ButterflyMapView: VisualMapCustomView {
     
     fileprivate func setRiskTypesTitle(_ onshow: Bool) {
         for riskType in riskTypeNodes {
-            let name = collection.getRiskTypeByKey(riskType.key)!.name ?? "iRa"
-            let typeName = String(name[0..<3])
-            riskType.text = onshow ? name : typeName
-            riskType.boldFont = !onshow
+
         }
     }
     
