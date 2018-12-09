@@ -15,16 +15,17 @@ enum ButterflyViewMode {
     case fromRiskClass, fromRiskType
 }
 
-
 class VisualMapCustomView: UIView {
     weak var hostVC: UIViewController!
     
     let avatar = UIImageView(image: UIImage(named: "avatar_temp"))
     
     var helpNodes = [SimpleNode]()           // tag: 100 + i
-    var riskClassNodes = [ButterflyNode]()   // riskClass.key
-    var riskTypeNodes = [ButterflyNode]()    // riskType.key
-    
+    var helpDecos = [UIImageView]()
+    var riskTypeNodes = [ButterflyNode]()      // riskType.key
+    var allRiksTypeNodes = [CustomButton]()
+    var riskClassNodes = [ButterflyNode]()    // riskClass.key
+
     // user info
     var userKey: String {
         return userCenter.currentGameTargetUser.Key()
@@ -85,16 +86,16 @@ class VisualMapCustomView: UIView {
     // create
     // helps
     func createHelpNodes(_ withDeco: Bool, nodeFrame: CGRect, decoSize: CGSize) {
+        helpDecos.removeAll()
+        helpNodes.removeAll()
+        
         // tier 1, 2, 3
-//        let helpTexts = ["IA by Comparison", "IA by Prediction", "IA by Stratification"]
-//        for (i, text) in helpTexts.enumerated() {
         for i  in 0..<3 {
             let help = SimpleNode()
-//            help.text = text
+            help.image = UIImage(named: "act_\(i)")
             help.borderShape = .none
             help.frame = nodeFrame
             help.tag = 100 + i
-            help.image = UIImage(named: "act_\(i)")
             
             addSubview(help)
             helpNodes.append(help)
@@ -102,10 +103,10 @@ class VisualMapCustomView: UIView {
             // deco
             if withDeco {
                 let deco = UIImageView(image: ProjectImages.sharedImage.butterfly)
-                help.decoView = deco
                 deco.transform = CGAffineTransform.identity
-                deco.frame = CGRect(center: CGPoint(x: nodeFrame.midX, y: nodeFrame.midY), width: decoSize.width, height: decoSize.height)
+                deco.frame = CGRect(center: help.center, width: decoSize.width, height: decoSize.height)
                 insertSubview(deco, belowSubview: help)
+                helpDecos.append(deco)
             }
         }
     }
@@ -127,7 +128,6 @@ class VisualMapCustomView: UIView {
             addSubview(node)
         }
     }
-    
     
     // alert
     func showAlert()  {
