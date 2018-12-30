@@ -91,7 +91,7 @@ class SearchTableView: UITableView, UITableViewDataSource, UITableViewDelegate, 
                 }
             }
         }
-        reloadSections(<#T##sections: IndexSet##IndexSet#>, with: <#T##UITableViewRowAnimation#>)
+//        reloadSections(<#T##sections: IndexSet##IndexSet#>, with: <#T##UITableViewRowAnimation#>)
         
     }
     
