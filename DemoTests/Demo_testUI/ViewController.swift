@@ -11,26 +11,13 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var a: UITextField!
-    @IBOutlet weak var b: UITextField!
-    @IBOutlet weak var c: UITextField!
-    @IBOutlet weak var d: UITextField!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //3， 10， 9
        
     }
     
-    
-    @IBAction func calculate(_ sender: Any) {
-        let score = Float(b.text!)! - Float(a.text!)!
-        let abc = Float(d.text!)! - Float(c.text!)!
-        
-        print(score/abc)
-        
-    }
+
     func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()
         view.layer.mask = arrowMaskLayer
