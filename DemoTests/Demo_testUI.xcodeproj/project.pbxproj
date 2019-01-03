@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		1901705A1FE66FB700EAD1EB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885031551E8E36F6009B21B6 /* Info.plist */; };
+		882A72E821DD9DAC00DB9703 /* SubviewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 882A72E721DD9DAC00DB9703 /* SubviewController.swift */; };
 		883E92ED202C2AE800B9D5D5 /* CardTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E92EC202C2AE800B9D5D5 /* CardTagView.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		882A72E721DD9DAC00DB9703 /* SubviewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubviewController.swift; sourceTree = "<group>"; };
 		883E92EC202C2AE800B9D5D5 /* CardTagView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardTagView.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 			children = (
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
+				882A72E721DD9DAC00DB9703 /* SubviewController.swift */,
 				888215F4216C873F00C50FFD /* SearchTable.swift */,
 				88E1E36B2160A46F00E4F877 /* AVPlayerSample.swift */,
 				887BC78D2068E4BD00C1019E /* Temp.swift */,
@@ -216,6 +219,7 @@
 			files = (
 				886005D61EB1BAE9008657D3 /* CalendarCollectionViewCell.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
+				882A72E821DD9DAC00DB9703 /* SubviewController.swift in Sources */,
 				886005DA1EB1BBD4008657D3 /* CalendarView.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				88E1E36C2160A46F00E4F877 /* AVPlayerSample.swift in Sources */,

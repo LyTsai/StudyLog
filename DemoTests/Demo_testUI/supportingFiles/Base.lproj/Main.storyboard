@@ -8,10 +8,10 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Sub View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Demo_testUI" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="SubViewController" customModule="Demo_testUI" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -28,13 +28,24 @@
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <connections>
-                                    <segue destination="OWl-nG-el3" kind="presentation" id="Vs0-5h-USg"/>
+                                    <action selector="present:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eCU-ir-I28"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="caM-Nr-odV">
+                                <rect key="frame" x="164" y="278.5" width="46" height="30"/>
+                                <state key="normal" title="Push"/>
+                                <connections>
+                                    <action selector="push:" destination="BYZ-38-t0r" eventType="touchUpInside" id="9fR-xp-EhI"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="1" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="caM-Nr-odV" firstAttribute="leading" secondItem="vsg-P1-f33" secondAttribute="leading" id="0la-N6-bMN"/>
+                            <constraint firstItem="caM-Nr-odV" firstAttribute="width" secondItem="vsg-P1-f33" secondAttribute="width" id="18S-Vl-kAA"/>
+                            <constraint firstItem="vsg-P1-f33" firstAttribute="top" secondItem="caM-Nr-odV" secondAttribute="bottom" constant="10" id="3Ag-gc-SmK"/>
                             <constraint firstItem="vsg-P1-f33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g7A-ZQ-B1r"/>
+                            <constraint firstItem="caM-Nr-odV" firstAttribute="height" secondItem="vsg-P1-f33" secondAttribute="height" id="ghN-En-CYE"/>
                             <constraint firstItem="vsg-P1-f33" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zp4-Db-Rx9"/>
                         </constraints>
                     </view>
@@ -43,32 +54,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="3591.1999999999998" y="114.69265367316342"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="lgT-Ne-olh">
-            <objects>
-                <viewController modalPresentationStyle="overCurrentContext" id="OWl-nG-el3" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="vaF-cm-Yh3"/>
-                        <viewControllerLayoutGuide type="bottom" id="ryY-li-6Ds"/>
-                    </layoutGuides>
-                    <view key="view" alpha="0.69999999999999996" contentMode="scaleToFill" id="TKk-NP-bkQ">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="CjH-d1-LW9">
-                                <rect key="frame" x="76" y="119" width="240" height="399"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                            </view>
-                        </subviews>
-                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                    </view>
-                    <nil key="simulatedBottomBarMetrics"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3uM-8i-BtJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="5316" y="217.24137931034485"/>
         </scene>
         <!--Item-->
         <scene sceneID="MVc-Fm-3YR">
@@ -92,7 +77,7 @@
         <!--View Controller-->
         <scene sceneID="K7T-2u-19t">
             <objects>
-                <viewController id="cbN-5X-tlr" sceneMemberID="viewController">
+                <viewController id="cbN-5X-tlr" customClass="ViewController" customModule="Demo_testUI" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="8yw-gY-cQW"/>
                         <viewControllerLayoutGuide type="bottom" id="O79-zt-dNT"/>

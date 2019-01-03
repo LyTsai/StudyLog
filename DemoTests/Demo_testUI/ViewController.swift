@@ -14,10 +14,15 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //3， 10， 9
-       
+       navigationController?.navigationBar.isHidden = true
     }
     
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        
+    }
     func showViewFromTop() {
         let arrowMaskLayer = CAShapeLayer()
         view.layer.mask = arrowMaskLayer
