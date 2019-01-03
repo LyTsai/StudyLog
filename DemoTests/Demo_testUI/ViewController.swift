@@ -11,24 +11,16 @@ import UIKit
 
 class ViewController: UIViewController {
     
-    @IBOutlet weak var a: UITextField!
-    @IBOutlet weak var b: UITextField!
-    @IBOutlet weak var c: UITextField!
-    @IBOutlet weak var d: UITextField!
-    
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //3， 10， 9
-       
+       navigationController?.navigationBar.isHidden = true
     }
     
-    
-    @IBAction func calculate(_ sender: Any) {
-        let score = Float(b.text!)! - Float(a.text!)!
-        let abc = Float(d.text!)! - Float(c.text!)!
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         
-        print(score/abc)
         
     }
     func showViewFromTop() {
