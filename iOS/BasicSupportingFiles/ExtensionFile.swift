@@ -319,4 +319,13 @@ extension UIViewController {
         backButton.setImage(backImage, for: .normal)
         return UIBarButtonItem(customView: backButton)
     }
+    
+    // present a viewController, if there is a tabbar     
+    func presentOverCurrentViewController(_ viewController: UIViewController, completion: (()->Void)?)  {
+        viewController.view.backgroundColor = UIColor.black.withAlphaComponent(0.6)
+        viewController.modalPresentationStyle = .overCurrentContext
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        let rootViewController = appDelegate.window?.rootViewController
+        rootViewController?.present(viewController, animated: true, completion: completion)
+    }
 }
