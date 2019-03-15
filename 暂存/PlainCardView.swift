@@ -7,88 +7,74 @@
 //
 
 import Foundation
-import Kingfisher
 import SDWebImage
 
 // only texts and image, used on many cards
-class PlainCardView: UIView, UITextViewDelegate {
+// MARK: -------- all labels are changed to textView now, with only name remained
+class PlainCardView: CardBackView {
     // MARK: --------- properties -------------------
-    // open, fill data
-    var title = "" {
-        didSet{ titleLabel.text = title}
-    }
-    
-    var prompt = "" {
-        didSet{
-            promptLabel.text = prompt
+    override var mainColor: UIColor {
+        didSet {
+            cardTitleBackView.mainColor = mainColor
+            stamp.mainColor = mainColor
         }
     }
     
-    var detail = "" {
-        didSet{ detailLabel.text = detail }
+    // open, fill data
+    var title: String! {
+        didSet{ titleTextView.text = title}
     }
+
+//    var prompt: String! {
+//        didSet{
+//            promptTextView.text = prompt
+//        }
+//    }
     
-    var side = "" {
-        didSet{ sideLabel.text = side }
+    var detail: String! {
+        didSet{ detailTextView.text = detail }
     }
     
     var mainImageUrl: URL! {
         didSet{
-            if mainImageUrl == nil  {
-                self.mainImageView.image = ProjectImages.sharedImage.placeHolder
-                return
-            }
-//            mainImageView.kf.indicatorType = .activity
-//            mainImageView.kf.setImage(with: ImageResource.init(downloadURL: mainImageUrl!), placeholder: ProjectImages.sharedImage.indicator, options: [KingfisherOptionsInfoItem.transition(ImageTransition.fade(1)), KingfisherOptionsInfoItem.cacheMemoryOnly], progressBlock: nil, completionHandler: nil)
-            
             mainImageView.sd_setShowActivityIndicatorView(true)
             mainImageView.sd_setIndicatorStyle(.gray)
-            mainImageView.sd_setImage(with: mainImageUrl, placeholderImage: ProjectImages.sharedImage.indicator, options: .refreshCached ,progress: nil) { (image, error, type, url) in
-                
-                if image == nil {
-                    self.mainImageView.image = ProjectImages.sharedImage.placeHolder
-                }else {
-
-                }
+            mainImageView.sd_setImage(with: mainImageUrl, placeholderImage: ProjectImages.sharedImage.indicator, options: .refreshCached, progress: nil) { (image, error, type, url) in
             }
         }
     }
     
-    var mainImage = UIImage(named: "Coming Soon.png") {
-        didSet{ mainImageView.image = mainImage }
+    var tagUrl: URL! {
+        didSet{
+            promptTag.sd_setShowActivityIndicatorView(true)
+            promptTag.sd_setIndicatorStyle(.gray)
+            promptTag.sd_setImage(with: tagUrl, placeholderImage: nil, options: .refreshCached, progress: nil) { (image, error, type, url) in
+            }
+        }
     }
     
     // hint
-    let hintButton = UIButton(type: .custom)
-    let hintPersonImageView = UIImageView()
+    let stamp = StampView()
     
     // size concerned, change with the backImage
     fileprivate var standardW: CGFloat {
         return bounds.width / 335
     }
     fileprivate var standardH: CGFloat {
-        return bounds.height / 448
+        return bounds.height / 446
     }
     
-    var lineInsets: UIEdgeInsets {
-        return UIEdgeInsets(top: 18 * standardH, left: 10 * standardW, bottom: 14 * standardH, right: 10 * standardW)
-    }
-    
-    var lineWidth: CGFloat {
-        return 4 * max(standardH, standardW)
-    }
-
     var bottomForMore: CGFloat {
         return 55 * standardH
     }
     
     // in case there is more change about the textLabel or imageView
-    let titleLabel = UILabel()
-    let promptLabel = UITextView()
-//        UILabel()
-    let detailLabel = UITextView()
-//        UILabel()
+    let titleTextView = AutoScrollTextView()
+    let cardTitleBackView = CardTitleView()
+//    let promptTextView = AutoScrollTextView() //        UILabel()
+    let detailTextView = AutoScrollTextView() //        UILabel()
     let mainImageView = UIImageView()
+    let promptTag = UIImageView()
     
     // init
     override init(frame: CGRect) {
@@ -102,173 +88,222 @@ class PlainCardView: UIView, UITextViewDelegate {
     
     // add views
     fileprivate let sideBack = UIImageView()
-    fileprivate let sideLabel = UILabel()
-//    fileprivate let gradientLayer = CAGradientLayer()
     fileprivate func updateUI() {
-        for view in subviews {
-            view.removeFromSuperview()
-        }
-        layer.sublayers = nil
-        withPrompt = false
-        
-        // setup titleLabel
-        titleLabel.textAlignment = .center
-        titleLabel.numberOfLines = 0
-        titleLabel.backgroundColor = UIColor.clear
-        titleLabel.textColor = UIColorFromRGB(69, green: 51, blue: 17)
-        
-        // setup detailLabel
-//        detailLabel.numberOfLines = 0
-        detailLabel.isEditable = false
-        detailLabel.textAlignment = .center
-        detailLabel.backgroundColor = UIColor.clear
-        detailLabel.delegate = self
-
-        // gradient layer
-//        gradientLayer.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0.2).cgColor]
-//        gradientLayer.startPoint = CGPoint.zero
-//        gradientLayer.endPoint = CGPoint(x: 0, y: 1)
-//        gradientLayer.locations = [0.7, 0.95]
-//        gradientLayer.isHidden = true
-     
         // setup side
         sideBack.image = ProjectImages.sharedImage.cardSide
-//        sideBack.contentMode = .scaleToFill
-        
-        sideLabel.numberOfLines = 0
-        sideLabel.textAlignment = .center
-        sideLabel.backgroundColor = UIColor.clear
         
         // setup imageView
         mainImageView.contentMode = .scaleAspectFit
-        
-        
-        // hint
-        hintButton.imageView?.contentMode = .scaleAspectFit
-        hintPersonImageView.contentMode = .scaleAspectFit
+        promptTag.contentMode = .scaleAspectFit
+        promptTag.layer.addBlackShadow(2 * fontFactor)
         
         // add
         addSubview(mainImageView)
-        addSubview(titleLabel)
-//        layer.addSublayer(gradientLayer)
-        addSubview(detailLabel)
+        addSubview(promptTag)
+        addSubview(cardTitleBackView)
+        cardTitleBackView.addSubview(titleTextView)
+        addSubview(detailTextView)
         addSubview(sideBack)
-//        addSubview(sideLabel)
+        addSubview(stamp)
         
-        addSubview(hintButton)
-        addSubview(hintPersonImageView)
+        // tap
+        hintImageView.contentMode = .scaleAspectFit
+        hintImageView.image = UIImage(named: "textScrollHint")
+        hintImageView.isUserInteractionEnabled = true
+        addSubview(hintImageView)
+        addSubview(stamp)
         
-//        Timer.scheduledTimer(withTimeInterval: 0.4, repeats: false) { (timer) in
-//            self.detailLabel.scrollRectToVisible(self.detailLabel.frame, animated: true)
-//
-//            timer.invalidate()
-//        }
+        let upSwipeGR = UISwipeGestureRecognizer(target: self, action: #selector(showOrHideText))
+        upSwipeGR.direction = .up
+        let downSwipeGR = UISwipeGestureRecognizer(target: self, action: #selector(showOrHideText))
+        downSwipeGR.direction = .down
+        self.addGestureRecognizer(upSwipeGR)
+        self.addGestureRecognizer(downSwipeGR)
     }
-    
     
     // for prompt
-    var prompted: Bool {
-        return withPrompt
-    }
+//    var prompted: Bool {
+//        return withPrompt
+//    }
     
-    fileprivate var withPrompt = false
-    func addSetForPrompt() {
-        withPrompt = true
-        
-        // prompt label
-//        promptLabel.numberOfLines = 0
-        promptLabel.textAlignment = .center
-        promptLabel.backgroundColor = UIColor.clear
-        promptLabel.isEditable = false
-        promptLabel.delegate = self
-        // text colors
-        
-//        titleLabel.textColor = UIColorFromRGB(69, green: 51, blue: 17)
-        if promptLabel.superview == nil {
-            addSubview(promptLabel)
-        }
-    }
+//    fileprivate var withPrompt = false
+//    func addSetForPrompt() {
+//        withPrompt = true
+//
+//        // prompt label
+////        if promptTextView.superview == nil {
+////            addSubview(promptTextView)
+////        }
+//        if promptTag.superview == nil {
+//            addSubview(promptTag)
+//        }
+//    }
     
-    func removePrompt() {
-        promptLabel.removeFromSuperview()
-        withPrompt = false
-    }
+//    func removePrompt() {
+//        promptTag.removeFromSuperview()
+////        promptTextView.removeFromSuperview()
+//        withPrompt = false
+//    }
     
+    fileprivate let hintImageView = UIImageView()
+
     func hideSide(_ hide: Bool) {
-        sideLabel.isHidden = hide
         sideBack.isHidden = hide
     }
     
     // layout subviews
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        resetLayout()
-    }
-    
     // call when the layout is changed, except from the frame of view is changed
+    fileprivate var textScrolling = true
+//    fileprivate var recordPromptFrame = CGRect.zero
+    fileprivate var recordDetailFrame = CGRect.zero
+    var promptMargin: CGFloat = 0
     func resetLayout() {
-        // title, x: 74, width: 187
-        titleLabel.frame = CGRect(x: 74.5 * standardW, y: 0, width: 186 * standardW, height: 48 * standardH)
-        titleLabel.font = UIFont.systemFont(ofSize: min(18, 18 * standardH), weight: UIFontWeightBold)
+        titleTextView.contentInset = UIEdgeInsets.zero
+//        promptTextView.contentInset = UIEdgeInsets.zero
+        detailTextView.contentInset = UIEdgeInsets.zero
+        
+        let fontPro = max(standardW, standardH)
+        
+        // title
+        cardTitleBackView.frame = CGRect(center: CGPoint(x: bounds.midX, y: 27 * standardH - 6 * standardH), width: 196 * standardW, height: 54 * standardH)
+        cardTitleBackView.borderWidth = rimLineWidth * 0.5
+        cardTitleBackView.cornerRadius = innerCornerRadius
+        cardTitleBackView.setNeedsDisplay()
+        
+        titleTextView.font = UIFont.systemFont(ofSize: 16 * fontPro, weight: .bold)
+        titleTextView.setupWithBounding(cardTitleBackView.bounds.insetBy(dx: rimLineWidth * 0.5, dy: rimLineWidth * 0.5), shrink: false)
 
+        let xLeft = titleTextView.frame.minX - rimFrame.minX - rimLineWidth * 2
+        // stamp
+        let stampLength = min(cardTitleBackView.frame.maxY - rimFrame.minY - rimLineWidth, rimFrame.maxX - xLeft)
+        stamp.frame = CGRect(x: rimFrame.maxX - rimLineWidth * 1.5 - stampLength, y: rimFrame.minY + rimLineWidth, width: stampLength, height: stampLength)
+        hintImageView.frame.size = CGSize(width: rimLineWidth * 4.5, height: rimLineWidth * 21) // 18 * 83
+        hintImageView.frame.origin = CGPoint(x: stamp.frame.midX - hintImageView.frame.width * 0.5, y: stamp.frame.maxY)
+        
         // stand position
-        let promptMargin = 2 * lineInsets.left + lineWidth
-        var promptY = 40 * standardH + lineInsets.top
+        promptMargin = rimFrame.minX + stampLength * 0.8 + rimLineWidth
+        var currentY = cardTitleBackView.frame.maxY + 2 * standardH
         
         // image
-        let widthForImage = bounds.width - lineInsets.left - lineInsets.right - 2 * lineWidth - 2.4 * lineInsets.top
-        let heightForImage = bounds.height - promptY - bottomForMore - lineInsets.bottom - lineWidth - 0.2 * lineInsets.top
+        let widthForImage = (rimFrame.width - 2 * rimLineWidth) * 0.85
+        let maxBottom = rimFrame.maxY - bottomForMore - rimLineWidth
+        let heightForImage = (maxBottom - currentY) * 0.75
         
-        let imageLength = min(widthForImage, heightForImage) * 0.84
-        let imageY = bounds.height - imageLength - bottomForMore - lineInsets.bottom - 0.2 * lineInsets.top
+        let imageY = rimFrame.maxY - rimLineWidth - heightForImage - bottomForMore
+        hintImageView.isHidden = true
         
-        mainImageView.frame = CGRect(x: bounds.midX - imageLength * 0.5, y: imageY, width: imageLength, height: imageLength)
-        
+        let hintX = bounds.width - promptMargin - hintImageView.frame.width - 2 * rimLineWidth
+        let remainedW = hintX - promptMargin
         // prompt
-        if withPrompt {
-            promptY -= lineInsets.top * 0.3
-            promptLabel.frame = CGRect(x: promptMargin, y: promptY, width: bounds.width - 2 * promptMargin, height: (imageY - promptY))
-            promptLabel.font = UIFont.systemFont(ofSize: min(18, 18 * standardH), weight: UIFontWeightBold)
-            promptLabel.sizeToFit()
-            promptLabel.frame = CGRect(x: promptMargin, y: promptY, width: bounds.width - 2 * promptMargin, height: min(imageY - promptY, promptLabel.frame.height))
-//            promptLabel.adjustWithWidthKept()
-            promptY += promptLabel.frame.height + 5 * standardH
+//        if withPrompt {
+//            let promptFrame = CGRect(x: promptMargin, y: currentY, width: bounds.width - 2 * promptMargin, height: (imageY - currentY))
+//            promptTextView.font = UIFont.systemFont(ofSize: 16 * fontPro, weight: .semibold)
+//            promptTextView.setupWithBounding(promptFrame, shrink: true)
+//
+//            if promptTextView.needScroll {
+//                hintImageView.isHidden = false
+//                promptTextView.setupWithBounding(CGRect(x: promptFrame.minX, y: promptFrame.minY, width: remainedW, height: promptFrame.height), shrink: true)
+//            }
+//
+//            currentY += promptTextView.frame.height + 5 * standardH
+//        }
+  
+        // detail
+        detailTextView.font = UIFont.systemFont(ofSize: 16 * fontPro, weight: .medium)
+        let textFrame = CGRect(x: promptMargin, y: currentY, width: bounds.width - 2 * promptMargin, height: imageY - currentY - 5 * fontPro)
+        detailTextView.setupWithBounding(textFrame, shrink: false)
+        
+        if detailTextView.needScroll {
+            hintImageView.isHidden = false
+            detailTextView.setupWithBounding(CGRect(x: textFrame.minX, y: textFrame.minY, width: remainedW, height: textFrame.height), shrink: false)
         }
         
-        // detail
-        let textFrame = CGRect(x: promptMargin, y: promptY, width: bounds.width - 2 * promptMargin, height: imageY - promptY)
-        detailLabel.frame = textFrame
-        detailLabel.font = UIFont.systemFont(ofSize: min(16, 16 * standardH))
-//        detailLabel.adjustWithWidthKept()
+        mainImageView.frame = CGRect(x: bounds.midX - widthForImage * 0.5, y: imageY, width: widthForImage, height: maxBottom - imageY)
         
-//        if detailLabel.frame.maxY > imageY {
-//            // show mask for image
-//            gradientLayer.isHidden = false
-//            gradientLayer.frame = CGRect(x: promptMargin, y: imageY, width: bounds.width - 2 * promptMargin, height: detailLabel.frame.maxY - imageY)
-//        }else {
-//            gradientLayer.isHidden = true
-//        }
-        
+        promptTag.frame = CGRect(x: rimFrame.minX, y: textFrame.maxY, width: 85 * fontPro, height: 85 * fontPro)
+
         // side
         // 31 * 107
         let sideSize = CGSize(width: 31 * standardW, height: 107 * standardW)
-        sideBack.frame = CGRect(x: bounds.width - sideSize.width, y: bounds.height - sideSize.height - bottomForMore * 0.7, width: sideSize.width, height: sideSize.height)
+        sideBack.frame = CGRect(x: bounds.width - sideSize.width, y: bounds.height - sideSize.height - bottomForMore * 0.9, width: sideSize.width, height: sideSize.height)
         
-        sideLabel.transform = CGAffineTransform(rotationAngle: CGFloat(Double.pi / 2))
-        sideLabel.frame = sideBack.frame
-        sideLabel.font = UIFont.systemFont(ofSize: min(10, sideSize.width * 0.32), weight: UIFontWeightMedium)
+        textScrolling = true
+//        recordPromptFrame = promptTextView.frame
+        recordDetailFrame = detailTextView.frame
+        mainImageView.alpha = 1
     }
     
-    func isTextViewScrollable(_ textView: UITextView) -> Bool {
-        return textView.frame.height < textView.contentSize.height
-    }
-    
-    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
-        for view in detailLabel.subviews {
-            if view.isKind(of: UIImageView.self) && view.autoresizingMask == .flexibleLeftMargin {
-                view.alpha = 1
+    @objc func showOrHideText(_ swipeGR: UISwipeGestureRecognizer) {
+        if hintImageView.isHidden {
+            return
+        }
+        
+        if swipeGR.direction == .up && !textScrolling {
+            // hide part
+//            promptTextView.frame = recordPromptFrame
+            detailTextView.frame = recordDetailFrame
+            
+//            if prompted && promptTextView.needScroll {
+//                promptTextView.startTimer()
+//            }
+            if detailTextView.needScroll {
+                detailTextView.startTimer()
             }
+            
+            mainImageView.alpha = 1
+            hintImageView.transform = CGAffineTransform.identity
+            
+            textScrolling = true
+        }else if swipeGR.direction == .down && textScrolling {
+            // down, show all text
+            var offsetY: CGFloat = 0
+//            if prompted && promptTextView.needScroll {
+//                promptTextView.frame.size = CGSize(width: recordPromptFrame.width, height: promptTextView.usedH)
+//                promptTextView.stopScroll()
+//                offsetY = promptTextView.usedH - recordPromptFrame.height
+//            }
+            
+            detailTextView.frame.origin = CGPoint(x: recordDetailFrame.minX, y: recordDetailFrame.minY + offsetY)
+            if detailTextView.needScroll {
+                let maxH = mainImageView.frame.maxY - (recordDetailFrame.minY + offsetY)
+                detailTextView.frame.size = CGSize(width: recordDetailFrame.width, height: min(detailTextView.usedH, maxH))
+
+                detailTextView.stopScroll()
+            }
+            
+            mainImageView.alpha = 0.15
+            let offset = min(stamp.frame.height, hintImageView.frame.height * 65 / 81)
+            hintImageView.transform = CGAffineTransform(translationX: 0, y: -offset)
+            textScrolling = false
         }
     }
     
+    func startToDisplay() {
+        if titleTextView.needScroll {
+            titleTextView.startTimer()
+        }
+        
+//        if prompted && promptTextView.needScroll {
+//            promptTextView.startTimer()
+//        }
+        
+        if detailTextView.needScroll {
+            detailTextView.startTimer()
+        }
+    }
+    
+    func endDisplay() {
+        if titleTextView.needScroll {
+            titleTextView.stopScroll()
+        }
+        
+//        if prompted && promptTextView.needScroll {
+//            promptTextView.stopScroll()
+//        }
+        
+        if detailTextView.needScroll {
+            detailTextView.stopScroll()
+        }
+    }
 }
+
