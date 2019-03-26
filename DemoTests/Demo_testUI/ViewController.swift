@@ -15,6 +15,10 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         //3， 10， 9
        navigationController?.navigationBar.isHidden = true
+        
+        let a = ScorecardHowMainPair()
+        a.addPairOnView(view, icon: #imageLiteral(resourceName: "icon1"), title: "testttttttt", color: UIColor.cyan)
+        a.layoutWithFrame(CGRect(x: 0, y: 70, width: 240, height: 55), rightStartX: 69)
     }
     
 
@@ -23,26 +27,7 @@ class ViewController: UIViewController {
         
         
     }
-    func showViewFromTop() {
-        let arrowMaskLayer = CAShapeLayer()
-        view.layer.mask = arrowMaskLayer
-        let arrowW = view.bounds.width
-        arrowMaskLayer.backgroundColor = UIColor.clear.cgColor
-        
-        let path = UIBezierPath()
-        path.move(to: CGPoint(x: arrowW * 0.5, y: 0))
-        path.addLine(to: CGPoint(x: arrowW * 0.5, y: view.bounds.maxY))
-        arrowMaskLayer.strokeColor = UIColor.red.cgColor
-        arrowMaskLayer.lineWidth = arrowW
-        
-        arrowMaskLayer.path = path.cgPath
-        
-        let basicAnimation = CABasicAnimation(keyPath: "strokeEnd")
-        basicAnimation.duration = 3
-        basicAnimation.fromValue = 0
-        basicAnimation.toValue = 1
-        arrowMaskLayer.add(basicAnimation, forKey: nil)
-    }
+    
 }
 
 
