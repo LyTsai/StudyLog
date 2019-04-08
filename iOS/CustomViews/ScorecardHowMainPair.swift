@@ -10,15 +10,16 @@ import Foundation
 
 class ScorecardHowMainPair {
     var leftIsTouched: (()->Void)?
+    var rightIsTouched: (()->Void)?
     
-    fileprivate let iconImageView = UIImageView()
+    fileprivate let iconButton = UIButton(type: .custom)
     fileprivate let titleLabel = UILabel()
     fileprivate let gradientLayer = CAGradientLayer()
     fileprivate let pairShape = CAShapeLayer()
     func addPairOnView(_ view: UIView, icon: UIImage?, title: String, color: UIColor) {
         // views
-        iconImageView.image = icon
-        iconImageView.layer.masksToBounds = true
+        iconButton.setBackgroundImage(icon, for: .normal)
+        iconButton.layer.masksToBounds = true
         titleLabel.numberOfLines = 0
         titleLabel.textAlignment = .center
         titleLabel.text = title
@@ -27,13 +28,45 @@ class ScorecardHowMainPair {
         pairShape.fillColor = color.cgColor
         pairShape.strokeColor = UIColor.black.cgColor
         gradientLayer.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
-        gradientLayer.locations = [0, 1]
+        gradientLayer.locations = [0, 0.6]
         
         // add all
         view.layer.addSublayer(pairShape)
         view.layer.addSublayer(gradientLayer)
-        view.addSubview(iconImageView)
+        view.addSubview(iconButton)
         view.addSubview(titleLabel)
+    }
+    
+    func enableLeftAction() {
+        iconButton.addTarget(self, action: #selector(buttonIsTouched), for: .touchUpInside)
+    }
+    
+    func enableRightAction() {
+        gradientLayer.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor, UIColor.white.cgColor]
+        gradientLayer.locations = [0, 0.3, 1]
+        titleLabel.isUserInteractionEnabled = true
+        
+        // tap
+        let tap = UITapGestureRecognizer(target: self, action: #selector(labelIsTapped))
+        titleLabel.addGestureRecognizer(tap)
+    }
+    
+    func setTitle(_ title: String) {
+        titleLabel.text = title
+    }
+    
+    @objc func buttonIsTouched() {
+        leftIsTouched?()
+    }
+    @objc func labelIsTapped() {
+        rightIsTouched?()
+    }
+    
+    func clearPair()  {
+        pairShape.removeFromSuperlayer()
+        gradientLayer.removeFromSuperlayer()
+        iconButton.removeFromSuperview()
+        titleLabel.removeFromSuperview()
     }
     
     // layout
@@ -52,9 +85,9 @@ class ScorecardHowMainPair {
         pairShape.lineWidth = lineWidth
         pairShape.path = shapePath.cgPath
         
-        gradientLayer.frame = CGRect(x: rightRect.minX, y: rightRect.minY, width: rightRect.width, height: rightRect.height * 0.6)
+        gradientLayer.frame = rightRect.insetBy(dx: lineWidth, dy: lineWidth)
         // subviews
-        iconImageView.frame = leftRect.insetBy(dx: 3 * lineWidth, dy: 3 * lineWidth)
+        iconButton.frame = leftRect.insetBy(dx: 3 * lineWidth, dy: 3 * lineWidth)
         titleLabel.frame = rightRect.insetBy(dx: 5 * lineWidth, dy: 4 * lineWidth)
         titleLabel.font = UIFont.systemFont(ofSize: 14 * lineWidth, weight: .medium)
     }
