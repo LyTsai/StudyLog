@@ -87,7 +87,7 @@ extension UIView {
         while nextView != nil {
             if let responder = nextView!.next {
                 if responder.isKind(of: UINavigationController.self) {
-                    return responder as! UINavigationController
+                    return responder as? UINavigationController
                 }
                 nextView = nextView!.superview
             }
@@ -101,7 +101,7 @@ extension UIView {
         while nextView != nil {
             if let responder = nextView!.next {
                 if responder.isKind(of: UIViewController.self) {
-                    return responder as! UIViewController
+                    return responder as? UIViewController
                 }
                 nextView = nextView!.superview
             }

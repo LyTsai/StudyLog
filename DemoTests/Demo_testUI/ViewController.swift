@@ -15,16 +15,14 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.cyan
 
-        // test
-        let strokeLabel = StrokeTextLabel(frame: view.bounds.insetBy(dx: 64, dy: 64))
-        
-        strokeLabel.textColor = UIColor.white
-        strokeLabel.text = "this is a test for stroke"
-        view.addSubview(strokeLabel)
-        strokeLabel.setNeedsDisplay()
+
     }
     
 
+    @IBAction func actionForButton(_ sender: Any) {
+        
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		1901705A1FE66FB700EAD1EB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 885031551E8E36F6009B21B6 /* Info.plist */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
@@ -16,10 +15,8 @@
 		8853A94E205BC79800A488BC /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853A94D205BC79800A488BC /* AnimationView.swift */; };
 		887BC78E2068E4BD00C1019E /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC78D2068E4BD00C1019E /* Temp.swift */; };
 		888215F5216C873F00C50FFD /* SearchTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 888215F4216C873F00C50FFD /* SearchTable.swift */; };
-		8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */; };
 		8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817D20E47F9F00A71EAC /* DefAndMethods.swift */; };
 		8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817E20E47F9F00A71EAC /* ExtensionFile.swift */; };
-		88AEFB37225AF40B008DD612 /* StrokeTextLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88AEFB36225AF40B008DD612 /* StrokeTextLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,11 +30,9 @@
 		8853A94D205BC79800A488BC /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		887BC78D2068E4BD00C1019E /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		888215F4216C873F00C50FFD /* SearchTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTable.swift; sourceTree = "<group>"; };
-		8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCollectionView.swift; sourceTree = "<group>"; };
 		8893817D20E47F9F00A71EAC /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
 		8893817E20E47F9F00A71EAC /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
-		8893817F20E47F9F00A71EAC /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
-		88AEFB36225AF40B008DD612 /* StrokeTextLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StrokeTextLabel.swift; sourceTree = "<group>"; };
+		8893817F20E47F9F00A71EAC /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PrefixHeader.h; path = ../../DemoTests/Demo_testUI/supportingFiles/PrefixHeader.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,9 +49,7 @@
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				8884FC07205F5DD400EEF878 /* CarouselCollectionView.swift */,
 				8853A94D205BC79800A488BC /* AnimationView.swift */,
-				88AEFB36225AF40B008DD612 /* StrokeTextLabel.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -140,19 +133,19 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 1020;
 				ORGANIZATIONNAME = LyTsai;
 				TargetAttributes = {
 					885031451E8E36F6009B21B6 = {
 						CreatedOnToolsVersion = 8.2.1;
-						DevelopmentTeam = 8D66FRV9W5;
+						DevelopmentTeam = PCJ2G2688F;
 						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = 885031411E8E36F6009B21B6 /* Build configuration list for PBXProject "Demo_testUI" */;
 			compatibilityVersion = "Xcode 3.2";
-			developmentRegion = English;
+			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
 				en,
@@ -175,7 +168,6 @@
 			files = (
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
-				1901705A1FE66FB700EAD1EB /* Info.plist in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -191,10 +183,8 @@
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				888215F5216C873F00C50FFD /* SearchTable.swift in Sources */,
-				88AEFB37225AF40B008DD612 /* StrokeTextLabel.swift in Sources */,
 				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
 				8853A94E205BC79800A488BC /* AnimationView.swift in Sources */,
-				8884FC08205F5DD400EEF878 /* CarouselCollectionView.swift in Sources */,
 				887BC78E2068E4BD00C1019E /* Temp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -225,6 +215,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -234,6 +225,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -241,6 +233,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -281,6 +274,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -290,6 +284,7 @@
 				CLANG_WARN_BOOL_CONVERSION = YES;
 				CLANG_WARN_COMMA = YES;
 				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
 				CLANG_WARN_EMPTY_BODY = YES;
@@ -297,6 +292,7 @@
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
 				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
@@ -330,15 +326,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8D66FRV9W5;
-				GCC_PREFIX_HEADER = /Users/imac/Documents/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
+				DEVELOPMENT_TEAM = PCJ2G2688F;
+				GCC_PREFIX_HEADER = Demo_testUI/supportingFiles/PrefixHeader.h;
 				INFOPLIST_FILE = Demo_testUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "minghui.Demo-testUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/imac/Documents/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = Demo_testUI/supportingFiles/PrefixHeader.h;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -346,15 +342,15 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 8D66FRV9W5;
-				GCC_PREFIX_HEADER = /Users/imac/Documents/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
+				DEVELOPMENT_TEAM = PCJ2G2688F;
+				GCC_PREFIX_HEADER = Demo_testUI/supportingFiles/PrefixHeader.h;
 				INFOPLIST_FILE = Demo_testUI/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				NEW_SETTING = "";
 				PRODUCT_BUNDLE_IDENTIFIER = "minghui.Demo-testUI";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_OBJC_BRIDGING_HEADER = /Users/imac/Documents/StudyLog/iOS/BasicSupportingFiles/PrefixHeader.h;
-				SWIFT_VERSION = 4.0;
+				SWIFT_OBJC_BRIDGING_HEADER = Demo_testUI/supportingFiles/PrefixHeader.h;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};
