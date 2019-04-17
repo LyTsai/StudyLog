@@ -21,6 +21,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-XB-Yhn">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsg-P1-f33">
                                 <rect key="frame" x="160" y="306" width="55" height="55"/>
                                 <constraints>
@@ -30,13 +33,16 @@
                                 <state key="normal" backgroundImage="icon0"/>
                                 <connections>
                                     <action selector="actionForButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="sk0-UN-hhO"/>
-                                    <action selector="present:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eCU-ir-I28"/>
                                 </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="1" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstAttribute="trailing" secondItem="bHT-XB-Yhn" secondAttribute="trailing" id="8U7-hZ-tjp"/>
+                            <constraint firstItem="bHT-XB-Yhn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NBV-iK-fV3"/>
+                            <constraint firstItem="bHT-XB-Yhn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="STp-Ud-dVE"/>
                             <constraint firstItem="vsg-P1-f33" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="g7A-ZQ-B1r"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bHT-XB-Yhn" secondAttribute="bottom" id="icc-CU-p3I"/>
                             <constraint firstItem="vsg-P1-f33" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="zp4-Db-Rx9"/>
                         </constraints>
                     </view>
@@ -48,6 +54,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="background" width="494" height="520"/>
         <image name="icon0" width="512" height="512"/>
     </resources>
 </document>
