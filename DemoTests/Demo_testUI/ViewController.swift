@@ -14,9 +14,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let label = UILabel(frame: view.bounds)
+        view.addSubview(label)
+        let text = "By creating an account, I agree to AnnielyticX’s terms of use and privacy policy."
         
-
-
+        let attributedText = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 12 * fontFactor)])
+        attributedText.addAttributes([NSAttributedString.Key.link: "netdown"], range: NSMakeRange(0, 5))
+        
+        label.attributedText = attributedText
     }
     
 
