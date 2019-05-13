@@ -257,7 +257,6 @@ extension UIImage {
     }
     
     func getImageAtFrame(_ frame: CGRect) -> UIImage {
-        
         let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
         
         return  UIImage(cgImage: self.cgImage!.cropping(to: cgFrame)!)
@@ -329,3 +328,32 @@ extension UIViewController {
         rootViewController?.present(viewController, animated: true, completion: completion)
     }
 }
+
+// MARK: --------- textView
+extension UITextView {
+    func placeTextMiddle(_ left: CGFloat, right: CGFloat) {
+        textContainerInset = UIEdgeInsets(top: 0, left: left, bottom: 0, right: right)
+        let textH = layoutManager.usedRect(for: textContainer).height
+        if textH < bounds.height {
+            let offsetH = (bounds.height - textH) * 0.5
+            textContainerInset = UIEdgeInsets(top: offsetH, left: left, bottom: offsetH, right: right)
+        }
+        
+        contentOffset = CGPoint.zero
+    }
+}
+
+// MARK: -------- String
+extension String {
+    func getStartIndexesOf(_ subString: String) -> [Int] {
+        var subStartIndex = startIndex
+        var indexes = [Int]()
+        while let range = range(of: subString, options: .caseInsensitive, range: subStartIndex..<endIndex, locale: nil) {
+            indexes.append(range.lowerBound.utf16Offset(in: self))
+            subStartIndex = range.upperBound
+        }
+        
+        return indexes
+    }
+}
+

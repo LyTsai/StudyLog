@@ -22,8 +22,11 @@ let topLength = UIApplication.shared.statusBarFrame.size.height + 44
 
 // tabBar
 var bottomLength: CGFloat {
-    if UIScreen.main.bounds.height == 812 {
-        return 34 + 49
+    if ISPHONE, #available(iOS 11, *) {
+        let appDelegate = UIApplication.shared.delegate as! AppDelegate
+        if appDelegate.window!.safeAreaInsets.bottom > CGFloat(0.0) {
+            return 34 + 49
+        }
     }
     
     return 49
