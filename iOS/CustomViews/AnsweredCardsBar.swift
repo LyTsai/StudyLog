@@ -11,6 +11,8 @@ class AnsweredCardsBar: UIView {
     fileprivate var drawInfo = [(number: Int, color: UIColor)]()
     fileprivate var total: Int = 0
     fileprivate var focusIndex: Int = 0
+    var name = "Match rate"
+    
     func setupWithDrawInfo(_ drawInfo: [(number: Int, color: UIColor)], totalNumber: Int, focusIndex: Int) {
         backgroundColor = UIColor.clear
         
@@ -28,43 +30,48 @@ class AnsweredCardsBar: UIView {
     
     // draw
     override func draw(_ rect: CGRect) {
-        let lineWidth = fontFactor
-        let lineGap = lineWidth * 0.5
-        UIColor.black.setStroke()
+        let left = bounds.height * 5
+        let right = bounds.height * 2
+        // texts
+        drawString(NSAttributedString(string: name, attributes: [NSForegroundColorAttributeName: UIColorGray(132), NSFontAttributeName: UIFont.systemFont(ofSize: bounds.height * 0.8, weight: UIFontWeightMedium)]), inRect: CGRect(x: 0, y: 0, width: left, height: bounds.height), alignment: .left)
+        let percent = drawInfo.count == 0 ? 0 : CGFloat(drawInfo[focusIndex].number) / CGFloat(total) * 100
+        drawString(NSAttributedString(string: "\(Int(nearbyint(percent)))%", attributes: [NSForegroundColorAttributeName: UIColor.black, NSFontAttributeName: UIFont.systemFont(ofSize: bounds.height * 0.8, weight: UIFontWeightMedium)]), inRect: CGRect(x: bounds.width - right, y: 0, width: right, height: bounds.height), alignment: .right)
         
-        let borderPath = UIBezierPath(roundedRect: bounds.insetBy(dx: lineGap, dy: lineGap), cornerRadius: bounds.height * 0.5 - lineGap)
-        borderPath.lineWidth = lineWidth * 2
+        // bars
+        let shadowY = fontFactor
+        let barRect = CGRect(x: left, y: shadowY * 0.5, width: bounds.width - left - right, height: bounds.height - shadowY * 4)
+        let backPath = UIBezierPath(rect: barRect)
         UIColorGray(230).setFill()
-        borderPath.fill()
-        borderPath.addClip()
+        backPath.fill()
         
-        var startX = lineGap
-//        var focusFrame = CGRect.zero
+        var startX = barRect.minX
+        var focusFrame = CGRect.zero
         for (offset: i, element: (number: number, color: color)) in drawInfo.enumerated() {
-            let length = CGFloat(number) / CGFloat(total) * (bounds.width - lineWidth)
-    
-            let drawFrame = CGRect(x: startX, y: lineGap, width: length, height: bounds.height - lineWidth)
+            let length = CGFloat(number) / CGFloat(total) * barRect.width
+            let drawFrame = CGRect(x: startX, y: barRect.minY, width: length, height: barRect.height)
             startX += length
- 
-            // draw
-            let path = UIBezierPath(rect:drawFrame)
-            path.lineWidth = lineWidth
-
-            (i == focusIndex ? color : color.withAlphaComponent(0.3)).setFill()
             
-            path.fill()
-            path.stroke()
-            
-            // pattern
             if i == focusIndex {
-                if let decoImage = UIImage(named: "right_arrow") {
-                    let whRatio = decoImage.size.width / decoImage.size.height
-                    let expectHeight = drawFrame.height
-                    decoImage.changeImageSizeTo(CGSize(width: expectHeight * whRatio, height: expectHeight), alpha: 1).drawAsPattern(in: drawFrame)
-                }
+                focusFrame = drawFrame
+                continue
             }
+            
+            // draw
+            color.setFill()
+            UIBezierPath(rect:drawFrame).fill()
         }
    
-        borderPath.stroke()
+        // shadow
+        let ctx = UIGraphicsGetCurrentContext()
+        ctx?.saveGState()
+        ctx?.setShadow(offset: CGSize(width: 0, height: shadowY), blur: shadowY * 1.5, color: UIColor.black.withAlphaComponent(0.6).cgColor)
+        ctx?.setFillColor(drawInfo[focusIndex].color.cgColor)
+        ctx?.fill(focusFrame)
+        ctx?.restoreGState()
+        
+        UIColor.black.setStroke()
+        let focusPath = UIBezierPath(rect: focusFrame)
+        focusPath.lineWidth = shadowY * 0.5
+        focusPath.stroke()
     }
 }
