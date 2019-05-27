@@ -30,11 +30,13 @@ class GradientBackStrokeButton: UIButton {
     fileprivate let gradient = CAGradientLayer()
     fileprivate func addBasic() {
         backgroundColor = UIColorFromHex(0x7ED321)
-        gradient.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
+        gradient.colors = [UIColor.white.withAlphaComponent(0.6).cgColor, UIColor.white.withAlphaComponent(0).cgColor]
         gradient.locations = [0, 1]
         
         titleTextLabel.textAlignment = .center
         titleStrokeLabel.textAlignment = .center
+        titleTextLabel.numberOfLines = 0
+        titleStrokeLabel.numberOfLines = 0
         
         layer.addSublayer(gradient)
         addSubview(titleStrokeLabel)
@@ -45,7 +47,7 @@ class GradientBackStrokeButton: UIButton {
     
     func setupWithTitle(_ title: String) {
         titleTextLabel.text = title
-        titleStrokeLabel.attributedText = NSAttributedString(string: title, attributes: [.strokeWidth: NSNumber(value: 10)])
+        titleStrokeLabel.attributedText = NSAttributedString(string: title, attributes: [.strokeWidth: NSNumber(value: -15)])
     }
     
     override func layoutSubviews() {
@@ -56,7 +58,7 @@ class GradientBackStrokeButton: UIButton {
         titleTextLabel.font = UIFont.systemFont(ofSize: 16 * one, weight: .medium)
         titleStrokeLabel.font = titleTextLabel.font
         
-        let inset = 2 * one
+        let inset = 2.5 * one
         titleTextLabel.frame = bounds.insetBy(dx: inset, dy: inset)
         titleStrokeLabel.frame = titleTextLabel.frame
         layer.borderWidth = one
