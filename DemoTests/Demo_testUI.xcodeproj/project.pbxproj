@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		883CED2422A0FC84007B56FC /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CED2322A0FC84007B56FC /* MathTool.swift */; };
+		883CED2822A11FA7007B56FC /* 新建表格.xls in Resources */ = {isa = PBXBuildFile; fileRef = 883CED2522A10DD3007B56FC /* 新建表格.xls */; };
+		883CED2A22A1201E007B56FC /* 时间安排+清单+当天工作安排.xlsx in Resources */ = {isa = PBXBuildFile; fileRef = 883CED2922A12004007B56FC /* 时间安排+清单+当天工作安排.xlsx */; };
+		883CED2C22A12576007B56FC /* 新建表格.csv in Resources */ = {isa = PBXBuildFile; fileRef = 883CED2B22A12576007B56FC /* 新建表格.csv */; };
+		883CED2E22A12944007B56FC /* 时间安排+清单+当天工作安排.csv in Resources */ = {isa = PBXBuildFile; fileRef = 883CED2D22A12943007B56FC /* 时间安排+清单+当天工作安排.csv */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
@@ -20,6 +25,11 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		883CED2322A0FC84007B56FC /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
+		883CED2522A10DD3007B56FC /* 新建表格.xls */ = {isa = PBXFileReference; lastKnownFileType = file; path = "新建表格.xls"; sourceTree = "<group>"; };
+		883CED2922A12004007B56FC /* 时间安排+清单+当天工作安排.xlsx */ = {isa = PBXFileReference; lastKnownFileType = file; path = "时间安排+清单+当天工作安排.xlsx"; sourceTree = "<group>"; };
+		883CED2B22A12576007B56FC /* 新建表格.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "新建表格.csv"; sourceTree = "<group>"; };
+		883CED2D22A12943007B56FC /* 时间安排+清单+当天工作安排.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "时间安排+清单+当天工作安排.csv"; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8850314B1E8E36F6009B21B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -75,8 +85,12 @@
 			children = (
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
+				883CED2D22A12943007B56FC /* 时间安排+清单+当天工作安排.csv */,
 				888215F4216C873F00C50FFD /* SearchTable.swift */,
 				887BC78D2068E4BD00C1019E /* Temp.swift */,
+				883CED2B22A12576007B56FC /* 新建表格.csv */,
+				883CED2922A12004007B56FC /* 时间安排+清单+当天工作安排.xlsx */,
+				883CED2522A10DD3007B56FC /* 新建表格.xls */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
 			path = Demo_testUI;
@@ -85,6 +99,7 @@
 		8893817C20E47F9F00A71EAC /* BasicSupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				883CED2322A0FC84007B56FC /* MathTool.swift */,
 				8893817D20E47F9F00A71EAC /* DefAndMethods.swift */,
 				8893817E20E47F9F00A71EAC /* ExtensionFile.swift */,
 				8893817F20E47F9F00A71EAC /* PrefixHeader.h */,
@@ -166,6 +181,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				883CED2C22A12576007B56FC /* 新建表格.csv in Resources */,
+				883CED2A22A1201E007B56FC /* 时间安排+清单+当天工作安排.xlsx in Resources */,
+				883CED2822A11FA7007B56FC /* 新建表格.xls in Resources */,
+				883CED2E22A12944007B56FC /* 时间安排+清单+当天工作安排.csv in Resources */,
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
@@ -181,6 +200,7 @@
 			files = (
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
+				883CED2422A0FC84007B56FC /* MathTool.swift in Sources */,
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				888215F5216C873F00C50FFD /* SearchTable.swift in Sources */,
 				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
