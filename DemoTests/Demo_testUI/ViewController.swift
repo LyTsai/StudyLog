@@ -14,46 +14,108 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let url = Bundle.main.url(forResource: "时间安排+清单+当天工作安排", withExtension: "csv") {
-            do {
-//                let data = try Data(contentsOf: url, options: .mappedIfSafe)
-                let string = try String(contentsOf: url, encoding: .utf8)
-                print(string)
-            }catch {
-                print("error")
-            }
-            
-            
-        }else {
-            print( Bundle.main.bundleURL)
-        }
-       
+        let imageView = UIImageView(frame: view.bounds.insetBy(dx: 20, dy: 100))
         
-        //先把excel的文件另存为csv格式的文件，然后在另存为txt格式的
-//        let dataBase = DataBaseManager()
-//        //读取txt文件
-//        let path = Bundle.main.path(forResource: "openTimes", ofType: "txt")
-//        let cfEnc = CFStringEncodings.GB_18030_2000
-//        let enc = CFStringConvertEncodingToNSStringEncoding(CFStringEncoding(cfEnc.rawValue))
-//        do {
-//            let ret = try NSString.init(contentsOfFile: path!, encoding: enc)
-//            let datas = ret .components(separatedBy:"\r")//\r代表换行，通过换行分割成一条条的数据，放入数组
-//            for i in datas{
-//                let arrs =  i .components(separatedBy:",")
-//                openTimArr.append(arrs)
+        imageView.image = UIImage(named: "facial_face")
+//        imageView.contentMode = .scaleAspectFit
+        view.addSubview(imageView)
+        
+        let detectiveTool = FacialDetectiveTool()
+        detectiveTool.detectFaceLandmarksInImage(imageView.image!) { (featureData) in
+            DispatchQueue.main.async {
+                let path = UIBezierPath()
+                for (boundingBox, landmark) in featureData {
+                    if let face = landmark.faceContour {
+                        let points = detectiveTool.getConvertedPoints(face, boundingBox: boundingBox, imageFrame: imageView.frame)
+                        
+                        path.move(to: points.first!)
+                        for point in points {
+                            path.addLine(to: point)
+                        }
+                    }
+                }
+                
+                let shape = CAShapeLayer()
+                shape.path = path.cgPath
+                shape.strokeColor = UIColor.red.cgColor
+                shape.fillColor = UIColor.clear.cgColor
+                imageView.layer.addSublayer(shape)
+            }
+        }
+        
+//        let ciToUITransform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+//        print(CGRect(x: 5, y: 0, width: 10, height: 20).applying(ciToUITransform))
+//
+//        let faces =  detectFacesOnImageView(imageView)
+//        for face in result {
+//            let path = UIBezierPath()
+//            let points = face.normalizedPoints
+//            path.move(to: points.first!)
+//            for point in points {
+//                path.addLine(to: point)
 //            }
-//            openTimArr.removeFirst()
-//            for i in openTimArr{
-//                let openDict = ["lotterycode":i[0],"issue_no":i[1],"single_letter":i[2],"open_time":i[3]]
-//                //插入数据库
-//                dataBase.insert(tableName: "tc_lottery_open_time", dataDic: openDict as NSDictionary)
-//            }
-//        }catch let error as NSError {
-//            QL1(error)
+//
+//            let shape = CAShapeLayer()
+//            shape.path = path.cgPath
+//            shape.strokeColor = UIColor.red.cgColor
+//            imageView.layer.addSublayer(shape)
+//
 //        }
     }
     
+    func detectFacesOnImage(_ image: UIImage?) -> [CIFaceFeature] {
+        guard image != nil, let cIImage = CIImage(image: image!) else {
+            print("Wrong image type")
+            return []
+        }
 
+        // detect
+        let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy : CIDetectorAccuracyLow])
+        let faces = faceDetector?.features(in: cIImage) as? [CIFaceFeature]
+        return faces ?? []
+    }
+    
+    func detectFacesOnImageView(_ imageView: UIImageView) -> [CGRect] {
+        guard imageView.image != nil, let cIImage = CIImage(image: imageView.image!) else {
+            print("Wrong image type")
+            return []
+        }
+        
+        // detect
+        let faceDetector = CIDetector(ofType: CIDetectorTypeFace, context: nil, options: [CIDetectorAccuracy : CIDetectorAccuracyLow])
+        let faces = faceDetector?.features(in: cIImage) as? [CIFaceFeature]
+        if faces == nil || faces!.isEmpty {
+            return []
+        }
+        
+        // get real frame
+        let ciToUITransform = CGAffineTransform(scaleX: 0.5, y: 0.5)
+        
+        // convert
+        let imageSize = imageView.image!.size
+        let imageViewSize = imageView.bounds.size
+        
+        let scale = min(imageViewSize.width / imageSize.width, imageViewSize.height / imageSize.height)
+        let offsetX = (imageViewSize.width - imageSize.width * scale) * 0.5
+        let offsetY = (imageViewSize.height - imageSize.height * scale) * 0.5
+        let aspectFitTransform = CGAffineTransform(scaleX: scale, y: scale).translatedBy(x: offsetX, y: offsetY)
+        
+        var faceFrames = [CGRect]()
+        for face in faces! {
+            var faceBounds = face.bounds.applying(ciToUITransform)
+            faceBounds = faceBounds.applying(aspectFitTransform)
+            faceFrames.append(faceBounds)
+        }
+        
+        return faceFrames
+       
+    }
+    
+    func covertFrame(_ frame: CGRect, fromSuper: CGRect) {
+        
+    }
+    
+    
     @IBAction func actionForButton(_ sender: Any) {
 //        let vc = AbookHintViewController()
 //        vc.modalPresentationStyle = .overCurrentContext
@@ -70,3 +132,36 @@ class ViewController: UIViewController {
     
 }
 
+// methods tested
+extension ViewController {
+    //        getCSVDataFromFile("时间安排+清单+当天工作安排")
+    func getCSVDataFromFile(_ fileName: String?) {
+        if let fileUrl = Bundle.main.url(forResource: fileName, withExtension: "csv") {
+            do {
+                let dataString = try String(contentsOf: fileUrl, encoding: .utf8)
+                let lineBreakArray = dataString.components(separatedBy: "\r") // by return
+                var eachDetail = [[String]]()
+                for line in lineBreakArray {
+                    let oneData = line.components(separatedBy: ",")
+                    eachDetail.append(oneData)
+                    print(oneData)
+                }
+                
+                //            openTimArr.removeFirst()
+                //            for i in openTimArr{
+                //                let openDict = ["lotterycode":i[0],"issue_no":i[1],"single_letter":i[2],"open_time":i[3]]
+                //                //插入数据库
+                //                dataBase.insert(tableName: "tc_lottery_open_time", dataDic: openDict as NSDictionary)
+                //            }
+                //        }catch let error as NSError {
+                //            QL1(error)
+                //        }
+            }catch {
+                print("error")
+            }
+        }else {
+            print("file not exist in bundle")
+        }
+    }
+
+}
