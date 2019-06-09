@@ -10,6 +10,35 @@ import Foundation
 import FMDB
 //import CommonCryptor
 
+func convertArrayToEncodedString(_ array: [Any]) -> String {
+    if array.isEmpty {
+        return ""
+    }
+    
+    var result = ""
+    do {
+        let data = try JSONSerialization.data(withJSONObject: array, options: .prettyPrinted)
+        result = data.base64EncodedString()
+    }catch {
+        print("can not convert")
+    }
+
+    return result
+}
+
+func getArrayFromEncodedString(_ encoded: String) -> [Any] {
+    var array = [Any]()
+    if let data = Data(base64Encoded: encoded) {
+        do {
+            array = try JSONSerialization.jsonObject(with: data, options: .allowFragments) as! [Any]
+        }catch {
+            
+        }
+    }
+    
+    return array
+}
+
 class LocalDatabase {
     // singleton
     static let sharedDatabase = LocalDatabase()
@@ -19,229 +48,192 @@ class LocalDatabase {
         return _database
     }
     fileprivate var _database: FMDatabase!
-    fileprivate let primaryKey = "key"
-    fileprivate let foreignKeys = "PRAGMA foreign_keys"
+    fileprivate let primaryKey = "Key"
     
     init() {
         let fileName = "AnnielyticxLocalDB.db"
         let localPath  = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!.appending("/\(fileName)")
-        
-        // copy
-        if let basePath = Bundle.main.path(forResource: fileName, ofType: nil) {
-            let fileManager = FileManager()
-            if !fileManager.fileExists(atPath: localPath) {
-                do {
-                    try fileManager.copyItem(atPath: basePath, toPath: localPath)
-                }catch {
-                    print("failed to copy: \(error.localizedDescription)")
-                }
-            }
-        }
+        print(localPath)
         
         _database = FMDatabase(path: localPath)
+        
+        // create
+        // application
+        if _database.open() {
+            
+            // homepage
+            createTableWithName(ApplicationObjModel.tableName, columns: ApplicationObjModel.localColumns)
+            
+            createTableWithName(RiskTypeObjModel.tableName, columns: RiskTypeObjModel.localColumns)
+            createTableWithName(MetricGroupObjModel.tableName, columns: MetricGroupObjModel.localColumns)
+            createTableWithName(MetricObjModel.tableName, columns: MetricObjModel.localColumns)
+            createTableWithName(RiskObjModel.tableName, columns: RiskObjModel.localColumns)
+            
+            // login
+            createTableWithName(UserObjModel.tableName, columns: UserObjModel.localColumns)
+            createTableWithName(PseudoUserObjModel.tableName, columns: PseudoUserObjModel.localColumns)
+            createTableWithName(UserGroupObjModel.tableName, columns: UserGroupObjModel.localColumns)
+            
+            // get card
+            createTableWithName(CardInfoObjModel.tableName, columns: CardInfoObjModel.localColumns)
+            createTableWithName(RiskFactorObjModel.tableName, columns: RiskFactorObjModel.localColumns)
+            createTableWithName(CardOptionObjModel.tableName, columns: CardOptionObjModel.localColumns)
+            createTableWithName(MatchObjModel.tableName, columns: MatchObjModel.localColumns)
+            createTableWithName(ClassifierObjModel.tableName, columns: ClassifierObjModel.localColumns)
+            createTableWithName(ClassificationObjModel.tableName, columns: ClassificationObjModel.localColumns)
+            createTableWithName(RangeGroupObjModel.tableName, columns: RangeGroupObjModel.localColumns)
+            createTableWithName(RangeObjModel.tableName, columns: RangeObjModel.localColumns)
+            
+            // measurement
+            createTableWithName(MeasurementObjModel.tableName, columns: MeasurementObjModel.localColumns)
+            
+            // fulfillment
+            createTableWithName(FulfilledActionMatchObjModel.tableName, columns: FulfilledActionMatchObjModel.localColumns)
+            
+            _database.close()
+        }
     }
-   
-//    fileprivate func enableForeignKeys() -> Int32 {
-//        var enabled: Int32 = 0
-//        do {
-//            let resultSet = try _database.executeQuery(foreignKeys, values: nil)
-//            if resultSet.next() {
-//                enabled = resultSet.int(forColumnIndex: 0)
-//            }
-//            resultSet.close()
-//        }catch {
-//            print(error.localizedDescription)
-//        }
-//
-//        return enabled
-//    }
 }
 
-// operation of tables
+
+// SQL strings
 extension LocalDatabase {
-    // all are created
-//    func createTableWithName(_ tableName: String, model: AnyObject) {
-//        if !database.tableExists(tableName) {
-//            do {
-//                let modelNames = getPropertyNames(model)
-//                var sqlString = "create table if not exists \(tableName) (\(primaryKey) text primary key,"
-//                for name in modelNames {
-//                    let value = model.value(forKey: name)
-//
-//                    if stringConvertable(value) && name != primaryKey {
-//                        sqlString.append("\(name) text,")
-//                    }
-//                }
-//                sqlString.removeLast()
-//                sqlString.append(")")
-//
-//                try database.executeUpdate(sqlString, values: nil)
-//
-//            } catch {
-//                print("---failed: \(error.localizedDescription)")
-//            }
-//        }else {
-//            print("already created")
-//        }
-//    }
-    
-    func stringConvertable(_ value: Any?) -> Bool {
-//        print(CFCopyTypeIDDescription(CFGetTypeID(value as CFTypeRef))) // CFXXXX, not fine with optional type
-//        if (value is [String]) {
-//            print("[string]")
-//        }else if (value is [String : String].Type) {
-//            print("dictionary")
-//        }else if (value is [URL]) {
-//            print("url array")
-//        }else if (value is String) {
-//            print("string")
-//        }else if(value is URL) {
-//            print("url")
-//        }
-        
-        // all take as String....
-//        else if (value is String?) {
-//            print("optional string")
-//        }else if (value is URL?) {
-//            print("url")
-//        }
-//
-        
-        
-        if (value is [String]) || (value is [String : String]) || (value is [URL])
-            || (value is String) || (value is URL) || (value is String?) || (value is URL?) {
+    func createTableWithName(_ tableName: String, columns: [String: String]) {
+        if !database.tableExists(tableName) {
+            var sqlString = "create table if not exists \(tableName) (\(primaryKey) text primary key,"
+            for (key, value) in columns {
+                if key == primaryKey {
+                    continue
+                }
+                sqlString.append("\(key) \(value),")
+            }
+            sqlString.removeLast()
+            sqlString.append(")")
             
-            
-//              || (value is Int) || (value is NSNumber) || (value is Float) || (value is Int?) || (value is NSNumber?) || (value is Float?)
-            return true
-        }
-        
-        return false
-    }
-    
-    
-    // add or change
-    func insertModelArray(_ modelArray: [AnyObject], toTable tableName: String) {
-        guard database.tableExists(tableName) else {
-            print("table does not exit")
-            return
-        }
-        
-        // insert or replace one by one
-        for model in modelArray {
-            var sqlString = "insert or replace into \(tableName) ("
-            var valueString = ""
-            for name in getPropertyNames(model) {
-                // not nil
-                if let value = model.value(forKey: name) {
-                    if stringConvertable(value) {
-                        sqlString.append("\(name),")
-                        
-                        // value saved as string
-                        var valueS = ""
-                        if JSONSerialization.isValidJSONObject(value) {
-                            // [String] || [String: [String]]
-                            do {
-                                let jsonData = try JSONSerialization.data(withJSONObject: value, options: [.prettyPrinted])
-                                valueS = String(data: jsonData, encoding: .utf8)!
-                            }catch {
-                                print("---error: \(error.localizedDescription)")
-                            }
-                        }else {
-                            valueS = String(describing: value)
-                        }
-                        
-                        // in case there is a "'" in this vauleS
-                        valueString.append("'\(convertToBase64(valueS))',")
+            do {
+                try database.executeUpdate(sqlString, values: nil)
+                
+            } catch {
+                print("--- add failed: \(error.localizedDescription)")
+            }
+        }else {
+           // column is changed?
+            for (name, type) in columns {
+                if !database.columnExists(name, inTableWithName: tableName) {
+                    // added colum
+                    let alterString = "alter table \(tableName) add \(name) \(type)"
+                    do {
+                        try database.executeUpdate(alterString, values: nil)
+                    }catch {
+                        print("alter failed: \(error.localizedDescription)")
                     }
                 }
             }
-            
-            sqlString.removeLast()
-            valueString.removeLast()
-            
-            sqlString.append(") values (\(valueString));")
-
-            database.executeStatements(sqlString)
         }
     }
+
     
-    
-//    func addColumn(_ columnName: String, inTable tableName: String) {
-//        if database.tableExists(tableName) && !database.columnExists(columnName, inTableWithName: tableName) {
-//            let sql = "alter table \(tableName) add \(columnName) text"
-//            do {
-//                try database.executeUpdate(sql, values: nil)
-//            }catch {
-//                print(error.localizedDescription)
-//            }
-//        }
-//    }
-    
-    func addValue(_ value: String, forColumn columnName: String, key: String, inTable tableName: String) {
-        if database.tableExists(tableName) {
-        let sqlString = "insert or replace into \(tableName) (\(primaryKey), \(columnName)) values(\(convertToBase64(key)), \(convertToBase64(value)));"
-        database.executeStatements(sqlString)
+    func insertModelDic(_ dic: [String: Any], tableName: String) {
+        if dic.isEmpty {
+            print("no data to add")
+            return
         }
+        
+        guard database.tableExists(tableName) else {
+            print("table does not exist")
+            return
+        }
+       
+        var keyString = ""
+        var valueString = ""
+        for (key, value) in dic {
+            if database.columnExists(key, inTableWithName: tableName) {
+                keyString.append("\(key),")
+                
+                if value is String {
+                    var valueS = value as! String
+                    if valueS.contains("'") {
+                        let indexes = valueS.indexes(of: "'")
+                        for index in indexes {
+                           valueS.insert("'", at: index)
+                        }
+                    }
+                    
+                    valueString.append("'\(valueS)',")
+                }else {
+                    valueString.append("\(value),")
+                }
+            }
+        }
+        
+        keyString.removeLast()
+        valueString.removeLast()
+        
+        let sqlString = "insert or replace into \(tableName) (\(keyString)) values (\(valueString));"
+
+        database.executeStatements(sqlString)
     }
     
     // search
-    // key
-    func getModelsWithKey(_ key: String, value: String, model: AnyObject, inTable tableName: String) -> [[String: String]] {
-        var resultArray = [[String: String]]()
-        guard database.tableExists(tableName) else {
-            print("table does not exit")
-            return resultArray
-        }
-        
-        let sqlString = "select * from \(tableName) where \(key)='\(convertToBase64(value))'"
-        do {
-            let resultSet = try database.executeQuery(sqlString, values: nil)
-            resultArray = getResultFromResultSet(resultSet, model: model)
-        }catch {
-            print("---failed: \(error.localizedDescription)")
-        }
-        
-        return resultArray
-    }
-    
-    func getModelsWithDic(_ dic: [String: String], model: AnyObject, inTable tableName: String) -> [[String: String]] {
-        var resultArray = [[String: String]]()
-        guard database.tableExists(tableName) else {
-            print("table does not exit")
-            return resultArray
-        }
-        
-        var sqlString = "select * from \(tableName) where "
-        for (key, value) in dic {
-            sqlString.append("\(key)='\(convertToBase64(value))' and ")
-        }
-        
-        let startIndex = sqlString.index(sqlString.endIndex, offsetBy: -5)
-        sqlString.removeSubrange(startIndex..<sqlString.endIndex)
-        
-        do {
-            let resultSet = try database.executeQuery(sqlString, values: nil)
-            resultArray = getResultFromResultSet(resultSet, model: model)
-        }catch {
-            print("---failed: \(error.localizedDescription)")
+    fileprivate func getResultFromResultSet(_ resultSet: FMResultSet, inTable tableName: String) -> [[String: Any]] {
+        var resultArray = [[String: Any]]()
+        while resultSet.next() {
+            var resultDic = [String: Any]()
+            let total = resultSet.columnCount
+            for index in 0..<total {
+                if let name = resultSet.columnName(for: index) {
+                    if let value = resultSet.object(forColumn: name) {
+                        resultDic[name] = value
+                    }
+                }
+            }
+            resultArray.append(resultDic)
         }
         
         return resultArray
     }
     
-    
-    func getAllModels(_ model: AnyObject, tableName: String) -> [[String: String]] {
-        var resultArray = [[String: String]]()
+    func getAllModels(_ tableName: String) -> [[String: Any]] {
         guard database.tableExists(tableName) else {
             print("\(tableName) does not exist")
-            return resultArray
+            return []
         }
         
+        var resultArray = [[String: Any]]()
         let sqlString = "select * from \(tableName)"
         do {
             let fetch = try database.executeQuery(sqlString, values: nil)
-            resultArray = getResultFromResultSet(fetch, model: model)
+            resultArray = getResultFromResultSet(fetch, inTable: tableName)
+        }catch {
+            print(error.localizedDescription)
+        }
+        
+        return resultArray
+    }
+    
+    
+    // key
+    func getModelDicWithPrimaryKey(_ key: String, inTable tableName: String) -> [String: Any] {
+        return getModelDicsWithColumnName(primaryKey, value: key, inTable: tableName).first ?? [:]
+    }
+    
+    func getModelDicsWithColumnName(_ name: String, value: Any, inTable tableName: String) -> [[String: Any]] {
+        guard database.tableExists(tableName) && database.columnExists(name, inTableWithName: tableName) else {
+            print("table does not exist")
+            return []
+        }
+        
+        var resultArray = [[String: Any]]()
+        var sqlString = ""
+        if value is String {
+            sqlString  = "select * from \(tableName) where \(name)='\(value)'"
+        }else {
+            sqlString  = "select * from \(tableName) where \(name)=\(value)"
+        }
+        
+        do {
+            let fetch = try database.executeQuery(sqlString, values: nil)
+            resultArray = getResultFromResultSet(fetch, inTable: tableName)
         }catch {
             print(error.localizedDescription)
         }
@@ -250,75 +242,42 @@ extension LocalDatabase {
     }
     
     
-    func setupModel(_ model: AnyObject, resultDic: [String: String]) {
-        for (key, value) in resultDic {
-            let modelValue = model.value(forKey: key)
-            // JSON
-            if JSONSerialization.isValidJSONObject(modelValue) {
-                do {
-                    let jsonData = value.data(using: .utf8)!
-                    let json = try JSONSerialization.jsonObject(with: jsonData, options: [.allowFragments])
-                    model.setValue(json, forKey: key)
-                }catch {
-                    print(error.localizedDescription)
-                }
-            }else if value.hasPrefix("http") {
-                    model.setValue(URL(string: value), forKey: key)
+    func getModelDicsWithCondition(_ condition: [String : Any], inTable tableName: String) -> [[String: Any]] {
+        guard database.tableExists(tableName) else {
+            print("table does not exist")
+            return []
+        }
+        
+        var resultArray = [[String: Any]]()
+        var sqlString = "select * from \(tableName) where "
+        for (name, value) in condition {
+            if value is String {
+                sqlString.append("\(name)='\(value)' and ")
             }else {
-                model.setValue(value, forKey: key)
+                sqlString.append("\(name)=\(value) and ")
             }
         }
-    }
-    
-//    func convertInfoDic(_ infoString: String) -> [String : Any] {
-//
-//    }
-    
-    fileprivate func getResultFromResultSet(_ resultSet: FMResultSet, model: AnyObject) -> [[String: String]] {
-        var resultArray = [[String: String]]()
-        while resultSet.next() {
-            var resultDic = [String: String]()
-            for name in getPropertyNames(model) {
-                if let value = resultSet.object(forColumn: name) {
-                    if value is String {
-                        let valueS = convertBase64String(value as! String)
-                        resultDic[name] = valueS
-                    }
-                }
-            }
-            
-            if resultDic.count != 0 && resultDic[primaryKey] != nil && resultDic[primaryKey] != "" {
-                resultArray.append(resultDic)
-            }
+        sqlString.removeLast(5)
+
+        do {
+            let fetch = try database.executeQuery(sqlString, values: nil)
+            resultArray = getResultFromResultSet(fetch, inTable: tableName)
+        }catch {
+            print(error.localizedDescription)
         }
         
         return resultArray
     }
+
     
     // delete
-    func dropModel(_ model: AnyObject, inTable tableName: String) {
-        // "delete from \(tableName) where"
+    func deleteByKey(_ key: String, inTable tableName: String) {
+        let sqlString = "delete from \(tableName) where \(primaryKey)='\(key)'"
+        database.executeStatements(sqlString)
     }
     
-    func dropTable(_ tableName: String) {
-        // "drop table \(tableName)"
-    }
-    
-    func deleteDataInTable(_ tableName: String) {
-        // "delete from \(tableName)"
-    }
-    
-    
-    fileprivate func convertToBase64(_ string: String) -> String {
-        return string.data(using: .utf8)?.base64EncodedString() ?? "" // base64 string
-    }
-    
-    fileprivate func convertBase64String(_ base64: String) -> String {
-        if let tData = Data(base64Encoded: base64) {
-            return String(data: tData, encoding: .utf8) ?? "" // string
-        }else {
-            return ""
-        }
-        
+    func deleteByColumn(_ columnName: String, value: String, inTable tableName: String) {
+        let sqlString = "delete from \(tableName) where \(columnName)='\(value)'"
+        database.executeStatements(sqlString)
     }
 }

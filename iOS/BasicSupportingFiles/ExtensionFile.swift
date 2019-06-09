@@ -32,6 +32,26 @@ extension CGRect {
         self.origin = CGPoint(x: originX, y: originY)
         self.size = CGSize(width: width, height: height)
     }
+    
+    func getAspectFitSize(_ expectedRatio: CGFloat) -> CGSize {
+        let ratio = width / height
+        if ratio > expectedRatio {
+            return CGSize(width: height * expectedRatio, height: height)
+        }else {
+            return CGSize(width: width, height: width / expectedRatio)
+        }
+    }
+    
+    // points
+    var bottomLeftPoint: CGPoint {
+        return CGPoint(x: minX, y: maxY)
+    }
+    var bottomRightPoint: CGPoint {
+        return CGPoint(x: maxX, y: maxY)
+    }
+    var topRightPoint: CGPoint {
+        return CGPoint(x: maxX, y: minY)
+    }
 }
 
 // MARK: ------------ UIColor
@@ -82,21 +102,11 @@ extension CALayer {
 
 // MARK: ----------- UIView --------
 extension UIView {
-    var navigation: UINavigationController! {
-        var nextView = self.superview
-        while nextView != nil {
-            if let responder = nextView!.next {
-                if responder.isKind(of: UINavigationController.self) {
-                    return responder as? UINavigationController
-                }
-                nextView = nextView!.superview
-            }
-        }
-        
-        return nil
+    weak var navigation: UINavigationController! {
+        return viewController.navigationController
     }
     
-    var viewController: UIViewController! {
+    weak var viewController: UIViewController! {
         var nextView = self.superview
         while nextView != nil {
             if let responder = nextView!.next {
@@ -136,14 +146,6 @@ extension UIView {
         }
         
         aString.draw(in: cRect)
-    }
-    
-    func getFanPath(_ radius: CGFloat, innerRadius: CGFloat, vertex: CGPoint, sAngle: CGFloat, eAngle: CGFloat, clockwise: Bool) -> UIBezierPath {
-        let path = UIBezierPath(arcCenter: vertex, radius: radius, startAngle: eAngle, endAngle: sAngle, clockwise: !clockwise)
-        path.addArc(withCenter: vertex, radius: innerRadius, startAngle: sAngle, endAngle: eAngle, clockwise: clockwise)
-        path.close()
-        
-        return path
     }
     
     func addBorder(_ color: UIColor!, cornerRadius: CGFloat, borderWidth: CGFloat, masksToBounds: Bool) {
@@ -317,6 +319,16 @@ extension UIViewController {
         
         backButton.setImage(backImage, for: .normal)
         return UIBarButtonItem(customView: backButton)
+    }
+    
+    weak var overCurrentPresentController: UIViewController? {
+        if (navigationController != nil) {
+            let appDelegate = UIApplication.shared.delegate as! AppDelegate
+            let rootViewController = appDelegate.window?.rootViewController
+            return rootViewController
+        }else {
+            return self
+        }
     }
     
     // present a viewController, if there is a tabbar     
