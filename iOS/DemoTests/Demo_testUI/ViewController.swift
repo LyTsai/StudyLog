@@ -13,37 +13,12 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        let image =  UIImage(named: "faceTest")!
-        let imageView = UIImageView(frame: view.bounds.insetBy(dx: 20, dy: 100))
-        
-        imageView.image = image
-        imageView.contentMode = .scaleAspectFit
-        view.addSubview(imageView)
-        
-        let imageFrame = CGRect(center: CGPoint(x: imageView.bounds.midX, y: imageView.bounds.midY), width: imageView.frame.width, height: imageView.frame.width / (image.size.width / image.size.height))
-        
-        let detectiveTool = FacialDetectiveTool()
-        detectiveTool.detectFaceLandmarksInImage(image) { (featureData) in
-            DispatchQueue.main.async {
-                let path = UIBezierPath()
-                for (boundingBox, landmark) in featureData {
-                    if let face = landmark.allPoints {
-                        let points = detectiveTool.getConvertedPoints( face, boundingBox: boundingBox, imageDisplayFrame: imageFrame)
-                        
-                        path.move(to: points.first!)
-                        for point in points {
-                            path.addLine(to: point)
-                        }
-                    }
-                }
-                
-                let shape = CAShapeLayer()
-                shape.path = path.cgPath
-                shape.strokeColor = UIColor.red.cgColor
-                shape.fillColor = UIColor.clear.cgColor
-                imageView.layer.addSublayer(shape)
-            }
+     
+        let urlString = "https://vms-api-test.saicmobility.com/dz-h5/#/rule"
+        if let url = URL(string: urlString) {
+            print("it's fine")
+        }else {
+            print("can not get url")
         }
     }
     
