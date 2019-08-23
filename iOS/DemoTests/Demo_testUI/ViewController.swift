@@ -14,12 +14,6 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        let urlString = "https://vms-api-test.saicmobility.com/dz-h5/#/rule"
-        if let url = URL(string: urlString) {
-            print("it's fine")
-        }else {
-            print("can not get url")
-        }
     }
     
    
