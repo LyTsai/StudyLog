@@ -8,23 +8,21 @@
 
 /* Begin PBXBuildFile section */
 		883CED2422A0FC84007B56FC /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CED2322A0FC84007B56FC /* MathTool.swift */; };
+		8846EC81230A42AF008E92E4 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8846EC80230A42AF008E92E4 /* CustomInputView.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
-		8853A94E205BC79800A488BC /* AnimationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8853A94D205BC79800A488BC /* AnimationView.swift */; };
 		887BC78E2068E4BD00C1019E /* Temp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887BC78D2068E4BD00C1019E /* Temp.swift */; };
 		8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817D20E47F9F00A71EAC /* DefAndMethods.swift */; };
 		8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817E20E47F9F00A71EAC /* ExtensionFile.swift */; };
-		88E0D87C22A76472006CEC4A /* FacialDetectiveTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E0D87A22A76472006CEC4A /* FacialDetectiveTool.swift */; };
-		88E0D87D22A76472006CEC4A /* FacialLandmarksView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E0D87B22A76472006CEC4A /* FacialLandmarksView.swift */; };
-		88E0D88822A765B8006CEC4A /* FacialLandmarkModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E0D88622A765B8006CEC4A /* FacialLandmarkModel.swift */; };
-		88E0D88B22A765E8006CEC4A /* FacialDetectiveResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E0D88A22A765E8006CEC4A /* FacialDetectiveResult.swift */; };
+		88F1B10F22C351C000BAB274 /* TestXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F1B10E22C351C000BAB274 /* TestXib.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		883CED2322A0FC84007B56FC /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
+		8846EC80230A42AF008E92E4 /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomInputView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/FacialRejuvenationByDesign/BeautiPhi/ProjectUtilities/CustomViews/CustomInputView.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8850314B1E8E36F6009B21B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -32,15 +30,11 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		8853A94D205BC79800A488BC /* AnimationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnimationView.swift; sourceTree = "<group>"; };
 		887BC78D2068E4BD00C1019E /* Temp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Temp.swift; sourceTree = "<group>"; };
 		8893817D20E47F9F00A71EAC /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
 		8893817E20E47F9F00A71EAC /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 		8893817F20E47F9F00A71EAC /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
-		88E0D87A22A76472006CEC4A /* FacialDetectiveTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FacialDetectiveTool.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/AnnielyticX/AnnielyticX/Game/FacialDetective/FacialDetectiveTool.swift; sourceTree = "<group>"; };
-		88E0D87B22A76472006CEC4A /* FacialLandmarksView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FacialLandmarksView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/AnnielyticX/AnnielyticX/Game/FacialDetective/FacialLandmarksView.swift; sourceTree = "<group>"; };
-		88E0D88622A765B8006CEC4A /* FacialLandmarkModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FacialLandmarkModel.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/AnnielyticX/AnnielyticX/Game/FacialDetective/FacialLandmarkModel.swift; sourceTree = "<group>"; };
-		88E0D88A22A765E8006CEC4A /* FacialDetectiveResult.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FacialDetectiveResult.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/AnnielyticX/AnnielyticX/Game/FacialDetective/FacialDetectiveResult.swift; sourceTree = "<group>"; };
+		88F1B10E22C351C000BAB274 /* TestXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestXib.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +51,7 @@
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				88E0D87A22A76472006CEC4A /* FacialDetectiveTool.swift */,
-				88E0D87B22A76472006CEC4A /* FacialLandmarksView.swift */,
-				88E0D88A22A765E8006CEC4A /* FacialDetectiveResult.swift */,
-				88E0D88622A765B8006CEC4A /* FacialLandmarkModel.swift */,
-				8853A94D205BC79800A488BC /* AnimationView.swift */,
+				8846EC80230A42AF008E92E4 /* CustomInputView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -87,7 +77,7 @@
 			children = (
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
-				887BC78D2068E4BD00C1019E /* Temp.swift */,
+				88F1B10E22C351C000BAB274 /* TestXib.xib */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
 			path = Demo_testUI;
@@ -96,6 +86,7 @@
 		8893817C20E47F9F00A71EAC /* BasicSupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				887BC78D2068E4BD00C1019E /* Temp.swift */,
 				883CED2322A0FC84007B56FC /* MathTool.swift */,
 				8893817D20E47F9F00A71EAC /* DefAndMethods.swift */,
 				8893817E20E47F9F00A71EAC /* ExtensionFile.swift */,
@@ -181,6 +172,7 @@
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
+				88F1B10F22C351C000BAB274 /* TestXib.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -193,15 +185,11 @@
 			files = (
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
-				88E0D88B22A765E8006CEC4A /* FacialDetectiveResult.swift in Sources */,
 				883CED2422A0FC84007B56FC /* MathTool.swift in Sources */,
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
-				88E0D88822A765B8006CEC4A /* FacialLandmarkModel.swift in Sources */,
-				8853A94E205BC79800A488BC /* AnimationView.swift in Sources */,
+				8846EC81230A42AF008E92E4 /* CustomInputView.swift in Sources */,
 				887BC78E2068E4BD00C1019E /* Temp.swift in Sources */,
-				88E0D87C22A76472006CEC4A /* FacialDetectiveTool.swift in Sources */,
-				88E0D87D22A76472006CEC4A /* FacialLandmarksView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
