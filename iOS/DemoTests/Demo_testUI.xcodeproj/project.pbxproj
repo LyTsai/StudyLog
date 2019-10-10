@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		883CED2422A0FC84007B56FC /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CED2322A0FC84007B56FC /* MathTool.swift */; };
 		883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D5546233B39D70004CC11 /* CustomTabbarController.swift */; };
+		883E583F234C5A48000BF403 /* SimpleCoverflowDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883E583E234C5A48000BF403 /* SimpleCoverflowDisplayView.swift */; };
 		8846EC81230A42AF008E92E4 /* CustomInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8846EC80230A42AF008E92E4 /* CustomInputView.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
@@ -24,6 +25,7 @@
 /* Begin PBXFileReference section */
 		883CED2322A0FC84007B56FC /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
 		883D5546233B39D70004CC11 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
+		883E583E234C5A48000BF403 /* SimpleCoverflowDisplayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleCoverflowDisplayView.swift; sourceTree = "<group>"; };
 		8846EC80230A42AF008E92E4 /* CustomInputView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CustomInputView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/FacialRejuvenationByDesign/BeautiPhi/ProjectUtilities/CustomViews/CustomInputView.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -80,6 +82,7 @@
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
 				883D5546233B39D70004CC11 /* CustomTabbarController.swift */,
+				883E583E234C5A48000BF403 /* SimpleCoverflowDisplayView.swift */,
 				88F1B10E22C351C000BAB274 /* TestXib.xib */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
@@ -189,6 +192,7 @@
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */,
+				883E583F234C5A48000BF403 /* SimpleCoverflowDisplayView.swift in Sources */,
 				883CED2422A0FC84007B56FC /* MathTool.swift in Sources */,
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
