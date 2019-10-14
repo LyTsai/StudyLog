@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="AddPeopleOrGroupView" customModule="AnnielyticX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8EM-Xn-qUA">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="1"/>
+                    <color key="backgroundColor" red="0.83529411764705885" green="0.93725490196078431" blue="0.77647058823529413" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Yyk-fv-JfE">
+                    <rect key="frame" x="28.5" y="8" width="318.5" height="52.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="Yyk-fv-JfE" secondAttribute="height" multiplier="345:57" id="BTc-gA-RK6"/>
+                    </constraints>
+                    <state key="normal" backgroundImage="addPeopleBack"/>
+                    <connections>
+                        <action selector="addNew:" destination="iN0-l3-epB" eventType="touchUpInside" id="Jvi-fa-8og"/>
+                    </connections>
+                </button>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2YJ-tG-grB">
+                    <rect key="frame" x="12.5" y="81" width="350.5" height="1"/>
+                    <color key="backgroundColor" red="0.83529411760000005" green="0.93725490199999995" blue="0.77647058820000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                </view>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="icon_choosePlayer" translatesAutoresizingMaskIntoConstraints="NO" id="yU7-5d-E77">
+                    <rect key="frame" x="130.5" y="71.5" width="114" height="18.5"/>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="yU7-5d-E77" secondAttribute="height" multiplier="135:22" id="laT-fN-ICm"/>
+                    </constraints>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Group" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FfV-zh-BFS">
+                    <rect key="frame" x="131" y="71" width="114" height="18.5"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <fontDescription key="fontDescription" type="system" weight="medium" pointSize="12"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+            <constraints>
+                <constraint firstItem="yU7-5d-E77" firstAttribute="centerX" secondItem="Yyk-fv-JfE" secondAttribute="centerX" id="0xW-E3-YAU"/>
+                <constraint firstItem="2YJ-tG-grB" firstAttribute="centerX" secondItem="Yyk-fv-JfE" secondAttribute="centerX" id="4ug-nX-HC4"/>
+                <constraint firstItem="8EM-Xn-qUA" firstAttribute="leading" secondItem="vUN-kp-3ea" secondAttribute="leading" id="9T9-H8-FkV"/>
+                <constraint firstItem="FfV-zh-BFS" firstAttribute="width" secondItem="yU7-5d-E77" secondAttribute="width" id="EpH-KO-cGZ"/>
+                <constraint firstItem="yU7-5d-E77" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.21" id="LZT-j7-l4U"/>
+                <constraint firstItem="Yyk-fv-JfE" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="NYq-5o-hOz"/>
+                <constraint firstItem="FfV-zh-BFS" firstAttribute="centerX" secondItem="Yyk-fv-JfE" secondAttribute="centerX" id="RFl-Nc-jVb"/>
+                <constraint firstItem="2YJ-tG-grB" firstAttribute="width" secondItem="Yyk-fv-JfE" secondAttribute="width" multiplier="1.1" id="SOF-IU-LJr"/>
+                <constraint firstItem="yU7-5d-E77" firstAttribute="bottom" secondItem="vUN-kp-3ea" secondAttribute="bottom" id="U90-2w-Lat"/>
+                <constraint firstItem="8EM-Xn-qUA" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.01" id="XKk-vt-dsx"/>
+                <constraint firstItem="FfV-zh-BFS" firstAttribute="centerY" secondItem="yU7-5d-E77" secondAttribute="centerY" id="aXH-XS-5OI"/>
+                <constraint firstItem="Yyk-fv-JfE" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.85" id="cVn-i8-SVg"/>
+                <constraint firstItem="2YJ-tG-grB" firstAttribute="height" secondItem="8EM-Xn-qUA" secondAttribute="height" id="cW2-sN-erO"/>
+                <constraint firstItem="2YJ-tG-grB" firstAttribute="centerY" secondItem="yU7-5d-E77" secondAttribute="centerY" id="dDC-6c-duq"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="trailing" secondItem="8EM-Xn-qUA" secondAttribute="trailing" id="jQU-jQ-XeC"/>
+                <constraint firstItem="8EM-Xn-qUA" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="n9i-qR-IYT"/>
+                <constraint firstItem="Yyk-fv-JfE" firstAttribute="top" secondItem="8EM-Xn-qUA" secondAttribute="bottom" multiplier="8" id="tOB-2a-4Zh"/>
+                <constraint firstItem="FfV-zh-BFS" firstAttribute="height" secondItem="yU7-5d-E77" secondAttribute="height" id="y2z-oT-74P"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="addNewButton" destination="Yyk-fv-JfE" id="S7E-Io-LYr"/>
+                <outlet property="groupLabel" destination="FfV-zh-BFS" id="xce-dU-IG0"/>
+                <outlet property="peopleImageView" destination="yU7-5d-E77" id="Lbc-Jm-pFP"/>
+                <outlet property="sepLine" destination="2YJ-tG-grB" id="6ls-36-Rew"/>
+                <outlet property="topLine" destination="8EM-Xn-qUA" id="LiX-jQ-RXZ"/>
+            </connections>
+            <point key="canvasLocation" x="-76.5" y="-236"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="addPeopleBack" width="345" height="57"/>
+        <image name="icon_choosePlayer" width="135" height="22"/>
+    </resources>
+</document>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="SleepQualityResultView" customModule="AnnielyticX" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="423" height="526"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="bottom" translatesAutoresizingMaskIntoConstraints="NO" id="X7z-ac-FJB">
+                    <rect key="frame" x="21" y="93.5" width="381" height="227"/>
+                    <subviews>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sleepD_0" translatesAutoresizingMaskIntoConstraints="NO" id="fCO-lK-7g9">
+                            <rect key="frame" x="0.0" y="45" width="85.5" height="182"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="fCO-lK-7g9" secondAttribute="height" multiplier="81:172" id="PuM-Om-XVR"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sleepD_1" translatesAutoresizingMaskIntoConstraints="NO" id="wr7-6p-x54">
+                            <rect key="frame" x="98" y="63" width="85.5" height="164"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="wr7-6p-x54" secondAttribute="height" multiplier="81:155" id="AE0-3z-CRc"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sleepD_2" translatesAutoresizingMaskIntoConstraints="NO" id="mAK-Gb-1Mw">
+                            <rect key="frame" x="196.5" y="61" width="86" height="166"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="mAK-Gb-1Mw" secondAttribute="height" multiplier="81:155" id="YJF-Du-SbO"/>
+                            </constraints>
+                        </imageView>
+                        <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="sleepD_3" translatesAutoresizingMaskIntoConstraints="NO" id="d6t-Ba-hWj">
+                            <rect key="frame" x="295" y="46" width="86" height="181"/>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="d6t-Ba-hWj" secondAttribute="height" multiplier="81:171" id="HE2-ky-X2E"/>
+                            </constraints>
+                        </imageView>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="width" secondItem="X7z-ac-FJB" secondAttribute="height" multiplier="42:25" id="0Bp-JL-zgT"/>
+                        <constraint firstItem="mAK-Gb-1Mw" firstAttribute="width" secondItem="d6t-Ba-hWj" secondAttribute="width" id="22d-Z6-v4g"/>
+                        <constraint firstItem="wr7-6p-x54" firstAttribute="width" secondItem="mAK-Gb-1Mw" secondAttribute="width" id="DUj-ww-eiE"/>
+                        <constraint firstItem="fCO-lK-7g9" firstAttribute="width" secondItem="wr7-6p-x54" secondAttribute="width" id="Lca-Q4-07X"/>
+                        <constraint firstItem="fCO-lK-7g9" firstAttribute="height" secondItem="X7z-ac-FJB" secondAttribute="height" multiplier="0.8" id="YmL-Nv-B47"/>
+                    </constraints>
+                </stackView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="“Keep up the good job”" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vla-rx-E7G">
+                    <rect key="frame" x="0.0" y="320.5" width="423" height="205.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your Sleep Difficulty Level" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ja6-Fj-Zip">
+                    <rect key="frame" x="0.0" y="20" width="423" height="73.5"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                    <nil key="textColor"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Vla-rx-E7G" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="2WS-Zr-ABr"/>
+                <constraint firstItem="Vla-rx-E7G" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="5ju-9r-gvD"/>
+                <constraint firstItem="X7z-ac-FJB" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="ObL-Vf-pRl"/>
+                <constraint firstItem="ja6-Fj-Zip" firstAttribute="centerX" secondItem="vUN-kp-3ea" secondAttribute="centerX" id="VXI-KG-Nlk"/>
+                <constraint firstItem="X7z-ac-FJB" firstAttribute="top" secondItem="ja6-Fj-Zip" secondAttribute="bottom" id="YiN-BU-avU"/>
+                <constraint firstItem="Vla-rx-E7G" firstAttribute="top" secondItem="X7z-ac-FJB" secondAttribute="bottom" id="ddO-33-lwt"/>
+                <constraint firstItem="ja6-Fj-Zip" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" id="oXu-bY-lPg"/>
+                <constraint firstItem="ja6-Fj-Zip" firstAttribute="top" secondItem="vUN-kp-3ea" secondAttribute="top" id="qfK-6g-Hu8"/>
+                <constraint firstItem="X7z-ac-FJB" firstAttribute="width" secondItem="iN0-l3-epB" secondAttribute="width" multiplier="0.9" id="rtU-OZ-qg9"/>
+                <constraint firstItem="ja6-Fj-Zip" firstAttribute="height" secondItem="iN0-l3-epB" secondAttribute="height" multiplier="0.14" id="sN6-fH-51q"/>
+                <constraint firstItem="vUN-kp-3ea" firstAttribute="bottom" secondItem="Vla-rx-E7G" secondAttribute="bottom" id="xst-82-0Wv"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <viewLayoutGuide key="safeArea" id="vUN-kp-3ea"/>
+            <connections>
+                <outlet property="bottomLabel" destination="Vla-rx-E7G" id="JVd-Sv-Wea"/>
+                <outlet property="stack" destination="X7z-ac-FJB" id="O1t-KL-1GK"/>
+                <outlet property="titleLabel" destination="ja6-Fj-Zip" id="aIv-L1-gpQ"/>
+                <outletCollection property="qualityImages" destination="fCO-lK-7g9" collectionClass="NSMutableArray" id="rgO-qN-Fej"/>
+                <outletCollection property="qualityImages" destination="wr7-6p-x54" collectionClass="NSMutableArray" id="d3B-zs-F4Q"/>
+                <outletCollection property="qualityImages" destination="mAK-Gb-1Mw" collectionClass="NSMutableArray" id="D2P-Kb-eU2"/>
+                <outletCollection property="qualityImages" destination="d6t-Ba-hWj" collectionClass="NSMutableArray" id="6FA-r2-Ugp"/>
+            </connections>
+            <point key="canvasLocation" x="-86.5" y="54"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="sleepD_0" width="81" height="172"/>
+        <image name="sleepD_1" width="81" height="155"/>
+        <image name="sleepD_2" width="81" height="155"/>
+        <image name="sleepD_3" width="81" height="171"/>
+    </resources>
+</document>

@@ -1,0 +1,67 @@
+//
+//  CardTitleView.swift
+//  Demo_testUI
+//
+//  Created by iMac on 2018/2/8.
+//  Copyright © 2018年 LyTsai. All rights reserved.
+//
+
+import Foundation
+import UIKit
+
+// title part of card
+class CardTitleView: UIView {
+    var mainColor = UIColor.magenta
+    var decoImage: UIImage! = UIImage(named: "indi_right")
+    var borderWidth: CGFloat = 4
+    var cornerRadius: CGFloat = 8
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupSubs()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupSubs()
+    }
+    
+    fileprivate func setupSubs() {
+        backgroundColor = UIColor.clear
+    }
+    
+    override func draw(_ rect: CGRect) {
+        let path = UIBezierPath(roundedRect: bounds.insetBy(dx: borderWidth * 0.5, dy: borderWidth * 0.5), byRoundingCorners: [.bottomLeft, .bottomRight], cornerRadii: CGSize(width: cornerRadius, height: cornerRadius))
+        path.lineCapStyle = .round
+        path.lineJoinStyle = .round
+        
+        // white back
+        UIColor.white.setFill()
+        path.fill()
+        
+        // linear gradient
+        let ctx = UIGraphicsGetCurrentContext()
+        ctx?.saveGState()
+        ctx?.addPath(path.cgPath)
+        ctx?.clip()
+        
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let gradient = CGGradient(colorsSpace: colorSpace,  colors:[mainColor.withAlphaComponent(0.2).cgColor, mainColor.withAlphaComponent(0.7).cgColor] as CFArray, locations: [0, 1])
+        ctx?.drawLinearGradient(gradient!, start: CGPoint(x: bounds.midX, y: 0), end: CGPoint(x: bounds.midX, y: bounds.height), options: .drawsBeforeStartLocation)
+        
+        // decoImage
+        if decoImage != nil {
+            let whRatio = decoImage.size.width / decoImage.size.height
+            let expectHeight = bounds.height / 2.5
+            decoImage.changeImageSizeTo(CGSize(width: expectHeight * whRatio, height: expectHeight), alpha: 0.5).drawAsPattern(in: bounds)
+        }
+        
+        ctx?.restoreGState()
+        
+        // border
+        mainColor.setStroke()
+        path.lineWidth = borderWidth
+        path.stroke()
+    }
+}
+
