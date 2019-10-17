@@ -1,0 +1,9 @@
+{
+  "commitish" : "2.7.5",
+  "iOS" : [
+    {
+      "name" : "FMDB",
+      "hash" : "147cf560871d2c192413ce7815b9b15d39bb3b2642b3fa8c636938b516c5ab53"
+    }
+  ]
+}
