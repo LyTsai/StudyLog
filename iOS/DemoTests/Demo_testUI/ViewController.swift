@@ -56,18 +56,14 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        let textLayer = CAShapeLayer()
-        textLayer.frame = CGRect(x: 100, y: 60, width: 200, height: 400)
-        textLayer.fillColor = UIColor.green.cgColor
-        textLayer.backgroundColor = UIColor.red.cgColor
-        textLayer.path = UIBezierPath.pathWithAttributedString(NSAttributedString(string: "This is a test\nfor more", attributes: [.font: UIFont.systemFont(ofSize: 32 * fontFactor, weight: .medium)]), maxWidth: 200).cgPath
-        textLayer.strokeColor = UIColor.black.cgColor
-        textLayer.lineWidth = fontFactor
-//        textLayer.fillRule = .evenOdd
-        textLayer.isGeometryFlipped = true
-
-        view.layer.addSublayer(textLayer)
-     
+        let timeString = "19-12-28"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yy-MM-dd"
+        
+        if let date = dateFormatter.date(from: timeString) {
+            dateFormatter.dateFormat = "yy/MM/dd"
+            print(dateFormatter.string(from: date))
+        }
     }
     
    
