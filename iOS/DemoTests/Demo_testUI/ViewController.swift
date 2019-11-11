@@ -56,18 +56,33 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        let timeString = "19-12-28"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy-MM-dd"
-        
-        if let date = dateFormatter.date(from: timeString) {
-            dateFormatter.dateFormat = "yy/MM/dd"
-            print(dateFormatter.string(from: date))
-        }
+        let shape = CAShapeLayer()
+        shape.path = getDownArrowBubblePathWithMainFrame(CGRect(x: 80, y: 80, width: 300, height: 100), arrowPoint: CGPoint(x: 200, y: 200), radius: 6).cgPath
+        shape.strokeColor = UIColor.red.cgColor
+        shape.fillColor = UIColor.clear.cgColor
+        shape.lineWidth = 5
+        view.layer.addSublayer(shape)
     }
     
    
-    
+    func getDownArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let innerRect = rect.insetBy(dx: radius, dy: radius)
+        let arrowL = (arrowPoint.y - rect.maxY) * 0.6
+        
+        // path
+        let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: innerRect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomLeftPoint, radius: radius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: arrowPoint.x - arrowL, y: rect.maxY))
+        bubblePath.addLine(to: arrowPoint)
+        bubblePath.addLine(to: CGPoint(x: arrowPoint.x + arrowL, y: rect.maxY))
+        bubblePath.addLine(to: CGPoint(x: innerRect.maxX, y: rect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomRightPoint, radius: radius, startAngle: CGFloatPi * 0.5, endAngle: 0, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: innerRect.minY))
+        bubblePath.addArc(withCenter: innerRect.topRightPoint, radius: radius, startAngle: 0, endAngle: -CGFloatPi * 0.5, clockwise: false)
+        bubblePath.close()
+        return bubblePath
+    }
     
     @IBAction func actionForButton(_ sender: Any) {
 //        let vc = AbookHintViewController()

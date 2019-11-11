@@ -189,6 +189,69 @@ extension UIBezierPath {
         
         return path
     }
+    // bubbles
+    class func getDownArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let innerRect = rect.insetBy(dx: radius, dy: radius)
+        let arrowL = (arrowPoint.y - rect.maxY) * 0.6
+        
+        // path
+        let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: innerRect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomLeftPoint, radius: radius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: arrowPoint.x - arrowL, y: rect.maxY))
+        bubblePath.addLine(to: arrowPoint)
+        bubblePath.addLine(to: CGPoint(x: arrowPoint.x + arrowL, y: rect.maxY))
+        bubblePath.addLine(to: CGPoint(x: innerRect.maxX, y: rect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomRightPoint, radius: radius, startAngle: CGFloatPi * 0.5, endAngle: 0, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: innerRect.minY))
+        bubblePath.addArc(withCenter: innerRect.topRightPoint, radius: radius, startAngle: 0, endAngle: -CGFloatPi * 0.5, clockwise: false)
+        bubblePath.close()
+        
+        return bubblePath
+    }
+    
+    class func getLeftArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let innerRect = rect.insetBy(dx: radius, dy: radius)
+        let arrowL = (rect.minX - arrowPoint.x) * 0.6
+        
+        // path
+        let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: arrowPoint.y - arrowL))
+        bubblePath.addLine(to: arrowPoint)
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: arrowPoint.y + arrowL))
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: innerRect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomLeftPoint, radius: radius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: innerRect.maxX, y: rect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomRightPoint, radius: radius, startAngle: CGFloatPi * 0.5, endAngle: 0, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: innerRect.minY))
+        bubblePath.addArc(withCenter: innerRect.topRightPoint, radius: radius, startAngle: 0, endAngle: -CGFloatPi * 0.5, clockwise: false)
+        bubblePath.close()
+        
+        return bubblePath
+    }
+    
+    class func getRightArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let innerRect = rect.insetBy(dx: radius, dy: radius)
+        let arrowL = (arrowPoint.x - rect.maxX) * 0.6
+        
+        // path
+        let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: innerRect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomLeftPoint, radius: radius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: innerRect.maxX, y: rect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomRightPoint, radius: radius, startAngle: CGFloatPi * 0.5, endAngle: 0, clockwise: false)
+        
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: arrowPoint.y - arrowL))
+        bubblePath.addLine(to: arrowPoint)
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: arrowPoint.y + arrowL))
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: innerRect.minY))
+        
+        bubblePath.addArc(withCenter: innerRect.topRightPoint, radius: radius, startAngle: 0, endAngle: -CGFloatPi * 0.5, clockwise: false)
+        bubblePath.close()
+        
+        
+        return bubblePath
+    }
 }
 
 // MARK: --------- UIImage
@@ -256,6 +319,19 @@ extension UIImage {
         let changedImage = UIGraphicsGetImageFromCurrentImageContext()!
         
         return changedImage
+    }
+    
+    class func imageFromView(_ view: UIView) -> UIImage? {
+        UIGraphicsBeginImageContext(view.bounds.size)
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            view.layer.render(in: context)
+        }
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        
+        UIGraphicsEndImageContext()
+        
+        return image
     }
     
     func getImageAtFrame(_ frame: CGRect) -> UIImage {
