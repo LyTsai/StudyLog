@@ -56,33 +56,21 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        let shape = CAShapeLayer()
-        shape.path = getDownArrowBubblePathWithMainFrame(CGRect(x: 80, y: 80, width: 300, height: 100), arrowPoint: CGPoint(x: 200, y: 200), radius: 6).cgPath
-        shape.strokeColor = UIColor.red.cgColor
-        shape.fillColor = UIColor.clear.cgColor
-        shape.lineWidth = 5
-        view.layer.addSublayer(shape)
+        print(isPhoneNumber("1223455698766544"))
+        print(isPhoneNumber("1228766545"))
+        print(isPhoneNumber("12287665489t987t9605"))
+        print(isPhoneNumber("12287665ry6ej87i45"))
+        print(isPhoneNumber("122876777089686545"))
     }
     
    
-    func getDownArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
-        let innerRect = rect.insetBy(dx: radius, dy: radius)
-        let arrowL = (arrowPoint.y - rect.maxY) * 0.6
+    func isPhoneNumber(_ string: String) -> Bool {
+        let phoneRegex = "^\\d{10}?$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@",phoneRegex)
         
-        // path
-        let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
-        bubblePath.addLine(to: CGPoint(x: rect.minX, y: innerRect.maxY))
-        bubblePath.addArc(withCenter: innerRect.bottomLeftPoint, radius: radius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
-        bubblePath.addLine(to: CGPoint(x: arrowPoint.x - arrowL, y: rect.maxY))
-        bubblePath.addLine(to: arrowPoint)
-        bubblePath.addLine(to: CGPoint(x: arrowPoint.x + arrowL, y: rect.maxY))
-        bubblePath.addLine(to: CGPoint(x: innerRect.maxX, y: rect.maxY))
-        bubblePath.addArc(withCenter: innerRect.bottomRightPoint, radius: radius, startAngle: CGFloatPi * 0.5, endAngle: 0, clockwise: false)
-        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: innerRect.minY))
-        bubblePath.addArc(withCenter: innerRect.topRightPoint, radius: radius, startAngle: 0, endAngle: -CGFloatPi * 0.5, clockwise: false)
-        bubblePath.close()
-        return bubblePath
+        return phoneTest.evaluate(with: string)
     }
+    
     
     @IBAction func actionForButton(_ sender: Any) {
 //        let vc = AbookHintViewController()
