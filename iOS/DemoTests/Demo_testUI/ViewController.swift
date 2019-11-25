@@ -56,17 +56,20 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        let timeString = "19-12-28"
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yy-MM-dd"
-        
-        if let date = dateFormatter.date(from: timeString) {
-            dateFormatter.dateFormat = "yy/MM/dd"
-            print(dateFormatter.string(from: date))
-        }
+        print(isPhoneNumber("1223455698766544"))
+        print(isPhoneNumber("1228766545"))
+        print(isPhoneNumber("12287665489t987t9605"))
+        print(isPhoneNumber("12287665ry6ej87i45"))
+        print(isPhoneNumber("122876777089686545"))
     }
     
    
+    func isPhoneNumber(_ string: String) -> Bool {
+        let phoneRegex = "^\\d{10}?$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@",phoneRegex)
+        
+        return phoneTest.evaluate(with: string)
+    }
     
     
     @IBAction func actionForButton(_ sender: Any) {
