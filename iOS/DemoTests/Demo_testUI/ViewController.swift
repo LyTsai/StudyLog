@@ -56,11 +56,18 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
      
-        print(isPhoneNumber("1223455698766544"))
-        print(isPhoneNumber("1228766545"))
-        print(isPhoneNumber("12287665489t987t9605"))
-        print(isPhoneNumber("12287665ry6ej87i45"))
-        print(isPhoneNumber("122876777089686545"))
+        let barModel = TestResultBar()
+        barModel.maxValue = 150
+        barModel.normalMin = 15
+        barModel.currentValue = 18
+        barModel.normalMax = 50
+        barModel.step = 15
+        
+        let testbar = TestResultBarView(frame: CGRect(x: 20, y: 80, width: 500, height: 120))
+        testbar.setupWithBar(barModel)
+        
+        view.addSubview(testbar)
+    
     }
     
    
@@ -73,12 +80,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func actionForButton(_ sender: Any) {
-//        let vc = AbookHintViewController()
-//        vc.modalPresentationStyle = .overCurrentContext
-//        vc.modalTransitionStyle = .crossDissolve
-//        vc.focusOnFrame(CGRect(x: 40, y: 160, width: 100, height: 200), hintText: "this is a test string") 
-//        present(vc, animated: true, completion: nil)
-        
+ 
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
