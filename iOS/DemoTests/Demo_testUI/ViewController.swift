@@ -55,7 +55,20 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-     
+       
+        var number = NSNumber(value: 0.0004450)
+        print(String(format: "%@", number))
+        
+        number = NSNumber(value: 1000.00)
+        print(String(format: "%@", number))
+        number = NSNumber(value: 10.0)
+        print(String(format: "%@", number))
+        number = NSNumber(value: 0.0)
+        print(String(format: "%@", number))
+        number = NSNumber(value: 0)
+        print(String(format: "%@", number))
+        
+        
         let barModel = TestResultBar()
         barModel.maxValue = 150
         barModel.normalMin = 15
