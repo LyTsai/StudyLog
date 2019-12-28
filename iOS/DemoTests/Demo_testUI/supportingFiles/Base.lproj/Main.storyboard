@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait">
-        <adaptation id="fullscreen"/>
-    </device>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="15505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="retina4_7" orientation="portrait" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="15510"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -24,24 +22,13 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-XB-Yhn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="Pc0-cw-cxC" customClass="CustomInputView" customModule="Demo_testUI" customModuleProvider="target">
-                                <rect key="frame" x="26" y="303.5" width="343" height="333.5"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                            </textView>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="1" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="bHT-XB-Yhn" secondAttribute="trailing" id="8U7-hZ-tjp"/>
-                            <constraint firstItem="Pc0-cw-cxC" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" constant="10" id="KWk-i7-lH0"/>
                             <constraint firstItem="bHT-XB-Yhn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NBV-iK-fV3"/>
                             <constraint firstItem="bHT-XB-Yhn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="STp-Ud-dVE"/>
-                            <constraint firstItem="Pc0-cw-cxC" firstAttribute="height" secondItem="bHT-XB-Yhn" secondAttribute="height" multiplier="0.5" id="WzC-rR-zNL"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bHT-XB-Yhn" secondAttribute="bottom" id="icc-CU-p3I"/>
-                            <constraint firstItem="Pc0-cw-cxC" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" constant="10" id="taW-gP-Rxd"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Pc0-cw-cxC" secondAttribute="bottom" constant="30" id="zSL-En-vmo"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T1q-Ol-3Z3"/>
