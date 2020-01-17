@@ -56,33 +56,26 @@ class ViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
        
-        var number = NSNumber(value: 0.0004450)
-        print(String(format: "%@", number))
+
+        print(getCurrentValue(500.988))
+        print(getCurrentValue(500000))
+        print(getCurrentValue(500.78978986))
+        print(getCurrentValue(511.99))
+        print(getCurrentValue(5036700))
+        print(getCurrentValue(500))
+        print(getCurrentValue(50000000))
         
-        number = NSNumber(value: 1000.00)
-        print(String(format: "%@", number))
-        number = NSNumber(value: 10.0)
-        print(String(format: "%@", number))
-        number = NSNumber(value: 0.0)
-        print(String(format: "%@", number))
-        number = NSNumber(value: 0)
-        print(String(format: "%@", number))
-        
-        
-        let barModel = TestResultBar()
-        barModel.maxValue = 150
-        barModel.normalMin = 15
-        barModel.currentValue = 18
-        barModel.normalMax = 50
-        barModel.step = 15
-        
-        let testbar = TestResultBarView(frame: CGRect(x: 20, y: 80, width: 500, height: 120))
-        testbar.setupWithBar(barModel)
-        
-        view.addSubview(testbar)
     
     }
-    
+    func getCurrentValue(_ v: Float) -> String {
+            let number = NSNumber(value: v)
+            let numberFormatter = NumberFormatter()
+//            numberFormatter.positiveFormat = "###0.##"
+    //        numberFormatter.numberStyle = .currencyPlural
+
+            numberFormatter.numberStyle = .decimal
+            return numberFormatter.string(from: number) ?? "0"
+        }
    
     func isPhoneNumber(_ string: String) -> Bool {
         let phoneRegex = "^\\d{10}?$"
