@@ -47,12 +47,16 @@ var standHP: CGFloat {
     return height / 667
 }
 
+var rootViewController: UIViewController? {
+    return (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController
+}
+
 /** can use as font factor*/
-var minOneP: CGFloat {
+var minOnePoint: CGFloat {
     return min(standWP, standHP)
 }
 
-var maxOneP: CGFloat {
+var maxOnePoint: CGFloat {
     return max(standWP, standHP)
 }
 
