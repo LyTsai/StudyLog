@@ -165,21 +165,28 @@ extension UIView {
         
         // for a scroll view
         if let scrollView = self as? UIScrollView {
+            self.contentOffset = CGPoint.zero
             self.frame.size = scrollView.contentSize
+//            scrollView.snapshotView(afterScreenUpdates: true)
         }
         
         UIGraphicsBeginImageContext(self.bounds.size)
         
+        var image: UIImage?
         if let context = UIGraphicsGetCurrentContext() {
+            
+            // it will call the viewDidLayoutSubviews of the view's view controller.....
             self.layer.render(in: context)
+        
+            image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
         }
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
         
         // assign back
         self.frame = viewFrame
         
         return image
+        
     }
     
     func createPDFFile(_ fileName: String) {
@@ -388,7 +395,7 @@ extension UIImage {
     }
     
     // add the color of the image
-    func addAMaskWithColor(_ color: UIColor) -> UIImage {
+    func addMaskWithColor(_ color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         let context = UIGraphicsGetCurrentContext()
         context?.translateBy(x: 0, y: size.height)
@@ -407,16 +414,16 @@ extension UIImage {
     }
     
     func imageFromColor(_ color: UIColor, size: CGSize) -> UIImage? {
-           UIGraphicsBeginImageContext(size)
-           
-           let context = UIGraphicsGetCurrentContext()
-           context?.setFillColor(color.cgColor)
-           context?.fill(CGRect(origin: CGPoint.zero, size: size))
-           let image = UIGraphicsGetImageFromCurrentImageContext()
-           
-           UIGraphicsEndImageContext()
-           
-           return image
+        UIGraphicsBeginImageContext(size)
+       
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+       
+        UIGraphicsEndImageContext()
+
+        return image
     }
     
     func clipRoundImageWithBorderColor(_ color: UIColor, borderWidth: CGFloat) -> UIImage {
@@ -435,9 +442,14 @@ extension UIImage {
     }
     
     // part of the image
-    func getImageAtFrame(_ frame: CGRect) -> UIImage {
+    func getImageAtFrame(_ frame: CGRect) -> UIImage? {
         let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
-        return  UIImage(cgImage: self.cgImage!.cropping(to: cgFrame)!)
+        if let cropped = self.cgImage?.cropping(to: cgFrame) {
+            return UIImage(cgImage: cropped)
+        }
+        
+        // none of image is in range
+        return  nil
     }
 }
 

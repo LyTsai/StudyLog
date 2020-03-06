@@ -26,6 +26,8 @@ class PrintTool {
             if UIPrintInteractionController.canPrint(printData) {
                 let printInfo = UIPrintInfo(dictionary: nil)
                 printInfo.outputType = .photo // general, grayScale
+                /*默认情况下, UIKit根据目标打印机和打印作业的输出类型设置一组默认的纸张大小. 如, 根据UIPrintInfo中的output type来指定. 例如, 如果输出是类型UIPrintInfoOutputPhoto, 默认纸张大小是4x6英寸, A6或其他一些标准, 这和当地的一些标准有关. 如果输出类型是UIPrintInfoOutputGeneral或UIPrintInfoOutputGray, 则默认大小是US 字母(8 1/2x11英寸), A4或一些其他标准的大小设置.
+                 */
                 printInfo.jobName = jobName
 //                printInfo.orientation = .portrait // default is portait
                 
