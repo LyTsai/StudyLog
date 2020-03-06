@@ -47,12 +47,16 @@ var standHP: CGFloat {
     return height / 667
 }
 
+var rootViewController: UIViewController? {
+    return (UIApplication.shared.delegate as! AppDelegate).window?.rootViewController
+}
+
 /** can use as font factor*/
-var minOneP: CGFloat {
+var minOnePoint: CGFloat {
     return min(standWP, standHP)
 }
 
-var maxOneP: CGFloat {
+var maxOnePoint: CGFloat {
     return max(standWP, standHP)
 }
 
@@ -119,32 +123,4 @@ let notificationCenter = NotificationCenter.default
 //        }
 //    }
 //}
-
-// data
-func createPDFDataFromView(_ view: UIView) -> Data? {
-    let pdf = NSMutableData()
-    UIGraphicsBeginPDFContextToData(pdf, view.bounds, nil)
-    UIGraphicsBeginPDFPage()
-    
-    if let context = UIGraphicsGetCurrentContext() {
-        view.layer.render(in: context)
-    }
-    UIGraphicsEndPDFContext()
-    
-    return Data(pdf)
-}
-
-func createPDFFromView(_ view: UIView, fileName: String) {
-    let pdf = NSMutableData()
-    UIGraphicsBeginPDFContextToData(pdf, view.bounds, nil)
-    UIGraphicsBeginPDFPage()
-    
-    if let context = UIGraphicsGetCurrentContext() {
-        view.layer.render(in: context)
-    }
-    UIGraphicsEndPDFContext()
-    
-    let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!.appending("/\(fileName)")
-    pdf.write(toFile: documentPath, atomically: true)
-}
 

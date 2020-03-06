@@ -9,92 +9,31 @@
 import UIKit
 import WebKit
 
-extension UIBezierPath {
-    class func pathWithAttributedString(_ attributedString: NSAttributedString, maxWidth: CGFloat) -> UIBezierPath {
-        let letters = CGMutablePath()
-
-        // CTLine
-        let line = CTLineCreateWithAttributedString(attributedString as CFAttributedString)
-        // CFArray
-        let runArray = CTLineGetGlyphRuns(line)
-        for runIndex in 0..<CFArrayGetCount(runArray) {
-            let run = CFArrayGetValueAtIndex(runArray, runIndex)
-            let runBit = unsafeBitCast(run, to: CTRun.self)
-            let CTFontName = unsafeBitCast(kCTFontAttributeName, to: UnsafeRawPointer.self)
-            
-            let runFontC = CFDictionaryGetValue(CTRunGetAttributes(runBit),CTFontName)
-            let runFontS = unsafeBitCast(runFontC, to: CTFont.self)
-
-            for i in 0..<CTRunGetGlyphCount(runBit) {
-                let range = CFRangeMake(i, 1)
-                let glyph = UnsafeMutablePointer<CGGlyph>.allocate(capacity: 1)
-                glyph.initialize(to: 0)
-                let position = UnsafeMutablePointer<CGPoint>.allocate(capacity: 1)
-                position.initialize(to: .zero)
-                CTRunGetGlyphs(runBit, range, glyph)
-                CTRunGetPositions(runBit, range, position);
-                
-                if let path = CTFontCreatePathForGlyph(runFontS,glyph.pointee,nil) {
-                    let transform = CGAffineTransform(translationX: position.pointee.x, y: position.pointee.y)
-                    letters.addPath(path, transform: transform)
-                }
-                glyph.deinitialize(count: 1)
-                glyph.deallocate()
-                
-                position.deinitialize(count: 1)
-                position.deallocate()
-            }
-        }
-        
-        let path = UIBezierPath(cgPath: letters)
-        return path
-    }
-}
-
 class ViewController: UIViewController {
     
+    let imageView = UIImageView()
     override func viewDidLoad() {
         super.viewDidLoad()
-       
-        var number = NSNumber(value: 0.0004450)
-        print(String(format: "%@", number))
+
+        let scroll = UIScrollView(frame: CGRect(x: 0, y: 100, width: 300, height: 100))
+        scroll.contentSize = CGSize(width: 300, height: 500)
+        let sub = UILabel(frame: CGRect(x: 0, y: 0, width: 300, height: 500))
+        sub.text = "a quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\na quick brown fox jumps over the lazy dog\n"
+        sub.numberOfLines = 0
+        sub.font = UIFont.systemFont(ofSize: 16 * minOnePoint, weight: .black)
+        scroll.addSubview(sub)
         
-        number = NSNumber(value: 1000.00)
-        print(String(format: "%@", number))
-        number = NSNumber(value: 10.0)
-        print(String(format: "%@", number))
-        number = NSNumber(value: 0.0)
-        print(String(format: "%@", number))
-        number = NSNumber(value: 0)
-        print(String(format: "%@", number))
+        imageView.contentMode = .scaleAspectFit
+        scroll.backgroundColor = UIColor.green
+        imageView.backgroundColor = UIColor.red
+        imageView.frame = CGRect(x: 320, y: 100, width: 300, height: 300)
+        view.addSubview(imageView)
+        view.addSubview(scroll)
         
-        
-        let barModel = TestResultBar()
-        barModel.maxValue = 150
-        barModel.normalMin = 15
-        barModel.currentValue = 18
-        barModel.normalMax = 50
-        barModel.step = 15
-        
-        let testbar = TestResultBarView(frame: CGRect(x: 20, y: 80, width: 500, height: 120))
-        testbar.setupWithBar(barModel)
-        
-        view.addSubview(testbar)
-    
+        imageView.image = UIImage.imageFromView(scroll)
     }
-    
-   
-    func isPhoneNumber(_ string: String) -> Bool {
-        let phoneRegex = "^\\d{10}?$"
-        let phoneTest = NSPredicate(format: "SELF MATCHES %@",phoneRegex)
-        
-        return phoneTest.evaluate(with: string)
-    }
-    
-    
-    @IBAction func actionForButton(_ sender: Any) {
- 
-    }
+  
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         

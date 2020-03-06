@@ -156,6 +156,62 @@ extension UIView {
         layer.cornerRadius = cornerRadius
         layer.masksToBounds = masksToBounds
     }
+    
+    //  convert
+    
+    // if Data is needed, use image.pngData() to convert
+    func createImageCopy() -> UIImage? {
+        let viewFrame = self.frame
+        
+        // for a scroll view
+        if let scrollView = self as? UIScrollView {
+            self.contentOffset = CGPoint.zero
+            self.frame.size = scrollView.contentSize
+//            scrollView.snapshotView(afterScreenUpdates: true)
+        }
+        
+        UIGraphicsBeginImageContext(self.bounds.size)
+        
+        var image: UIImage?
+        if let context = UIGraphicsGetCurrentContext() {
+            
+            // it will call the viewDidLayoutSubviews of the view's view controller.....
+            self.layer.render(in: context)
+        
+            image = UIGraphicsGetImageFromCurrentImageContext()
+            UIGraphicsEndImageContext()
+        }
+        
+        // assign back
+        self.frame = viewFrame
+        
+        return image
+        
+    }
+    
+    func createPDFFile(_ fileName: String) {
+        let viewFrame = self.frame
+         
+        // for a scroll view
+        if let scrollView = self as? UIScrollView {
+            self.frame.size = scrollView.contentSize
+        }
+        
+        let pdf = NSMutableData()
+        UIGraphicsBeginPDFContextToData(pdf, self.bounds, nil)
+        UIGraphicsBeginPDFPage()
+        
+        if let context = UIGraphicsGetCurrentContext() {
+            self.layer.render(in: context)
+        }
+        UIGraphicsEndPDFContext()
+
+        // assign back
+        self.frame = viewFrame
+        
+        let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!.appending("/\(fileName)")
+        pdf.write(toFile: documentPath, atomically: true)
+    }
 }
 
 // MARK: ------ UIBezierPath
@@ -252,6 +308,58 @@ extension UIBezierPath {
         
         return bubblePath
     }
+    
+    class func pathWithAttributedString(_ attributedString: NSAttributedString, maxWidth: CGFloat) -> UIBezierPath {
+        /*
+         如果不做任何位移，是一堆叠在一起的y轴翻转了的字符
+
+        \n不起折行的作用
+
+
+        textLayer.isGeometryFlipped = true
+        竖直翻转，文字会在最下面开始排列
+
+        如果考虑到不止一排的情况，需要计算当前字符所在的行数目然后上移（翻转后就是看起来下移了
+        ）
+         */
+        let letters = CGMutablePath()
+
+        // CTLine
+        let line = CTLineCreateWithAttributedString(attributedString as CFAttributedString)
+        // CFArray
+        let runArray = CTLineGetGlyphRuns(line)
+        for runIndex in 0..<CFArrayGetCount(runArray) {
+            let run = CFArrayGetValueAtIndex(runArray, runIndex)
+            let runBit = unsafeBitCast(run, to: CTRun.self)
+            let CTFontName = unsafeBitCast(kCTFontAttributeName, to: UnsafeRawPointer.self)
+            
+            let runFontC = CFDictionaryGetValue(CTRunGetAttributes(runBit),CTFontName)
+            let runFontS = unsafeBitCast(runFontC, to: CTFont.self)
+
+            for i in 0..<CTRunGetGlyphCount(runBit) {
+                let range = CFRangeMake(i, 1)
+                let glyph = UnsafeMutablePointer<CGGlyph>.allocate(capacity: 1)
+                glyph.initialize(to: 0)
+                let position = UnsafeMutablePointer<CGPoint>.allocate(capacity: 1)
+                position.initialize(to: .zero)
+                CTRunGetGlyphs(runBit, range, glyph)
+                CTRunGetPositions(runBit, range, position);
+                
+                if let path = CTFontCreatePathForGlyph(runFontS,glyph.pointee,nil) {
+                    let transform = CGAffineTransform(translationX: position.pointee.x, y: position.pointee.y)
+                    letters.addPath(path, transform: transform)
+                }
+                glyph.deinitialize(count: 1)
+                glyph.deallocate()
+                
+                position.deinitialize(count: 1)
+                position.deallocate()
+            }
+        }
+        
+        let path = UIBezierPath(cgPath: letters)
+        return path
+    }
 }
 
 // MARK: --------- UIImage
@@ -274,7 +382,6 @@ extension UIImage {
         return changedImage!
     }
     
-    
     // MARK: if the color's alpha is 0, it will turn to black
     func convertImageToGrayScale() -> UIImage {
         let imageRect = CGRect(x: 0, y: 0, width: size.width, height: size.height)
@@ -287,8 +394,8 @@ extension UIImage {
         return grayImage
     }
     
-    // change the color of the image
-    func imageWithColor(_ color: UIColor) -> UIImage {
+    // add the color of the image
+    func addMaskWithColor(_ color: UIColor) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(size, false, scale)
         let context = UIGraphicsGetCurrentContext()
         context?.translateBy(x: 0, y: size.height)
@@ -306,6 +413,19 @@ extension UIImage {
         return image!
     }
     
+    func imageFromColor(_ color: UIColor, size: CGSize) -> UIImage? {
+        UIGraphicsBeginImageContext(size)
+       
+        let context = UIGraphicsGetCurrentContext()
+        context?.setFillColor(color.cgColor)
+        context?.fill(CGRect(origin: CGPoint.zero, size: size))
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+       
+        UIGraphicsEndImageContext()
+
+        return image
+    }
+    
     func clipRoundImageWithBorderColor(_ color: UIColor, borderWidth: CGFloat) -> UIImage {
         let radius = min(size.width, size.height) / 2 + borderWidth
         let totalSize = CGSize(width: radius * 2, height: radius * 2)
@@ -321,23 +441,15 @@ extension UIImage {
         return changedImage
     }
     
-    class func imageFromView(_ view: UIView) -> UIImage? {
-        UIGraphicsBeginImageContext(view.bounds.size)
-        
-        if let context = UIGraphicsGetCurrentContext() {
-            view.layer.render(in: context)
-        }
-        let image = UIGraphicsGetImageFromCurrentImageContext()
-        
-        UIGraphicsEndImageContext()
-        
-        return image
-    }
-    
-    func getImageAtFrame(_ frame: CGRect) -> UIImage {
+    // part of the image
+    func getImageAtFrame(_ frame: CGRect) -> UIImage? {
         let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
+        if let cropped = self.cgImage?.cropping(to: cgFrame) {
+            return UIImage(cgImage: cropped)
+        }
         
-        return  UIImage(cgImage: self.cgImage!.cropping(to: cgFrame)!)
+        // none of image is in range
+        return  nil
     }
 }
 
@@ -415,6 +527,43 @@ extension UIViewController {
         let rootViewController = appDelegate.window?.rootViewController
         rootViewController?.present(viewController, animated: true, completion: completion)
     }
+    
+    func showAlertMessage(_ message : String?, title : String?, buttons: [(name: String, handle: (()->Void)?)]) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+         
+        // buttons
+        for button in buttons {
+            let action = UIAlertAction(title: button.name, style: .default, handler: { (action) in
+                button.handle?()
+            })
+            alert.addAction(action)
+        }
+    
+        present(alert, animated: true, completion: nil)
+    }
+}
+
+// MARK: ------ UIResponder
+private weak var currentFirstResponder: AnyObject?
+extension UIResponder {
+    static func firstResponder() -> AnyObject? {
+        currentFirstResponder = nil
+        UIApplication.shared.sendAction(#selector(findFirstResponder(_:)), to: nil, from: nil, for: nil)
+        return currentFirstResponder
+    }
+    
+    @objc func findFirstResponder(_ sender: AnyObject) {
+        currentFirstResponder = self
+    }
+}
+
+
+// MARK: --------- table View
+extension UITableView {
+    func setToFullDisplay() {
+        self.layoutIfNeeded()
+        self.frame.size = self.contentSize
+    }
 }
 
 // MARK: --------- textView
@@ -442,6 +591,45 @@ extension String {
         }
         
         return indexes
+    }
+    
+    func isEmailAddress() -> Bool {
+        let emailRegex = "^([a-z0-9_\\.-]+)@([\\da-z\\.-]+)\\.([a-z\\.]{2,6})$"
+        let emailTest = NSPredicate(format: "SELF MATCHES %@",emailRegex)
+        
+        return emailTest.evaluate(with: self)
+    }
+    
+    // ten numbers
+    func isPhoneNumber() -> Bool {
+        let phoneRegex = "^\\d{10}?$"
+        let phoneTest = NSPredicate(format: "SELF MATCHES %@",phoneRegex)
+        
+        return phoneTest.evaluate(with: self)
+    }
+    
+    func isDecimal(_ maxNumber: Int) -> Bool {
+        let decimalRegex = "^[0-9]+(\\.[0-9]{1,\(maxNumber)})?$"
+        let decimalTest = NSPredicate(format: "SELF MATCHES %@", decimalRegex)
+        return decimalTest.evaluate(with: self)
+    }
+}
+
+// MARK: ---------- number
+extension Float {
+    // 0 of float will disappear
+    func getStringValue() -> String {
+        let number = NSNumber(value: self)
+        return String(format: "%@", number)
+    }
+    
+    // 000, 000, 000
+    func getCurrentValue() -> String {
+        let number = NSNumber(value: self)
+        let numberFormatter = NumberFormatter()
+        numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: number) ?? "0"
     }
 }
 
