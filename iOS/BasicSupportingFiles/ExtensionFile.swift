@@ -165,16 +165,14 @@ extension UIView {
         
         // for a scroll view
         if let scrollView = self as? UIScrollView {
-            self.contentOffset = CGPoint.zero
-            self.frame.size = scrollView.contentSize
-//            scrollView.snapshotView(afterScreenUpdates: true)
+            scrollView.contentOffset = CGPoint.zero
+            scrollView.frame.size = scrollView.contentSize
         }
         
         UIGraphicsBeginImageContext(self.bounds.size)
         
         var image: UIImage?
         if let context = UIGraphicsGetCurrentContext() {
-            
             // it will call the viewDidLayoutSubviews of the view's view controller.....
             self.layer.render(in: context)
         
@@ -443,12 +441,9 @@ extension UIImage {
     
     // part of the image
     func getImageAtFrame(_ frame: CGRect) -> UIImage? {
-        let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
-        if let cropped = self.cgImage?.cropping(to: cgFrame) {
+        if let cropped = self.cgImage?.cropping(to: frame) {
             return UIImage(cgImage: cropped)
         }
-        
-        // none of image is in range
         return  nil
     }
 }
@@ -600,7 +595,7 @@ extension String {
         return emailTest.evaluate(with: self)
     }
     
-    // ten numbers
+    // 10 numbers, US phone number
     func isPhoneNumber() -> Bool {
         let phoneRegex = "^\\d{10}?$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@",phoneRegex)
@@ -628,6 +623,20 @@ extension Float {
         let number = NSNumber(value: self)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: number) ?? "0"
+    }
+    
+    // for example: 233,233.23
+    func getTwoFractionDigitsCurrentValue() -> String {
+        let number = NSNumber(value: self)
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.alwaysShowsDecimalSeparator = true
+        
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
         
         return numberFormatter.string(from: number) ?? "0"
     }
