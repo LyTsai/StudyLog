@@ -16,6 +16,8 @@ import MessageUI
  */
 
 class EmailOpearationTool: NSObject, MFMailComposeViewControllerDelegate {
+    weak var viewControllerForPresent: UIViewController?
+    
     var subject: String?
     var recipient: String?
     var emailContent: String?
@@ -26,7 +28,6 @@ class EmailOpearationTool: NSObject, MFMailComposeViewControllerDelegate {
         
         // send
         if MFMailComposeViewController.canSendMail() {
-            
             let mailCompose = MFMailComposeViewController()
             mailCompose.mailComposeDelegate = self
 
@@ -34,14 +35,16 @@ class EmailOpearationTool: NSObject, MFMailComposeViewControllerDelegate {
             mailCompose.setToRecipients(["收件人"]) // setCcRecipients, setBccRecipients
 
             let emailContent = "正文"
-            mailCompose.setMessageBody(emailContent, isHTML: false)
-
+//            mailCompose.setMessageBody(emailContent, isHTML: false)
+            let htmlContent = "<span style=\"font-size: 20px; font-weight: 700\">\(emailContent)</span>"
+            mailCompose.setMessageBody(htmlContent, isHTML: true)
+            
             if attachment != nil {
                 mailCompose.addAttachmentData(attachment!, mimeType: "", fileName: "order.png")
             }
-            rootViewController?.present(mailCompose, animated: true, completion: nil)
+            viewControllerForPresent?.present(mailCompose, animated: true, completion: nil)
         }else {
-            rootViewController?.showAlertMessage("Please check your email account", title: "Can not send email to \(recipient)", buttons: [("OK", nil)])
+            viewControllerForPresent?.showAlertMessage("Please check your email account", title: "Can not send email to \(recipient)", buttons: [("OK", nil)])
         }
     }
    

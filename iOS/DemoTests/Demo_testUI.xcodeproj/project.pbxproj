@@ -14,6 +14,9 @@
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
+		887667DB2415DA040055B92F /* EmailOpearationTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887667D82415DA040055B92F /* EmailOpearationTool.swift */; };
+		887667DC2415DA040055B92F /* DeviceImageGetTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887667D92415DA040055B92F /* DeviceImageGetTool.swift */; };
+		887667DD2415DA040055B92F /* PrintTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887667DA2415DA040055B92F /* PrintTool.swift */; };
 		8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817D20E47F9F00A71EAC /* DefAndMethods.swift */; };
 		8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817E20E47F9F00A71EAC /* ExtensionFile.swift */; };
 		88F1B10F22C351C000BAB274 /* TestXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F1B10E22C351C000BAB274 /* TestXib.xib */; };
@@ -29,6 +32,9 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		887667D82415DA040055B92F /* EmailOpearationTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = EmailOpearationTool.swift; path = ../../../FunctionClasses/EmailOpearationTool.swift; sourceTree = "<group>"; };
+		887667D92415DA040055B92F /* DeviceImageGetTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeviceImageGetTool.swift; path = ../../../FunctionClasses/DeviceImageGetTool.swift; sourceTree = "<group>"; };
+		887667DA2415DA040055B92F /* PrintTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PrintTool.swift; path = ../../../FunctionClasses/PrintTool.swift; sourceTree = "<group>"; };
 		8893817D20E47F9F00A71EAC /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
 		8893817E20E47F9F00A71EAC /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 		8893817F20E47F9F00A71EAC /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
@@ -49,6 +55,9 @@
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				887667D92415DA040055B92F /* DeviceImageGetTool.swift */,
+				887667D82415DA040055B92F /* EmailOpearationTool.swift */,
+				887667DA2415DA040055B92F /* PrintTool.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -180,9 +189,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				887667DB2415DA040055B92F /* EmailOpearationTool.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
+				887667DD2415DA040055B92F /* PrintTool.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */,
+				887667DC2415DA040055B92F /* DeviceImageGetTool.swift in Sources */,
 				883CED2422A0FC84007B56FC /* MathTool.swift in Sources */,
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
 				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
