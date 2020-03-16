@@ -65,6 +65,7 @@ extension UIColor {
         }
     }
     
+    
     // set up color
     class func colorFromHex(_ hexValue: Int) -> UIColor {
         return UIColor(red: CGFloat((hexValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((hexValue & 0xFF00) >> 8) / 255.0, blue: CGFloat(hexValue & 0xFF) / 255.0, alpha: 1)
@@ -160,11 +161,14 @@ extension UIView {
     //  convert
     
     // if Data is needed, use image.pngData() to convert
-    func createImageCopy() -> UIImage? {
+    func getFullPageScreenShot() -> UIImage? {
         let viewFrame = self.frame
+        var recordOffset: CGPoint!
         
         // for a scroll view
         if let scrollView = self as? UIScrollView {
+            recordOffset = scrollView.contentOffset
+            // scroll view strench
             scrollView.contentOffset = CGPoint.zero
             scrollView.frame.size = scrollView.contentSize
         }
@@ -173,18 +177,19 @@ extension UIView {
         
         var image: UIImage?
         if let context = UIGraphicsGetCurrentContext() {
-            // it will call the viewDidLayoutSubviews of the view's view controller.....
+            // it will call the viewDidLayoutSubviews of the view's viewController.....
             self.layer.render(in: context)
-        
             image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
         }
         
         // assign back
         self.frame = viewFrame
+        if recordOffset != nil {
+            (self as? UIScrollView)?.contentOffset = recordOffset
+        }
         
         return image
-        
     }
     
     func createPDFFile(_ fileName: String) {
@@ -206,7 +211,6 @@ extension UIView {
 
         // assign back
         self.frame = viewFrame
-        
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!.appending("/\(fileName)")
         pdf.write(toFile: documentPath, atomically: true)
     }
@@ -577,6 +581,25 @@ extension UITextView {
 
 // MARK: -------- String
 extension String {
+    subscript (r: Range<Int>) -> String {
+        get {
+            let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.index(self.startIndex, offsetBy: r.upperBound)
+
+            return String(self[startIndex..<endIndex])
+        }
+    }
+    subscript(index:Int) -> String {
+        get{
+            let stringIndex = self.index(self.startIndex, offsetBy: index)
+            return String(self[stringIndex])
+        }
+//        set{
+//
+//            }
+    }
+
+    
     func getStartIndexesOf(_ subString: String) -> [Int] {
         var subStartIndex = startIndex
         var indexes = [Int]()
@@ -602,11 +625,22 @@ extension String {
         
         return phoneTest.evaluate(with: self)
     }
-    
+
     func isDecimal(_ maxNumber: Int) -> Bool {
         let decimalRegex = "^[0-9]+(\\.[0-9]{1,\(maxNumber)})?$"
         let decimalTest = NSPredicate(format: "SELF MATCHES %@", decimalRegex)
         return decimalTest.evaluate(with: self)
+    }
+
+    func filterNumbers() -> String {
+        var number = ""
+        for char in self {
+            if char.isNumber {
+                number.append(char)
+            }
+        }
+        
+        return number
     }
 }
 

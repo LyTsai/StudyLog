@@ -8,8 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8E5B32407DE000099F155 /* TestTableView.swift */; };
+		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		883CED2422A0FC84007B56FC /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CED2322A0FC84007B56FC /* MathTool.swift */; };
-		883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D5546233B39D70004CC11 /* CustomTabbarController.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
@@ -22,8 +22,8 @@
 
 /* Begin PBXFileReference section */
 		19B8E5B32407DE000099F155 /* TestTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableView.swift; sourceTree = "<group>"; };
+		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		883CED2322A0FC84007B56FC /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
-		883D5546233B39D70004CC11 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8850314B1E8E36F6009B21B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -77,7 +77,7 @@
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
 				19B8E5B32407DE000099F155 /* TestTableView.swift */,
-				883D5546233B39D70004CC11 /* CustomTabbarController.swift */,
+				8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */,
 				88F1B10E22C351C000BAB274 /* TestXib.xib */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
@@ -183,9 +183,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
-				883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */,
 				19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */,
 				883CED2422A0FC84007B56FC /* MathTool.swift in Sources */,
 				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
