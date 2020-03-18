@@ -7,26 +7,71 @@
 //
 
 import UIKit
-import WebKit
+import MapKit
 
-class ViewController: UIViewController {
-
-    let imageView = UIImageView()
+class ViewController: UIViewController, CLLocationManagerDelegate {
+    
+    let locationM = CLLocationManager()
+    let geocoder = CLGeocoder()
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        let table1 = TestTableView(frame: CGRect(x: 0, y: 120, width: 200, height: 55))
-        table1.add()
-        view.addSubview(table1)
-
-        table1.frame = CGRect(x: 0, y: 120, width: 350, height: 55)
-
-        let table3 = TestTableView(frame: CGRect(x: 0, y: 200, width: 200, height: 55))
-        table1.add()
-        view.addSubview(table3)
+        let request = UIButton(frame: CGRect(x: 50, y: 100, width: 200, height: 100))
+        request.backgroundColor = UIColor.magenta
+        request.setTitle("TestLocation", for: .normal)
+        request.addTarget(self, action: #selector(requestFor), for: .touchUpInside)
+        locationM.delegate = self
+        
+        view.addSubview(request)
+    }
+    
+    @objc func requestFor() {
+        if CLLocationManager.locationServicesEnabled() {
+            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+                locationM.startUpdatingLocation()
+            }else {
+                // is not authorized
+                locationM.requestWhenInUseAuthorization()
+            }
+        }else {
+            // not available for location service
+        }
+        
+        geocoder.geocodeAddressString("Apple Inc.") { (placemarks, error) in
+            if let marks = placemarks {
+                 for placemark in marks {
+                    print(placemark.postalCode)
+                    print(placemark.name)
+                 }
+            }else {
+                print("place marks nil for apple")
+            }
+            if error != nil {
+                print("error is \(error?.localizedDescription)")
+            }
+        }
+        
     }
 
-
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+         print("--------------- get by location --------------")
+        if let location = locations.last {
+            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+                if let marks = placemarks {
+                    for placemark in marks {
+                        print(placemark.postalCode)
+                        print(placemark.addressDictionary)
+                    }
+                }else {
+                    print("place marks nil for current location")
+                }
+                if error != nil {
+                    print("error is \(error?.localizedDescription)")
+                }
+            }
+        }
+    }
+    
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
