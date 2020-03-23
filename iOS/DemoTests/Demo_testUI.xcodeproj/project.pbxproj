@@ -14,6 +14,11 @@
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
+		887C87592424A75500511D16 /* CardTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C87572424A75500511D16 /* CardTagView.swift */; };
+		887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C87582424A75500511D16 /* CoreTextArcView.swift */; };
+		887C87602424A78400511D16 /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875C2424A78400511D16 /* ExtensionFile.swift */; };
+		887C87612424A78400511D16 /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875D2424A78400511D16 /* MathTool.swift */; };
+		887C87622424A78400511D16 /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875F2424A78400511D16 /* DefAndMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +31,12 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
+		887C87572424A75500511D16 /* CardTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTagView.swift; sourceTree = "<group>"; };
+		887C87582424A75500511D16 /* CoreTextArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextArcView.swift; sourceTree = "<group>"; };
+		887C875C2424A78400511D16 /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
+		887C875D2424A78400511D16 /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
+		887C875E2424A78400511D16 /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
+		887C875F2424A78400511D16 /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,6 +53,8 @@
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				887C87572424A75500511D16 /* CardTagView.swift */,
+				887C87582424A75500511D16 /* CoreTextArcView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -74,9 +87,22 @@
 			path = Demo_testUI;
 			sourceTree = "<group>";
 		};
+		887C875B2424A78400511D16 /* BasicSupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				887C875C2424A78400511D16 /* ExtensionFile.swift */,
+				887C875D2424A78400511D16 /* MathTool.swift */,
+				887C875E2424A78400511D16 /* PrefixHeader.h */,
+				887C875F2424A78400511D16 /* DefAndMethods.swift */,
+			);
+			name = BasicSupportingFiles;
+			path = ../../../BasicSupportingFiles;
+			sourceTree = "<group>";
+		};
 		88B85C3D1FA9C2D200BA13B9 /* supportingFiles */ = {
 			isa = PBXGroup;
 			children = (
+				887C875B2424A78400511D16 /* BasicSupportingFiles */,
 				885031491E8E36F6009B21B6 /* AppDelegate.swift */,
 				8850314D1E8E36F6009B21B6 /* Main.storyboard */,
 				885031501E8E36F6009B21B6 /* Assets.xcassets */,
@@ -160,8 +186,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
+				887C87612424A78400511D16 /* MathTool.swift in Sources */,
+				887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
+				887C87602424A78400511D16 /* ExtensionFile.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
+				887C87592424A75500511D16 /* CardTagView.swift in Sources */,
+				887C87622424A78400511D16 /* DefAndMethods.swift in Sources */,
 				19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
