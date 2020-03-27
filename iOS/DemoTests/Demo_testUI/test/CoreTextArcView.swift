@@ -8,32 +8,20 @@
 /* 删减版本，只保持简单的纯色文字画出*/
 // https://developer.apple.com/library/content/samplecode/CoreTextArcCocoa/Introduction/Intro.html
 
-// http://www.cocoachina.com/industry/20140521/8504.html
-
 import Foundation
 import UIKit
 
 class CoreTextArcView: UIView {
     // open
-    var font = UIFont.systemFont(ofSize: 32)
+    var textFont = UIFont.systemFont(ofSize: 32)
     var text = "Curvaceous Type"
     var textColor = UIColor.purple
-    
-    var attributedString : NSAttributedString! {
-        /*
-         NSLigatureAttributeName 该属性所对应的值是一个 NSNumber 对象(整数)。连体字符是指某些连在一起的字符，它们采用单个的图元符号。0 表示没有连体字符。1 表示使用默认的连体字符。2表示使用所有连体符号。默认值为 1（注意，iOS 不支持值为 2
-         NSKernAttributeName(字间距)
-         NSStrikethroughStyleAttributeName(删除线)， NSStrikethroughColorAttributeName 设置删除线颜色
-         */
-        let attributes = [NSFontAttributeName: font, NSForegroundColorAttributeName: textColor, NSLigatureAttributeName: NSNumber(value: 0)] as [String : Any]
-        return NSAttributedString(string: text, attributes: attributes)
-    }
-    
+    var attributedString : NSAttributedString!
+   
     var radius: CGFloat = 150
     var arcCenter = CGPoint(x: 160, y: 250)
     var middleAngle: CGFloat = -CGFloat(Double.pi) / 2.0
     var arcAngle: CGFloat = CGFloat(Double.pi) * 0.8
-
 }
 
 extension CoreTextArcView {
@@ -44,6 +32,9 @@ extension CoreTextArcView {
         context?.textMatrix = CGAffineTransform.identity
         
         // Draw a white background
+        if attributedString == nil {
+            attributedString = NSAttributedString(string: text, attributes: [.font: textFont, .foregroundColor: textColor])
+        }
         
         let line = CTLineCreateWithAttributedString(attributedString as CFAttributedString)
         let glyphCount = CTLineGetGlyphCount(line)
