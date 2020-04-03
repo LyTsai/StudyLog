@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <viewController modalTransitionStyle="crossDissolve" modalPresentationStyle="overFullScreen" id="05K-bx-DCM" customClass="SingleInfoInputViewController" customModule="BeautiPhi" customModuleProvider="target">
+            <view key="view" contentMode="scaleToFill" id="RGu-Ky-DZe">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                <subviews>
+                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="umN-WU-v5T">
+                        <rect key="frame" x="-79.5" y="160" width="573" height="269"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Discount" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wZB-sp-zv9">
+                                <rect key="frame" x="57" y="0.0" width="459" height="75.5"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aD0-xC-2fO" customClass="CustomColorButton" customModule="BeautiPhi" customModuleProvider="target">
+                                <rect key="frame" x="57" y="196.5" width="174" height="51"/>
+                                <state key="normal" title="Cancel"/>
+                                <connections>
+                                    <action selector="leftButtonIsTouched:" destination="05K-bx-DCM" eventType="touchUpInside" id="3yD-5T-8lA"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Xol-eO-v8G" customClass="CustomColorButton" customModule="BeautiPhi" customModuleProvider="target">
+                                <rect key="frame" x="342" y="196.5" width="174" height="51"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Xol-eO-v8G" secondAttribute="height" multiplier="150:44" id="NsL-Zl-avp"/>
+                                </constraints>
+                                <state key="normal" title="Confirm"/>
+                                <connections>
+                                    <action selector="rightButtonIsTouched:" destination="05K-bx-DCM" eventType="touchUpInside" id="UrG-bC-V7p"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Can-mA-Xok">
+                                <rect key="frame" x="87" y="110.5" width="399" height="51"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad" returnKeyType="done"/>
+                            </textField>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="%" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="R2d-BM-6Dk">
+                                <rect key="frame" x="486" y="75.5" width="30" height="121"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="30" id="4tm-Jk-VAa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="Xol-eO-v8G" firstAttribute="height" secondItem="umN-WU-v5T" secondAttribute="height" multiplier="0.19" id="5XR-u9-IcO"/>
+                            <constraint firstItem="R2d-BM-6Dk" firstAttribute="height" secondItem="umN-WU-v5T" secondAttribute="height" multiplier="0.45" id="6jO-6K-Hrb"/>
+                            <constraint firstItem="R2d-BM-6Dk" firstAttribute="centerY" secondItem="Can-mA-Xok" secondAttribute="centerY" id="9Mn-Qj-rOJ"/>
+                            <constraint firstItem="R2d-BM-6Dk" firstAttribute="top" secondItem="wZB-sp-zv9" secondAttribute="bottom" id="AzS-v2-W2w"/>
+                            <constraint firstItem="Xol-eO-v8G" firstAttribute="trailing" secondItem="wZB-sp-zv9" secondAttribute="trailing" id="Bwc-6P-CQJ"/>
+                            <constraint firstItem="aD0-xC-2fO" firstAttribute="height" secondItem="Xol-eO-v8G" secondAttribute="height" id="CTe-g5-yUI"/>
+                            <constraint firstItem="R2d-BM-6Dk" firstAttribute="trailing" secondItem="wZB-sp-zv9" secondAttribute="trailing" id="Fbr-qp-JRH"/>
+                            <constraint firstItem="Can-mA-Xok" firstAttribute="height" secondItem="Xol-eO-v8G" secondAttribute="height" id="HQu-Bo-W5h"/>
+                            <constraint firstItem="wZB-sp-zv9" firstAttribute="top" secondItem="umN-WU-v5T" secondAttribute="top" id="Mgs-TP-FrO"/>
+                            <constraint firstItem="wZB-sp-zv9" firstAttribute="width" secondItem="umN-WU-v5T" secondAttribute="width" multiplier="0.8" id="T74-Px-dWI"/>
+                            <constraint firstItem="aD0-xC-2fO" firstAttribute="centerY" secondItem="Xol-eO-v8G" secondAttribute="centerY" id="VBp-yf-wtT"/>
+                            <constraint firstItem="Xol-eO-v8G" firstAttribute="top" secondItem="R2d-BM-6Dk" secondAttribute="bottom" id="Xzz-vd-3KL"/>
+                            <constraint firstAttribute="width" secondItem="umN-WU-v5T" secondAttribute="height" multiplier="512:240" id="beZ-Qp-q7q"/>
+                            <constraint firstItem="R2d-BM-6Dk" firstAttribute="leading" secondItem="Can-mA-Xok" secondAttribute="trailing" id="cXu-O4-8u0"/>
+                            <constraint firstItem="aD0-xC-2fO" firstAttribute="leading" secondItem="wZB-sp-zv9" secondAttribute="leading" id="cvh-NU-3uW"/>
+                            <constraint firstItem="aD0-xC-2fO" firstAttribute="width" secondItem="Xol-eO-v8G" secondAttribute="width" id="g6T-8I-eVJ"/>
+                            <constraint firstItem="wZB-sp-zv9" firstAttribute="height" secondItem="umN-WU-v5T" secondAttribute="height" multiplier="0.28" id="hK1-J7-jgo"/>
+                            <constraint firstItem="Can-mA-Xok" firstAttribute="centerX" secondItem="umN-WU-v5T" secondAttribute="centerX" id="mVz-GN-uNj"/>
+                        </constraints>
+                    </view>
+                </subviews>
+                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                <constraints>
+                    <constraint firstItem="umN-WU-v5T" firstAttribute="centerY" secondItem="WYt-vb-Grb" secondAttribute="centerY" multiplier="0.65" id="XTJ-67-CX8"/>
+                    <constraint firstItem="wZB-sp-zv9" firstAttribute="centerX" secondItem="WYt-vb-Grb" secondAttribute="centerX" id="jyu-G4-S8c"/>
+                    <constraint firstItem="umN-WU-v5T" firstAttribute="centerX" secondItem="WYt-vb-Grb" secondAttribute="centerX" id="ngp-1W-SUt"/>
+                    <constraint firstItem="umN-WU-v5T" firstAttribute="height" secondItem="RGu-Ky-DZe" secondAttribute="height" multiplier="0.3" id="ria-wy-3vX"/>
+                </constraints>
+                <viewLayoutGuide key="safeArea" id="WYt-vb-Grb"/>
+            </view>
+            <connections>
+                <outlet property="backView" destination="umN-WU-v5T" id="ZSu-y9-Dbd"/>
+                <outlet property="inputTextField" destination="Can-mA-Xok" id="Kux-D0-XAL"/>
+                <outlet property="rightButton" destination="Xol-eO-v8G" id="234-2m-wJm"/>
+                <outlet property="rightView" destination="R2d-BM-6Dk" id="e6u-dN-5aE"/>
+                <outlet property="titleLabel" destination="wZB-sp-zv9" id="aMg-wW-Jed"/>
+            </connections>
+            <point key="canvasLocation" x="-16.40625" y="162.5"/>
+        </viewController>
+    </objects>
+</document>

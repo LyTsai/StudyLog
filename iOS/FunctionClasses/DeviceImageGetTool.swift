@@ -9,31 +9,43 @@
 import Foundation
 import UIKit
 
+/*
+1. Use Camera: info.plist, Privacy - Camera Usage Description
+2. ViewController  -> rootViewController
+    如果是加在window上，必须用root才能出来，一般情况下，是sender的viewController
+*/
 class DeviceImageGetTool: NSObject, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     var imageIsChosen: ((UIImage) -> Void)?
     var selectionIsCancelled: (() -> Void)?
+    weak var viewControllerForPresent: UIViewController?
     
     // sheet
     var sheetTitle = "Choose From"
-    var message: String?
-    var allowedTypes: [(title: String, type: UIImagePickerController.SourceType)] = [("PhotoLibrary", .photoLibrary), ("Camera", .camera), ("Saved Photos Album", .savedPhotosAlbum)]
+    var sheetMessage: String?
+    var allowedTypes: [(title: String, type: UIImagePickerController.SourceType)] = [("PhotoLibrary", .photoLibrary), ("Saved Photos Album", .savedPhotosAlbum), ("Camera", .camera)]
     // image handle
     var allowsEditing = true
 
-    var confinedPoint: CGFloat?
+    var confinedLength: CGFloat?
     
     // methods
     func getImageFromAllowedTypes(_ sender: UIView) {
-        let actionSheet = UIAlertController(title: sheetTitle, message: message, preferredStyle: .actionSheet)
-        for (title, type) in self.allowedTypes {
-            let alertAction = UIAlertAction(title: title, style: .default) { (action) in
-                 self.showImagePicker(type)
+        if self.allowedTypes.count == 1 {
+            // only one
+            showImagePicker(self.allowedTypes.first!.type)
+        }else {
+            // multiple choice
+            let actionSheet = UIAlertController(title: sheetTitle, message: sheetMessage, preferredStyle: .actionSheet)
+            for (title, type) in self.allowedTypes {
+                let alertAction = UIAlertAction(title: title, style: .default) { (action) in
+                     self.showImagePicker(type)
+                }
+                actionSheet.addAction(alertAction)
             }
-            actionSheet.addAction(alertAction)
+            actionSheet.popoverPresentationController?.sourceView = sender // iPad, 从sender显示sheet
+            actionSheet.popoverPresentationController?.sourceRect = sender.bounds
+            viewControllerForPresent?.present(actionSheet, animated: true, completion: nil)
         }
-        actionSheet.popoverPresentationController?.sourceView = sender // iPad, 从sender显示sheet
-        actionSheet.popoverPresentationController?.sourceRect = sender.bounds
-        rootViewController?.present(actionSheet, animated: true, completion: nil)
     }
     
     func showImagePicker(_ sourceType: UIImagePickerController.SourceType) {
@@ -44,10 +56,10 @@ class DeviceImageGetTool: NSObject, UIImagePickerControllerDelegate, UINavigatio
             imagePicker.sourceType = sourceType
             imagePicker.allowsEditing = allowsEditing // square
                    
-            rootViewController?.present(imagePicker, animated: true, completion: nil)
+            viewControllerForPresent?.present(imagePicker, animated: true, completion: nil)
         }else {
             // no camera
-            rootViewController?.showAlertMessage(nil, title: "SourceType Is Not Available", buttons: [("Choose Other Source Type", nil)])
+            viewControllerForPresent?.showAlertMessage(nil, title: "SourceType Is Not Available", buttons: [("Choose Other Source Type", nil)])
         }
     }
     
@@ -59,8 +71,8 @@ class DeviceImageGetTool: NSObject, UIImagePickerControllerDelegate, UINavigatio
         }
         
         var image = info[resultInfoKey] as! UIImage
-        if confinedPoint != nil && image.size.width > confinedPoint! {
-                image = image.changeImageSizeTo(CGSize(width: confinedPoint!, height: confinedPoint!))
+        if confinedLength != nil && image.size.width > confinedLength! {
+            image = image.changeImageSizeTo(CGSize(width: confinedLength!, height: confinedLength!))
         }
     
         picker.dismiss(animated: true) {

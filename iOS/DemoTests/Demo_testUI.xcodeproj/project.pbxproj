@@ -7,21 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		883CED2422A0FC84007B56FC /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883CED2322A0FC84007B56FC /* MathTool.swift */; };
-		883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883D5546233B39D70004CC11 /* CustomTabbarController.swift */; };
+		0BBCD2812429ECC900E2570C /* ImageReviewScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCD2802429ECC900E2570C /* ImageReviewScrollView.swift */; };
+		19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8E5B32407DE000099F155 /* TestTableView.swift */; };
+		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
-		8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817D20E47F9F00A71EAC /* DefAndMethods.swift */; };
-		8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8893817E20E47F9F00A71EAC /* ExtensionFile.swift */; };
-		88F1B10F22C351C000BAB274 /* TestXib.xib in Resources */ = {isa = PBXBuildFile; fileRef = 88F1B10E22C351C000BAB274 /* TestXib.xib */; };
+		887C87592424A75500511D16 /* CardTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C87572424A75500511D16 /* CardTagView.swift */; };
+		887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C87582424A75500511D16 /* CoreTextArcView.swift */; };
+		887C87602424A78400511D16 /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875C2424A78400511D16 /* ExtensionFile.swift */; };
+		887C87612424A78400511D16 /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875D2424A78400511D16 /* MathTool.swift */; };
+		887C87622424A78400511D16 /* DefAndMethods.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875F2424A78400511D16 /* DefAndMethods.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		883CED2322A0FC84007B56FC /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
-		883D5546233B39D70004CC11 /* CustomTabbarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomTabbarController.swift; sourceTree = "<group>"; };
+		0BBCD2802429ECC900E2570C /* ImageReviewScrollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageReviewScrollView.swift; sourceTree = "<group>"; };
+		19B8E5B32407DE000099F155 /* TestTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableView.swift; sourceTree = "<group>"; };
+		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8850314B1E8E36F6009B21B6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -29,10 +33,12 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		8893817D20E47F9F00A71EAC /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
-		8893817E20E47F9F00A71EAC /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
-		8893817F20E47F9F00A71EAC /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
-		88F1B10E22C351C000BAB274 /* TestXib.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TestXib.xib; sourceTree = "<group>"; };
+		887C87572424A75500511D16 /* CardTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTagView.swift; sourceTree = "<group>"; };
+		887C87582424A75500511D16 /* CoreTextArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextArcView.swift; sourceTree = "<group>"; };
+		887C875C2424A78400511D16 /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
+		887C875D2424A78400511D16 /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
+		887C875E2424A78400511D16 /* PrefixHeader.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.h; sourceTree = "<group>"; };
+		887C875F2424A78400511D16 /* DefAndMethods.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DefAndMethods.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +55,8 @@
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
+				887C87572424A75500511D16 /* CardTagView.swift */,
+				887C87582424A75500511D16 /* CoreTextArcView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -74,20 +82,21 @@
 			children = (
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
-				883D5546233B39D70004CC11 /* CustomTabbarController.swift */,
-				88F1B10E22C351C000BAB274 /* TestXib.xib */,
+				0BBCD2802429ECC900E2570C /* ImageReviewScrollView.swift */,
+				19B8E5B32407DE000099F155 /* TestTableView.swift */,
+				8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
 			);
 			path = Demo_testUI;
 			sourceTree = "<group>";
 		};
-		8893817C20E47F9F00A71EAC /* BasicSupportingFiles */ = {
+		887C875B2424A78400511D16 /* BasicSupportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				883CED2322A0FC84007B56FC /* MathTool.swift */,
-				8893817D20E47F9F00A71EAC /* DefAndMethods.swift */,
-				8893817E20E47F9F00A71EAC /* ExtensionFile.swift */,
-				8893817F20E47F9F00A71EAC /* PrefixHeader.h */,
+				887C875C2424A78400511D16 /* ExtensionFile.swift */,
+				887C875D2424A78400511D16 /* MathTool.swift */,
+				887C875E2424A78400511D16 /* PrefixHeader.h */,
+				887C875F2424A78400511D16 /* DefAndMethods.swift */,
 			);
 			name = BasicSupportingFiles;
 			path = ../../../BasicSupportingFiles;
@@ -96,7 +105,7 @@
 		88B85C3D1FA9C2D200BA13B9 /* supportingFiles */ = {
 			isa = PBXGroup;
 			children = (
-				8893817C20E47F9F00A71EAC /* BasicSupportingFiles */,
+				887C875B2424A78400511D16 /* BasicSupportingFiles */,
 				885031491E8E36F6009B21B6 /* AppDelegate.swift */,
 				8850314D1E8E36F6009B21B6 /* Main.storyboard */,
 				885031501E8E36F6009B21B6 /* Assets.xcassets */,
@@ -169,7 +178,6 @@
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
-				88F1B10F22C351C000BAB274 /* TestXib.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -180,12 +188,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
+				0BBCD2812429ECC900E2570C /* ImageReviewScrollView.swift in Sources */,
+				887C87612424A78400511D16 /* MathTool.swift in Sources */,
+				887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
+				887C87602424A78400511D16 /* ExtensionFile.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
-				883D5547233B39D70004CC11 /* CustomTabbarController.swift in Sources */,
-				883CED2422A0FC84007B56FC /* MathTool.swift in Sources */,
-				8893818020E47F9F00A71EAC /* DefAndMethods.swift in Sources */,
-				8893818120E47F9F00A71EAC /* ExtensionFile.swift in Sources */,
+				887C87592424A75500511D16 /* CardTagView.swift in Sources */,
+				887C87622424A78400511D16 /* DefAndMethods.swift in Sources */,
+				19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

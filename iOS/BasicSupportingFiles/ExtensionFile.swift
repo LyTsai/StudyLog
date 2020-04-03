@@ -65,6 +65,7 @@ extension UIColor {
         }
     }
     
+    
     // set up color
     class func colorFromHex(_ hexValue: Int) -> UIColor {
         return UIColor(red: CGFloat((hexValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((hexValue & 0xFF00) >> 8) / 255.0, blue: CGFloat(hexValue & 0xFF) / 255.0, alpha: 1)
@@ -160,33 +161,35 @@ extension UIView {
     //  convert
     
     // if Data is needed, use image.pngData() to convert
-    func createImageCopy() -> UIImage? {
+    func getFullPageScreenShot() -> UIImage? {
         let viewFrame = self.frame
+        var recordOffset: CGPoint!
         
         // for a scroll view
         if let scrollView = self as? UIScrollView {
-            self.contentOffset = CGPoint.zero
-            self.frame.size = scrollView.contentSize
-//            scrollView.snapshotView(afterScreenUpdates: true)
+            recordOffset = scrollView.contentOffset
+            // scroll view strench
+            scrollView.contentOffset = CGPoint.zero
+            scrollView.frame.size = scrollView.contentSize
         }
         
         UIGraphicsBeginImageContext(self.bounds.size)
         
         var image: UIImage?
         if let context = UIGraphicsGetCurrentContext() {
-            
-            // it will call the viewDidLayoutSubviews of the view's view controller.....
+            // it will call the viewDidLayoutSubviews of the view's viewController.....
             self.layer.render(in: context)
-        
             image = UIGraphicsGetImageFromCurrentImageContext()
             UIGraphicsEndImageContext()
         }
         
         // assign back
         self.frame = viewFrame
+        if recordOffset != nil {
+            (self as? UIScrollView)?.contentOffset = recordOffset
+        }
         
         return image
-        
     }
     
     func createPDFFile(_ fileName: String) {
@@ -208,7 +211,6 @@ extension UIView {
 
         // assign back
         self.frame = viewFrame
-        
         let documentPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first!.appending("/\(fileName)")
         pdf.write(toFile: documentPath, atomically: true)
     }
@@ -443,12 +445,9 @@ extension UIImage {
     
     // part of the image
     func getImageAtFrame(_ frame: CGRect) -> UIImage? {
-        let cgFrame = CGRect(x: frame.minX * 2 ,y: frame.minY * 2, width: frame.width * 2, height: frame.height * 2)
-        if let cropped = self.cgImage?.cropping(to: cgFrame) {
+        if let cropped = self.cgImage?.cropping(to: frame) {
             return UIImage(cgImage: cropped)
         }
-        
-        // none of image is in range
         return  nil
     }
 }
@@ -582,6 +581,25 @@ extension UITextView {
 
 // MARK: -------- String
 extension String {
+    subscript (r: Range<Int>) -> String {
+        get {
+            let startIndex = self.index(self.startIndex, offsetBy: r.lowerBound)
+            let endIndex = self.index(self.startIndex, offsetBy: r.upperBound)
+
+            return String(self[startIndex..<endIndex])
+        }
+    }
+    subscript(index:Int) -> String {
+        get{
+            let stringIndex = self.index(self.startIndex, offsetBy: index)
+            return String(self[stringIndex])
+        }
+//        set{
+//
+//            }
+    }
+
+    
     func getStartIndexesOf(_ subString: String) -> [Int] {
         var subStartIndex = startIndex
         var indexes = [Int]()
@@ -600,18 +618,29 @@ extension String {
         return emailTest.evaluate(with: self)
     }
     
-    // ten numbers
+    // 10 numbers, US phone number
     func isPhoneNumber() -> Bool {
         let phoneRegex = "^\\d{10}?$"
         let phoneTest = NSPredicate(format: "SELF MATCHES %@",phoneRegex)
         
         return phoneTest.evaluate(with: self)
     }
-    
+
     func isDecimal(_ maxNumber: Int) -> Bool {
         let decimalRegex = "^[0-9]+(\\.[0-9]{1,\(maxNumber)})?$"
         let decimalTest = NSPredicate(format: "SELF MATCHES %@", decimalRegex)
         return decimalTest.evaluate(with: self)
+    }
+
+    func filterNumbers() -> String {
+        var number = ""
+        for char in self {
+            if char.isNumber {
+                number.append(char)
+            }
+        }
+        
+        return number
     }
 }
 
@@ -628,6 +657,20 @@ extension Float {
         let number = NSNumber(value: self)
         let numberFormatter = NumberFormatter()
         numberFormatter.numberStyle = .decimal
+        
+        return numberFormatter.string(from: number) ?? "0"
+    }
+    
+    // for example: 233,233.23
+    func getTwoFractionDigitsCurrentValue() -> String {
+        let number = NSNumber(value: self)
+        let numberFormatter = NumberFormatter()
+        
+        numberFormatter.numberStyle = .decimal
+        numberFormatter.alwaysShowsDecimalSeparator = true
+        
+        numberFormatter.minimumFractionDigits = 2
+        numberFormatter.maximumFractionDigits = 2
         
         return numberFormatter.string(from: number) ?? "0"
     }
