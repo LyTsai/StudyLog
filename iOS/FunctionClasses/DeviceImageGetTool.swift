@@ -29,7 +29,7 @@ class DeviceImageGetTool: NSObject, UIImagePickerControllerDelegate, UINavigatio
     var confinedLength: CGFloat?
     
     // methods
-    func getImageFromAllowedTypes(_ sender: UIView) {
+    func getImageFromAllowedTypes(_ sender: UIView?) {
         if self.allowedTypes.count == 1 {
             // only one
             showImagePicker(self.allowedTypes.first!.type)
@@ -42,8 +42,15 @@ class DeviceImageGetTool: NSObject, UIImagePickerControllerDelegate, UINavigatio
                 }
                 actionSheet.addAction(alertAction)
             }
-            actionSheet.popoverPresentationController?.sourceView = sender // iPad, 从sender显示sheet
-            actionSheet.popoverPresentationController?.sourceRect = sender.bounds
+            
+            if sender != nil {
+                actionSheet.popoverPresentationController?.sourceView = sender! // iPad, 从sender显示sheet
+                actionSheet.popoverPresentationController?.sourceRect = sender!.bounds
+            }else {
+                actionSheet.popoverPresentationController?.sourceView = viewControllerForPresent?.view
+                actionSheet.popoverPresentationController?.sourceRect = viewControllerForPresent!.view.bounds
+            }
+            
             viewControllerForPresent?.present(actionSheet, animated: true, completion: nil)
         }
     }
