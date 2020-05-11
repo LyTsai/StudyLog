@@ -8,6 +8,36 @@
 
 import UIKit
 
+class PhotoModel {
+    var name = "icon"
+    var image: UIImage!
+    
+    class func photoModelWithName(_ name: String, image: UIImage) -> PhotoModel {
+        let photeModel = PhotoModel()
+        photeModel.name = name
+        photeModel.image = image
+        
+        return photeModel
+    }
+    
+    class func defaultModel() -> [PhotoModel]{
+        var model = [PhotoModel]()
+        
+        for i in 0..<3 {
+            let name = "back\(i)"
+            model.append(PhotoModel.photoModelWithName(name, image: UIImage(named: name)!))
+        }
+        
+        for i in 0..<12 {
+            let name = "icon\(i)"
+            model.append(PhotoModel.photoModelWithName(name, image: UIImage(named: name)!))
+        }
+        
+        return model
+    }
+    
+}
+
 // MARK: ------------------- One -----------------------
 class SampleOneViewController: UIViewController {
     let kCellIdentifier = "Cell Identifier"
@@ -19,9 +49,8 @@ class SampleOneViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        collectionView.dataSource = self
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellIdentifier)
-//        view = collectionView
+
         var tempArray = [UIColor]()
         for _ in 0..<100 {
             let redValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
@@ -32,7 +61,6 @@ class SampleOneViewController: UIViewController {
         }
         
         colorArray = tempArray
-        print(colorArray)
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -366,7 +394,7 @@ class SampleFourViewController: UICollectionViewController, UICollectionViewDele
         flowLayout.headerReferenceSize = CGSize(width: 60, height: 50)
         
         collectionView?.register(SampleFourCell.self, forCellWithReuseIdentifier: CellIdentifier)
-        collectionView?.register(SampleFourHeaderView.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HeaderIdentifier)
+     collectionView?.register(SampleFourHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: HeaderIdentifier)
         
         collectionView?.allowsMultipleSelection = true
         collectionView?.indicatorStyle = .white

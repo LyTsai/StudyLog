@@ -16,22 +16,15 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let arc = CoreTextArcView(frame: CGRect(x: 50, y: 100, width: 600, height: 300))
-        arc.backgroundColor = UIColor.clear
-        
-        arc.radius = 220
-        arc.arcCenter = CGPoint(x: 300, y: 300)
-        view.addSubview(arc)
-        
-        arc.setNeedsDisplay()
-
-//        let request = UIButton(frame: CGRect(x: 50, y: 100, width: 200, height: 100))
-//        request.backgroundColor = UIColor.magenta
-//        request.setTitle("TestLocation", for: .normal)
-//        request.addTarget(self, action: #selector(requestFor), for: .touchUpInside)
-//        locationM.delegate = self
+//        let arc = CoreTextArcView(frame: CGRect(x: 50, y: 100, width: 600, height: 300))
+//        arc.backgroundColor = UIColor.clear
 //
-//        view.addSubview(request)
+//        arc.radius = 220
+//        arc.arcCenter = CGPoint(x: 300, y: 300)
+//        view.addSubview(arc)
+//
+//        arc.setNeedsDisplay()
+
     }
     
     @objc func requestFor() {

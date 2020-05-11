@@ -652,17 +652,8 @@ extension Float {
         return String(format: "%@", number)
     }
     
-    // 000, 000, 000
-    func getCurrentValue() -> String {
-        let number = NSNumber(value: self)
-        let numberFormatter = NumberFormatter()
-        numberFormatter.numberStyle = .decimal
-        
-        return numberFormatter.string(from: number) ?? "0"
-    }
-    
-    // for example: 233,233.23
-    func getTwoFractionDigitsCurrentValue() -> String {
+    // 000, 000, 000.00
+    func getCurrentString(_ needPrefix: Bool) -> String {
         let number = NSNumber(value: self)
         let numberFormatter = NumberFormatter()
         
@@ -672,7 +663,12 @@ extension Float {
         numberFormatter.minimumFractionDigits = 2
         numberFormatter.maximumFractionDigits = 2
         
-        return numberFormatter.string(from: number) ?? "0"
+        let value = numberFormatter.string(from: number) ?? "0"
+        if needPrefix {
+            return "$ \(value)"
+        }else {
+            return value
+        }
     }
 }
 

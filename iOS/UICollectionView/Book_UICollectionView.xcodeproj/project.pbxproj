@@ -12,7 +12,6 @@
 		883DC1291DB5BD02009B82E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883DC1271DB5BD02009B82E1 /* Main.storyboard */; };
 		883DC12B1DB5BD02009B82E1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 883DC12A1DB5BD02009B82E1 /* Assets.xcassets */; };
 		883DC12E1DB5BD02009B82E1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883DC12C1DB5BD02009B82E1 /* LaunchScreen.storyboard */; };
-		8851E4851DEE7FDC00F55BD7 /* CircleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8851E4841DEE7FDC00F55BD7 /* CircleLayout.swift */; };
 		88B80EBD1DEC044C009B2FDF /* CoverFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88B80EBC1DEC044C009B2FDF /* CoverFlowLayout.swift */; };
 		88EEF9381DE53D9000F064D2 /* LayoutConcernedClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88EEF9371DE53D9000F064D2 /* LayoutConcernedClasses.swift */; };
 /* End PBXBuildFile section */
@@ -25,7 +24,6 @@
 		883DC12A1DB5BD02009B82E1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		883DC12D1DB5BD02009B82E1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		883DC12F1DB5BD02009B82E1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8851E4841DEE7FDC00F55BD7 /* CircleLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLayout.swift; sourceTree = "<group>"; };
 		88B80EBC1DEC044C009B2FDF /* CoverFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverFlowLayout.swift; sourceTree = "<group>"; };
 		88EEF9371DE53D9000F064D2 /* LayoutConcernedClasses.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LayoutConcernedClasses.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -63,7 +61,6 @@
 				883DC1251DB5BD02009B82E1 /* ViewController.swift */,
 				88EEF9371DE53D9000F064D2 /* LayoutConcernedClasses.swift */,
 				88B80EBC1DEC044C009B2FDF /* CoverFlowLayout.swift */,
-				8851E4841DEE7FDC00F55BD7 /* CircleLayout.swift */,
 				883DC1271DB5BD02009B82E1 /* Main.storyboard */,
 				883DC1351DB5CDF4009B82E1 /* supporting files */,
 			);
@@ -122,6 +119,7 @@
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
 			knownRegions = (
+				English,
 				en,
 				Base,
 			);
@@ -155,7 +153,6 @@
 			files = (
 				883DC1261DB5BD02009B82E1 /* ViewController.swift in Sources */,
 				88B80EBD1DEC044C009B2FDF /* CoverFlowLayout.swift in Sources */,
-				8851E4851DEE7FDC00F55BD7 /* CircleLayout.swift in Sources */,
 				883DC1241DB5BD02009B82E1 /* AppDelegate.swift in Sources */,
 				88EEF9381DE53D9000F064D2 /* LayoutConcernedClasses.swift in Sources */,
 			);
@@ -220,11 +217,12 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -260,9 +258,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_VERSION = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -276,7 +275,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LT.Book-UICollectionView";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
 		};
@@ -288,7 +287,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "LT.Book-UICollectionView";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 3.0;
+				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
 		};

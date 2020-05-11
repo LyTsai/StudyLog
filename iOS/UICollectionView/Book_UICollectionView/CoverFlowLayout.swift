@@ -9,36 +9,6 @@
 import Foundation
 import UIKit
 
-class PhotoModel {
-    var name = "icon"
-    var image: UIImage!
-    
-    class func photoModelWithName(_ name: String, image: UIImage) -> PhotoModel {
-        let photeModel = PhotoModel()
-        photeModel.name = name
-        photeModel.image = image
-        
-        return photeModel
-    }
-    
-    class func defaultModel() -> [PhotoModel]{
-        var model = [PhotoModel]()
-        
-        for i in 0..<3 {
-            let name = "back\(i)"
-            model.append(PhotoModel.photoModelWithName(name, image: UIImage(named: name)!))
-        }
-        
-        for i in 0..<12 {
-            let name = "icon\(i)"
-            model.append(PhotoModel.photoModelWithName(name, image: UIImage(named: name)!))
-        }
-        
-        return model
-    }
-    
-}
-
 class CoverFlowLayoutViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     @IBOutlet weak var layoutChangeSegmentedControl: UISegmentedControl!
     
@@ -71,12 +41,13 @@ class CoverFlowLayoutViewController: UICollectionViewController, UICollectionVie
         layoutChangeSegmentedControl.addTarget(self, action: #selector(layoutChangeSegmentedControlDidChangeValue), for: .valueChanged)
     }
     
-    func layoutChangeSegmentedControlDidChangeValue() {
+    @objc func layoutChangeSegmentedControlDidChangeValue() {
         if layoutChangeSegmentedControl.selectedSegmentIndex == 0 {
             collectionView!.setCollectionViewLayout(boringCollectionViewLayout, animated: true)
         }else {
             collectionView!.setCollectionViewLayout(coverFlowCollectionViewLayout, animated: true)
         }
+        
         // Invalidate the new layout
         collectionView!.collectionViewLayout.invalidateLayout()
     }
@@ -218,15 +189,15 @@ class CoverFlowFlowLayout: UICollectionViewFlowLayout {
         var transform = CATransform3DIdentity
         var maskAlpha: CGFloat = 0
         
-        if fabs(distanceFromVisibleRectToItem) < activeDistance {
+        if abs(distanceFromVisibleRectToItem) < activeDistance {
             // We're close enough to apply the transform in relation to how far away from the center we are.
-            transform = CATransform3DTranslate(CATransform3DIdentity, (-flowOffset * distanceFromVisibleRectToItem / translateDistance), 0,  (1 - fabs(normalizedDistance)) * 40000 + (isLeft ? 200 : 0))
+            transform = CATransform3DTranslate(CATransform3DIdentity, (-flowOffset * distanceFromVisibleRectToItem / translateDistance), 0,  (1 - abs(normalizedDistance)) * 40000 + (isLeft ? 200 : 0))
             let zoom = 1 + zoomFactor * (1 - abs(normalizedDistance))
             transform = CATransform3DRotate(transform, normalizedDistance * CGFloat(M_PI_4), 0, 1, 0)
             transform = CATransform3DScale(transform, zoom, zoom, 1)
             attributes.zIndex = 1
             
-            maskAlpha = inactiveGrayValue * fabs(normalizedDistance)
+            maskAlpha = inactiveGrayValue * abs(normalizedDistance)
         }else {
             // We're too far away - just apply a standard perspective transform.
             transform.m34 = -1 / (4.6777 * itemSize.width)
@@ -252,12 +223,12 @@ class CoverFlowFlowLayout: UICollectionViewFlowLayout {
         
         for layoutAttributes in array {
             // skip supplementary views
-            if layoutAttributes.representedElementCategory != UICollectionElementCategory.cell {
+            if layoutAttributes.representedElementCategory != UICollectionView.ElementCategory.cell {
                 continue
             }
             
             let itemHorizontalCenter = layoutAttributes.center.x
-            if fabs(itemHorizontalCenter - horizontalCenter) < fabs(offsetAdjustment) {
+            if abs(itemHorizontalCenter - horizontalCenter) < abs(offsetAdjustment) {
                 offsetAdjustment = itemHorizontalCenter - horizontalCenter
             }
         }
