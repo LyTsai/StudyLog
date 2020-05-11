@@ -49,6 +49,11 @@ class LoadingFilm {
             }
         })
     }
+    
+    func addOnView(_ view: UIView) {
+        isLoading = true
+        view.addSubview(backView)
+    }
 
     @objc func endLoading() {
         isLoading = false
