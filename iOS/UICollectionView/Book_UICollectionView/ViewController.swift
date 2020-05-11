@@ -8,268 +8,7 @@
 
 import UIKit
 
-class PhotoModel {
-    var name = "icon"
-    var image: UIImage!
-    
-    class func photoModelWithName(_ name: String, image: UIImage) -> PhotoModel {
-        let photeModel = PhotoModel()
-        photeModel.name = name
-        photeModel.image = image
-        
-        return photeModel
-    }
-    
-    class func defaultModel() -> [PhotoModel]{
-        var model = [PhotoModel]()
-        
-        for i in 0..<3 {
-            let name = "back\(i)"
-            model.append(PhotoModel.photoModelWithName(name, image: UIImage(named: name)!))
-        }
-        
-        for i in 0..<12 {
-            let name = "icon\(i)"
-            model.append(PhotoModel.photoModelWithName(name, image: UIImage(named: name)!))
-        }
-        
-        return model
-    }
-    
-}
-
-// MARK: ------------------- One -----------------------
-class SampleOneViewController: UIViewController {
-    let kCellIdentifier = "Cell Identifier"
-    
-    @IBOutlet var collectionView: UICollectionView!
-
-    var colorArray: [UIColor]!
-        
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: kCellIdentifier)
-
-        var tempArray = [UIColor]()
-        for _ in 0..<100 {
-            let redValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
-            let greenValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
-            let blueValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
-            
-            tempArray.append(UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: 1))
-        }
-        
-        colorArray = tempArray
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return colorArray.count
-    }
-    func collectionView(_ collectionView: UICollectionView, cellForItemAtIndexPath indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: kCellIdentifier, for: indexPath)
-        cell.backgroundColor = colorArray[indexPath.item]
-        
-        return cell
-    }
-}
-
-
-// MARK: ------------------- Two -----------------------
-class SampleTwoCell: UICollectionViewCell {
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        text = "Hello World"
-    }
-    
-    var text = "Hello World" {
-        willSet{
-            textLabel.text = newValue
-        }
-    }
-    
-    fileprivate let textLabel = UILabel()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupUI()
-    }
-    
-    func setupUI() {
-        textLabel.frame = bounds
-        textLabel.textAlignment = .center
-        contentView.addSubview(textLabel)
-        backgroundColor = UIColor.white
-    }
-}
-
-class SampleTwoViewController: UICollectionViewController {
-    let CellIdentifier = "Cell Identifier"
-    var datesArray = [Date]()
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    
-        let flowLayout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
-        flowLayout.minimumInteritemSpacing = 40
-        flowLayout.minimumLineSpacing = 40
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        flowLayout.itemSize = CGSize(width: 150, height: 80)
-        collectionView?.indicatorStyle = .white
-        
-        collectionView?.register(SampleTwoCell.self, forCellWithReuseIdentifier: CellIdentifier)
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return datesArray.count
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = DateFormatter.dateFormat(fromTemplate: "h:mm:ss a", options: 0, locale: Locale.current)
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! SampleTwoCell
-        cell.text = dateFormatter.string(from: datesArray[indexPath.item])
-        
-        return cell
-    }
-    
-    @IBAction func userTappedAddButton(_ sender: AnyObject) {
-        collectionView?.performBatchUpdates({ 
-            let dateNow = Date()
-            self.datesArray.insert(dateNow, at: 0)
-            
-            self.collectionView?.insertItems(at: [IndexPath.init(row: 0, section: 0)])// (0, 0)
-            }, completion: nil)
-    }
-}
-
-// MARK: ------------------- Three -----------------------
-class SampleThreeViewController: UICollectionViewController {
-    let CellIdentifier = "Cell Identifier"
-    
-    var imageArray = [UIImage?]()
-    var colorArray = [UIColor]()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        setupModels()
-        setupLayout()
-        
-        collectionView?.register(SampleThreeCell.self, forCellWithReuseIdentifier: CellIdentifier)
-        collectionView?.allowsMultipleSelection = true
-        collectionView?.indicatorStyle = .white
-        
-//        collectionView?.canCancelContentTouches = false
-//        collectionView?.delaysContentTouches = false
-    }
-    
-    func setupModels() {
-        for i in 0..<12 {
-            let image = UIImage(named: "icon\(i)")
-            imageArray.append(image)
-        }
-        
-        for _ in 0..<10 {
-            let redValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
-            let greenValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
-            let blueValue = CGFloat(arc4random()).truncatingRemainder(dividingBy: 255)/255.0
-            colorArray.append(UIColor(red: redValue, green: greenValue, blue: blueValue, alpha: 1))
-        }
-    }
-    
-    func setupLayout() {
-        let flowLayout = collectionView?.collectionViewLayout as! UICollectionViewFlowLayout
-        flowLayout.minimumInteritemSpacing = 20
-        flowLayout.minimumLineSpacing = 20
-        flowLayout.sectionInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-        flowLayout.itemSize = CGSize(width: 100, height: 100)
-        flowLayout.headerReferenceSize = CGSize(width: 60, height: 50)
-    }
-    
-    // dataSource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-        return colorArray.count
-    }
-    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return imageArray.count
-    }
-    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! SampleThreeCell
-        
-        cell.image = imageArray[indexPath.row]
-        cell.backgroundColor = colorArray[indexPath.section]
-        
-        return cell
-    }
-}
-
-class SampleThreeCell: UICollectionViewCell {
-    var image: UIImage! {
-        willSet{
-            imageView.image = newValue
-        }
-    }
-    fileprivate let imageView = UIImageView()
-    
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupUI()
-    }
-    
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        setupUI()
-    }
-    
-    func setupUI() {
-        backgroundColor = UIColor.white
-        
-        imageView.frame = bounds.insetBy(dx: 10, dy: 10)
-        contentView.addSubview(imageView)
-        
-        let selectedBackgroundView = UIView(frame: CGRect.zero)
-        selectedBackgroundView.backgroundColor = UIColor.white.withAlphaComponent(0.9)
-        self.selectedBackgroundView = selectedBackgroundView
-    }
-    
-    override var isHighlighted: Bool {
-        willSet{
-            if newValue == true {
-                imageView.alpha = 0.8
-            }else {
-                imageView.alpha = 1
-            }
-        }
-    }
-    
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        backgroundColor = UIColor.white
-        image = nil
-    }
-}
-
 // MARK: ------------------- Four -----------------------
-class SampleFourPhotoModel {
-    var name = "Leaves"
-    var image: UIImage!
-    
-    class func photeModelWithName(_ name: String, image: UIImage) -> SampleFourPhotoModel {
-        let photeModel = SampleFourPhotoModel()
-        photeModel.name = name
-        photeModel.image = image
-        
-        return photeModel
-    }
-}
 
 class SampleFourSectionModel {
     var selectionModelNoSelectionIndex: Int!
@@ -549,3 +288,125 @@ class SampleFiveCollectionFlowLayout: UICollectionViewFlowLayout {
         
     }
 }
+
+
+class CoverFlowLayoutViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    @IBOutlet weak var layoutChangeSegmentedControl: UISegmentedControl!
+    
+    var photoModelArray = PhotoModel.defaultModel()
+    var coverFlowCollectionViewLayout = CoverFlowFlowLayout()
+    var boringCollectionViewLayout = UICollectionViewFlowLayout()
+    
+    let CellIdentifier = "CellIdentifier"
+    
+    // there is a method called "loadView" in UIViewController
+    override func loadView() {
+        boringCollectionViewLayout.itemSize = CGSize(width: 140, height: 140)
+        boringCollectionViewLayout.minimumLineSpacing = 10
+        boringCollectionViewLayout.minimumInteritemSpacing = 10
+        
+        let photoCollectionView = UICollectionView(frame: CGRect.zero, collectionViewLayout: boringCollectionViewLayout)
+        photoCollectionView.register(CoverFlowCollectionViewCell.self, forCellWithReuseIdentifier: CellIdentifier)
+        
+        photoCollectionView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        photoCollectionView.allowsSelection = false
+        photoCollectionView.indicatorStyle = .white
+        
+        self.collectionView = photoCollectionView // now, all delegates are finished
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        layoutChangeSegmentedControl.selectedSegmentIndex = 0
+        layoutChangeSegmentedControl.addTarget(self, action: #selector(layoutChangeSegmentedControlDidChangeValue), for: .valueChanged)
+    }
+    
+    @objc func layoutChangeSegmentedControlDidChangeValue() {
+        if layoutChangeSegmentedControl.selectedSegmentIndex == 0 {
+            collectionView!.setCollectionViewLayout(boringCollectionViewLayout, animated: true)
+        }else {
+            collectionView!.setCollectionViewLayout(coverFlowCollectionViewLayout, animated: true)
+        }
+        
+        // Invalidate the new layout
+        collectionView!.collectionViewLayout.invalidateLayout()
+    }
+    
+    // flowLayoutDelegate
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        if collectionViewLayout == boringCollectionViewLayout {
+            return UIEdgeInsets(top: 10, left: 20, bottom: 10, right: 20)
+        }else {
+            return UIEdgeInsets(top: 0, left: 190, bottom: 0, right: 190)
+        }
+    }
+    
+    // dataSource
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return photoModelArray.count
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CellIdentifier, for: indexPath) as! CoverFlowCollectionViewCell
+        configureCell(cell, forIndexPath: indexPath)
+        return cell
+    }
+    fileprivate func configureCell(_ cell: CoverFlowCollectionViewCell, forIndexPath indexPath: IndexPath){
+        cell.image = photoModelArray[indexPath.item].image
+    }
+}
+
+class CoverFlowCollectionViewCell: UICollectionViewCell {
+    var image: UIImage! {
+        didSet{ imageView.image = image }
+    }
+    
+    fileprivate let imageView = UIImageView()
+    fileprivate var coverMaskView = UIView() // maskView is a property of UIView
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupUI()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        setupUI()
+    }
+    
+    fileprivate func setupUI() {
+        imageView.backgroundColor = UIColor.cyan
+        imageView.clipsToBounds = true
+        contentView.addSubview(imageView)
+        
+        coverMaskView.backgroundColor = UIColor.black
+        coverMaskView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        coverMaskView.alpha = 0
+        contentView.insertSubview(coverMaskView, aboveSubview: imageView)
+        
+        backgroundColor = UIColor.white
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        image = nil
+    }
+    
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        coverMaskView.alpha = 0
+        layer.shouldRasterize = false
+        
+        if layoutAttributes.isKind(of: CoverFlowLayoutAttributes.self) {
+            let castedLayoutAttributes = layoutAttributes as! CoverFlowLayoutAttributes
+            layer.shouldRasterize = castedLayoutAttributes.shouldRasterize
+            coverMaskView.alpha = castedLayoutAttributes.maskingValue
+        }
+    }
+    
+    override func layoutSubviews() {
+        imageView.frame = bounds.insetBy(dx: 10, dy: 10)
+        coverMaskView.frame = bounds
+    }
+}
+

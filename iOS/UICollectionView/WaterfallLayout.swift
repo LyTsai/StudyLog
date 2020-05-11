@@ -78,11 +78,11 @@ class WaterfallLayout: UICollectionViewFlowLayout {
         
         var itemHeight: CGFloat = 0
         
-        switch indexPath.item {
-        case 0 , 2: itemHeight = itemWidth * 0.2
-        case 1: itemHeight = itemWidth * 0.1
-        default: itemHeight = itemWidth * 1.1
-        }
+//        switch indexPath.item {
+//        case 0 , 2: itemHeight = itemWidth * 0.2
+//        case 1: itemHeight = itemWidth * 0.1
+//        default: itemHeight = itemWidth * 1.1
+//        }
 
         
         let attributes = super.layoutAttributesForItem(at: indexPath)

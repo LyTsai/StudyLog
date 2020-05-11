@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import UIKit
 
 class ScaleLayout: UICollectionViewFlowLayout {
     var minRatio: CGFloat = 0.6
@@ -45,7 +46,7 @@ class ScaleLayout: UICollectionViewFlowLayout {
         
         for layoutAttributes in array {
             // skip supplementary views
-            if layoutAttributes.representedElementCategory != UICollectionElementCategory.cell { continue }
+            if layoutAttributes.representedElementCategory != UICollectionView.ElementCategory.cell { continue }
             let itemHorizontalCenter = layoutAttributes.center.x
             if fabs(itemHorizontalCenter - horizontalCenter) < fabs(offsetAdjustment) {
                 offsetAdjustment = itemHorizontalCenter - horizontalCenter

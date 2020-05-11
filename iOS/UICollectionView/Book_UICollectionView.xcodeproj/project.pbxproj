@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B77112D24695119001E8237 /* ScaleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77112624695119001E8237 /* ScaleLayout.swift */; };
+		0B77112E24695119001E8237 /* CircleLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77112724695119001E8237 /* CircleLayout.swift */; };
+		0B77112F24695119001E8237 /* SpinningWheel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77112824695119001E8237 /* SpinningWheel.swift */; };
+		0B77113024695119001E8237 /* WaterfallLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77112924695119001E8237 /* WaterfallLayout.swift */; };
+		0B77113224695119001E8237 /* WindingRoadCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77112B24695119001E8237 /* WindingRoadCollectionView.swift */; };
+		0B77113324695119001E8237 /* ScrollAndScale.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77112C24695119001E8237 /* ScrollAndScale.swift */; };
+		0B7711352469511F001E8237 /* BlockFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7711342469511F001E8237 /* BlockFlowLayout.swift */; };
+		0B77113724695194001E8237 /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77113624695194001E8237 /* PhotoModel.swift */; };
+		0B77113924695609001E8237 /* MultipleLayoutCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77113824695609001E8237 /* MultipleLayoutCollectionViewController.swift */; };
 		883DC1241DB5BD02009B82E1 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DC1231DB5BD02009B82E1 /* AppDelegate.swift */; };
 		883DC1261DB5BD02009B82E1 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 883DC1251DB5BD02009B82E1 /* ViewController.swift */; };
 		883DC1291DB5BD02009B82E1 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 883DC1271DB5BD02009B82E1 /* Main.storyboard */; };
@@ -17,6 +26,15 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B77112624695119001E8237 /* ScaleLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScaleLayout.swift; sourceTree = SOURCE_ROOT; };
+		0B77112724695119001E8237 /* CircleLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleLayout.swift; sourceTree = SOURCE_ROOT; };
+		0B77112824695119001E8237 /* SpinningWheel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpinningWheel.swift; sourceTree = SOURCE_ROOT; };
+		0B77112924695119001E8237 /* WaterfallLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WaterfallLayout.swift; sourceTree = SOURCE_ROOT; };
+		0B77112B24695119001E8237 /* WindingRoadCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WindingRoadCollectionView.swift; sourceTree = SOURCE_ROOT; };
+		0B77112C24695119001E8237 /* ScrollAndScale.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollAndScale.swift; sourceTree = SOURCE_ROOT; };
+		0B7711342469511F001E8237 /* BlockFlowLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BlockFlowLayout.swift; sourceTree = SOURCE_ROOT; };
+		0B77113624695194001E8237 /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
+		0B77113824695609001E8237 /* MultipleLayoutCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MultipleLayoutCollectionViewController.swift; sourceTree = "<group>"; };
 		883DC1201DB5BD02009B82E1 /* Book_UICollectionView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Book_UICollectionView.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		883DC1231DB5BD02009B82E1 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		883DC1251DB5BD02009B82E1 /* ViewController.swift */ = {isa = PBXFileReference; indentWidth = 5; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -58,10 +76,18 @@
 		883DC1221DB5BD02009B82E1 /* Book_UICollectionView */ = {
 			isa = PBXGroup;
 			children = (
+				0B77113624695194001E8237 /* PhotoModel.swift */,
+				0B77113824695609001E8237 /* MultipleLayoutCollectionViewController.swift */,
 				883DC1251DB5BD02009B82E1 /* ViewController.swift */,
 				88EEF9371DE53D9000F064D2 /* LayoutConcernedClasses.swift */,
+				0B7711342469511F001E8237 /* BlockFlowLayout.swift */,
 				88B80EBC1DEC044C009B2FDF /* CoverFlowLayout.swift */,
-				883DC1271DB5BD02009B82E1 /* Main.storyboard */,
+				0B77112724695119001E8237 /* CircleLayout.swift */,
+				0B77112624695119001E8237 /* ScaleLayout.swift */,
+				0B77112C24695119001E8237 /* ScrollAndScale.swift */,
+				0B77112824695119001E8237 /* SpinningWheel.swift */,
+				0B77112924695119001E8237 /* WaterfallLayout.swift */,
+				0B77112B24695119001E8237 /* WindingRoadCollectionView.swift */,
 				883DC1351DB5CDF4009B82E1 /* supporting files */,
 			);
 			path = Book_UICollectionView;
@@ -70,6 +96,7 @@
 		883DC1351DB5CDF4009B82E1 /* supporting files */ = {
 			isa = PBXGroup;
 			children = (
+				883DC1271DB5BD02009B82E1 /* Main.storyboard */,
 				883DC1231DB5BD02009B82E1 /* AppDelegate.swift */,
 				883DC12A1DB5BD02009B82E1 /* Assets.xcassets */,
 				883DC12C1DB5BD02009B82E1 /* LaunchScreen.storyboard */,
@@ -151,10 +178,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B77113024695119001E8237 /* WaterfallLayout.swift in Sources */,
+				0B7711352469511F001E8237 /* BlockFlowLayout.swift in Sources */,
+				0B77112D24695119001E8237 /* ScaleLayout.swift in Sources */,
+				0B77112E24695119001E8237 /* CircleLayout.swift in Sources */,
+				0B77112F24695119001E8237 /* SpinningWheel.swift in Sources */,
 				883DC1261DB5BD02009B82E1 /* ViewController.swift in Sources */,
+				0B77113724695194001E8237 /* PhotoModel.swift in Sources */,
 				88B80EBD1DEC044C009B2FDF /* CoverFlowLayout.swift in Sources */,
 				883DC1241DB5BD02009B82E1 /* AppDelegate.swift in Sources */,
 				88EEF9381DE53D9000F064D2 /* LayoutConcernedClasses.swift in Sources */,
+				0B77113324695119001E8237 /* ScrollAndScale.swift in Sources */,
+				0B77113924695609001E8237 /* MultipleLayoutCollectionViewController.swift in Sources */,
+				0B77113224695119001E8237 /* WindingRoadCollectionView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
