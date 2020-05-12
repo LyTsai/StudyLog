@@ -8,12 +8,13 @@
 
 import Foundation
 import UIKit
-class MultipleLayoutCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class MultipleLayoutCollectionViewController: UICollectionViewController, UICollectionViewDelegateFlowLayout, BlockFlowDelegate {
     @IBOutlet weak var layoutChangeSegmentedControl: UISegmentedControl!
     
     let photoModelArray = PhotoModel.defaultModels()
     var coverFlowCollectionViewLayout = CoverFlowFlowLayout()
     var boringCollectionViewLayout = UICollectionViewFlowLayout()
+    var blockFlowLayout = BlockFlowLayout()
     
     
     // there is a method called "loadView" in UIViewController
@@ -40,10 +41,13 @@ class MultipleLayoutCollectionViewController: UICollectionViewController, UIColl
     }
     
     @objc func layoutChangeSegmentedControlDidChangeValue() {
-        if layoutChangeSegmentedControl.selectedSegmentIndex == 0 {
+        let segmentIndex = layoutChangeSegmentedControl.selectedSegmentIndex
+        if segmentIndex == 0 {
             collectionView!.setCollectionViewLayout(boringCollectionViewLayout, animated: true)
-        }else {
+        }else if segmentIndex == 1 {
             collectionView!.setCollectionViewLayout(coverFlowCollectionViewLayout, animated: true)
+        }else if segmentIndex == 2 {
+            collectionView.setCollectionViewLayout(blockFlowLayout, animated: true)
         }
         
         // Invalidate the new layout

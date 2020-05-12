@@ -9,103 +9,108 @@
 import Foundation
 import UIKit
 
+
 // protocol for flow
-@objc protocol BlockFlowDataSource {
-    // default as 2
-    @objc optional func numberOfColsForLayout(_ layout: BlockFlowLayout) -> Int
+@objc protocol BlockFlowDelegate {
+    // top and left gaps
+    @objc optional func originVectorForLayout(_ layout: BlockFlowLayout, at indexPath: IndexPath) -> CGPoint
     
-    // diffferent cols
-//    @objc optional func numberOfCellsForLayout(_ layout: BlockFlowLayout, atRow: Int) -> Int
-    
-    // default as 0
-    @objc optional func topMarginOfItemAt(_ indexPath: IndexPath) -> CGFloat
-    
-    // default as 0
-    @objc optional func leftMarginOfItemAt(_ indexPath: IndexPath) -> CGFloat
-    
-    // default as itemSize
+    // item size
     @objc optional func itemSizeForLayout(_ layout: BlockFlowLayout, at indexPath: IndexPath) -> CGSize
-    
-    // edgeInset
-    @objc optional func sectionEdgeInsetsForLayout(_ layout: BlockFlowLayout) -> UIEdgeInsets
-    
-    // for draw
-    @objc optional func anchorPointAt(_ indexPath: IndexPath) -> CGPoint
-//    @objc optional func anchorPositonAt(_ indexPath: IndexPath) -> PositionOfAnchor
 }
 
 class BlockFlowLayout: UICollectionViewFlowLayout {
-    var dataSource: BlockFlowDataSource!
-    
-    var maxYs = [Int : CGFloat]()
-    var attriArray = [UICollectionViewLayoutAttributes]()
+    var delegate: BlockFlowDelegate?
+//    var numberOfFlow: Int = 2
+ 
+    fileprivate var _attriArray = [UICollectionViewLayoutAttributes]()
+    fileprivate var _itemMarginGuide = [Int: CGFloat]()
     override func prepare() {
         super.prepare()
         
-        scrollDirection = .vertical
-        sectionInset = dataSource.sectionEdgeInsetsForLayout?(self) ?? UIEdgeInsets.zero
-        minimumLineSpacing = 0
-        minimumInteritemSpacing = 0
-        
-        // maxYs
-        let numberOfCols = dataSource.numberOfColsForLayout?(self) ?? 2
-        for i in 0..<numberOfCols {
-            maxYs[i] = dataSource.sectionEdgeInsetsForLayout?(self).top ?? 0
-        }
-        
+        self.minimumLineSpacing = 0
+        self.minimumInteritemSpacing = 0
+
         // for rect
-        let numberOfItems = collectionView!.numberOfItems(inSection: 0)
-        attriArray.removeAll()
-        for i in 0..<numberOfItems {
-            attriArray.append(layoutAttributesForItem(at: IndexPath(item: i, section: 0))!)
-        }
-    }
-    
-    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
-        return true
-    }
-    
-    override var collectionViewContentSize: CGSize {
-        var maxYItem = 0
-        for (col, value) in maxYs {
-            if maxYs[maxYItem]! < value {
-                maxYItem = col
+        _attriArray.removeAll()
+        if let numberOfItems = collectionView?.numberOfItems(inSection: 0) {
+            for i in 0..<numberOfItems {
+                if let attri = layoutAttributesForItem(at: IndexPath(item: i, section: 0)) {
+                    _attriArray.append(attri)
+                }
             }
         }
-        
-        return CGSize(width: 0, height: maxYs[maxYItem]! + sectionInset.bottom)
+    }
+    
+//    override func shouldInvalidateLayout(forBoundsChange newBounds: CGRect) -> Bool {
+//        return true
+//    }
+    
+    override var collectionViewContentSize: CGSize {
+        var maxX: CGFloat = 0
+        var maxY: CGFloat = 0
+        for attri in _attriArray {
+            maxX = max(attri.frame.maxX, maxX)
+            maxY = max(attri.frame.maxY, maxY)
+        }
+        if scrollDirection == .horizontal {
+            return CGSize(width: maxX + sectionInset.right, height: 0)
+        }else {
+            return CGSize(width: 0, height: maxY + sectionInset.bottom)
+        }
     }
     
     // attributes
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let originalAttributes = super.layoutAttributesForItem(at: indexPath)
-        let attributes = originalAttributes
-        
-        let colNumber = indexPath.item % (dataSource.numberOfColsForLayout?(self) ?? 2)
-        let sizeOfItem = dataSource.itemSizeForLayout?(self, at: indexPath) ?? itemSize
-        let top = dataSource.topMarginOfItemAt?(indexPath) ?? 0
-        let left = dataSource.leftMarginOfItemAt?(indexPath) ?? 0
-        
-        var itemX = sectionInset.left + left
-        if colNumber != 0 {
-            for i in 1...colNumber {
-                let lastIndexPath = IndexPath(item: indexPath.item - i, section: indexPath.section)
-                let lastLeft = dataSource.leftMarginOfItemAt?(lastIndexPath)  ?? 0
-                let lastWidth = dataSource.itemSizeForLayout?(self, at: lastIndexPath).width ?? 0
-                itemX += lastLeft + lastWidth
-            }
-        }
-        
-        let itemY = maxYs[colNumber]! + top
-        attributes?.frame = CGRect(x: itemX, y: itemY, width: sizeOfItem.width, height: sizeOfItem.height)
-        attributes?.zIndex = indexPath.item // the next is higher, first is zero
-        maxYs[colNumber] = attributes?.frame.maxY
-        
+        let attributes = originalAttributes?.copy() as? UICollectionViewLayoutAttributes
+        attributes?.frame = getFrameForItem(at: indexPath)
+        attributes?.zIndex = indexPath.item // maybe overlap
+   
         return attributes
     }
     
+    fileprivate func getFrameForItem(at indexPath: IndexPath) -> CGRect {
+        let sizeOfItem = delegate?.itemSizeForLayout?(self, at: indexPath) ?? itemSize
+        let originVector = delegate?.originVectorForLayout?(self, at: indexPath) ?? CGPoint.zero
+        
+//        let flowIndex = indexPath.item % numberOfFlow
+        
+        var calcultedFrame = CGRect(origin: CGPoint(x: sectionInset.left + originVector.x, y: sectionInset.top + originVector.y), size: sizeOfItem)
+        if indexPath.item != 0 {
+            let collectionSize = collectionView?.frame.size ?? CGSize.zero
+            let lastIndexPath = IndexPath(item: indexPath.item - 1, section: indexPath.section)
+            let lastFrame = getFrameForItem(at: lastIndexPath)
+            
+//            var calcultedFrame = CGRect(origin: originVector, size: <#T##CGSize#>
+//                x: lastFrame.maxX + originVector.x, y: lastFrame.maxY + originVector.y, width: sizeOfItem.width, height: sizeOfItem.height)
+//
+            if scrollDirection == .horizontal {
+                calcultedFrame.origin = CGPoint(x: lastFrame.minX + originVector.x, y: lastFrame.maxY + originVector.y)
+                if calcultedFrame.maxY > collectionSize.height - sectionInset.bottom {
+                    // next column
+                    calcultedFrame.origin = CGPoint(x: lastFrame.maxX + originVector.x, y: sectionInset.top + originVector.y)
+                }
+            }else {
+                calcultedFrame.origin = CGPoint(x: lastFrame.maxX + originVector.x, y: lastFrame.minY + originVector.y)
+                if calcultedFrame.maxX > collectionSize.width - sectionInset.right {
+                    // next row
+                    calcultedFrame.origin = CGPoint(x: sectionInset.left + originVector.x, y: lastFrame.maxY + originVector.y)
+                }
+            }
+        }
+        
+//        if scrollDirection == .horizontal {
+//            _itemMarginGuide[flowIndex] = calcultedFrame.maxX
+//        }else {
+//            _itemMarginGuide[flowIndex] = calcultedFrame.maxY
+//        }
+        
+        return calcultedFrame
+    }
+    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        return attriArray
+        return _attriArray
     }
     
 }
