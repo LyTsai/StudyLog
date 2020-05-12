@@ -20,7 +20,7 @@ class CoverFlowFlowLayout: UICollectionViewFlowLayout {
         itemSize = CGSize(width: 180, height: 180)
         
         minimumLineSpacing = -60  // Gets items up close to one another
-        minimumInteritemSpacing = 200 // only one row
+        minimumInteritemSpacing = 700 // only one row
     }
     
     // now, the attributes is custom
