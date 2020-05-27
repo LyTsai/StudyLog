@@ -9,7 +9,6 @@
 import Foundation
 import UIKit
 
-
 class CircleAndFlowCollectionViewController: UICollectionViewController {
     var cellCount: Int = 12
     var circleLayout = CircleLayout()

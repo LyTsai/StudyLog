@@ -35,7 +35,7 @@ class AFCollectionViewFlowLayout: UICollectionViewFlowLayout {
             
 //            if attributes.representedElementCategory == UICollectionElementCategorySupplementaryView {
             // checking the element category of the layout attributes was added.
-            if attributes.representedElementCategory == UICollectionElementCategory.supplementaryView {
+            if attributes.representedElementCategory == UICollectionView.ElementCategory.supplementaryView {
                 let newAttributes = layoutAttributesForDecorationView(ofKind: AFCollectionViewFlowLayoutBackgroundDecoration, at: attributes.indexPath)
                 newAttributesArray.append(newAttributes!)
             }

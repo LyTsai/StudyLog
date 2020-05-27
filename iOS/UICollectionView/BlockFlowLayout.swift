@@ -23,7 +23,7 @@ import Foundation
     @objc optional func leftMarginOfItemAt(_ indexPath: IndexPath) -> CGFloat
     
     // default as itemSize
-    @objc optional func itemSizeForLayout(_ layout: BlockFlowLayout, at indexPath: IndexPath) -> CGSize
+    @objc optional func itemSizeAtIndexPath(_ indexPath: IndexPath) -> CGSize
     
     // edgeInset
     @objc optional func sectionEdgeInsetsForLayout(_ layout: BlockFlowLayout) -> UIEdgeInsets
@@ -78,10 +78,10 @@ class BlockFlowLayout: UICollectionViewFlowLayout {
     // attributes
     override func layoutAttributesForItem(at indexPath: IndexPath) -> UICollectionViewLayoutAttributes? {
         let originalAttributes = super.layoutAttributesForItem(at: indexPath)
-        let attributes = originalAttributes
+        let attributes = originalAttributes?.copy() as? UICollectionViewLayoutAttributes
         
         let colNumber = indexPath.item % (dataSource.numberOfColsForLayout?(self) ?? 2)
-        let sizeOfItem = dataSource.itemSizeForLayout?(self, at: indexPath) ?? itemSize
+        let sizeOfItem = dataSource.itemSizeAtIndexPath?(indexPath) ?? itemSize
         let top = dataSource.topMarginOfItemAt?(indexPath) ?? 0
         let left = dataSource.leftMarginOfItemAt?(indexPath) ?? 0
         
@@ -90,7 +90,7 @@ class BlockFlowLayout: UICollectionViewFlowLayout {
             for i in 1...colNumber {
                 let lastIndexPath = IndexPath(item: indexPath.item - i, section: indexPath.section)
                 let lastLeft = dataSource.leftMarginOfItemAt?(lastIndexPath)  ?? 0
-                let lastWidth = dataSource.itemSizeForLayout?(self, at: lastIndexPath).width ?? 0
+                let lastWidth = dataSource.itemSizeAtIndexPath?(lastIndexPath).width ?? 0
                 itemX += lastLeft + lastWidth
             }
         }
@@ -106,6 +106,5 @@ class BlockFlowLayout: UICollectionViewFlowLayout {
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         return attriArray
     }
-    
 }
 

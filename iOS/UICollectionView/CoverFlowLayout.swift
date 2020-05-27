@@ -22,11 +22,14 @@ class CoverFlowLayout: UICollectionViewFlowLayout {
         return true
     }
     
-    
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
         let originAttributes = super.layoutAttributesForElements(in: rect) ?? []
         
-        let attributesArray = originAttributes
+        var attributesArray = [UICollectionViewLayoutAttributes]()
+        for one in originAttributes {
+            attributesArray.append(one.copy() as! UICollectionViewLayoutAttributes)
+        }
+        
         for attributes in attributesArray {
             let shifting = collectionView!.contentOffset.x + collectionView!.bounds.width * 0.5 - attributes.center.x
             
@@ -58,8 +61,8 @@ class CoverFlowLayout: UICollectionViewFlowLayout {
         let attributesArray = layoutAttributesForElements(in: rect) ?? []
         
         var offsetX = collectionView!.bounds.width // max gap
-        for (i, attributes) in attributesArray.enumerated()  {
-            if attributes.representedElementCategory != UICollectionElementCategory.cell {
+        for (_, attributes) in attributesArray.enumerated()  {
+            if attributes.representedElementCategory != UICollectionView.ElementCategory.cell {
                 continue
             }
             

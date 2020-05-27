@@ -10,7 +10,8 @@ import Foundation
 
 class ScaleLayout: UICollectionViewFlowLayout {
     var minRatio: CGFloat = 0.6
-    
+    var focusMiddle = true
+
     override func prepare() {
         super.prepare()
         
@@ -23,12 +24,15 @@ class ScaleLayout: UICollectionViewFlowLayout {
     }
     
     override func layoutAttributesForElements(in rect: CGRect) -> [UICollectionViewLayoutAttributes]? {
-        let orginalArray = super.layoutAttributesForElements(in: rect)
-        let curArray = orginalArray ?? []
-        let centerX = collectionView!.contentOffset.x + collectionView!.bounds.width * 0.5
+        let orginalArray = super.layoutAttributesForElements(in: rect) ?? []
+        var curArray = [UICollectionViewLayoutAttributes]()
+        for one in orginalArray {
+            curArray.append(one.copy() as! UICollectionViewLayoutAttributes)
+        }
         
         for attrs in curArray {
-            let space = abs(attrs.center.x - centerX)
+            let focus = collectionView!.contentOffset.x + (focusMiddle ? collectionView!.bounds.width * 0.5 : itemSize.width * 0.5 + sectionInset.left)
+            let space = abs(attrs.center.x - focus)
             let scale = max(minRatio, min(1 - space / collectionView!.bounds.width,1))
             attrs.transform = CGAffineTransform(scaleX: scale, y: scale)
             attrs.zIndex = -Int(space)
@@ -39,15 +43,15 @@ class ScaleLayout: UICollectionViewFlowLayout {
 
     override func targetContentOffset(forProposedContentOffset proposedContentOffset: CGPoint, withScrollingVelocity velocity: CGPoint) -> CGPoint {
         var offsetAdjustment = CGFloat(MAXFLOAT)
-        let horizontalCenter = proposedContentOffset.x + collectionView!.bounds.width * 0.5
+        let horizontalCenter = focusMiddle ? proposedContentOffset.x + collectionView!.bounds.width * 0.5 : proposedContentOffset.x + itemSize.width * 0.5
         let proposedRect = CGRect(origin: CGPoint(x: proposedContentOffset.x, y: 0), size: collectionView!.bounds.size)
         let array = layoutAttributesForElements(in: proposedRect)!
         
         for layoutAttributes in array {
             // skip supplementary views
-            if layoutAttributes.representedElementCategory != UICollectionElementCategory.cell { continue }
+            if layoutAttributes.representedElementCategory != UICollectionView.ElementCategory.cell { continue }
             let itemHorizontalCenter = layoutAttributes.center.x
-            if fabs(itemHorizontalCenter - horizontalCenter) < fabs(offsetAdjustment) {
+            if abs(itemHorizontalCenter - horizontalCenter) < abs(offsetAdjustment) {
                 offsetAdjustment = itemHorizontalCenter - horizontalCenter
             }
         }

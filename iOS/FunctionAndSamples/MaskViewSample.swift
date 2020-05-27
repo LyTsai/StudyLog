@@ -12,12 +12,10 @@ import UIKit
 // maskView: An optional view whose alpha channel is used to mask a view’s content.
 /*
  最终效果图怎么显示只跟maskView每个point的alpha相关，透明度一致。
- 
  */
 
 class MaskViewUsageView: UIView {
     let maskLayer = CALayer()
-//    let maskV = UIView()
     let imageView1 = UIImageView(image: #imageLiteral(resourceName: "base"))
     let imageView2 = UIImageView(image: #imageLiteral(resourceName: "background"))
     
@@ -33,12 +31,9 @@ class MaskViewUsageView: UIView {
         // 可以用一个边缘羽化的图片，这样会出来一个边上渐隐的效果。因为maskLayer的透明部分会继续遮挡。
 //        maskLayer.backgroundColor = UIColor.red.cgColor
         imageView2.layer.mask = maskLayer
-        
-//        addSubview(imageView1)
         addSubview(imageView2)
         
         // frames
-        imageView1.frame = bounds
         imageView2.frame = bounds
         
         maskLayer.frame = CGRect(x: 20, y: 10, width: 100, height: 100)
@@ -50,10 +45,9 @@ class MaskViewUsageView: UIView {
         if demoTag == 1 {
             maskLayer.position = point!
         }
-        
     }
     
-    // 两个图片的切换显示
+    // 两个图片的交叉切换显示
     func demoTwo() {
         imageView1.frame = CGRect(x: 0, y: 0, width: 200, height: 200)
         imageView1.center = self.center
@@ -105,7 +99,6 @@ class MaskViewUsageView: UIView {
         /*
          当一个控件(UIiew,UIlabel,UIbutton)创建时,系统会自动创建一个与之相对应的layer，layer怎么显示，实际是与之对应的控件相关的，layer与之对应的控件是delegate关系，即layer.delegate=当前控件，在系统创建layer之后，layer的delegate会执行 - (void)drawLayer:(CALayer *)layer inContext:(CGContextRef)context 方法绘制图层来显示给用户看，当控件销毁了，则不会执行此方法了，那么layer上什么也没有，又因为控件创建的默认色为clearColor(如果设置了backgroundColor为不透明，则layer也会不透明),那么layer也会全透明(UIImageView比较特殊，除外)。在此例中如果不强引用保存unlock，执行完viewDidload方法后unlock就会销毁，如果unlock销毁了，那么unlock相对的layer就是全透明，那么gradientLayer也会全透明，即不强引用unlock的最终显示效果是 屏幕上什么都看不见。
          */
-//        let unlock = UILabel(frame: gradientLayer.bounds)
         unlock.frame = gradientLayer.bounds
         unlock.text = "滑动来解锁 >>"
         unlock.textAlignment = .center
