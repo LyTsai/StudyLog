@@ -10,38 +10,47 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-    let locationM = CLLocationManager()
-    let geocoder = CLGeocoder()
+//    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+    @IBOutlet weak var datePicker: CustomDatePicker!
+//    let locationM = CLLocationManager()
+//    let geocoder = CLGeocoder()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let arc = CoreTextArcView(frame: CGRect(x: 50, y: 100, width: 600, height: 300))
-//        arc.backgroundColor = UIColor.clear
-//
-//        arc.radius = 220
-//        arc.arcCenter = CGPoint(x: 300, y: 300)
-//        view.addSubview(arc)
-//
-//        arc.setNeedsDisplay()
-        
-        deck.setupBasic()
-        view.addSubview(deck)
+        self.datePicker.setupMode(.time)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        deck.frame = view.bounds.insetBy(dx: 0, dy: 100)
-        deck.setupWithSize(CGSize(width: 200, height: 300))
+//        deck.frame = view.bounds.insetBy(dx: 0, dy: 100)
+//        deck.setupWithSize(CGSize(width: 200, height: 300))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+        datePicker.setWithValue(9 * 60)
     }
     
+    var time = 0
+    var dateString: String?
+    var dateValue: Int = 0
+    @IBAction func saveTouch(_ sender: Any) {
+
+        if time % 2 == 0 {
+            dateValue = datePicker.currentValue
+        }else {
+//            let date = convertValueToValue(dateValue ?? 0)
+
+            datePicker.setWithValue(dateValue)
+        }
+
+        time += 1
+        print(datePicker.currentValue)
+    }
+    
+
     
 //    @objc func requestFor() {
 //        if CLLocationManager.locationServicesEnabled() {
@@ -89,8 +98,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //            }
 //        }
 //    }
-//
 
-
-    
 }
+
