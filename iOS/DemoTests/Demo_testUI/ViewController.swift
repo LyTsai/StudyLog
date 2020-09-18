@@ -11,26 +11,63 @@ import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
 //    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
-    @IBOutlet weak var datePicker: CustomDatePicker!
+    @IBOutlet weak var commentLabel: UILabel!
 //    let locationM = CLLocationManager()
 //    let geocoder = CLGeocoder()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.datePicker.setupMode(.time)
+        let textMask = UIView(frame: mainFrame)
+        let top = CAGradientLayer()
+        top.frame = CGRect(x: 0, y: 0, width: mainFrame.width, height: mainFrame.height * 0.5)
+        top.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        top.locations = [0.4, 0.8]
+        top.startPoint =  CGPoint(x: 0, y: 0.5)
+        top.endPoint = CGPoint(x: 1, y: 0.5)
+        textMask.layer.addSublayer(top)
+        
+        let bottom = CAGradientLayer()
+        bottom.frame = CGRect(x: 0, y: mainFrame.height * 0.5, width: mainFrame.width, height: mainFrame.height * 0.5)
+        bottom.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+        bottom.locations = [0.4, 0.8]
+        bottom.startPoint = CGPoint(x: 1, y: 0.5)
+        bottom.endPoint = CGPoint(x: 0, y: 0.5)
+        textMask.layer.addSublayer(top)
+        
+        self.commentLabel.mask = textMask
+        
+                       // animation
+        //                self.commentLabel.isHidden = false
+        //                // label
+        //                let labelFrame = self.commentLabel.bounds
+        //                let textMask = CAShapeLayer()
+        //                textMask.strokeColor = UIColor.red.cgColor
+        //                let maskPath = UIBezierPath()
+        //                maskPath.move(to: CGPoint(x: 0, y: labelFrame.height * 0.5))
+        //                maskPath.addLine(to: CGPoint(x: labelFrame.width, y: labelFrame.height * 0.5))
+        //                textMask.lineWidth = labelFrame.height
+        //                textMask.lineCap = .butt
+        //                textMask.path = maskPath.cgPath
+        //
+        //                self.commentLabel.layer.mask = textMask
+        //
+        //                // animation
+        //                let maskAni = CABasicAnimation(keyPath: "strokeEnd")
+        //                maskAni.fromValue = 0
+        //                maskAni.toValue = 1
+        //                maskAni.duration = 1
+        //
+        //                textMask.add(maskAni, forKey: nil)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-//        deck.frame = view.bounds.insetBy(dx: 0, dy: 100)
-//        deck.setupWithSize(CGSize(width: 200, height: 300))
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        datePicker.setWithValue(9 * 60)
     }
     
     var time = 0
@@ -38,16 +75,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var dateValue: Int = 0
     @IBAction func saveTouch(_ sender: Any) {
 
-        if time % 2 == 0 {
-            dateValue = datePicker.currentValue
-        }else {
-//            let date = convertValueToValue(dateValue ?? 0)
-
-            datePicker.setWithValue(dateValue)
-        }
-
-        time += 1
-        print(datePicker.currentValue)
     }
     
 

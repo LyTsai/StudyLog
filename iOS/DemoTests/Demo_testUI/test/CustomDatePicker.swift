@@ -15,13 +15,26 @@ class CustomDatePicker: UIPickerView {
         case .countDownTimer:
             value = value * 60 + selectedRow(inComponent: 2)
         default:
+            // hour
             value += 1
-            value = value * 60 + selectedRow(inComponent: 1)
-            // PM
-            if selectedRow(inComponent: 2) == 1 {
-                value += 12 * 60
+            
+            let isAM = selectedRow(inComponent: 2) == 0
+            if value == 12 {
+                if isAM {
+                    // AM
+                    value = 0
+                }
+            }else {
+                // other, PM
+                if !isAM {
+                    value += 12 * 60
+                }
             }
+            
+            // real
+            value = value * 60 + selectedRow(inComponent: 1)
         }
+        
         return value
     }
     
@@ -62,16 +75,40 @@ class CustomDatePicker: UIPickerView {
         
         // value
         if self.datePickerMode == .time {
-            let displayRow = (hour > 12 ? hour - 12 : hour) - 1
-            
+            var displayRow = (hour > 12 ? hour - 12 : hour) - 1
+            if hour == 0 {
+                displayRow = 11
+            }
             // set rows
             self.selectRow(displayRow, inComponent: 0, animated: true)
             self.selectRow(minute, inComponent: 1, animated: true)
-            self.selectRow(hour <= 12 ? 0 : 1, inComponent: 2, animated: true)
+            // >= 12 PM
+            self.selectRow((hour < 12) ? 0 : 1, inComponent: 2, animated: true)
         }else {
             self.selectRow(hour, inComponent: 0, animated: true)
             self.selectRow(minute, inComponent: 3, animated: true)
         }
+    }
+    
+    
+    func getTimeDisplayString() -> String {
+        var hour = currentValue / 60
+        let minute = currentValue % 60
+        // special
+//        if minute == 0 {
+//            if hour == 24 {
+//                return "Midnight"
+//            }
+//        }
+
+        // normal
+        let timeTag = hour >= 12 ? "P" : "A"
+        hour = hour > 12 ? hour - 12 : hour
+        if hour == 0 {
+            hour += 12
+        }
+
+        return String(format: "%02d:%02d\(timeTag)M",hour, minute)
     }
 }
 

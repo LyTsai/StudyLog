@@ -22,34 +22,36 @@
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-XB-Yhn">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GFm-O7-dmP">
-                                <rect key="frame" x="99" y="450" width="115" height="34"/>
-                                <state key="normal" title="Button"/>
-                                <connections>
-                                    <action selector="saveTouch:" destination="BYZ-38-t0r" eventType="touchUpInside" id="nd4-wL-rW8"/>
-                                </connections>
-                            </button>
-                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="0sk-CF-3bD" customClass="CustomDatePicker" customModule="Demo_testUI" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="225.5" width="375" height="216"/>
-                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4hK-C2-NTf">
+                                <rect key="frame" x="16" y="0.0" width="343" height="667"/>
+                                <mutableString key="text">                let textMask = UIView(frame: self.commentLabel.bounds)
+                let top = CAGradientLayer()
+                top.frame = CGRect(x: 0, y: 0, width: self.commentLabel.frame.width, height: self.commentLabel.frame.height * 0.5)
+                top.colors = [UIColor.black.cgColor, UIColor.clear.cgColor]
+                top.locations = [0.4, 0.8]                bottom.endPoint = CGPoint(x: 0, y: 0.5)
+                textMask.layer.addSublayer(top)
+                
+                self.commentLabel.mask = textMask</mutableString>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="1" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="4hK-C2-NTf" secondAttribute="bottom" id="7o3-jd-eUT"/>
                             <constraint firstAttribute="trailing" secondItem="bHT-XB-Yhn" secondAttribute="trailing" id="8U7-hZ-tjp"/>
-                            <constraint firstItem="GFm-O7-dmP" firstAttribute="top" secondItem="0sk-CF-3bD" secondAttribute="bottom" constant="8" id="Hwb-aa-Suw"/>
-                            <constraint firstItem="0sk-CF-3bD" firstAttribute="height" secondItem="bHT-XB-Yhn" secondAttribute="height" multiplier="0.323838" id="JcB-WI-ols"/>
                             <constraint firstItem="bHT-XB-Yhn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NBV-iK-fV3"/>
                             <constraint firstItem="bHT-XB-Yhn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="STp-Ud-dVE"/>
+                            <constraint firstItem="4hK-C2-NTf" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leadingMargin" id="fev-Cm-W2m"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="4hK-C2-NTf" secondAttribute="trailing" id="h6K-AL-BEY"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bHT-XB-Yhn" secondAttribute="bottom" id="icc-CU-p3I"/>
-                            <constraint firstItem="0sk-CF-3bD" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ipQ-H0-dZf"/>
-                            <constraint firstItem="GFm-O7-dmP" firstAttribute="centerX" secondItem="bHT-XB-Yhn" secondAttribute="centerX" id="k5T-uM-3JK"/>
-                            <constraint firstItem="0sk-CF-3bD" firstAttribute="centerY" secondItem="bHT-XB-Yhn" secondAttribute="centerY" id="mCj-J6-XuX"/>
-                            <constraint firstAttribute="trailing" secondItem="0sk-CF-3bD" secondAttribute="trailing" id="qwo-fO-IFz"/>
+                            <constraint firstItem="4hK-C2-NTf" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="kCI-bs-Pq2"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T1q-Ol-3Z3"/>
                     <connections>
-                        <outlet property="datePicker" destination="0sk-CF-3bD" id="P5o-Xk-XGy"/>
+                        <outlet property="commentLabel" destination="4hK-C2-NTf" id="aSs-lp-8f1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
