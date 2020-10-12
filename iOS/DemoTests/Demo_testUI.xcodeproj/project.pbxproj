@@ -11,6 +11,7 @@
 		0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */; };
 		0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */; };
 		0B72CFD224EF9076008FCF40 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B72CFD124EF9076008FCF40 /* CustomDatePicker.swift */; };
+		0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */; };
 		0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */; };
 		0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9924C04CAC006781BF /* DeckCell.swift */; };
 		0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */; };
@@ -34,6 +35,7 @@
 		0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMethod.swift; sourceTree = "<group>"; };
 		0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
 		0B72CFD124EF9076008FCF40 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
+		0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewsLayoutTool.swift; sourceTree = "<group>"; };
 		0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCollectionView.swift; sourceTree = "<group>"; };
 		0B7A7B9924C04CAC006781BF /* DeckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckLayout.swift; sourceTree = "<group>"; };
@@ -90,6 +92,7 @@
 			isa = PBXGroup;
 			children = (
 				887C87572424A75500511D16 /* CardTagView.swift */,
+				0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */,
 				0BCE5211251206DE0021542A /* MaskViewSample.swift */,
 				0B72CFD124EF9076008FCF40 /* CustomDatePicker.swift */,
 				887C87582424A75500511D16 /* CoreTextArcView.swift */,
@@ -225,6 +228,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */,
 				0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */,
 				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
 				0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */,
