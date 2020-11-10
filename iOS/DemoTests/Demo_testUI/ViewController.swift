@@ -14,15 +14,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
   
     @IBOutlet weak var background: UIImageView!
     //    let geocoder = CLGeocoder()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        background.layer.transform = CATransform3DRotate(CATransform3DIdentity, CGFloatPi, 1, 0, 0)
+        let topLayer = CAShapeLayer()
+        let viewPath = UIBezierPath(roundedRect: CGRect(x: 100, y: 100, width: 500, height: 600), cornerRadius: 4)
+        viewPath.append(UIBezierPath(ovalIn: CGRect(x: 110, y: 300, width: 40, height: 40)))
+        viewPath.append(UIBezierPath(ovalIn: CGRect(x: 410, y: 300, width: 40, height: 40)))
+        
+        topLayer.fillRule = .evenOdd
+        topLayer.path = viewPath.cgPath
+        topLayer.fillColor = UIColor.clear.cgColor
+        topLayer.lineWidth = 4
+        topLayer.strokeColor = UIColor.cyan.cgColor
+        
+        topLayer.addBlackShadow(4)
+        
+        self.view.layer.addSublayer(topLayer)
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        background.layer.transform = CATransform3DRotate(CATransform3DIdentity, CGFloatPi, 1, 0, 0)
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
