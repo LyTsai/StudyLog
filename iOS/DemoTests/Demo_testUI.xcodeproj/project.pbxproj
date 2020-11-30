@@ -16,6 +16,7 @@
 		0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9924C04CAC006781BF /* DeckCell.swift */; };
 		0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */; };
 		0BCE5212251206DE0021542A /* MaskViewSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE5211251206DE0021542A /* MaskViewSample.swift */; };
+		0BCE755D25749BF000B728CB /* TEst.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCE755C25749BF000B728CB /* TEst.xib */; };
 		19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8E5B32407DE000099F155 /* TestTableView.swift */; };
 		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
@@ -40,6 +41,7 @@
 		0B7A7B9924C04CAC006781BF /* DeckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckLayout.swift; sourceTree = "<group>"; };
 		0BCE5211251206DE0021542A /* MaskViewSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaskViewSample.swift; path = ../../../FunctionAndSamples/MaskViewSample.swift; sourceTree = "<group>"; };
+		0BCE755C25749BF000B728CB /* TEst.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TEst.xib; sourceTree = "<group>"; };
 		19B8E5B32407DE000099F155 /* TestTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableView.swift; sourceTree = "<group>"; };
 		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -72,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				0B05F1D824D904CA00CCE648 /* LayoutTool.swift */,
+				0BCE755C25749BF000B728CB /* TEst.xib */,
 				0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */,
 				0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */,
 			);
@@ -216,6 +219,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
+				0BCE755D25749BF000B728CB /* TEst.xib in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
 			);
