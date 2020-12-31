@@ -1,10 +1,8 @@
 #!/usr/bin/env python3
-list = list(range(10))
 
-list.append([2, True])
-list1 = [1, 'hello']
-list.extend(list1 * 2)
-
-print(list)
-
-print(list.index(1, 9))
+tupleA = (2, 4, 5)
+print(tupleA[2:4])  # (5,)
+print(tupleA[::-1])  # (5, 4, 2)
+print(tupleA[::-2])  # (5, 2)
+print(tupleA[-2:-1:1])  # (4,)
+print(tupleA[-2:-1:])
