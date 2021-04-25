@@ -13,23 +13,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
 //    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
   
     @IBOutlet weak var background: UIImageView!
-    //    let geocoder = CLGeocoder()
     
+    let topLayer = CAShapeLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let topLayer = CAShapeLayer()
-        let viewPath = UIBezierPath(roundedRect: CGRect(x: 100, y: 100, width: 500, height: 600), cornerRadius: 4)
-        viewPath.append(UIBezierPath(ovalIn: CGRect(x: 110, y: 300, width: 40, height: 40)))
-        viewPath.append(UIBezierPath(ovalIn: CGRect(x: 410, y: 300, width: 40, height: 40)))
-        
-        topLayer.fillRule = .evenOdd
-        topLayer.path = viewPath.cgPath
         topLayer.fillColor = UIColor.clear.cgColor
-        topLayer.lineWidth = 4
-        topLayer.strokeColor = UIColor.cyan.cgColor
-        
-        topLayer.addBlackShadow(4)
+        topLayer.strokeColor = UIColor.black.cgColor
         
         self.view.layer.addSublayer(topLayer)
     }
@@ -37,6 +27,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
+        let path = UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 300, y: 500), arrowL: 10)
+        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 300, y: 200), arrowL: 10))
+
+
+        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 500, y: 500), arrowL: 10))
+        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 100, y: 500), arrowL: 10))
+        topLayer.path = path.cgPath
     }
     
     override func viewWillAppear(_ animated: Bool) {

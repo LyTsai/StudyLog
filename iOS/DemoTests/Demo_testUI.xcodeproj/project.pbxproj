@@ -10,13 +10,10 @@
 		0B05F1D924D904CA00CCE648 /* LayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1D824D904CA00CCE648 /* LayoutTool.swift */; };
 		0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */; };
 		0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */; };
-		0B72CFD224EF9076008FCF40 /* CustomDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B72CFD124EF9076008FCF40 /* CustomDatePicker.swift */; };
 		0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */; };
 		0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */; };
 		0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9924C04CAC006781BF /* DeckCell.swift */; };
 		0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */; };
-		0BCE5212251206DE0021542A /* MaskViewSample.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BCE5211251206DE0021542A /* MaskViewSample.swift */; };
-		0BCE755D25749BF000B728CB /* TEst.xib in Resources */ = {isa = PBXBuildFile; fileRef = 0BCE755C25749BF000B728CB /* TEst.xib */; };
 		19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8E5B32407DE000099F155 /* TestTableView.swift */; };
 		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
@@ -35,13 +32,10 @@
 		0B05F1D824D904CA00CCE648 /* LayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTool.swift; sourceTree = "<group>"; };
 		0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMethod.swift; sourceTree = "<group>"; };
 		0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
-		0B72CFD124EF9076008FCF40 /* CustomDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomDatePicker.swift; sourceTree = "<group>"; };
 		0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewsLayoutTool.swift; sourceTree = "<group>"; };
 		0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCollectionView.swift; sourceTree = "<group>"; };
 		0B7A7B9924C04CAC006781BF /* DeckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckLayout.swift; sourceTree = "<group>"; };
-		0BCE5211251206DE0021542A /* MaskViewSample.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MaskViewSample.swift; path = ../../../FunctionAndSamples/MaskViewSample.swift; sourceTree = "<group>"; };
-		0BCE755C25749BF000B728CB /* TEst.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TEst.xib; sourceTree = "<group>"; };
 		19B8E5B32407DE000099F155 /* TestTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableView.swift; sourceTree = "<group>"; };
 		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -74,7 +68,6 @@
 			isa = PBXGroup;
 			children = (
 				0B05F1D824D904CA00CCE648 /* LayoutTool.swift */,
-				0BCE755C25749BF000B728CB /* TEst.xib */,
 				0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */,
 				0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */,
 			);
@@ -96,8 +89,6 @@
 			children = (
 				887C87572424A75500511D16 /* CardTagView.swift */,
 				0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */,
-				0BCE5211251206DE0021542A /* MaskViewSample.swift */,
-				0B72CFD124EF9076008FCF40 /* CustomDatePicker.swift */,
 				887C87582424A75500511D16 /* CoreTextArcView.swift */,
 			);
 			path = test;
@@ -219,7 +210,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */,
-				0BCE755D25749BF000B728CB /* TEst.xib in Resources */,
 				885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */,
 				8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */,
 			);
@@ -241,11 +231,9 @@
 				0B05F1D924D904CA00CCE648 /* LayoutTool.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				887C87602424A78400511D16 /* ExtensionFile.swift in Sources */,
-				0B72CFD224EF9076008FCF40 /* CustomDatePicker.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				887C87592424A75500511D16 /* CardTagView.swift in Sources */,
 				0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */,
-				0BCE5212251206DE0021542A /* MaskViewSample.swift in Sources */,
 				0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */,
 				887C87622424A78400511D16 /* DefAndMethods.swift in Sources */,
 				0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */,

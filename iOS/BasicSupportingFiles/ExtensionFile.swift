@@ -218,6 +218,46 @@ extension UIView {
 
 // MARK: ------ UIBezierPath
 extension UIBezierPath {
+    // polygon
+    class func getRegularPolygonPath(_ center: CGPoint, radius: CGFloat, startAngle: CGFloat, lineNumber: Int) -> UIBezierPath {
+        let polygonPath = UIBezierPath()
+        
+        // create
+        for i in 0..<lineNumber {
+            let angle = CGFloatPi * 2 / CGFloat(lineNumber) * CGFloat(i) + startAngle
+            let point = Calculation.getPositionByAngle(angle, radius: radius, origin: center)
+            
+            // connect
+            if i == 0 {
+                polygonPath.move(to: point)
+            }else {
+                polygonPath.addLine(to: point)
+            }
+        }
+        
+        polygonPath.close()
+        
+        return polygonPath
+    }
+    
+    // sign board
+    class func getRightPointSignBoardPathInRect(_ rect: CGRect, offset: CGFloat, cornerRadius: CGFloat) -> UIBezierPath {
+        let path = UIBezierPath()
+        
+        path.move(to: CGPoint(x: rect.maxX - offset, y: rect.maxY))
+        path.addLine(to: CGPoint(x: rect.maxX, y: rect.midY))
+        path.addLine(to: CGPoint(x: rect.maxX - offset, y: rect.minY))
+        
+        path.addLine(to: CGPoint(x: rect.minX + cornerRadius, y: rect.minY))
+        path.addArc(withCenter: CGPoint(x: rect.minX + cornerRadius, y: rect.minY + cornerRadius), radius: cornerRadius, startAngle: -CGFloatPi * 0.5, endAngle: -CGFloatPi, clockwise: false)
+        path.addLine(to: CGPoint(x: rect.minX, y: rect.maxY - cornerRadius))
+        path.addArc(withCenter: CGPoint(x: rect.minX + cornerRadius, y: rect.maxY - cornerRadius), radius: cornerRadius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
+        
+        path.close()
+        
+        return path
+    }
+    // Fan
     class func getFanPath(_ radius: CGFloat, innerRadius: CGFloat, vertex: CGPoint, sAngle: CGFloat, eAngle: CGFloat, clockwise: Bool) -> UIBezierPath {
         let path = UIBezierPath(arcCenter: vertex, radius: radius, startAngle: eAngle, endAngle: sAngle, clockwise: !clockwise)
         path.addArc(withCenter: vertex, radius: innerRadius, startAngle: sAngle, endAngle: eAngle, clockwise: clockwise)
@@ -247,7 +287,30 @@ extension UIBezierPath {
         
         return path
     }
+    
     // bubbles
+    class func getTopArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
+        let innerRect = rect.insetBy(dx: radius, dy: radius)
+        let arrowL = (arrowPoint.y - rect.minY) * 0.6
+        
+        // path
+        let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.minX, y: innerRect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomLeftPoint, radius: radius, startAngle: CGFloatPi, endAngle: CGFloatPi * 0.5, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: innerRect.maxX, y: rect.maxY))
+        bubblePath.addArc(withCenter: innerRect.bottomRightPoint, radius: radius, startAngle: CGFloatPi * 0.5, endAngle: 0, clockwise: false)
+        bubblePath.addLine(to: CGPoint(x: rect.maxX, y: innerRect.minY))
+        bubblePath.addArc(withCenter: innerRect.topRightPoint, radius: radius, startAngle: 0, endAngle: -CGFloatPi * 0.5, clockwise: false)
+        
+        bubblePath.addLine(to: CGPoint(x: arrowPoint.x + arrowL, y: rect.minY))
+        bubblePath.addLine(to: arrowPoint)
+        bubblePath.addLine(to: CGPoint(x: arrowPoint.x - arrowL, y: rect.minY))
+        
+        bubblePath.close()
+        
+        return bubblePath
+    }
+    
     class func getDownArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
         let innerRect = rect.insetBy(dx: radius, dy: radius)
         let arrowL = (arrowPoint.y - rect.maxY) * 0.6
@@ -270,7 +333,7 @@ extension UIBezierPath {
     
     class func getLeftArrowBubblePathWithMainFrame(_ rect: CGRect, arrowPoint: CGPoint, radius: CGFloat) -> UIBezierPath {
         let innerRect = rect.insetBy(dx: radius, dy: radius)
-        let arrowL = (rect.minX - arrowPoint.x) * 0.6
+        let arrowL = min((rect.minX - arrowPoint.x) * 0.6, rect.height - arrowPoint.y)
         
         // path
         let bubblePath = UIBezierPath(arcCenter: innerRect.origin, radius: radius, startAngle: -CGFloatPi * 0.5, endAngle: CGFloatPi, clockwise: false)
@@ -311,56 +374,24 @@ extension UIBezierPath {
         return bubblePath
     }
     
-    class func pathWithAttributedString(_ attributedString: NSAttributedString, maxWidth: CGFloat) -> UIBezierPath {
-        /*
-         如果不做任何位移，是一堆叠在一起的y轴翻转了的字符
-
-        \n不起折行的作用
-
-
-        textLayer.isGeometryFlipped = true
-        竖直翻转，文字会在最下面开始排列
-
-        如果考虑到不止一排的情况，需要计算当前字符所在的行数目然后上移（翻转后就是看起来下移了
-        ）
-         */
-        let letters = CGMutablePath()
-
-        // CTLine
-        let line = CTLineCreateWithAttributedString(attributedString as CFAttributedString)
-        // CFArray
-        let runArray = CTLineGetGlyphRuns(line)
-        for runIndex in 0..<CFArrayGetCount(runArray) {
-            let run = CFArrayGetValueAtIndex(runArray, runIndex)
-            let runBit = unsafeBitCast(run, to: CTRun.self)
-            let CTFontName = unsafeBitCast(kCTFontAttributeName, to: UnsafeRawPointer.self)
-            
-            let runFontC = CFDictionaryGetValue(CTRunGetAttributes(runBit),CTFontName)
-            let runFontS = unsafeBitCast(runFontC, to: CTFont.self)
-
-            for i in 0..<CTRunGetGlyphCount(runBit) {
-                let range = CFRangeMake(i, 1)
-                let glyph = UnsafeMutablePointer<CGGlyph>.allocate(capacity: 1)
-                glyph.initialize(to: 0)
-                let position = UnsafeMutablePointer<CGPoint>.allocate(capacity: 1)
-                position.initialize(to: .zero)
-                CTRunGetGlyphs(runBit, range, glyph)
-                CTRunGetPositions(runBit, range, position);
-                
-                if let path = CTFontCreatePathForGlyph(runFontS,glyph.pointee,nil) {
-                    let transform = CGAffineTransform(translationX: position.pointee.x, y: position.pointee.y)
-                    letters.addPath(path, transform: transform)
-                }
-                glyph.deinitialize(count: 1)
-                glyph.deallocate()
-                
-                position.deinitialize(count: 1)
-                position.deallocate()
-            }
-        }
+    class func getDirectionArrowFrom(_ start: CGPoint, end: CGPoint, arrowL: CGFloat) -> UIBezierPath {
+        let arrowPath = UIBezierPath()
         
-        let path = UIBezierPath(cgPath: letters)
-        return path
+        // line
+        arrowPath.move(to: start)
+        arrowPath.addLine(to: end)
+        
+        // arrow
+        let arrowAngle = CGFloatPi * 25 / 180
+        let lineAngle = atan2(start.y - end.y, start.x - end.x)
+       
+        let downAngle = lineAngle - arrowAngle
+        arrowPath.addLine(to: CGPoint(x: arrowL * cos(downAngle) + end.x, y: end.y + arrowL * sin(downAngle)))
+        arrowPath.move(to: end)
+        let upAngle = lineAngle + arrowAngle
+        arrowPath.addLine(to: CGPoint(x: arrowL * cos(upAngle) + end.x, y: end.y + arrowL * sin(upAngle)))
+        
+        return arrowPath
     }
 }
 
