@@ -10,75 +10,56 @@ import UIKit
 import MapKit
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
+//    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
+  
+    @IBOutlet weak var background: UIImageView!
     
-    let locationM = CLLocationManager()
-    let geocoder = CLGeocoder()
+    let topLayer = CAShapeLayer()
     override func viewDidLoad() {
         super.viewDidLoad()
         
-//        let arc = CoreTextArcView(frame: CGRect(x: 50, y: 100, width: 600, height: 300))
-//        arc.backgroundColor = UIColor.clear
-//
-//        arc.radius = 220
-//        arc.arcCenter = CGPoint(x: 300, y: 300)
-//        view.addSubview(arc)
-//
-//        arc.setNeedsDisplay()
-
+        topLayer.fillColor = UIColor.clear.cgColor
+        topLayer.strokeColor = UIColor.black.cgColor
+        
+        self.view.layer.addSublayer(topLayer)
     }
     
-    @objc func requestFor() {
-        if CLLocationManager.locationServicesEnabled() {
-            if CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-                locationM.startUpdatingLocation()
-            }else {
-                // is not authorized
-                locationM.requestWhenInUseAuthorization()
-            }
-        }else {
-            // not available for location service
-        }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
-        geocoder.geocodeAddressString("Apple Inc.") { (placemarks, error) in
-            if let marks = placemarks {
-                 for placemark in marks {
-                    print(placemark.postalCode)
-                    print(placemark.name)
-                 }
-            }else {
-                print("place marks nil for apple")
-            }
-            if error != nil {
-                print("error is \(error?.localizedDescription)")
-            }
-        }
-        
-    }
+        let path = UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 300, y: 500), arrowL: 10)
+        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 300, y: 200), arrowL: 10))
 
-    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-         print("--------------- get by location --------------")
-        if let location = locations.last {
-            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-                if let marks = placemarks {
-                    for placemark in marks {
-                        print(placemark.postalCode)
-                        print(placemark.addressDictionary)
-                    }
-                }else {
-                    print("place marks nil for current location")
-                }
-                if error != nil {
-                    print("error is \(error?.localizedDescription)")
-                }
-            }
-        }
+
+        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 500, y: 500), arrowL: 10))
+        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 100, y: 500), arrowL: 10))
+        topLayer.path = path.cgPath
     }
     
-
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
     }
-    
+   
+//
+//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+//         print("--------------- get by location --------------")
+//        if let location = locations.last {
+//            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
+//                if let marks = placemarks {
+//                    for placemark in marks {
+//                        print(placemark.postalCode)
+//                        print(placemark.addressDictionary)
+//                    }
+//                }else {
+//                    print("place marks nil for current location")
+//                }
+//                if error != nil {
+//                    print("error is \(error?.localizedDescription)")
+//                }
+//            }
+//        }
+//    }
+
 }
+

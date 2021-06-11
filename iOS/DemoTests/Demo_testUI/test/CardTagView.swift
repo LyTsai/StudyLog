@@ -14,7 +14,7 @@ class CardTagView: UIView {
     var decoImage: UIImage! = #imageLiteral(resourceName: "icon3")
     var borderWidth: CGFloat = 4
     var cornerRadius: CGFloat = 8
-    
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         setupSubs()
@@ -23,6 +23,7 @@ class CardTagView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         setupSubs()
+        
     }
     
     fileprivate func setupSubs() {

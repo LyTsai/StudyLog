@@ -7,6 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B05F1D924D904CA00CCE648 /* LayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1D824D904CA00CCE648 /* LayoutTool.swift */; };
+		0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */; };
+		0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */; };
+		0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */; };
+		0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */; };
+		0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9924C04CAC006781BF /* DeckCell.swift */; };
+		0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */; };
 		19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 19B8E5B32407DE000099F155 /* TestTableView.swift */; };
 		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
@@ -22,6 +29,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B05F1D824D904CA00CCE648 /* LayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTool.swift; sourceTree = "<group>"; };
+		0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMethod.swift; sourceTree = "<group>"; };
+		0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
+		0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewsLayoutTool.swift; sourceTree = "<group>"; };
+		0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCollectionView.swift; sourceTree = "<group>"; };
+		0B7A7B9924C04CAC006781BF /* DeckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
+		0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckLayout.swift; sourceTree = "<group>"; };
 		19B8E5B32407DE000099F155 /* TestTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestTableView.swift; sourceTree = "<group>"; };
 		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -50,10 +64,31 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B05F1DA24D904D300CCE648 /* UIAdapt */ = {
+			isa = PBXGroup;
+			children = (
+				0B05F1D824D904CA00CCE648 /* LayoutTool.swift */,
+				0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */,
+				0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */,
+			);
+			path = UIAdapt;
+			sourceTree = "<group>";
+		};
+		0B7A7B9724C04CAC006781BF /* Deck */ = {
+			isa = PBXGroup;
+			children = (
+				0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */,
+				0B7A7B9924C04CAC006781BF /* DeckCell.swift */,
+				0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */,
+			);
+			path = Deck;
+			sourceTree = "<group>";
+		};
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
 				887C87572424A75500511D16 /* CardTagView.swift */,
+				0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */,
 				887C87582424A75500511D16 /* CoreTextArcView.swift */,
 			);
 			path = test;
@@ -78,8 +113,10 @@
 		885031481E8E36F6009B21B6 /* Demo_testUI */ = {
 			isa = PBXGroup;
 			children = (
+				0B05F1DA24D904D300CCE648 /* UIAdapt */,
 				8845E35E2064DF36001C18F6 /* test */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
+				0B7A7B9724C04CAC006781BF /* Deck */,
 				19B8E5B32407DE000099F155 /* TestTableView.swift */,
 				8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
@@ -185,14 +222,21 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */,
+				0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */,
 				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
+				0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */,
 				887C87612424A78400511D16 /* MathTool.swift in Sources */,
 				887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */,
+				0B05F1D924D904CA00CCE648 /* LayoutTool.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
 				887C87602424A78400511D16 /* ExtensionFile.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				887C87592424A75500511D16 /* CardTagView.swift in Sources */,
+				0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */,
+				0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */,
 				887C87622424A78400511D16 /* DefAndMethods.swift in Sources */,
+				0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */,
 				19B8E5B42407DE000099F155 /* TestTableView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
