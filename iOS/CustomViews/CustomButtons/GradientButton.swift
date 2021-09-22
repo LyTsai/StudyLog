@@ -1,9 +1,9 @@
 //
 //  GradientButton.swift
-//  MagniPhi
+//  SHIELD
 //
-//  Created by L on 2021/5/10.
-//  Copyright © 2021 MingHui. All rights reserved.
+//  Created by L on 2020/6/11.
+//  Copyright © 2020 MingHui. All rights reserved.
 //
 
 import Foundation
@@ -50,12 +50,12 @@ class GradientButton: UIButton {
     fileprivate let buttonTitleLabel = UILabel()
     fileprivate let gradient = CAGradientLayer()
     fileprivate func addBasic() {
-        self.backgroundColor = UIColor.white
-        
         // gradient
-        gradient.opacity = 0.8
-        gradient.colors = [UIColorFromHex(0xECFFC9).cgColor, UIColorFromHex(0x67BD45).cgColor]
-        gradient.locations = [0, 0.99]
+        gradient.opacity = 0.45
+        gradient.colors = [UIColor.white.cgColor, UIColor.white.withAlphaComponent(0).cgColor]
+        gradient.locations = [0, 0.55]
+        titleLabel?.numberOfLines = 0
+        
         self.layer.addSublayer(gradient)
         
         // text
@@ -68,12 +68,26 @@ class GradientButton: UIButton {
     }
     
     fileprivate func setAccordingToCurrentState() {
-        self.gradient.isHidden = !isSelected
-        self.layer.borderColor = (isSelected ? projectTintColor : buttonColor).cgColor
-        self.buttonTitleLabel.textColor = isSelected ? UIColor.black : buttonColor
+        self.backgroundColor = isSelected ? buttonColor : UIColor.white
+        self.layer.borderColor = (isSelected ? UIColor.clear : buttonColor).cgColor
+        self.buttonTitleLabel.textColor = isSelected ? UIColor.white : UIColor.black
     }
     
-   
+    // gradient animation
+    func useAnimation() {
+        gradient.removeAllAnimations()
+        gradient.locations = [0, 0.55]
+
+        let animation = CABasicAnimation(keyPath: "locations")
+        animation.fromValue = [0, 0.55]
+        animation.toValue = [0.55, 1]
+        animation.autoreverses = true
+        animation.duration = 1.5
+        animation.repeatCount = MAXFLOAT
+
+        gradient.add(animation, forKey: nil)
+    }
+     
     // title setup
     func setTitle(_ title: String?) {
         self.setTitle(nil, for: .normal)
@@ -83,38 +97,26 @@ class GradientButton: UIButton {
         self.buttonTitleLabel.text = title
     }
     
-    fileprivate var action: (() -> Void)?
-    func addButtonAction(_ action: (() -> Void)?) {
-        self.action = action
-        if (self.actions(forTarget: self, forControlEvent: .touchUpInside) ?? []).isEmpty {
-            self.addTarget(self, action: #selector(buttonIsTouched), for: .touchUpInside)
-        }
+    // color
+    func resetGradientColor(_ color: UIColor) {
+        self.buttonColor = color
+        self.setAccordingToCurrentState()
     }
-    @objc func buttonIsTouched() {
-        self.action?()
-    }
-    
-    func setAsMoreGradients() {
-        self.roundCorner = true
-        gradient.opacity = 1
-        gradient.colors = [UIColorFromHex(0xD4FF89).cgColor, UIColorFromHex(0x98D150).cgColor, UIColorFromHex(0x368F12).cgColor]
-        gradient.locations = [0, 0.1, 0.99]
-    }
-    
+   
     // layout
     override func layoutSubviews() {
         super.layoutSubviews()
          
-        let one = bounds.height / 40
+        let one = bounds.height / 48
         layer.borderWidth = one
         
-        let innerFrame = bounds.insetBy(dx: 0.5 * one, dy: 0.5 * one)
-        let radius = roundCorner ? bounds.height * 0.5 : 4 * one
+        let radius = roundCorner ? bounds.height * 0.5 : 8 * one
         layer.cornerRadius = radius
-        gradient.frame = innerFrame
-        gradient.cornerRadius = radius - 0.5 * one
+        let gap = one * 1.5
+        gradient.frame = bounds.insetBy(dx: gap, dy: gap)
+        gradient.cornerRadius = radius - gap
         
-        self.buttonTitleLabel.frame = innerFrame
-        self.buttonTitleLabel.font = UIFont.systemFont(ofSize: 16 * one, weight: .medium)
+        self.buttonTitleLabel.frame = bounds.insetBy(dx: one, dy: one)
+        self.buttonTitleLabel.font = UIFont.systemFont(ofSize: 18 * one, weight: .medium)
     }
 }

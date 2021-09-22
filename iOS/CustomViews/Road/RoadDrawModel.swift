@@ -12,23 +12,27 @@ enum RoadDirection {
 }
 
 class RoadDrawModel {
+    var solidRoad = false
+    
     var branchPoint = CGPoint.zero
     var turningRadius: CGFloat = 40
     var startPoint = CGPoint.zero
-    var roadWidth: CGFloat = 31.0
+    var roadWidth: CGFloat = 31.0 {
+        didSet {
+            minGap = roadWidth * 1.15
+        }
+    }
     
     // for draw
     var anchorInfo = [(anchor: CGPoint, played: Bool)]()
     
-    var roadLineColor = UIColorFromRGB(253, green: 255, blue: 251)
+    var roadLineColor = UIColorFromRGB(253, green: 255, blue: 251).withAlphaComponent(0.5)
     // green sets
-    var roadMainColor = UIColorFromRGB(185, green: 183, blue: 169)
-    var roadPlayedColor = UIColorFromRGB(56, green: 129, blue: 18)
+    var roadMainColor = UIColorFromRGB(185, green: 183, blue: 169).withAlphaComponent(0.5)
+    var roadPlayedColor = projectTintColor.withAlphaComponent(0.5)
     
     // take as overlapped
-    fileprivate var minGap : CGFloat {
-        return roadWidth * 1.15
-    }
+    var minGap : CGFloat = 10
     
     // take as one line
     fileprivate var ultraGap: CGFloat {
@@ -36,14 +40,15 @@ class RoadDrawModel {
     }
     
     var firstDirection = RoadDirection.fromTop
-    fileprivate var rect = CGRect.zero
-    func drawRoadInRect(_ rect: CGRect) {
+    fileprivate var maxX: CGFloat = 0
+    func drawRoadWithMaxX(_ maxX: CGFloat) {
         // no point
-        if anchorInfo.count == 0  {
+        if anchorInfo.isEmpty  {
             return
         }
         
-        self.rect = rect
+        self.maxX = maxX
+
         // line of road
         var direction: RoadDirection = firstDirection
         
@@ -130,12 +135,18 @@ class RoadDrawModel {
         path.lineJoinStyle = .round
         path.lineCapStyle = .round
         
-        
         // draw main road
+        let roadColor = played ? roadPlayedColor : roadMainColor
         path.lineWidth = roadWidth
-        roadMainColor.setStroke()
-        path.stroke()
-        
+        if solidRoad {
+            roadColor.setStroke()
+            path.stroke()
+            return
+        }else {
+            roadMainColor.setStroke()
+            path.stroke()
+        }
+       
         // coverPath
         let coverPath = path
         roadLineColor.setStroke()
@@ -143,7 +154,6 @@ class RoadDrawModel {
         coverPath.stroke()
         
         // middle path
-        let roadColor = played ? roadPlayedColor : roadMainColor
         let middlePath = path
         roadColor.setStroke()
         middlePath.lineWidth = roadWidth * 0.6
@@ -239,8 +249,8 @@ class RoadDrawModel {
                         direction = .fromTop
                     }
                 }else {
-                    if (point2.x + radius) >= rect.width - roadWidth * 0.5 {
-                        radius = (rect.width - point2.x - roadWidth * 0.5) * 0.6
+                    if (point2.x + radius) >= maxX - roadWidth * 0.5 {
+                        radius = (maxX - point2.x - roadWidth * 0.5) * 0.6
                     }
                     
                     var startP = CGPoint(x: point2.x, y: point1.y)
@@ -265,9 +275,9 @@ class RoadDrawModel {
                 if radius < minGap * 0.5 {
                     //                    print("error for from left")
                 }else {
-                    if (point1.x + radius + roadWidth * 0.5) >= rect.width {
+                    if (point1.x + radius + roadWidth * 0.5) >= maxX {
                         // topLeftCorner, down
-                        radius = (rect.width - point1.x - roadWidth * 0.5) * 0.6
+                        radius = (maxX - point1.x - roadWidth * 0.5) * 0.6
                     }
                     
                     radius = min(radius, turningRadius)

@@ -1,12 +1,13 @@
 //
 //  InnerShadowCheckButton.swift
-//  WholeSHIELD
+//  BrainSHIELD
 //
 //  Created by L on 2020/7/22.
 //  Copyright © 2020 MingHui. All rights reserved.
 //
 
 import Foundation
+import UIKit
 
 class InnerShadowCheckButton: UIButton {
     var roundCornered = true {
@@ -42,6 +43,7 @@ class InnerShadowCheckButton: UIButton {
         // text and check
         textLabel.numberOfLines = 0
         textLabel.textAlignment = .center
+        textLabel.adjustsFontSizeToFitWidth = true
         addSubview(textLabel)
         
         checked.contentMode = .scaleAspectFit
@@ -87,32 +89,21 @@ class InnerShadowCheckButton: UIButton {
         self.layer.shadowColor = (self.isSelected ? UIColor.clear : UIColor.black).cgColor
     }
     
-//    var calculateTextWidth: CGFloat {
+//    var calculatedTextHeight: CGFloat {
 //        if let attributedText = textLabel.attributedText {
-//            let oneH = bounds.height / 44
-//            let boundingW = attributedText.boundingRect(with: CGSize(width: width, height: bounds.height), options: .usesLineFragmentOrigin, context: nil).width
+//            let boundingH = attributedText.boundingRect(with: CGSize(width: textLabel.bounds.width, height: height), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).height
 //
-//            return boundingW + bounds.height + 10 * oneH
+//            print(boundingH)
+//            return boundingH
 //        }
 //
-//        return self.bounds.width
+//        return self.bounds.height
 //    }
-    
-    var calculatedTextHeight: CGFloat {
-        if let attributedText = textLabel.attributedText {
-            let boundingH = attributedText.boundingRect(with: CGSize(width: textLabel.bounds.width, height: height), options: [.usesLineFragmentOrigin, .usesFontLeading], context: nil).height
-
-            print(boundingH)
-            return boundingH
-        }
-        
-        return self.bounds.height
-    }
         
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        let oneH = bounds.height / 40
+        let oneH = bounds.height / 44
         textLabel.font = UIFont.systemFont(ofSize: 16 * oneH, weight: .medium)
         
         let radius = roundCornered ? bounds.height * 0.5 : 4 * fontFactor
@@ -123,7 +114,6 @@ class InnerShadowCheckButton: UIButton {
         self.layer.cornerRadius = radius
         
         // inner
-        
         let innerShape = UIBezierPath(roundedRect: bounds, cornerRadius: radius)
         innerShape.append(UIBezierPath(roundedRect: bounds.insetBy(dx: oneH * 2, dy: oneH * 2), cornerRadius: radius - oneH))
         innerShapeLayer.path = innerShape.cgPath

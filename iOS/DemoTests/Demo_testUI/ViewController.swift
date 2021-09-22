@@ -9,36 +9,46 @@
 import UIKit
 import MapKit
 
-class ViewController: UIViewController, CLLocationManagerDelegate {
+class ViewController: UIViewController, UITextFieldDelegate {
 //    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
   
     @IBOutlet weak var background: UIImageView!
     
-    let topLayer = CAShapeLayer()
+    @IBOutlet weak var textField: UITextField!
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        textField.delegate = self
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        if let text = textField.text {
+            print(AccountAndPasswordTool.passwordContainsNumber(text))
+            print(AccountAndPasswordTool.passwordContainsUpperLetter(text))
+            print(AccountAndPasswordTool.passwordContainsLowerLetter(text))
+            print(AccountAndPasswordTool.passwordContainsWords(text, words: ["test", "password"]))
+            print("------------")
+        }
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.view.endEditing(true)
         
-        topLayer.fillColor = UIColor.clear.cgColor
-        topLayer.strokeColor = UIColor.black.cgColor
-        
-        self.view.layer.addSublayer(topLayer)
+        return true
     }
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         
-        let path = UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 300, y: 500), arrowL: 10)
-        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 300, y: 200), arrowL: 10))
-
-
-        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 500, y: 500), arrowL: 10))
-        path.append(UIBezierPath.getDirectionArrowFrom(CGPoint(x: 300, y: 400), end: CGPoint(x: 100, y: 500), arrowL: 10))
-        topLayer.path = path.cgPath
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
    
 //

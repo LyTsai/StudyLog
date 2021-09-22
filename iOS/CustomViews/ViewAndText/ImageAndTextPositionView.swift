@@ -20,7 +20,7 @@ class ImageAndTextPositionView: UIView {
     }
     
     var viewKey: String?
-    
+    var gap: CGFloat = 5
     var textWidthExpandRatio: CGFloat?
     var textHeightExpandRatio: CGFloat?
     
@@ -88,7 +88,7 @@ class ImageAndTextPositionView: UIView {
     // label frames
     fileprivate func updateLabelPosition() {
         let textBounding = CGSize(width: bounds.height * (textWidthExpandRatio ?? 4), height: bounds.height * (textHeightExpandRatio ?? 1))
-        titleLabel.frame = TextPosition.getFrame(textBounding, sideFrame: bounds, labelPosition: labelPosition, gap: 5, verticalAdjustRatio: verticalAdjustRatio ?? 0)
+        titleLabel.frame = TextPosition.getFrame(textBounding, sideFrame: bounds, labelPosition: labelPosition, gap: gap, verticalAdjustRatio: verticalAdjustRatio ?? 0)
        
         // text alignment
         if autoAdjustAlignment {
