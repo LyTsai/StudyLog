@@ -10,18 +10,18 @@
 		0B05F1D924D904CA00CCE648 /* LayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1D824D904CA00CCE648 /* LayoutTool.swift */; };
 		0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */; };
 		0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */; };
-		0B74E4FB26F315EA005F5CC4 /* AccountAndPasswordTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B74E4FA26F315EA005F5CC4 /* AccountAndPasswordTool.swift */; };
-		0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */; };
 		0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */; };
 		0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9924C04CAC006781BF /* DeckCell.swift */; };
 		0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */; };
+		0BF68B3027118C8200BF1BA4 /* MoodSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF68B2E27118C8200BF1BA4 /* MoodSelectionView.swift */; };
+		0BF68B3127118C8200BF1BA4 /* PersonalMoodDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF68B2F27118C8200BF1BA4 /* PersonalMoodDisplayView.swift */; };
+		0BF68B3327118CBF00BF1BA4 /* TextPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF68B3227118CBF00BF1BA4 /* TextPosition.swift */; };
 		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
 		8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8850314B1E8E36F6009B21B6 /* ViewController.swift */; };
 		8850314F1E8E36F6009B21B6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8850314D1E8E36F6009B21B6 /* Main.storyboard */; };
 		885031511E8E36F6009B21B6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 885031501E8E36F6009B21B6 /* Assets.xcassets */; };
 		885031541E8E36F6009B21B6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 885031521E8E36F6009B21B6 /* LaunchScreen.storyboard */; };
-		887C87592424A75500511D16 /* CardTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C87572424A75500511D16 /* CardTagView.swift */; };
 		887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C87582424A75500511D16 /* CoreTextArcView.swift */; };
 		887C87602424A78400511D16 /* ExtensionFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875C2424A78400511D16 /* ExtensionFile.swift */; };
 		887C87612424A78400511D16 /* MathTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 887C875D2424A78400511D16 /* MathTool.swift */; };
@@ -32,11 +32,12 @@
 		0B05F1D824D904CA00CCE648 /* LayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutTool.swift; sourceTree = "<group>"; };
 		0B05F1DB24D9069C00CCE648 /* LayoutMethod.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LayoutMethod.swift; sourceTree = "<group>"; };
 		0B05F1DD24D9070B00CCE648 /* UIDevice+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIDevice+Extension.swift"; sourceTree = "<group>"; };
-		0B74E4FA26F315EA005F5CC4 /* AccountAndPasswordTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AccountAndPasswordTool.swift; path = ../../../../ANBook_iOS_Version_One/Shared/LoginAndSignUp/AccountAndPasswordTool.swift; sourceTree = "<group>"; };
-		0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewsLayoutTool.swift; sourceTree = "<group>"; };
 		0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCollectionView.swift; sourceTree = "<group>"; };
 		0B7A7B9924C04CAC006781BF /* DeckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckLayout.swift; sourceTree = "<group>"; };
+		0BF68B2E27118C8200BF1BA4 /* MoodSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoodSelectionView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/MerriPhi/MerriPhi/TodayTab/MoodSelectionView.swift; sourceTree = "<group>"; };
+		0BF68B2F27118C8200BF1BA4 /* PersonalMoodDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalMoodDisplayView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/MerriPhi/MerriPhi/TodayTab/PersonalMoodDisplayView.swift; sourceTree = "<group>"; };
+		0BF68B3227118CBF00BF1BA4 /* TextPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextPosition.swift; path = ../../../../../ANBook_iOS_Version_One/Shared/CustomViews/ViewAndText/TextPosition.swift; sourceTree = "<group>"; };
 		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		885031491E8E36F6009B21B6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -45,7 +46,6 @@
 		885031501E8E36F6009B21B6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		885031531E8E36F6009B21B6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		885031551E8E36F6009B21B6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = ../Info.plist; sourceTree = "<group>"; };
-		887C87572424A75500511D16 /* CardTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardTagView.swift; sourceTree = "<group>"; };
 		887C87582424A75500511D16 /* CoreTextArcView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreTextArcView.swift; sourceTree = "<group>"; };
 		887C875C2424A78400511D16 /* ExtensionFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExtensionFile.swift; sourceTree = "<group>"; };
 		887C875D2424A78400511D16 /* MathTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MathTool.swift; sourceTree = "<group>"; };
@@ -87,9 +87,9 @@
 		8845E35E2064DF36001C18F6 /* test */ = {
 			isa = PBXGroup;
 			children = (
-				887C87572424A75500511D16 /* CardTagView.swift */,
-				0B77DE1B2533F1C10048249F /* UIViewsLayoutTool.swift */,
-				887C87582424A75500511D16 /* CoreTextArcView.swift */,
+				0BF68B3227118CBF00BF1BA4 /* TextPosition.swift */,
+				0BF68B2E27118C8200BF1BA4 /* MoodSelectionView.swift */,
+				0BF68B2F27118C8200BF1BA4 /* PersonalMoodDisplayView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -115,8 +115,8 @@
 			children = (
 				0B05F1DA24D904D300CCE648 /* UIAdapt */,
 				8845E35E2064DF36001C18F6 /* test */,
-				0B74E4FA26F315EA005F5CC4 /* AccountAndPasswordTool.swift */,
 				8850314B1E8E36F6009B21B6 /* ViewController.swift */,
+				887C87582424A75500511D16 /* CoreTextArcView.swift */,
 				0B7A7B9724C04CAC006781BF /* Deck */,
 				8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */,
 				88B85C3D1FA9C2D200BA13B9 /* supportingFiles */,
@@ -222,19 +222,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0B77DE1C2533F1C10048249F /* UIViewsLayoutTool.swift in Sources */,
+				0BF68B3327118CBF00BF1BA4 /* TextPosition.swift in Sources */,
 				0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */,
+				0BF68B3027118C8200BF1BA4 /* MoodSelectionView.swift in Sources */,
 				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
 				0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */,
 				887C87612424A78400511D16 /* MathTool.swift in Sources */,
 				887C875A2424A75500511D16 /* CoreTextArcView.swift in Sources */,
 				0B05F1D924D904CA00CCE648 /* LayoutTool.swift in Sources */,
 				8850314C1E8E36F6009B21B6 /* ViewController.swift in Sources */,
-				0B74E4FB26F315EA005F5CC4 /* AccountAndPasswordTool.swift in Sources */,
 				887C87602424A78400511D16 /* ExtensionFile.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
-				887C87592424A75500511D16 /* CardTagView.swift in Sources */,
 				0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */,
+				0BF68B3127118C8200BF1BA4 /* PersonalMoodDisplayView.swift in Sources */,
 				0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */,
 				887C87622424A78400511D16 /* DefAndMethods.swift in Sources */,
 				0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */,

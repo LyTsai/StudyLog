@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="18122" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina4_7" orientation="portrait" appearance="light"/>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="19162" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
+    <device id="ipad10_5" orientation="landscape" layout="fullscreen" appearance="light"/>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="18093"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="19144"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -16,42 +17,43 @@
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background" translatesAutoresizingMaskIntoConstraints="NO" id="bHT-XB-Yhn">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <rect key="frame" x="0.0" y="0.0" width="1112" height="834"/>
                             </imageView>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="jk0-3C-mlr">
-                                <rect key="frame" x="37.5" y="300" width="300" height="67"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="74w-hB-7ys" customClass="PersonalMoodDisplayView" customModule="Demo_testUI" customModuleProvider="target">
+                                <rect key="frame" x="167" y="83.5" width="778" height="667"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.92156862750000001" green="1" blue="0.86274509799999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="jk0-3C-mlr" firstAttribute="centerX" secondItem="bHT-XB-Yhn" secondAttribute="centerX" id="5k5-tE-NWC"/>
                             <constraint firstAttribute="trailing" secondItem="bHT-XB-Yhn" secondAttribute="trailing" id="8U7-hZ-tjp"/>
+                            <constraint firstItem="74w-hB-7ys" firstAttribute="centerX" secondItem="bHT-XB-Yhn" secondAttribute="centerX" id="EyD-lO-5ci"/>
                             <constraint firstItem="bHT-XB-Yhn" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NBV-iK-fV3"/>
+                            <constraint firstItem="74w-hB-7ys" firstAttribute="height" secondItem="bHT-XB-Yhn" secondAttribute="height" multiplier="0.8" id="OuJ-s4-4WK"/>
                             <constraint firstItem="bHT-XB-Yhn" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="STp-Ud-dVE"/>
-                            <constraint firstItem="jk0-3C-mlr" firstAttribute="centerY" secondItem="bHT-XB-Yhn" secondAttribute="centerY" id="d0m-Ec-WGE"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="bHT-XB-Yhn" secondAttribute="bottom" id="icc-CU-p3I"/>
-                            <constraint firstItem="jk0-3C-mlr" firstAttribute="width" secondItem="bHT-XB-Yhn" secondAttribute="width" multiplier="0.8" id="wwJ-7B-dda"/>
-                            <constraint firstItem="jk0-3C-mlr" firstAttribute="height" secondItem="bHT-XB-Yhn" secondAttribute="height" multiplier="0.1" id="xqm-Cr-hQN"/>
+                            <constraint firstItem="74w-hB-7ys" firstAttribute="width" secondItem="bHT-XB-Yhn" secondAttribute="width" multiplier="0.7" id="ksw-e6-vwR"/>
+                            <constraint firstItem="74w-hB-7ys" firstAttribute="centerY" secondItem="bHT-XB-Yhn" secondAttribute="centerY" id="lCn-ib-Cbp"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="T1q-Ol-3Z3"/>
                     <connections>
                         <outlet property="background" destination="bHT-XB-Yhn" id="rIB-O4-S1c"/>
-                        <outlet property="textField" destination="jk0-3C-mlr" id="UxU-bn-pSi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3591.1999999999998" y="114.69265367316342"/>
+            <point key="canvasLocation" x="3590.6474820143885" y="114.3884892086331"/>
         </scene>
     </scenes>
     <resources>
         <image name="background" width="494" height="520"/>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
     </resources>
 </document>

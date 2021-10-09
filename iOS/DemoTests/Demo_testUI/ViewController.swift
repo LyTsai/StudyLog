@@ -9,33 +9,21 @@
 import UIKit
 import MapKit
 
+func UIColorFromHex(_ rgbValue: Int) -> UIColor {
+    return UIColor(red: CGFloat((rgbValue & 0xFF0000) >> 16) / 255.0, green: CGFloat((rgbValue & 0xFF00) >> 8) / 255.0, blue: CGFloat(rgbValue & 0xFF) / 255.0, alpha: 1)
+}
+
 class ViewController: UIViewController, UITextFieldDelegate {
 //    let deck = DeckCollectionView(frame: CGRect.zero, collectionViewLayout: UICollectionViewFlowLayout())
   
     @IBOutlet weak var background: UIImageView!
     
-    @IBOutlet weak var textField: UITextField!
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        textField.delegate = self
+      
     }
     
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        if let text = textField.text {
-            print(AccountAndPasswordTool.passwordContainsNumber(text))
-            print(AccountAndPasswordTool.passwordContainsUpperLetter(text))
-            print(AccountAndPasswordTool.passwordContainsLowerLetter(text))
-            print(AccountAndPasswordTool.passwordContainsWords(text, words: ["test", "password"]))
-            print("------------")
-        }
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        self.view.endEditing(true)
-        
-        return true
-    }
+  
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
@@ -46,30 +34,7 @@ class ViewController: UIViewController, UITextFieldDelegate {
         super.viewWillAppear(animated)
         
     }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        self.view.endEditing(true)
-    }
-   
-//
-//    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
-//         print("--------------- get by location --------------")
-//        if let location = locations.last {
-//            geocoder.reverseGeocodeLocation(location) { (placemarks, error) in
-//                if let marks = placemarks {
-//                    for placemark in marks {
-//                        print(placemark.postalCode)
-//                        print(placemark.addressDictionary)
-//                    }
-//                }else {
-//                    print("place marks nil for current location")
-//                }
-//                if error != nil {
-//                    print("error is \(error?.localizedDescription)")
-//                }
-//            }
-//        }
-//    }
+ 
 
 }
 
