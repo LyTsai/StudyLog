@@ -20,7 +20,15 @@ class ViewController: UIViewController, UITextFieldDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-      
+        
+        for seqNumber in 0..<6 {
+            if seqNumber % 2 == 0 {
+                print(seqNumber / 2)
+            }else {
+                let totalNumber = 6
+                print(totalNumber - (seqNumber / 2) - 1)
+            }
+        }
     }
     
   
