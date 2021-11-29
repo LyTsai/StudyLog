@@ -13,8 +13,6 @@
 		0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */; };
 		0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9924C04CAC006781BF /* DeckCell.swift */; };
 		0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */; };
-		0BF68B3027118C8200BF1BA4 /* MoodSelectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF68B2E27118C8200BF1BA4 /* MoodSelectionView.swift */; };
-		0BF68B3127118C8200BF1BA4 /* PersonalMoodDisplayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF68B2F27118C8200BF1BA4 /* PersonalMoodDisplayView.swift */; };
 		0BF68B3327118CBF00BF1BA4 /* TextPosition.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BF68B3227118CBF00BF1BA4 /* TextPosition.swift */; };
 		8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */; };
 		8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 885031491E8E36F6009B21B6 /* AppDelegate.swift */; };
@@ -35,8 +33,6 @@
 		0B7A7B9824C04CAC006781BF /* DeckCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCollectionView.swift; sourceTree = "<group>"; };
 		0B7A7B9924C04CAC006781BF /* DeckCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckCell.swift; sourceTree = "<group>"; };
 		0B7A7B9A24C04CAC006781BF /* DeckLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeckLayout.swift; sourceTree = "<group>"; };
-		0BF68B2E27118C8200BF1BA4 /* MoodSelectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MoodSelectionView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/MerriPhi/MerriPhi/TodayTab/MoodSelectionView.swift; sourceTree = "<group>"; };
-		0BF68B2F27118C8200BF1BA4 /* PersonalMoodDisplayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = PersonalMoodDisplayView.swift; path = ../../../../../ANBook_iOS_Version_One/ABook/MerriPhi/MerriPhi/TodayTab/PersonalMoodDisplayView.swift; sourceTree = "<group>"; };
 		0BF68B3227118CBF00BF1BA4 /* TextPosition.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TextPosition.swift; path = ../../../../../ANBook_iOS_Version_One/Shared/CustomViews/ViewAndText/TextPosition.swift; sourceTree = "<group>"; };
 		8822C0BD241F205600406DE8 /* NumberAutoSeperateTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberAutoSeperateTextField.swift; sourceTree = "<group>"; };
 		885031461E8E36F6009B21B6 /* Demo_testUI.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Demo_testUI.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -88,8 +84,6 @@
 			isa = PBXGroup;
 			children = (
 				0BF68B3227118CBF00BF1BA4 /* TextPosition.swift */,
-				0BF68B2E27118C8200BF1BA4 /* MoodSelectionView.swift */,
-				0BF68B2F27118C8200BF1BA4 /* PersonalMoodDisplayView.swift */,
 			);
 			path = test;
 			sourceTree = "<group>";
@@ -224,7 +218,6 @@
 			files = (
 				0BF68B3327118CBF00BF1BA4 /* TextPosition.swift in Sources */,
 				0B7A7B9D24C04CAC006781BF /* DeckLayout.swift in Sources */,
-				0BF68B3027118C8200BF1BA4 /* MoodSelectionView.swift in Sources */,
 				8822C0BE241F205600406DE8 /* NumberAutoSeperateTextField.swift in Sources */,
 				0B7A7B9B24C04CAC006781BF /* DeckCollectionView.swift in Sources */,
 				887C87612424A78400511D16 /* MathTool.swift in Sources */,
@@ -234,7 +227,6 @@
 				887C87602424A78400511D16 /* ExtensionFile.swift in Sources */,
 				8850314A1E8E36F6009B21B6 /* AppDelegate.swift in Sources */,
 				0B05F1DC24D9069C00CCE648 /* LayoutMethod.swift in Sources */,
-				0BF68B3127118C8200BF1BA4 /* PersonalMoodDisplayView.swift in Sources */,
 				0B7A7B9C24C04CAC006781BF /* DeckCell.swift in Sources */,
 				887C87622424A78400511D16 /* DefAndMethods.swift in Sources */,
 				0B05F1DE24D9070B00CCE648 /* UIDevice+Extension.swift in Sources */,
@@ -312,7 +304,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -365,7 +357,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
