@@ -13,7 +13,6 @@
           The Grim North<br>
           UK
         </p>
-      
         <ul>
           <li>Tel: 01234 567 890</li>
           <li>Email: me@grim-north.co.uk</li>
@@ -22,4 +21,29 @@
     <blockquote cite="https://developer.mozilla.org/en-US/docs/Web/HTML/Element/blockquote">
         <p>The <strong>HTML <code>&lt;blockquote&gt;</code> Element</strong> indicates the enclosed text is an extended quotation.</p>
     </blockquote>
+
+<!-- 标准简单日期 -->
+<time datetime="2016-01-20">20 January 2016</time>
+<!-- 只包含年份和月份-->
+<time datetime="2016-01">January 2016</time>
+<!-- 只包含月份和日期 -->
+<time datetime="01-20">20 January</time>
+<!-- 只包含时间，小时和分钟数 -->
+<time datetime="19:30">19:30</time>
+<!-- 还可包含秒和毫秒 -->
+<time datetime="19:30:01.856">19:30:01.856</time>
+<!-- 日期和时间 -->
+<time datetime="2016-01-20T19:30">7.30pm, 20 January 2016</time>
+<!-- 含有时区偏移值的日期时间 -->
+<time datetime="2016-01-20T19:30+01:00">7.30pm, 20 January 2016 is 8.30pm in France</time>
+<!-- 调用特定的周 -->
+<time datetime="2016-W04">The fourth week of 2016</time>
+
+<video controls width="400" height="400"
+       autoplay loop muted preload="auto"
+       poster="poster.png">
+  <source src="rabbit320.mp4" type="video/mp4">
+  <source src="rabbit320.webm" type="video/webm">
+  <p>Your browser doesn't support HTML video. Here is a <a href="rabbit320.mp4">link to the video</a> instead.</p>
+</video>
 </body>
