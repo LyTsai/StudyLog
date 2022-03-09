@@ -32,22 +32,52 @@
         <a href="http://www.baidu.com" title="visit baidu" target="_blank">
             <img src="images/icon0.png" alt="a image link Here">
         </a>
-        <svg width="300" height="200">
-            <rect width="100%" height="200" fill ="black"/>
-            <circle cx="150" cy="100" r="90" fill="blue"/>
-            <polygon points="100,0 40,100 180,150" fill="green"></polygon>
-            <text x="50" y="100" font-family="Verdana" font-size="55"
-            fill="white" stroke="black" stroke-width="2">Hello!</text>
-        </svg>
-<picture>
-    <source media="(max-width: 799px)" srcset="image-480w-close-portrait.jpg">
-    <source media="(min-width: 800px)" srcset="elva-800w.jpg">
-    <img src="elva-800w.jpg" alt="Chris standing up holding his daughter Elva">
-</picture>
-
-        <a href="#email_address">Check Address</a>
         
-        <button>Change User</button>
+        <div>
+            <svg width="300" height="200">
+                <rect width="100%" height="200" fill ="black"/>
+                <circle cx="150" cy="100" r="90" fill="blue"/>
+                <polygon points="100,0 40,100 180,150" fill="green"></polygon>
+                <text x="50" y="100" font-family="Verdana" font-size="55"
+                fill="white" stroke="black" stroke-width="2">Hello!</text>
+            </svg>
+        </div>
+        <table>
+            <caption>How I chose to spend my money</caption>
+            <colgroup>
+                <col style="border: 2px solid yellow;">
+                <col style="background-color: red;">
+                <!-- <col style="background-color: red" span="2"> -->
+            </colgroup>
+            
+            <thead>
+                <tr>
+                    <th scope="">Purchase</th>
+                    <th>Date</th>
+                    <th>Evaluation</th>
+                    <th>Cost($)</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr>
+                    <th>Haircut</th>
+                    <td>12/09</td>
+                    <td>Good idea</td>
+                    <td>30</td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="3">SUM</td>
+                    <td>110</td>
+                </tr>
+            </tfoot>
+        </table>
+        <div>
+            <button>Change User</button>
+        </div>
+        
 
         <script src="scripts/main.js"></script>
     </body>
