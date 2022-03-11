@@ -44,6 +44,22 @@ button {
     border-color: lawngreen;
 }
 
+.links-list a {
+    background: url(icon0.png);
+    background-size: contain;
+    color: #fff;
+    text-decoration: none;
+    padding: 1em 2em;
+  display:inline-block;
+  }
+  
+  .links-list a:hover {
+    background-image: linear-gradient(105deg, rgba(0,249,255,1) 39%, rgba(51,56,57,1) 96%);
+    background-image: radial-gradient(circle, rgba(0,249,255,1) 39%, rgba(51,56,57,1) 96%);
+    background-color: rgb(66, 28, 40);
+    color: #fff;
+  }
+
 /* table {
     border: 1px solid black;
 } */
