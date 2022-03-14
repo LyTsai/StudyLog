@@ -2,6 +2,7 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <link href="styles/solarSystemStyle.css" rel="styleSheet">
         <title>Solar System</title>
     </head>
 
@@ -17,22 +18,22 @@
             </colgroup>
             <thead>
                 <tr>
-                    <th colspan="2"></th>
-                    <th>名字</th>
-                    <th>质量 (10<sup>24</sup>kg)</th>
-                    <th>直径 (km)</th>
-                    <th>密度 (kg/m<sup>3</sup>)</th>
-                    <th>重力 (m/s<sup>2</sup>)</th>
-                    <th>天长 (hours)</th>
-                    <th>与太阳距离 (10<sup>6</sup>km)</th>
-                    <th>平均温度 (°C)</th>
-                    <th>卫星数量</th>
-                    <th>备注</th>
+                    <th scope="col" colspan="2"></th>
+                    <th scope="col">名字</th>
+                    <th scope="col">质量 (10<sup>24</sup>kg)</th>
+                    <th scope="col">直径 (km)</th>
+                    <th scope="col">密度 (kg/m<sup>3</sup>)</th>
+                    <th scope="col">重力 (m/s<sup>2</sup>)</th>
+                    <th scope="col">天长 (hours)</th>
+                    <th scope="col">与太阳距离 (10<sup>6</sup>km)</th>
+                    <th scope="col">平均温度 (°C)</th>
+                    <th scope="col">卫星数量</th>
+                    <th scope="col">备注</th>
                 </tr>
             </thead>
             <body>
                 <tr>
-                    <th rowspan="4" colspan="2">类地行星</th>
+                    <th scope="row" rowspan="4" colspan="2">类地行星</th>
                     <td>水星</td>
                     <td>0.330</td>
                     <td>4,879</td>
@@ -81,8 +82,8 @@
                     <td>红色星球</td>
                 </tr>
                 <tr>
-                    <th rowspan="4">类木行星</th>
-                    <th rowspan="2">气巨星</th>
+                    <th scope="row" rowspan="4">类木行星</th>
+                    <th scope="row" rowspan="2">气巨星</th>
                     <td>木星</td>
                     <td>1898</td>
                     <td>142,984</td>
@@ -106,7 +107,7 @@
                     <td>62</td>
                 </tr>
                 <tr>
-                    <th rowspan="2">冰巨星</th>
+                    <th scope="row" rowspan="2">冰巨星</th>
                     <td>天王星</td>
                     <td>86.8</td>
                     <td>51,118</td>
@@ -130,7 +131,7 @@
                 </tr>
                 
                 <tr>
-                    <th colspan="2">矮行星*</th>
+                    <th scope="row" colspan="2">矮行星*</th>
                     <td>冥王星</td>
                     <td>0.0146</td>
                     <td>2,370</td>

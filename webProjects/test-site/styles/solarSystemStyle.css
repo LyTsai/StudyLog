@@ -1,0 +1,48 @@
+table {
+    table-layout: fixed;
+    width: 100%;
+    border-collapse: collapse;/*边框合并*/
+    border: 3px solid purple;
+
+    background-color: burlywood;
+    text-align: center;
+}
+
+thead {
+    background: linear-gradient(to bottom, rgba(0,0,0,0.1), rgba(0,0,0,0.5));
+    /* background: url(icon0.png); */
+    /* background-size: cover; */
+    color: white;
+    text-shadow: 1px 1px 1px black;
+    border: 3px solid purple;
+}
+
+thead th:nth-child(1) { /*选择第n个子元素，它是一个顺序排列的<th>元素，且其父元素是<thead>元素*/
+    width: 10%;
+}
+thead th:nth-child(2) {
+    width: 10%;
+}
+thead th:nth-child(3) {
+    width: 5%;
+}
+thead th:nth-child(4) {
+    width: 5%;
+}
+th, td {
+    padding: 10px;
+}
+
+tbody tr:nth-child(odd) {
+    background-color: azure;
+}
+tbody tr:nth-child(even) {
+    background-color: beige;
+}
+
+caption {
+    padding: 20px;
+    font-style: italic;
+    caption-side: bottom; /*放到表下方*/
+    letter-spacing: 1px;
+}
