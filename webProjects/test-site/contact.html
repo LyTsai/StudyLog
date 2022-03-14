@@ -1,19 +1,51 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
-      <meta charset="utf-8">
-      <meta lang="en-US">
-      <title>Contact page</title>
-      <link rel="icon" href="../WebDocuments/favicon.png">
+    <meta charset="utf-8"/>
+    <title>Images and forms 2: styling form fields</title>
+    <link rel="stylesheet" href="../styles.css"/>
+    <style>
+
+      body {
+        background-color: #fff;
+        color: #333;
+        font: 1.2em / 1.5 Helvetica Neue, Helvetica, Arial, sans-serif;
+        padding: 1em;
+        margin: 0;
+      }
+
+      .preview .myform input {
+        display: inline;
+        margin: 0;
+      }
+
+      .myform {
+        border: 2px solid #000;
+        padding: 5px;
+      }
+
+      input[type="search"], input[type="submint"] {
+        height: 100%;
+      }
+
+      input[type="submit"] {
+        background-color: purple;
+        color: white;
+        border-radius: 10px;
+        border:0px;
+      }
+    </style>
   </head>
+
   <body>
-  <iframe src="//player.bilibili.com/player.html?aid=978966048&bvid=BV1a44y1H7YW&cid=505069437&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
-  <iframe src="https://developer.mozilla.org/en-US/docs/Glossary"
-          width="100%" height="500" frameborder="0"
-          allowfullscreen sandbox>
-    <p> <a href="https://developer.mozilla.org/en-US/docs/Glossary">
-      Fallback link for browsers that don't support iframes
-    </a> </p>
-  </iframe>
+
+    <form method="post" action="" class="myform">
+      <div>
+        <label for="fldSearch">Keywords</label>
+        <input type="search" id="fldSearch" name="keywords">
+        <input type="submit" name="btnSubmit" value="Search"></div>
+    </form>
+
   </body>
+
 </html>
