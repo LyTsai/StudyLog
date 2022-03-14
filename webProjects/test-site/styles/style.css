@@ -50,7 +50,7 @@ button {
     color: #fff;
     text-decoration: none;
     padding: 1em 2em;
-  display:inline-block;
+    display:inline-block;
   }
   
   .links-list a:hover {
@@ -58,10 +58,11 @@ button {
     background-image: radial-gradient(circle, rgba(0,249,255,1) 39%, rgba(51,56,57,1) 96%);
     background-color: rgb(66, 28, 40);
     color: #fff;
-     
-    
   }
 
 /* table {
     border: 1px solid black;
 } */
+    li {
+    list-style-type: lower-roman;
+    }
