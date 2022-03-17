@@ -87,6 +87,7 @@ myImage.onclick = () => {
     }
 };
 
+
 let myButton = document.querySelector('button');
 myButton.onclick = function() {
     setUserName();

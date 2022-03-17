@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Calendar</title>
+        <!-- <link href="/styles/style.css" rel="styleSheet"> -->
+        <style>
+            ul {
+                display: flex;
+                flex-wrap: wrap;
+            }
+            li {
+                background-color: orange;
+                color: white;
+                list-style-type: none;
+                text-align: center;
+                
+                margin: 5px;
+                flex: 12%;
+                height: 50px;
+                padding: 40px auto;
+            }
+        </style>
+    </head>
+    <body>
+        <div>
+            <label for="selectMonth">Select month:</label>
+                <select class="calendar">
+                    <option value="January">January</option>
+                    <option value="February">February</option>
+                    <option value="March">March</option>
+                    <option value="April">April</option>
+                    <option value="May">May</option>
+                </select>
+        </div>
+        <h1></h1>
+        <!-- <div> -->
+            <ul class="days">
+            </ul>
+        <!-- </div> -->
+
+        <script>
+            let select = document.querySelector(".calendar")
+            select.onchange = () => {
+                displayForMonth(select.value)
+            }
+            
+            displayForMonth("January");
+
+            function displayForMonth(month) {
+                let h1Tag = document.querySelector("h1")
+                h1Tag.textContent = month
+                // day
+                let dayNumber = 31
+                switch (month) {
+                    case "February":
+                        dayNumber = 28
+                        break;
+                    case "April":
+                        dayNumber = 30
+                        break;
+                    default:
+                        break;
+                }
+
+                let ulist = document.querySelector("ul")
+                // remove
+                ulist.innerHTML = "";
+                for (let index = 0; index < dayNumber; index++) {
+                    let list = document.createElement("li")
+                    list.textContent = (index + 1).toString()
+                    ulist.appendChild(list)
+                }
+            }
+        </script>
+    </body>
+</html>
