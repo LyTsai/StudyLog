@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-XOmpatible" content="IE=edge, chrome=1">
+        <meta name="viewport" content="width=device-width">
+        <title>Silly Story Generator</title>
+
+        <style>
+            body {
+                font-family: Arial, Helvetica, sans-serif;
+                font-size: 16px;
+                width: 350px;
+            }
+
+            label {
+                font-weight: bold;
+            }
+
+            div {
+                padding-bottom: 20px;
+            }
+
+            input[type="text"] {
+                padding: 5px;
+                width: 150px;
+            }
+
+            .randomize {
+                height: 35px;
+                background-color: white;
+                border: 1px solid black;
+                border-radius: 4px;
+                box-shadow: 0px 1px 2px black;
+            }
+
+            p {
+                background: #FFC125;
+                color: #5E2612;
+                padding: 10px;
+                visibility: hidden;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div>
+            <label for="customName">Enter custom name:</label>
+            <input id="customName" type="text" placeholder="">
+        </div>
+
+        <div>
+            <label for="usUnit">US</label><input id="usUnit" type="radio" name="ukus" value="us" checked>
+            <label for="ukUnit">UK</label><input id="ukUnit" type="radio" name="ukus" value="uk">
+        </div>
+        <div>
+            <button class="randomize">Generate random story</button>
+        </div>
+        <p class="story"></p>
+
+        <script>
+
+            // button
+            let randomize = document.querySelector(".randomize");
+            randomize.addEventListener("click", generateStory);
+
+            function generateStory() {
+                const customName = document.querySelector("#customName").value
+                const names = ["Willy the Goblin", "Big Daddy", "Father Christmas"]
+                const locations = ["the soup kitchen", "Disneyland", "the White House"]
+                const actions = ["spontaneously combusted","melted into a puddle on the sidewalk", "turned into a slug and crawled away"]
+                // replace
+                let displayText = "It was 94 fahrenheit outside, so :insertx: went for a walk. When they got to :inserty:, they stared in horror for a few moments, then :insertz:. Bob saw the whole thing, but was not surprised — :insertx: weighs 300 pounds, and it was a hot day."
+
+                if (customName.length > 0) {
+                    let firstC = customName[0].toUpperCase()
+                    dislayText = displayText.replace("Bob", customName.replace(customName[0], firstC))
+                }
+
+                const name =  randomValueFromArray(names)
+                while (displayText.indexOf(":insertx:") !== -1) {
+                    displayText = displayText.replace(":insertx:", name)
+                }
+                
+                displayText = displayText.replace(":inserty:", randomValueFromArray(locations))
+                displayText = displayText.replace(":insertz:", randomValueFromArray(actions))
+                
+                if (document.getElementById("ukUnit").checked) {
+                    // uk unit
+                    displayText = displayText.replace("94 fahrenheit", "35 degree")
+                    displayText = displayText.replace("300 pounds", "140kg")
+                }
+
+                // assign
+                let paragraph = document.querySelector(".story")
+                paragraph.textContent = displayText
+                paragraph.style.visibility = 'visible'
+            }
+
+            function randomValueFromArray(array) {
+                const randomIndex = Math.floor(Math.random() * array.length)
+                return array[randomIndex]
+            }
+        </script>
+    </body>
+</html>
