@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>StopWatch</title>
+        <style>
+            button {
+                height: 40px;
+            }
+        </style>
+    </head>
+    <body>
+        <P></P>
+        <div>
+            <button class="start">Start</button>
+            <button class="stop">Stop</button>
+            <button class="reset">Reset</button>
+        </div>
+
+        <script>
+            let seconds = 0
+            let counter;
+            let duringCount = false
+            document.querySelector('.start').addEventListener('click',addTime)
+            document.querySelector('.stop').addEventListener('click', () => {
+                duringCount = false
+                clearInterval(counter)
+            })
+            document.querySelector('.reset').addEventListener('click', reset)
+
+            function addTime() {
+                if (!duringCount) {
+                    duringCount = true
+                    counter = setInterval(() => {
+                        seconds += 1
+                         displayWithSeconds()
+                    }, 1000)
+                }
+            }
+
+            function reset() {
+                duringCount = false
+                clearInterval(counter)
+                seconds = 0
+                displayWithSeconds()
+            }
+
+            function displayWithSeconds() {
+                document.querySelector('p').textContent = seconds.toString()
+            }
+
+            displayWithSeconds();
+        </script>
+    </body>
+</html>

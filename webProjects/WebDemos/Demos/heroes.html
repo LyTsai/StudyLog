@@ -66,6 +66,23 @@
             // url
             const requestURL = "https://mdn.github.io/learning-area/javascript/oojs/json/superheroes.json";
 
+            fetch(requestURL)
+            .then( response => {
+                if (!response.ok) {
+                    throw new Error('HTTP error: $(response.status)')
+                }
+                // Promise{status: "resolved", reult: xxx}
+                return response.text()
+            })
+            .then (text => {
+                console.log(text)
+                populateHeader(JSON.parse(text))
+                showHeroes(JSON.parse(text))
+            })
+            .catch(error => {
+                console.log(error)
+            })
+            
             // const request = new Request(requestURL);
             // const response = await fetch(request);
             // const superHeroes = await response.json();
@@ -74,19 +91,20 @@
             // populateHeroes(superHeroes);
 
             // http requst
-            let request = new XMLHttpRequest()
-            request.open('GET', requestURL)
+            // let request = new XMLHttpRequest()
+            // request.open('GET', requestURL)
 
-            // type
-            request.responseType = "json"
-            request.send()
+            // // type
+            // request.responseType = "json"
+            // request.send()
 
-            // handle
-            request.onload = () => {
-                let response = request.response
-                populateHeader(response)
-                showHeroes(response)
-            }
+            // // handle
+            // request.onload = () => {
+            //     let response = request.response
+            //     populateHeader(response)
+            //     showHeroes(response)
+            // }
+
 
 /*
 {
