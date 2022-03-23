@@ -80,15 +80,37 @@
                 return color;
             }
 
-            function Ball(x, y, velX, velY, color, radius) {
+            function intersection(one, another) {
+                const dx = one.x - another.x;
+                const dy = one.y - another.y;
+                const distance = Math.sqrt(dx * dx + dy * dy);
+
+                return distance < (one.radius + another.radius)
+            }
+
+            // constructors
+            function Shape(x, y, velX, velY, exists) {
                 this.x = x;
                 this.y = y;
                 this.velX = velX;
                 this.velY = velY;
-                this.color = color;
-                this.radius = radius;
+                this.exists = exists;
             }
 
+            function Ball(x, y, velX, velY, color, radius, exists) {
+                Shape.call(this, x, y, velX, velY, exists)
+                this.color = color
+                this.radius = radius
+            }
+
+            function EvilCircle(x, y, exists) {
+                Shape.call(this, x, y, 20, 20, exists)
+                this.color = 'white'
+                this.radius = 10
+            }
+        
+            // add prototypes
+            // 1. balls
             Ball.prototype.draw = function() {
                 ctx.beginPath();
                 ctx.fillStyle = this.color;
@@ -96,20 +118,16 @@
                 ctx.fill();
             };
 
-            Ball.prototype.update = function() {
+            Ball.prototype.checkBound = function() {
                 if((this.x + this.radius) >= width) {
                     this.velX = -(this.velX);
-                }
-
-                if((this.x - this.radius) <= 0) {
+                }else if ((this.x - this.radius) <= 0) {
                     this.velX = -(this.velX);
                 }
 
                 if((this.y + this.radius) >= height) {
                     this.velY = -(this.velY);
-                }
-
-                if((this.y - this.radius) <= 0) {
+                }else if((this.y - this.radius) <= 0) {
                     this.velY = -(this.velY);
                 }
 
@@ -119,50 +137,110 @@
 
             Ball.prototype.collisionDetect = function() {
                 for(let j = 0; j < balls.length; j++) {
-                    if(this !== balls[j]) {
-                        const dx = this.x - balls[j].x;
-                        const dy = this.y - balls[j].y;
-                        const distance = Math.sqrt(dx * dx + dy * dy);
-
-                        if (distance < this.radius + balls[j].radius) {
+                    if(this.exists && this !== balls[j] && balls[j].exists) {
+                        if (intersection(this, balls[j])) {
                             balls[j].color = this.color = randomColor();
+                            break;
                         }
                     }
                 }
             };
 
-            // class EvilCircle extends Ball {
-            //     Ball.call(this, x, y, 20);
-            //     this.color = white
-            // }
+            // 2. evil circle
+            EvilCircle.prototype.draw = function() {
+                ctx.beginPath();
+                ctx.strokeStyle = this.color;
+                ctx.lineWidth = 3
+                ctx.arc(this.x, this.y, this.radius, 0, 2 * Math.PI);
+                ctx.stroke();
+            }
 
+            EvilCircle.prototype.checkBound = function() {
+                if ((this.x + this.radius) >= width) {
+                    this.x -= this.radius
+                }else if (this.x <= this.radius) {
+                    this.x += this.radius
+                }
+
+                if((this.y + this.radius) >= height) {
+                    this.y -= -(this.radius);
+                }else if((this.y - this.radius) <= 0) {
+                    this.y += -this.radius;
+                }
+            }
+
+            EvilCircle.prototype.setControls = function() {
+                window.onkeydown = e => {
+                    switch (e.key) {
+                        case 'a':
+                            this.x -= this.velX;
+                            break;
+                        case 'd':
+                            this.x += this.velX;
+                            break;
+                        case 'w':
+                            this.y -= this.velY;
+                            break;
+                        case 's':
+                            this.y += this.velY;
+                            break;
+                        default:
+                            break;
+                    }
+                }
+            }
+
+            EvilCircle.prototype.collisionDetect = function() {
+                for (let index = 0; index < balls.length; index++) {
+                    const ball = balls[index];
+                    if (ball.exists && intersection(ball, this)){
+                        ball.exists = false
+                        ball.radius = 0
+                    }
+                }
+            }
+
+            // create all
             let balls = [];
+            let evilCircle = new EvilCircle(width * 0.5, height * 0.5, true)
+            evilCircle.setControls()
 
             while(balls.length < 25) {
                 const radius = random(10,20);
+                let velX = random(-7, 7)
+                if (velX === 0) {
+                    velX = 1
+                }
                 let ball = new Ball(
                     random(0 + radius, width - radius),
                     random(0 + radius, height - radius),
-                    random(-7, 7),
+                    velX,
                     random(-7, 7),
                     randomColor(),
-                    radius
+                    radius,
+                    true
                 );
                 balls.push(ball);
             }
 
+            // display
             function loop() {
                 ctx.fillStyle = 'rgba(0,0,0,0.25)';
                 ctx.fillRect(0,0,width,height);
 
                 for(let i = 0; i < balls.length; i++) {
                     balls[i].draw();
-                    balls[i].update();
-                    // balls[i].collisionDetect();
+                    balls[i].checkBound();
+                    balls[i].collisionDetect();
                 }
+
+                evilCircle.draw();
+                evilCircle.checkBound();
+                evilCircle.collisionDetect();
 
                 requestAnimationFrame(loop);
             }
+
             // start
             loop();
         </script>
