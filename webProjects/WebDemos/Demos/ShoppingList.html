@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>My Shopping List</title>
+        <style>
+            li {
+                margin-bottom: 10px;
+            }
+
+            li button {
+                font-size: 8px;
+                margin-left: 20px;
+                color: #666;
+            }
+        </style>
+    </head>
+    <body>
+        <h1>My Shopping List</h1>
+        <div>
+            <label for="item">Enter a new item:</label>
+            <input type="text" name="item" id="item">
+            <button>Add item</button>
+        </div>
+        <ul>
+            
+        </ul>
+
+        <script>
+            const button = document.querySelector('button')
+            
+            button.addEventListener('click', () => {
+                // add one item
+                console.log("hh")
+                let input = document.querySelector('input')
+                let inputValue = input.value
+
+                if (inputValue !== "") {
+                    // create
+                    // console.log(inputValue)
+                    // text
+                    let textItem = document.createElement('span')
+                    textItem.textContent = inputValue
+                    // button
+                    let buttonItem = document.createElement('button')
+                    buttonItem.textContent= "Delete"
+
+                    // add
+                    let list = document.querySelector('ul')
+                    let listItem = document.createElement('li')
+                    listItem.appendChild(textItem)
+                    listItem.appendChild(buttonItem)
+
+                    list.appendChild(listItem)
+
+                    // delete
+                    buttonItem.addEventListener('click', () => {
+                        list.removeChild(listItem)
+                    })
+
+                    // finish
+                    input.value = ""
+                    input.focus()
+                }
+            })
+
+        </script>
+    </body>
+</html>

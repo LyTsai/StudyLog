@@ -1,6 +1,15 @@
 const myHeading = document.querySelector('h1');
 myHeading.textContent = 'Hello world!';
-
+navigator.geolocation.getCurrentPosition(function(position) {
+  var latlng = new google.maps.LatLng(position.coords.latitude,position.coords.longitude);
+  var myOptions = {
+    zoom: 8,
+    center: latlng,
+    mapTypeId: google.maps.MapTypeId.TERRAIN,
+    disableDefaultUI: true
+  }
+  var map = new google.maps.Map(document.querySelector("#map_canvas"), myOptions);
+});
 // java script
 let randomNumber = Math.floor(Math.random() * 100) + 1;
 const guesses = document.querySelector(".guesses");
