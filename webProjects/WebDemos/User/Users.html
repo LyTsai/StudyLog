@@ -1,143 +1,154 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="utf-8">
-        <title>Users Management</title>
-        <style>
-            html {
-                font-family: sans-serif;
-            }
 
-            body {
-                margin: 10px auto;
-                width: 80%;
-            }
+<head>
+    <meta charset="utf-8">
+    <title>Users Management</title>
+    <style>
+        html {
+            font-family: sans-serif;
+        }
 
-            form {
-                padding: 1rem;
-                border: 1px solid #ccc;
-                border-radius: 1rem;
-            }
+        body {
+            margin: 10px auto;
+            width: 80%;
+        }
 
-            input,textarea, select, button {
-                font-size: 1rem;
-                padding: 5px 5px;
-                margin: auto 5px;
-                margin-right: 10px;
-                border: 1px solid #ccc;
-            }
+        form {
+            padding: 1rem;
+            border: 1px solid #ccc;
+            border-radius: 1rem;
+        }
 
-            label {
-                position: relative;
-                /* width: 100px; */
-            }
+        input,
+        textarea,
+        select,
+        button {
+            font-size: 1rem;
+            padding: 5px 5px;
+            margin: auto 5px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+        }
 
-            p {
-                margin-bottom: 16px;
-            }
+        label {
+            position: relative;
+            width: 100px;
+            display: inline-block;
+            vertical-align: top;
+            line-height: 30px;
+            text-align: right;
+        }
 
-            textarea {
-                height: 60px;
-            }
+        p {
+            margin-bottom: 16px;
+        }
 
-            button {
-                background-color: white;
-                padding: 5px 15px;
-                margin: 10px auto;
-                border-radius: 4px;
-            }
+        textarea {
+            height: 60px;
+        }
 
-            abbr {
-                color: red;
-            }
-        </style>
-    </head>
-    <body>
-        <!-- action="localhost:5001"  -->
-        <form method="post"> 
-            <h1>Add User</h1>
-            <p>Required fields are follow by *</p>
-            <p>
-                <label for="username">Username:<abbr title="required">*</abbr></label>
-                <input id="username" type="text" name="username" required>
-    
-                <label for="password">Password:<abbr title="required">*</abbr></label>
-                <input id="password" type="password" name="password" required>
-            </p>
-            <p>
-                <label for="first_name">First Name:</label>
-                <input id="first_name" type="text" name="first_name">
-                <label for="last_name">Last Name:</label>
-                <input id="last_name" type="text" name="last_name">
-            </p>
-            <p>
-                <label for="address">Address:</label>
-                <textarea id="address" name="address"></textarea>
-            </p>
-            <p>
-                <label>Profession:</label>
-                <select id="profession">
-                    <option value="Medical Professional">Medical Professional</option>
-                    <option value="Educator">Educator</option>
-                    <option value="Researcher">Researcher</option>
+        button {
+            background-color: white;
+            padding: 5px 15px;
+            margin: 10px auto;
+            border-radius: 4px;
+        }
+
+        abbr {
+            color: red;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- action="localhost:5001"  -->
+    <form method="post">
+        <h1>Add User</h1>
+        <p>Required fields are follow by *</p>
+        <p>
+            <label for="username">Username:<abbr title="required">*</abbr></label>
+            <input id="username" type="text" name="username" required>
+
+            <label for="password">Password:<abbr title="required">*</abbr></label>
+            <input id="password" type="password" name="password" required>
+        </p>
+        <p>
+            <label for="first_name">First Name:</label>
+            <input id="first_name" type="text" name="first_name">
+            <label for="last_name">Last Name:</label>
+            <input id="last_name" type="text" name="last_name">
+        </p>
+        <p>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address"></textarea>
+        </p>
+        <p>
+            <label>Profession:</label>
+            <select id="profession">
+                <option value="Medical Professional">Medical Professional</option>
+                <option value="Educator">Educator</option>
+                <option value="Researcher">Researcher</option>
                 <select>
-            </p>
-            <p>
-                <label for="email">Email:</label>
-                <input id="email" type="email" name="email">
-            </p>
-            <p>
-                <label for="cell">Cell:</label>
-                <input id="cell" type="tel" name="cell">
-            </p>
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input id="email" type="email" name="email">
+        </p>
+        <p>
+            <label for="cell">Cell:</label>
+            <input id="cell" type="tel" name="cell">
+        </p>
 
-            <button class="addUser" type="submit">Add</button>
-        </form>
-        
-        <script>
-            const form = document.querySelector('form')
-            const username = document.querySelector('#username')
-            const password = document.querySelector('#password')
-            const firstName = document.querySelector('#first_name')
-            const lastName = document.querySelector('#last_name')
-            const address = document.querySelector('#address')
-            const profession = document.querySelector('#profession')
-            const email = document.querySelector('#email')
-            const cell = document.querySelector('#cell')
+        <button class="addUser" type="submit">Add</button>
+    </form>
 
-            // let submitButton = document.querySelector('.addUser')
-            // submitButton.onclick = checkAndAddUser
-            form.onsubmit = checkAndAddUser
+    <script>
+        const form = document.querySelector('form')
+        const username = document.querySelector('#username')
+        const password = document.querySelector('#password')
+        const firstName = document.querySelector('#first_name')
+        const lastName = document.querySelector('#last_name')
+        const address = document.querySelector('#address')
+        const profession = document.querySelector('#profession')
+        const email = document.querySelector('#email')
+        const cell = document.querySelector('#cell')
 
-            function checkAndAddUser() {
-                const mongoClient = require('mongodb').MongoClient
-                const assert = require('assert')
+        // let submitButton = document.querySelector('.addUser')
+        // submitButton.onclick = checkAndAddUser
+        form.onsubmit = checkAndAddUser
 
-                let mongoLink = 'mongodb://sharemap:LyPXwvDthnPtUi6HoFzCjIfMcb5OyD4ePaVFDB5oJ4sSVQOPBQeRCMfmqwnogqPKMhWlCdI1Ed4rdnTg8SIR4A==@sharemap.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@sharemap@'
+        function checkAndAddUser() {
+            console.info(111111)
+            const mongoClient = require('mongodb').MongoClient
+            const assert = require('assert')
 
-                
-                mongoClient.connect(url, function(err, db) {
-                    assert.equal(null, err)
-                    console.log("success")
-                })
-                
-                db.users.insert({'username': username.value})
-                // let user = new User(username.value, password.value, firstName.value, lastName.value,address.value, profession.value,[email], [cell])
+            let mongoLink = 'mongodb://sharemap:LyPXwvDthnPtUi6HoFzCjIfMcb5OyD4ePaVFDB5oJ4sSVQOPBQeRCMfmqwnogqPKMhWlCdI1Ed4rdnTg8SIR4A==@sharemap.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@sharemap@'
 
-                console.log(user) 
-            }
 
-            function User(username, password, firstname, lastname, address, profession, emails, cells) {
-                this.username = username
-                this.password = password
-                this.firstname = firstname
-                this.lastname = lastname
-                this.address = address
-                this.profession = profession
-                this.emails = emails
-                this.cells = cells
-            }
-        </script>
+            mongoClient.connect(url, function (err, db) {
+                assert.equal(null, err)
+                console.log("success")
+            })
 
-    </body>
+            db.users.insert({ 'username': username.value })
+            // let user = new User(username.value, password.value, firstName.value, lastName.value,address.value, profession.value,[email], [cell])
+
+            console.log(user)
+        }
+
+        function User(username, password, firstname, lastname, address, profession, emails, cells) {
+            this.username = username
+            this.password = password
+            this.firstname = firstname
+            this.lastname = lastname
+            this.address = address
+            this.profession = profession
+            this.emails = emails
+            this.cells = cells
+        }
+    </script>
+
+</body>
+
 </html>
