@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Indexed Database</title>
+        <!-- <link href="style.css" rel="stylesheet">
+        <script src="index.js" defer></script> -->
+        <style>
+            html {
+                font-family: sans-serif;
+            }
+            body {
+                margin: 0 auto; /* 如果不设，左右有默认的 */
+                max-width: 800px;
+            }
+            header, footer {
+                background-color: green;
+                color: white;
+                line-height: 100px; /* height: 文字在最上面，这样文字上下居中了; */
+                padding: 0 20px; 
+            }
+            .new-note, .note-display {
+                padding: 20px;
+            }
+            .new-note {
+                background-color: #ddd;
+            }
+            h1 {
+                margin: 0;
+            }
+            ul {
+                list-style-type: none;
+            }
+            div {
+                margin-bottom: 10px;
+            }
+
+        </style>
+    </head>
+    <body>
+        <header>
+            <h1>IndexedDB notes demo</h1>
+        </header>
+        <main>
+            <section class="note-display">
+              <h2>Notes</h2>
+              <ul>
+              </ul>
+            </section>
+            <section class="new-note">
+              <h2>Enter a new note</h2>
+              <form>
+                <div>
+                  <label for="title">Note title</label>
+                  <input id="title" type="text" required> 
+                </div>
+                <div>
+                  <label for="body">Note text</label>
+                  <input id="body" type="text" required>
+                </div>
+                <div>
+                  <button>Create new note</button>
+                </div>
+              </form>
+            </section>
+          </main>
+        <footer>
+            <p>Copyright me.</p>
+        </footer>
+        <script>
+            const list = document.querySelector('ul');
+            const titleInput = document.querySelector('#title');
+            const bodyInput = document.querySelector('#body');
+            const form = document.querySelector('form');
+            form.onsubmit = addData
+
+            let db;
+            let dbName = 'notes_os'
+            window.onload = function() {
+                // Open our database; it is created if it doesn't already exist
+                let request = window.indexedDB.open(dbName, 1) // version: 1
+                request.onerror = function() {
+                    console.log('Database failed to open')
+                }
+                request.onsuccess = function() {
+                    console.log('Database opened successfully')
+                    db = request.result
+                    displayData()
+                }
+                // Setup the database tables if this has not already been done
+                // 尚未设置数据库，或者使用比现有存储数据库更大的版本号打开数据库，则运行此处理程序
+                request.onupgradeneeded = function(e) {
+                    // Grab a reference to the opened database
+                    db = e.target.result;
+
+                    // IDBDatabase.createObjectStore()
+                    // including a auto-incrementing key
+                    let objectStore = db.createObjectStore(dbName, { keyPath: 'id', autoIncrement:true });
+
+                    // IDBObjectStore.createIndex()
+                    // Define what data items the objectStore will contain
+                    objectStore.createIndex('title', 'title', { unique: false });
+                    objectStore.createIndex('body', 'body', { unique: false });
+
+                    console.log('Database setup complete');
+                }
+            }
+            // add action
+            function addData(e) {
+                // Event.preventDefault()在事件对象上运行以停止以传统方式实际提交的表单
+                e.preventDefault()
+
+                let item = {title: titleInput.value, body: bodyInput.value}
+                // open a read/write db transaction, ready for adding the data
+                let transaction = db.transaction([dbName], 'readwrite')
+                let objectStore = transaction.objectStore(dbName)
+
+                // add item
+                let request = objectStore.add(item)
+                request.onsuccess = function() {
+                    titleInput.value = ''
+                    bodyInput.value = ''
+                }
+
+                transaction.oncomplete = function() {
+                    console.log('Transaction completed: database modification finished.')
+                    displayData()
+                }
+                transaction.onerror = function() {
+                    console.log('Transaction not opened due to error');
+                }
+            }
+
+            function displayData() {
+                // clear
+                list.innerHTML = ''
+                // open
+                let objectStore = db.transaction(dbName).objectStore(dbName)
+                objectStore.openCursor().onsuccess = function(e) {
+                    let cursor = e.target.result
+                    
+                    if (cursor) {
+                        let noteTitle = document.createElement('h3')
+                        noteTitle.textContent = cursor.value.title
+
+                        let noteDetail = document.createElement('p')
+                        noteDetail.textContent = cursor.value.body
+
+                        let deleteBtn = document.createElement('button')
+                        deleteBtn.textContent = 'Delete'
+
+                        // list item
+                        let listItem = document.createElement('li')
+                        listItem.appendChild(noteTitle)
+                        listItem.appendChild(noteDetail)
+                        listItem.appendChild(deleteBtn)
+
+                        listItem.setAttribute('data-note-id', cursor.value.id)
+                        list.appendChild(listItem)
+
+                        // buttonAction
+                        deleteBtn.onclick = deleteItem
+                        cursor.continue()
+                    }else {
+                        // none
+                        checkForNoNote()
+                        console.log('Notes all displayed')
+                    }
+                }
+            }
+
+            function checkForNoNote() {
+                if (!list.firstChild) {
+                    let listItem = document.createElement('li')
+                    listItem.textContent = 'No notes stored.'
+                    list.appendChild(listItem)
+                }
+            }
+
+            function deleteItem(e) {
+                let noteId = Number(e.target.parentNode.getAttribute('data-note-id'))
+                let transaction = db.transaction([dbName], 'readwrite');
+                let objectStore = transaction.objectStore(dbName);
+                let request = objectStore.delete(noteId)
+                transaction.oncomplete = function() {
+                    e.target.parentNode.parentNode.removeChild(e.target.parentNode);
+                    console.log('Note ' + noteId + ' deleted.');
+                    checkForNoNote()
+                }
+            }
+
+            displayData()
+        </script>
+    </body>
+</html>
