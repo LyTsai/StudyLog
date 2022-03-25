@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <meta charset="utf-8">
     <title>Users Management</title>
+    <script src="app.js" defer></script>
+    <script src="usersScript.js" defer></script>
     <style>
         html {
             font-family: sans-serif;
@@ -55,6 +56,10 @@
             border-radius: 4px;
         }
 
+        .hint {
+            font-size: 0.8rem;
+        }
+
         abbr {
             color: red;
         }
@@ -62,10 +67,10 @@
 </head>
 
 <body>
-    <!-- action="localhost:5001"  -->
-    <form method="post">
+    <!-- action="localhost:5001" method="post" -->
+    <form>
         <h1>Add User</h1>
-        <p>Required fields are follow by *</p>
+        <p class="hint">Required fields are followed by *</p>
         <p>
             <label for="username">Username:<abbr title="required">*</abbr></label>
             <input id="username" type="text" name="username" required>
@@ -102,53 +107,6 @@
 
         <button class="addUser" type="submit">Add</button>
     </form>
-
-    <script>
-        const form = document.querySelector('form')
-        const username = document.querySelector('#username')
-        const password = document.querySelector('#password')
-        const firstName = document.querySelector('#first_name')
-        const lastName = document.querySelector('#last_name')
-        const address = document.querySelector('#address')
-        const profession = document.querySelector('#profession')
-        const email = document.querySelector('#email')
-        const cell = document.querySelector('#cell')
-
-        // let submitButton = document.querySelector('.addUser')
-        // submitButton.onclick = checkAndAddUser
-        form.onsubmit = checkAndAddUser
-
-        function checkAndAddUser() {
-            console.info(111111)
-            const mongoClient = require('mongodb').MongoClient
-            const assert = require('assert')
-
-            let mongoLink = 'mongodb://sharemap:LyPXwvDthnPtUi6HoFzCjIfMcb5OyD4ePaVFDB5oJ4sSVQOPBQeRCMfmqwnogqPKMhWlCdI1Ed4rdnTg8SIR4A==@sharemap.mongo.cosmos.azure.com:10255/?ssl=true&replicaSet=globaldb&maxIdleTimeMS=120000&appName=@sharemap@'
-
-
-            mongoClient.connect(url, function (err, db) {
-                assert.equal(null, err)
-                console.log("success")
-            })
-
-            db.users.insert({ 'username': username.value })
-            // let user = new User(username.value, password.value, firstName.value, lastName.value,address.value, profession.value,[email], [cell])
-
-            console.log(user)
-        }
-
-        function User(username, password, firstname, lastname, address, profession, emails, cells) {
-            this.username = username
-            this.password = password
-            this.firstname = firstname
-            this.lastname = lastname
-            this.address = address
-            this.profession = profession
-            this.emails = emails
-            this.cells = cells
-        }
-    </script>
-
 </body>
 
 </html>
