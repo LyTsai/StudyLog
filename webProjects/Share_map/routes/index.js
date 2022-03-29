@@ -1,9 +1,8 @@
-const express = require('express')
-const router = express.router
+// const express = require('express')
+// const router = express.router
 
-router.get("/", (req, res) => {
-    res.end('hello')
-})
+// router.get("/", (req, res) => {
+//     res.end('hello')
+// })
 
-
-module.exports = router
+// module.exports = router

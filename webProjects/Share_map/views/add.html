@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Users Management</title>
+    <link href="addStyle.css" rel="styleSheet">
+</head>
+<body>
+    <form action="/add" method="post">
+        <h1>Add User</h1>
+        <p class="hint">Required fields are followed by *</p>
+        <p>
+            <label for="username">Username:<abbr title="required">*</abbr></label>
+            <input id="username" type="text" name="username" required>
+
+            <label for="password">Password:<abbr title="required">*</abbr></label>
+            <input id="password" type="password" name="password" required>
+        </p>
+        <p>
+            <label for="first_name">First Name:</label>
+            <input id="first_name" type="text" name="first_name">
+            <label for="last_name">Last Name:</label>
+            <input id="last_name" type="text" name="last_name">
+        </p>
+        <p>
+            <label for="address">Address:</label>
+            <textarea id="address" name="address"></textarea>
+        </p>
+        <p>
+            <label for="profession">Profession:</label>
+            <label><input type="checkbox" value="Medical Professional" name="profession">Medical Professional</label>
+            <label><input type="checkbox" value="Educator" name="profession">Educator</label>
+            <label><input type="checkbox" value="Researcher" name="profession">Researcher</label>
+        </p>
+        <p>
+            <label for="email">Email:</label>
+            <input id="email" type="email" name="email">
+        </p>
+        <p>
+            <label for="cell">Cell:</label>
+            <input id="cell" type="tel" name="cell">
+        </p>
+        <button class="addUser" type="submit">Add</button>
+    </form>
+</body>
+</html>

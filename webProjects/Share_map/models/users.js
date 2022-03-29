@@ -1,6 +1,4 @@
 const mongoose = require('./mongoConnect')
-// const http = require('http')
-// const url = require('url')
 
 // collection rules
 const userSchema = new mongoose.Schema({
