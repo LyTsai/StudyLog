@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>Template</title>
+    <script src="./js/template-web.js"></script>
+</head>
+<body>
+    <div class="container"></div>
+<script id="template1" type="text/html">
+    <!-- 通过模板语法告诉模板引擎如何拼接 -->
+    <h1>{{name}}:{{age}}</h1>
+</script>
+<script type="text/javascript">
+    let html = template("template1", {name: 'idName', age: 30})
+    document.querySelector('.container').innerHTML = html
+</script>
+</body>
+</html>
