@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accordion</title>
+    <script src="../jquery.min.js"></script>
+    <style>
+         * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        li div {
+            display: block;
+            height: 69px;
+            border-radius: 5px;
+        }
+        
+        ul {
+            list-style: none;
+        }
+        .accordion {
+            width: 852px;
+            margin: 100px auto;
+            background-color: aquamarine;
+            overflow: hidden;
+            padding: 10px;
+        }
+        
+        .accordion ul {
+            overflow: hidden;
+        }
+        
+        .accordion li {
+            /* position: relative; */
+            float: left;
+            width: 69px;
+            height: 69px;
+            margin-right: 10px;
+        }
+        
+        .accordion li.current {
+            width: 224px;
+        }
+        
+        .accordion li.current .large {
+            display: block;
+        }
+        
+        .accordion li.current .small {
+            display: none;
+        }
+        
+        .large {
+            background-color: blue;
+            width: 224px;
+            display: none;
+        }
+
+        .small {
+            background-color: crimson;
+            /* position: absolute; */
+            top: 0;
+            left: 0;
+            width: 69px;
+            height: 69px;
+        }
+    </style>
+</head>
+<body>
+    <div class="accordion">
+        <ul>
+            <li class="current">
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+            <li>
+                <a href="#">
+                    <div class="large"></div>
+                    <div class="small"></div>
+                </a>
+            </li>
+
+        </ul>
+    </div>
+
+    <script>
+        $(function() {
+            let largeWidth = $(".large").width
+            let smallWidth = $(".small").width
+
+            $('li').mouseenter(function() {
+                // $(this).addClass('current')
+                // $(this).siblings().removeClass('current')
+            
+                $(this).stop().animate({
+                    width: largeWidth
+                }).find(".small").stop().fadeOut().siblings(".large").stop().fadeIn();
+                $(this).siblings("li").stop().animate({
+                    width: smallWidth
+                }).find(".small").stop().fadeIn().siblings(".large").stop().fadeOut();
+            })
+        })
+    </script>
+</body>
+</html>

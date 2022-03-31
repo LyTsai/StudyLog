@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Document</title>
+</head>
+<body>
+    <!-- <form> -->
+        <input id="username" type="text" name="Name">
+        <input id="password" type="password" name="Password">
+        <input id= "submit" type="submit" value="Submit" >
+    <!-- </form> -->
+
+
+    <script>
+        let submit = document.getElementById('submit')
+        submit.onclick = function() {
+            // send
+            let name = document.getElementById("username").value
+            let password = document.getElementById("password").value
+            let params = "username=" + name + "&password=" + password
+
+            // 创建Ajax对象
+            let xhr = new XMLHttpRequest()
+            // 请求方式，请求地址
+            // xhr.open('get', 'http://localhost:3000/get?' + params)
+            // 发送请求
+            // xhr.send()
+            // 报文
+            xhr.open('post', 'http://localhost:3000/post')
+            // 参数格式类型
+            xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded")
+            xhr.send(params)
+            console.log(params)
+            // 获取数据
+            xhr.onload = () => {
+                console.log(xhr.responseText)
+            }
+        }
+        
+
+    </script>
+</body>
+</html>
