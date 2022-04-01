@@ -1,19 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <title>Template</title>
+    <meta charset="utf-8">
+    <title>Demo</title>
     <script src="./js/template-web.js"></script>
+    <script src="./js/ajax.js"></script>
 </head>
 <body>
-    <div class="container"></div>
-<script id="template1" type="text/html">
-    <!-- 通过模板语法告诉模板引擎如何拼接 -->
-    <h1>{{name}}:{{age}}</h1>
-</script>
-<script type="text/javascript">
-    let html = template("template1", {name: 'idName', age: 30})
-    document.querySelector('.container').innerHTML = html
-</script>
+    <form id="form">
+        <input type="text" name="username" />
+        <input type="password" name="password" />
+        <input id="btn" type="button"/>
+    </form>
+
+    <script>
+       var form = document.getElementById('form'); 
+       const btn = document.getElementById("btn")
+       btn.onclick = function() {
+        let formData = new FormData(form);
+        let xhr = new XMLHttpRequest()
+        xhr.open("post", "http://localhost:3000/formData")
+        xhr.send(formData);
+        formData.set('key', 'value')
+        
+        xhr.onload = function() {
+            
+            console.log(xhr.responseText)
+        }
+       }
+        
+    </script>
 </body>
 </html>
