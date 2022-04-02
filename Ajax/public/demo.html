@@ -5,29 +5,43 @@
     <title>Demo</title>
     <script src="./js/template-web.js"></script>
     <script src="./js/ajax.js"></script>
+    <script src="./js/vue.js"></script>
+
+    <style>
+        [v-cloak] {
+            display: none;
+        }
+    </style>
 </head>
 <body>
-    <form id="form">
-        <input type="text" name="username" />
-        <input type="password" name="password" />
-        <input id="btn" type="button"/>
-    </form>
-
+    <div id="app">
+        <form>
+            <div>
+                <label>UserName:
+                    <input type="text" @keyup="handleSubmit" v-model="uname">
+                </label>
+            </div>
+            <div>
+                <label>Passord:
+                    <input type="text" @keyup.enter="handleSubmit" v-model="pwd">
+                </label>
+            </div>
+            <button @click="handleSubmit">Submit</button>
+        </form>
+    </div>
     <script>
-       var form = document.getElementById('form'); 
-       const btn = document.getElementById("btn")
-       btn.onclick = function() {
-        let formData = new FormData(form);
-        let xhr = new XMLHttpRequest()
-        xhr.open("post", "http://localhost:3000/formData")
-        xhr.send(formData);
-        formData.set('key', 'value')
-        
-        xhr.onload = function() {
-            
-            console.log(xhr.responseText)
-        }
-       }
+        Vue.config.keyCodes.aaa = 65
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                uname: "",
+                pwd: ""
+            }, methods: {
+                handleSubmit: function(event) {
+                    console.log(event.keyCode)
+                }
+            }
+        })
         
     </script>
 </body>
