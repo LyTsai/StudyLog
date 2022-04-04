@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Libray Management</title>
+        <script src="../../js/vue.js"></script>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+
+            h1 {
+                line-height: 60px;
+            }
+
+            label {
+                font-weight: bold;
+                padding-right: 10px;
+                padding-left: 15px;
+                line-height: 35px;
+            }
+
+            input {
+                line-height: 20px;
+                padding: auto;
+            }
+
+            tr {
+                line-height: 40px;
+            }
+
+            #list {
+                display: block;
+                width: 90%;
+                min-width: 520px;
+                margin: auto;
+                text-align: center;
+            }
+            
+            table {
+                width: 100%;
+            }
+            tr, th, table, td {
+                border: 1px solid #c2d89a;
+                border-collapse: collapse;
+            }
+
+            caption {
+                position: top;
+            }
+            form, thead {
+                background-color:lemonchiffon;
+            }
+
+            [disabled] {
+                background-color: lightgray;
+            }
+        </style>
+    </head>
+    <body>
+        
+        <div id="list">
+            <h1>Libray Management</h1>
+            <form>
+                <label>NO.:</label><input type="text" v-model.number="id" :disabled="idDisable">
+                <label>Name:</label><input type="text" v-model="name">
+                <input type="submit" value="Submit" @click.prevent="handleSubmit" :disabled="submitFlag">
+            </form>
+            <table>
+                <thead>
+                    <tr>
+                        <th>NO.</th>
+                        <th>Name</th>
+                        <th>Date</th>
+                        <th>Manage</th>
+                     </tr>
+                </thead>
+                <tbody>
+                    <tr :key="item.id" v-for="(item, index) in books">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.time | format('yyyy-MM-dd')}}</td>
+                        <td><a href="#" @click.prevent="handleModify(index)">Modify</a> | <a href=#"" @click.prevent="handleDelete(index)">Delete</a>
+                    </tr>
+                </tbody>
+                <caption>Total Number: {{total}}</caption>
+                
+            </table>
+        </div>
+        <script type="text/javascript">
+        Vue.filter('format', function(value, arg) {
+            function dateFormat(date, format) {
+                if (typeof date === "string") {
+                var mts = date.match(/(\/Date\((\d+)\)\/)/);
+                if (mts && mts.length >= 3) {
+                    date = parseInt(mts[2]);
+                }
+                }
+                date = new Date(date);
+                if (!date || date.toUTCString() == "Invalid Date") {
+                return "";
+                }
+                var map = {
+                "M": date.getMonth() + 1, //月份 
+                "d": date.getDate(), //日 
+                "h": date.getHours(), //小时 
+                "m": date.getMinutes(), //分 
+                "s": date.getSeconds(), //秒 
+                "q": Math.floor((date.getMonth() + 3) / 3), //季度 
+                "S": date.getMilliseconds() //毫秒 
+                };
+                format = format.replace(/([yMdhmsqS])+/g, function(all, t) {
+                var v = map[t];
+                if (v !== undefined) {
+                    if (all.length > 1) {
+                    v = '0' + v;
+                    v = v.substr(v.length - 2);
+                    }
+                    return v;
+                } else if (t === 'y') {
+                    return (date.getFullYear() + '').substr(4 - all.length);
+                }
+                return all;
+                });
+                return format;
+            }
+            return dateFormat(value, arg);
+            })
+
+            let vm = new Vue({
+                el: "#list",
+                data: {
+                    id:"",
+                    name:"",
+                    idDisable:false,
+                    submitFlag: false,
+                    books: []
+                }, methods: {
+                    handleSubmit: function() {
+                        let book = this.bookExist(this.id)
+                        // for modify
+                        if (this.idDisable) {
+                            book.name = this.name;
+                        }else {
+                            if (book) {
+                                alert('You already have')
+                                return
+                            }
+
+                            // change book
+                            let newBook = {id: this.id, name: this.name, time: new Date()}
+                            this.books.push(newBook)
+                        }
+
+                        // init state
+                        this.id = ""
+                        this.name = ""
+                        this.idDisable = false
+                    },
+                    handleDelete: function(index) {
+                        this.books.splice(index, 1)
+                    },
+                    handleModify: function(index) {
+                        this.idDisable = true
+                        let book = this.books[index]
+                        this.id = book.id
+                        this.name = book.name
+                    },
+                    bookExist: function(id) {
+                        return this.books.find((book) => {
+                            return book.id === id
+                        })
+                    }
+                }, computed: {
+                    total: function() {
+                        return this.books.length
+                    }
+                // }, filters:{
+                //     dateFormat: function(value, arg) {
+                //         let year = value.getFullYear();
+                //         let month = value.getMonth() + 1;
+                //         let day = value.getDate();
+                //         return year + "-" + month + "-" + day
+                //     }
+                }, watch: {
+                    name: function() {
+
+                    }
+                }, mounted: function() {
+                    // init
+                    // 一般此时用于获取后台数据，然后把数据填充到模板
+                    var data = [{
+                    id: 1,
+                    name: '三国演义',
+                    date: 2525609975000
+                    },{
+                    id: 2,
+                    name: '水浒传',
+                    date: 2525609975000
+                    },{
+                    id: 3,
+                    name: '红楼梦',
+                    date: 2525609975000
+                    },{
+                    id: 4,
+                    name: '西游记',
+                    date: 2525609975000
+                    }];
+                    this.books = data;
+                }
+            })
+            
+        </script>
+    </body>
+</html>

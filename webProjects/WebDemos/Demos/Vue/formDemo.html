@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Form</title>
+    <script src="../../js/vue.js"></script>
+    <style>
+        #app div {
+            margin-bottom: 10px;
+        }
+
+        span {
+            line-height: 1.5rem;
+            display: inline-block;
+            width: 85px;
+        }
+
+        label {
+            padding-left: 5px;
+            padding-right: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <form>
+            <div><span>Name:</span>
+                <input type="text" v-model="username" type="Input Name">
+            </div>
+            <div><span>Gender:</span>
+                <input type="radio" id="male" value="1" v-model="gender"><label>Male</label>
+                <input type="radio" id="female" value="2" v-model="gender"><label>Female</label>
+            </div>
+            <div><span>Hobbies</span>
+                <input type="checkbox" v-model="hobbies" value="1"><label>BasketBall</label>
+                <input type="checkbox" v-model="hobbies" value="2"><label>Singing</label>
+                <input type="checkbox" v-model="hobbies" value="3"><label>Draw</label>
+            </div>
+            <div><span>Occupation:</span>
+                <select v-model="occupation" multiple="true">
+                    <option value="0">Select Occupation</option>
+                    <option value="1">Student</option>
+                    <option value="2">Teacher</option>
+                    <option value="3">Assistant</option>
+                </select>
+            </div>
+            <div><span>Introducion:</span>
+                <textarea v-model="introduction"></textarea>
+            </div>
+            <input type="submit" value="Submit" @click.prevent="submitForm">
+        </form>
+    </div>
+    <script>
+        let vm = new Vue({
+            el: "#app",
+            data: {
+                username: "",
+                gender: "1",
+                hobbies: [],
+                occupation:[],
+                introduction: ""
+            }, methods: {
+                submitForm: function() {
+                    console.log(this.username)
+                    console.log(this.gender)
+                }
+            }
+        });
+    </script>
+</body>
+</html>

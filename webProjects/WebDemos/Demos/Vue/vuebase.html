@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tab Select</title>
+        <script src="../../js/vue.js"></script>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div id="app">
+            <!-- <div v-text="date | dateFormat('yyyy-MM-dd')"></div> -->
+            {{date | dateFormat('yyyy-MM-dd')}}
+        </div>
+        <script type="text/javascript">
+            let vm = new Vue({
+                el: "#app",
+                data: {
+                    date: new Date()
+                }, filters:{
+                    dateFormat: function(value, arg) {
+                        let year = value.getFullYear();
+                        let month = value.getMonth() + 1;
+                        let day = value.getDate();
+                        return year + "-" + month + "-" + day
+                    }
+                }, beforecreate: function() {
+                    
+                }
+            })
+            
+        </script>
+    </body>
+</html>
