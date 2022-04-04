@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Demo</title>
+    <script src="./js/template-web.js"></script>
+    <script src="./js/ajax.js"></script>
+    <script src="./js/vue.js"></script>
+
+    <style>
+
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div v-if="score>=90">Excellent</div>
+        <div v-else-if="score>=80">Good</div>
+        <div v-else-if="score>=60">OK</div>
+        <div v-else="score<60">Bad</div>
+        <li :key="item.id" v-for="(item, index) in array">{{item + "---" + index}}</li>
+
+        <div>
+            <label>UserName:
+                <input type="text" @keyup.enter="handle" v-model="inputValue">
+            </label>
+        </div>
+        <button @click="handle">Submit</button>
+    </div>
+    <script>
+        var vm = new Vue({
+            el: "#app",
+            data: {
+                inputValue: "",
+                score: 90
+            }, methods: {
+                handle: function(event) {
+                    this.score = parseInt(this.inputValue)
+                }
+            }
+        })
+        
+    </script>
+</body>
+</html>

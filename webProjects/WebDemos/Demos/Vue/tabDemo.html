@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tab Select</title>
+        <script src="../../js/vue.js"></script>
+        <style>
+            * {
+                padding: 0;
+                margin: 0;
+            }
+            #tab {
+                margin-top: 10px;
+                margin-left: 20px;
+            }
+
+            li {
+                display: inline-block;
+                width: 80px;
+                line-height: 40px;
+                text-align: center;
+                list-style-type: none;
+                border-top: 1px solid blue;
+                border-left: 1px solid blue;
+                /* padding: 10px; */
+            }
+            li:last-child {
+                border-right: 1px solid blue;
+            }
+            img {
+                /* margin-left: 20px; */
+                width: 280px;
+                border: 1px solid blue;
+            }
+            .current {
+                background-color: orange;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="tab">
+            <ul>
+                <li v-for="(item, index) in tabInfo" :class="index==currentIndex ? 'current' : ''" :key="index"  @click="focusOn(index, $event)">{{item.name}}</li>
+            </ul>
+            <!-- <img src="../../images/01.jpg"> -->
+            <img :src="tabInfo[currentIndex].imageSrc">
+        </div>
+
+        <script type="text/javascript">
+            let vm = new Vue({
+                el: "#tab",
+                data: {
+                    currentIndex: 0,
+                    tabInfo: [{
+                        name: "apple",
+                        imageSrc: "../../images/01.jpg"
+                    }, {
+                        name: "orange",
+                        imageSrc: "../../images/02.jpg"
+                    }, {
+                        name: "lemon",
+                        imageSrc: "../../images/03.jpg"
+                    }]
+                }, methods:{
+                    focusOn: function(index, event) {
+                        this.currentIndex = index
+                    }
+                }
+            })
+        </script>
+    </body>
+</html>
