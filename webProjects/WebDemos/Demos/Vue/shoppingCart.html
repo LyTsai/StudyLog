@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Tab Select</title>
+        <script src="../../js/vue.js"></script>
+        <style>
+        </style>
+    </head>
+    <body>
+        <div id="app">
+        </div>
+
+        <script type="text/javascript">
+            Vue.component("shoppingCart", {
+                props: ["list"],
+                template:`
+                    <div>
+                        <li :key="item.id" v-for="item in list">
+                            <slot :info="item">{{item.name}}</slot>
+                        </li>
+                    </div>
+                `
+            })
+
+            let vm = new Vue({
+                el: "#app",
+                goods: [],
+                methods: {
+
+                }
+            })
+
+
+        </script>
+    </body>
+</html>
