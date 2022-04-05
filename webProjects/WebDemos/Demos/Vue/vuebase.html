@@ -5,35 +5,32 @@
         <title>Tab Select</title>
         <script src="../../js/vue.js"></script>
         <style>
-            * {
-                padding: 0;
-                margin: 0;
-            }
-            
         </style>
     </head>
     <body>
         <div id="app">
-            <!-- <div v-text="date | dateFormat('yyyy-MM-dd')"></div> -->
-            {{date | dateFormat('yyyy-MM-dd')}}
+            <template slot-scope="slotProps">
+                <strong v-if="slotProps.item.current">{{slotProps.item.text}}</strong>
+            </template>
         </div>
+
         <script type="text/javascript">
-            let vm = new Vue({
-                el: "#app",
-                data: {
-                    date: new Date()
-                }, filters:{
-                    dateFormat: function(value, arg) {
-                        let year = value.getFullYear();
-                        let month = value.getMonth() + 1;
-                        let day = value.getDate();
-                        return year + "-" + month + "-" + day
-                    }
-                }, beforecreate: function() {
-                    
-                }
+            Vue.component("fruits", {
+                props: ["list"],
+                template:`
+                    <div>
+                        <li :key="item.id" v-for="item in list">
+                            <slot :info="item">{{item.name}}</slot>
+                        </li>
+                    </div>
+                `
             })
-            
+
+            let vm = new Vue({
+                el: "#app"
+            })
+
+
         </script>
     </body>
 </html>
