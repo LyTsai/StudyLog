@@ -5,11 +5,21 @@
     <title>User List</title>
     <link rel="styleSheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
     <script type="text/javascript" src="../scripts/vue.js"></script>
+    <script type="text/javascript" src="../scripts/axios.js"></script>
+
+    <style>
+        .container #users .address {
+            width: 20%;
+        }
+        .container #users .operation {
+            vertical-align: middle;
+        }
+    </style>
 </head>
 <body>
     <div class="container">
         <h6>
-            <a href="add.html" class="btn btn-primary">Add User</a>
+            <a href="addUser.html" class="btn btn-primary">Add User</a>
         </h6>
         <div id="users">
             <user-item :users="userlist"></user-item>
@@ -26,20 +36,25 @@
             props: ["users"],
             template:`
             <table class="table table-striped table-border">
+            <thead>
             <tr>
                 <th v-for="item in headers">{{item}}</th>
             </tr>
-            <tr :key="item.key" v-for="item in users">
+            </thead>
+            <tbody>
+            <tr :key="item._id" v-for="item in users">
                 <td>{{item.username}}</td>
                 <td>{{item.first_name + " " + item.last_name}}</td>
-                <td>{{item.address}}</td>
-                <td>{{item.profession}}<td>
+                <td class="address">{{item.address}}</td>
+                <td>{{item.profession.join(", ")}}</td>
                 <td>{{item.email}}</td>
                 <td>{{item.cell}}</td>
-                <a href= "" @click.prevent="deleteUser(item.id)" class="btn btn-danger btn-xs">Delete</a>
-                <a href= "" @click.prevent="modifyUser(item.id)" class="btn btn-success btn-xs">Modify</a>
+                <td class="operation">
+                    <a href= "" @click.prevent="deleteUser(item.id)" class="btn btn-danger btn-xs">Delete</a>
+                    <a href= "" @click.prevent="modifyUser(item.id)" class="btn btn-success btn-xs">Modify</a>
                 </td>
             </tr>
+            </tbody>
         </table>
             `
         , methods: {
@@ -52,29 +67,28 @@
         }
     })
 
-    let vm = new Vue({
-        el: "#users",
-        data: {
-            userlist: []
-        },methods: {
-            getAll: function() {
-                fetch("https://localhost:5001/api/user", {
-                method: 'get'
-                }).then(data => {
-                    return data.text()
-                }).then(all => {
-                    console.log(all)
-                }).catch(error => {
-                    console.log(error)
-                })
+        axios.defaults.baseURL = 'http://localhost:5001/'
+        axios.interceptors.response.use(function(res){
+            return res.data;
+        }, function(error){
+            console.log(error)
+        });
+
+        let vm = new Vue({
+            el: "#users",
+            data: {
+                userlist: []
+            },methods: {
+                getAll: async function() {
+                    this.userlist = await axios.get('/user')
+                }
+            },
+            mounted: function() {
+                // users
+                this.getAll()
             }
-        },
-        mounted: function() {
-            // users
-            this.getAll()
-        }
-    })
-       
+        })
+        
     </script>
 </body>
 </html>

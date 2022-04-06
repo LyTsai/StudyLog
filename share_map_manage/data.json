@@ -1,0 +1,59 @@
+[{"_id": "5ff4a758ea9902163009a3bb",
+        "username": "rudytanzi",
+        "first_name": "Rudolph",
+        "last_name": "Tanzi",
+        "address": "Genetics and Aging Research Unit, MassGeneral Institute for Neurodegenerative Disease, Massachusetts General Hospital, 114 16th Street, Charlestown, MA 02129",
+        "profession": [
+            "Medical Professional",
+            "Educator",
+            "Researcher"
+        ],
+        "email": 
+            "Tanzi@helix.mgh.harvard.edu"
+        ,
+        "cell": 
+            "617-726-6845"
+        ,
+        "sharemaps": [],
+        "doctemplates": []
+    },
+    {
+        "_id": "62352300fe3ca8f02b47f2a6",
+        "username": "huiwang",
+        "first_name": "hui",
+        "last_name": "wang",
+        "address": "60 south st, upton, ma 01568",
+        "profession": [
+            "Scientist",
+            "Engineer",
+            "Researcher"
+        ],
+        "email": 
+            "hw88_98@yahoo.com"
+        ,
+        "cell": 
+            "508-330-4112"
+        ,
+        "sharemaps": [],
+        "doctemplates": []
+    },
+    {
+        "_id": "6243a87d904144cb4087e06f",
+        "username": "annielyticx",
+        "first_name": "admin",
+        "last_name": "annielyticx",
+        "address": "Hopkinton, MA",
+        "profession": [
+            "Research",
+            "Engineering"
+        ],
+        "email": 
+            "yinghan@annielyticx.com"
+        ,
+        "cell": 
+            "508-529-9012"
+        ,
+        "sharemaps": [],
+        "doctemplates": []
+    }
+]
