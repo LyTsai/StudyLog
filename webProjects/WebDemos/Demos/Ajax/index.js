@@ -115,18 +115,3 @@ app.listen(3000, () => {
   console.log('running...')
 })
 
-fetch('url', {
-    method: 'post',
-    body: JSON.stringify({
-        uname: lisi,
-        pwd: "123"
-    }),
-    headers: {
-        'Content-Type': 'application/json'
-    }
-}).then(date => {
-    return date.text()
-}).then (result => {
-    // real result
-    console.log(result)
-})
