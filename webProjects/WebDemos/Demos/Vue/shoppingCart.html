@@ -5,32 +5,216 @@
         <title>Tab Select</title>
         <script src="../../js/vue.js"></script>
         <style>
+            #app {
+                width: 80%;
+                min-width:  500px;
+                margin: auto;
+                
+                margin-top: 20px;
+                padding: 0;
+            }
+            .title {
+                background-color: aquamarine;
+                text-align: center;
+                line-height: 40px;
+                font-weight: bold;
+            }
+
+            .cart ul {
+                list-style-type: none;
+            }
+
+            .cart li {
+                width: 100%;
+                /* margin: 5px; */
+                height: 40px;
+                line-height: 40px;
+                position: relative;
+                border-top: 1px solid #ADD8E6;
+            }
+
+            .cart img{
+                width: 30px;
+                height: 30px;
+                margin: 5px;
+            }
+            .cart .name {
+                position: absolute;
+                width: 90px;
+                top: 0;
+                left: 55px;
+                font-size: 16px;
+            }
+            .cart .change {
+                position: absolute;
+                width: 100px;
+                top: 0;
+                right: 50px;
+            }
+            
+            .cart .change a {
+                width: 30px;
+                background-color: azure;
+                text-decoration: none;
+                font-size: 20px;
+                vertical-align: middle;
+            }
+
+            .cart input {
+                width: 40px;
+            }
+
+            .cart .del {
+                position: absolute;
+                top: 0;
+                right: 0px;
+                width: 40px;
+                text-align: center;
+                font-size: 40px;
+                cursor: pointer;
+                color: red;
+        
+            }
+
+            .total {
+                background-color: orange;
+                /* padding-right: 0px; */
+                line-height: 50px;
+                text-align: right;
+            }
+            .total button {
+                margin: 0 10px;
+                background-color: #DC4C40;
+                height: 35px;
+                width: 80px;
+                border: 0;
+            }
+
         </style>
     </head>
     <body>
         <div id="app">
+            <my-cart></my-cart>
         </div>
 
         <script type="text/javascript">
-            Vue.component("shoppingCart", {
-                props: ["list"],
-                template:`
-                    <div>
-                        <li :key="item.id" v-for="item in list">
-                            <slot :info="item">{{item.name}}</slot>
-                        </li>
-                    </div>
-                `
+
+
+            let CartTitle = Vue.component("cart-title", {
+                props: ["name"],
+                template:`<div class="title">{{name}}的商品</div>`
             })
 
-            let vm = new Vue({
-                el: "#app",
-                goods: [],
-                methods: {
+            let ProductList = Vue.component("product-list", {
+                props: ["products"],
+                template:`
+                <div class="cart">
+                    <ul>
+                        <li :key="item.id" v-for="item in products">
+                            <img :src="item.imgSrc">
+                            <div class="name">{{item.name}}</div>
+                            <div class="change">
+                                <a href="" @click.prevent="">-</a>
+                                <input type="text" :v-model.number="item.number">
+                                <a href="">+</a>
+                            </div>
+                            <div class="del" @click="deleteItem(item.id)">X</div>
+                        </li>
+                    </ul>
+                </div>
+                `, methods: {
+                    // changeNumber: function(id, event) {
+                    //     this.$emit("change-number", {
+                    //         id: id,
+                    //     })
+                    // }
 
+                    deleteItem: function(id) {
+                        console.log(id)
+                        this.$emit('delete-product', id)
+                    }
                 }
             })
 
+            let CartTotal = Vue.component("cart-total", {
+                props: ["products"],
+                template:`
+                <div class="total">
+                    <span>Total Price: {{total}}</span>
+                    <button @click="$emit('save')">结算</button>
+                </div>
+                `,computed: {
+                    total: function() {
+                        var price = 0
+                        this.products.forEach(element => {
+                            price += element.number * element.price
+                        });
+                        return price
+                    }
+                }
+            })
+
+            Vue.component("my-cart", {
+                // props: ["products"],
+                data: function() {
+                    return {
+                        username: "我",
+                        products: [{
+                        id: 1,
+                        imageSrc:"../../images/01.jpg",
+                        name: "name",
+                        number: 1,
+                        price: 200
+                    },{
+                        id: 2,
+                        imageSrc:"../../images/02.jpg",
+                        name: "name2",
+                        number: 1,
+                        price: 200
+                    },{
+                        id: 3,
+                        imageSrc:"../../images/03.jpg",
+                        name: "name3",
+                        number: 2,
+                        price: 200
+                    },{
+                        id: 4,
+                        imageSrc:"../../images/04.jpg",
+                        name: "name4",
+                        number: 1,
+                        price: 200
+                    },{
+                        id: 5,
+                        imageSrc:"../../images/05.jpg",
+                        name: "name5",
+                        number: 10,
+                        price: 200
+                    }]
+                    }
+                },
+                template:`
+                <div id="app">
+                <cart-title :name="username"></cart-title>
+                <product-list :products="products" @delete-product="deleteProduct($event)"></product-list>
+                <cart-total :products="products"></cart-total>
+                </div>
+            `, components: {
+                    'cart-title': CartTitle,
+                    'procuct-list':ProductList,
+                    'cart-total': CartTotal
+                }, methods: {
+                    deleteProduct: function(id) {
+                        let index = this.products.findIndex(item => {
+                            item.id == id
+                        })
+                        this.products.splice(index, 1)
+                    }
+                }
+            })
+
+            let vm = new Vue({
+                el: "#app"
+            })
 
         </script>
     </body>
