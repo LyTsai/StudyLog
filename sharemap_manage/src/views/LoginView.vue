@@ -25,14 +25,14 @@
 </template>
 
 <script>
-import axios from 'axios'
+// import axios from 'axios'
 export default {
   data () {
     return {
       loginForm: {
         username: '',
-        password: '',
-        grant_type: 'password'
+        password: ''
+        // grant_type: 'password'
       },
       loginFormRules: {
         username: [
@@ -49,21 +49,31 @@ export default {
       this.$refs.loginFormRef.resetFields()
     },
     login () {
-      this.$refs.loginFormRef.validate(async valid => {
+      this.$refs.loginFormRef.validate(valid => {
         if (!valid) return
-        console.log(this.loginForm)
-        // axios.defaults.baseURL = 'https://annielyticx-gamedataauth.azurewebsites.net/'
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
-        axios.defaults.headers.post['Content-Type'] = 'application/json'
-        try {
-          const { data: res } = await axios.post('axios/oauth/token', this.loginForm)
-          if (res.meta.status !== 200) return alert('Failed to Login')
-          alert('Success')
-          window.sessionStorage.setItem('token', res.data.token)
+
+        const loginUrl = 'https://annielyticx-gamedataauth.azurewebsites.net/oauth/token'
+        const body = 'username=' + this.loginForm.username + '&password=' + this.loginForm.password + '&grant_type=password'
+        fetch(loginUrl, {
+          method: 'post',
+          body: body,
+          headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+          // , mode: 'no-cors'
+        }).then(response => {
+          console.log(response)
+          if (!response.ok) {
+            throw new Error(response.status)
+          }
+          return response.json()
+        }).then(result => {
+          const token = result.access_token
+          window.sessionStorage.setItem('token', token)
           this.$router.push('/home')
-        } catch (error) {
+        }).catch(error => {
           alert(error)
-        }
+        })
       })
     }
   }

@@ -6,13 +6,11 @@ module.exports = defineConfig({
     host: "localhost",
     open: true,
     proxy: {
-      '/axios': {
-        target: 'https://annielyticx-gamedataauth.azurewebsites.net',
+      '/oauth': {
+        target: 'https://annielyticx-gamedataauth.azurewebsites.net/oauth/',
         changeOrigin: true,
-        ws: false,
-        secure: false,
         pathRewrite: {
-          '^/axios': ''
+          '^/oauth': ''
         }
       }
     }
