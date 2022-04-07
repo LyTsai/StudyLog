@@ -2,17 +2,17 @@ const { defineConfig } = require('@vue/cli-service')
 module.exports = defineConfig({
   transpileDependencies: true,
   devServer: {
-    port: "5001",
+    port: 5001,
     host: "localhost",
     open: true,
     proxy: {
-      '/axios': {
-        target: 'https://annielyticx-gamedataauth.azurewebsites.net',
+      '/token': {
+        target: "https://annielyticx-gamedataauth.azurewebsites.net/oauth",
         changeOrigin: true,
         ws: false,
         secure: false,
         pathRewrite: {
-          '^/axios': ''
+          "^/token":""
         }
       }
     }
