@@ -52,11 +52,11 @@ export default {
       this.$refs.loginFormRef.validate(async valid => {
         if (!valid) return
         console.log(this.loginForm)
-        // axios.defaults.baseURL = 'https://annielyticx-gamedataauth.azurewebsites.net/'
-        axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
+        // axios.defaults.baseURL = '/token'
+        // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*'
         axios.defaults.headers.post['Content-Type'] = 'application/json'
         try {
-          const { data: res } = await axios.post('axios/oauth/token', this.loginForm)
+          const { data: res } = await axios.post('/token', this.loginForm)
           if (res.meta.status !== 200) return alert('Failed to Login')
           alert('Success')
           window.sessionStorage.setItem('token', res.data.token)
