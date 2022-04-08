@@ -9,8 +9,6 @@ module.exports = defineConfig({
       '/token': {
         target: "https://annielyticx-gamedataauth.azurewebsites.net/oauth",
         changeOrigin: true,
-        ws: false,
-        secure: false,
         pathRewrite: {
           "^/token":""
         }

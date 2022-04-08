@@ -13,10 +13,12 @@ const router = createRouter({
   routes
 })
 
+// router guide
 router.beforeEach((to, from, next) => {
   if (to.path === '/login') return next()
   const tokenStr = window.sessionStorage.getItem('token')
   if (!tokenStr) return next('/login')
+  // valid token?
   next()
 })
 export default router
