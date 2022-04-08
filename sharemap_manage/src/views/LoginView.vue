@@ -1,26 +1,28 @@
 <template>
 <div class="login_container">
-    <div class="login_box">
-        <!-- logo image -->
-        <div class="avator_box">
-            <img src="../assets/logo.png" alt="logo">
-        </div>
-        <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0" class="login_form">
-            <!-- username -->
-            <el-form-item prop="username">UserName
-                <el-input v-model="loginForm.username" placeholder="Please input Email adress" :prefix-icon="Search"/>
-            </el-form-item>
-            <!-- password -->
-            <el-form-item prop="password">Password
-                <el-input v-model="loginForm.password" type="password" placeholder="Please input password" show-password :prefix-icon="icon-password"/>
-            </el-form-item>
-            <!-- buttons -->
-            <el-form-item class="btns">
-                <el-button type="primary" @click="login">Log In</el-button>
-                <el-button type="info" @click="resetLoginForm">Reset</el-button>
-            </el-form-item>
-        </el-form>
+  <div class="login_box">
+    <!-- logo image -->
+    <div class="avator_box">
+      <img src="../assets/logo.png" alt="logo">
     </div>
+    <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0" class="login_form">
+      <!-- username -->
+      <el-form-item prop="username">
+        <span>UserName</span>
+        <el-input v-model="loginForm.username" placeholder="Please input Email adress" :prefix-icon="Search"/>
+      </el-form-item>
+        <!-- password -->
+      <el-form-item prop="password">
+        <span>Password</span>
+        <el-input v-model="loginForm.password" type="password" placeholder="Please input password" show-password :prefix-icon="icon-password"/>
+      </el-form-item>
+        <!-- buttons -->
+      <el-form-item class="btns">
+        <el-button type="primary" @click="login">Log In</el-button>
+        <el-button type="info" @click="resetLoginForm">Reset</el-button>
+      </el-form-item>
+    </el-form>
+  </div>
 </div>
 </template>
 
@@ -32,7 +34,6 @@ export default {
       loginForm: {
         username: '',
         password: ''
-        // grant_type: 'password'
       },
       loginFormRules: {
         username: [

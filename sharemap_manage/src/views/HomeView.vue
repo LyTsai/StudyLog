@@ -13,12 +13,24 @@
       <el-aside :width="isCollapse ? '64px' : '160px'">
         <div class="toggle-button" @click="toggleSide">|||</div>
         <el-menu background-color="#333744" text-color="#fff" active-text-color="#409EFF" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
-          <el-sub-menu :key="index" v-for="(item, index) in menulist">
-            <span>{{item.title}}</span>
+          <el-sub-menu :index="index" :key="index" v-for="(item, index) in menulist">
+            <template #title>
+              <!-- <el-icon :class="item.icon"></el-icon> -->
+              <span>{{item.name}}</span>
+            </template>
+            <!-- sub -->
+            <el-menu-item :index="subItem.path" :key="index + subIndex" v-for="(subItem, subIndex) in item.sub" @:click="saveNavState(subItem.path)">
+              <template #title>
+                <span>{{subItem.title}}</span>
+              </template>
+            </el-menu-item>
           </el-sub-menu>
         </el-menu>
       </el-aside>
-      <el-main>Main</el-main>
+      <!-- main -->
+      <el-main>
+        <router-view></router-view>
+      </el-main>
     </el-container>
   </el-container>
 </template>
@@ -29,18 +41,39 @@ export default {
     return {
       menulist: [{
         icon: '',
-        name: 'Users'
+        name: 'User Management',
+        sub: [{
+          icon: '',
+          title: 'User List',
+          path: '/userlist'
+        }]
       }, {
         icon: '',
-        name: 'Visuals'
+        name: 'Visuals',
+        sub: [{
+          icon: '',
+          title: 'Visual Pages',
+          path: '/visualPage'
+        }, {
+          icon: '',
+          title: 'Visual Books',
+          path: '/visualBook'
+        }]
+      }, {
+        icon: '',
+        name: 'Clients',
+        sub: []
       }],
       isCollapse: false,
-      activePath: ''
+      activePath: '/welcome'
     }
   },
   created () {
     // init state, fetch data?
-    this.activePath = window.sessionStorage.getItem('activePath')
+    const sessionPath = window.sessionStorage.getItem('activePath')
+    if (sessionPath) {
+      this.activePath = sessionPath
+    }
   },
   methods: {
     logout () {
@@ -69,6 +102,7 @@ export default {
   justify-content: space-between;
   align-items: center;
   font-size: 20px;
+  padding-left: 5px;
   > div {
     display: flex;
     align-items: center;
@@ -76,7 +110,7 @@ export default {
       margin-left: 15px;
     }
     img {
-      height: 35px;
+      height: 30px;
     }
   }
 }
