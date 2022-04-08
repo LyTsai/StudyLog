@@ -1,5 +1,4 @@
 import axios from 'axios'
-import { configProviderContextKey } from 'element-plus'
 
 axios.defaults.baseURL = 'https://localhost:5001/'
 // axios.defaults.timeout = 2000

@@ -13,13 +13,13 @@
       <el-aside :width="isCollapse ? '64px' : '160px'">
         <div class="toggle-button" @click="toggleSide">|||</div>
         <el-menu background-color="#333744" text-color="#fff" active-text-color="#409EFF" unique-opened :collapse="isCollapse" :collapse-transition="false" router :default-active="activePath">
-          <el-sub-menu :index="index" :key="index" v-for="(item, index) in menulist">
+          <el-sub-menu :index="index + '1'" :key="index" v-for="(item, index) in menulist">
             <template #title>
               <!-- <el-icon :class="item.icon"></el-icon> -->
               <span>{{item.name}}</span>
             </template>
             <!-- sub -->
-            <el-menu-item :index="subItem.path" :key="index + subIndex" v-for="(subItem, subIndex) in item.sub" @:click="saveNavState(subItem.path)">
+            <el-menu-item :index="subItem.path" :key="index + subIndex" v-for="(subItem, subIndex) in item.sub" @click="saveNavState(subItem.path)">
               <template #title>
                 <span>{{subItem.title}}</span>
               </template>
@@ -65,15 +65,11 @@ export default {
         sub: []
       }],
       isCollapse: false,
-      activePath: '/welcome'
+      activePath: ''
     }
   },
   created () {
-    // init state, fetch data?
-    const sessionPath = window.sessionStorage.getItem('activePath')
-    if (sessionPath) {
-      this.activePath = sessionPath
-    }
+    this.activePath = window.sessionStorage.getItem('activePath')
   },
   methods: {
     logout () {
@@ -83,9 +79,9 @@ export default {
     toggleSide () {
       this.isCollapse = !this.isCollapse
     },
-    saveNavState (activePath) {
-      window.sessionStorage.setItem('activePath', activePath)
-      this.activePath = activePath
+    saveNavState (path) {
+      window.sessionStorage.setItem('activePath', path)
+      this.activePath = path
     }
   }
 }

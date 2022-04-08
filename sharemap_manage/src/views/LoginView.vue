@@ -73,7 +73,7 @@ export default {
           window.sessionStorage.setItem('token', token)
           this.$router.push('/home')
         }).catch(error => {
-          alert(error)
+          alert('Failed to login :' + error)
         })
       })
     }
