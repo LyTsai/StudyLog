@@ -91,101 +91,103 @@
   </div>
 </template>
 <script>
+import { reactive, ref } from 'vue'
 export default {
-  data () {
-    return {
-      queryInfo: {
-        query: '',
-        pagenum: 1,
-        pagesize: 10
-      },
-      userlist: [{
-        _id: '12345',
-        username: 'userOne',
-        first_name: 'User',
-        last_name: 'one',
-        password: 'slowaging123',
-        address: 'long long text to see',
-        profession: ['a', 'b', 'c'],
-        email: 'hello@163.com',
-        cell: '1000000'
-      }, {
-        _id: '12ddd345',
-        username: 'user2',
-        first_name: 'User',
-        last_name: '2',
-        password: 'slowaging123d',
-        profession: ['a', 'b'],
-        email: 'hello@163.com'
-      }, {
-        _id: '1dsgad5',
-        username: 'user2',
-        first_name: 'User',
-        last_name: '2',
-        password: 'slowaging123d',
-        profession: ['a', 'b'],
-        email: 'hello@163.com'
-      }, {
-        _id: '1daggag5',
-        username: 'user2',
-        first_name: 'User',
-        last_name: '2',
-        password: 'slowaging123d',
-        profession: ['a', 'b'],
-        email: 'hello@163.com'
-      }, {
-        _id: '12dagdgae5',
-        username: 'user2',
-        first_name: 'User',
-        last_name: '2',
-        password: 'slowaging123d',
-        profession: ['a', 'b'],
-        email: 'hello@163.com'
-      }, {
-        _id: '12agadd345',
-        username: 'user2',
-        first_name: 'User',
-        last_name: '2',
-        password: 'slowaging123d',
-        profession: ['a', 'b'],
-        email: 'hello@163.com'
-      }],
-      addDialogVisible: false,
-      addForm: {
-        username: '',
-        password: '',
-        first_name: '',
-        last_name: '',
-        address: '',
-        profession: [],
-        email: '',
-        cell: ''
-      },
-      addFormRules: {
-        username: [
-          { required: true, message: 'Input user name', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: 'Input user password', trigger: 'blur' }
-        ]
-      }
-    }
-  },
-  methods: {
+  setup () {
+    const queryInfo = reactive({
+      query: '',
+      pagenum: 1,
+      pagesize: 10
+    })
+    
+    const total = ref(0)
+    const userlist = reactive([{
+      _id: '12345',
+      username: 'userOne',
+      first_name: 'User',
+      last_name: 'one',
+      password: 'slowaging123',
+      address: 'long long text to see',
+      profession: ['a', 'b', 'c'],
+      email: 'hello@163.com',
+      cell: '1000000'
+    }, {
+      _id: '12ddd345',
+      username: 'user2',
+      first_name: 'User',
+      last_name: '2',
+      password: 'slowaging123d',
+      profession: ['a', 'b'],
+      email: 'hello@163.com'
+    }, {
+      _id: '1dsgad5',
+      username: 'user2',
+      first_name: 'User',
+      last_name: '2',
+      password: 'slowaging123d',
+      profession: ['a', 'b'],
+      email: 'hello@163.com'
+    }, {
+      _id: '1daggag5',
+      username: 'user2',
+      first_name: 'User',
+      last_name: '2',
+      password: 'slowaging123d',
+      profession: ['a', 'b'],
+      email: 'hello@163.com'
+    }, {
+      _id: '12dagdgae5',
+      username: 'user2',
+      first_name: 'User',
+      last_name: '2',
+      password: 'slowaging123d',
+      profession: ['a', 'b'],
+      email: 'hello@163.com'
+    }, {
+      _id: '12agadd345',
+      username: 'user2',
+      first_name: 'User',
+      last_name: '2',
+      password: 'slowaging123d',
+      profession: ['a', 'b'],
+      email: 'hello@163.com'
+    }])
+    
+    // add form
+    const addFormRef = ref()
+    const addDialogVisible = ref(false)
+    const addForm = reactive({
+      username: '',
+      password: '',
+      first_name: '',
+      last_name: '',
+      address: '',
+      profession: [],
+      email: '',
+      cell: ''
+    })
+    const addFormRules = reactive({
+      username: [
+        { required: true, message: 'Input user name', trigger: 'blur' }
+      ],
+      password: [
+        { required: true, message: 'Input user password', trigger: 'blur' }
+      ]
+    })
     // page
-    handleSizeChange: function (size) {
+    const handleSizeChange = (size) => {
       this.queryInfo.pagesize = size
       this.getUserList()
-    },
-    handleCurrentChange: function (page) {
+    }
+    const handleCurrentChange = (size) => {
       this.queryInfo.pagenum = page
       this.getUserList()
-    },
+    }
     // user buttons
-    editUserClicked: function (id) {
+    const editUserClicked = (id) => {
       console.log(id)
-    },
-    deleteUserClicked: async function (id) {
+    }
+    const deleteUserClicked = async (id) => {
       const confirmResult = await this.$confirm(
         'Will Delete this User',
         'Warning',
@@ -200,36 +202,28 @@ export default {
       } else {
         this.deleteUser(id)
       }
-    },
+    }
     // dialog
-    addDialogClosed: function () {
-      this.$refs.addFormRef.resetFields()
-    },
+    const addDialogClosed = () => {
+      addFormRef.value.resetFields()
+    }
     // api functions
-    getUserList: async function () {
+    const getUserList = async () => {
       const result = await this.$http.get('/api/user', {
         params: this.queryInfo
       })
       console.log(result)
-    },
-    addUser: function () {
-
-    },
-    deleteUser: function (id) {
-
-    },
-    updateUser: function (id) {
+    }
+    const addUser = () => {
 
     }
-  },
-  computed: {
-    total: function () {
-      return this.userlist.length
+    const deleteUser = (id) => {
+
     }
-  },
-  created () {
-    this.getUserList()
-  }
+    const updateUser = (id) => {
+
+    }
+    return { queryInfo, userlist, addFormRef, addDialogVisible, addForm, addFormRules, handleSizeChange, handleCurrentChange, editUserClicked, deleteUserClicked, updateUser }
 }
 </script>
 <style lang="less" scoped>

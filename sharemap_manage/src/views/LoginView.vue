@@ -27,7 +27,7 @@
 <script>
 import { getCurrentInstance, reactive, ref, unref } from 'vue'
 export default {
-  setup (props) {
+  setup () {
     const loginFormRef = ref()
     const loginForm = reactive({
       username: '',
