@@ -99,7 +99,7 @@ export default {
       pagenum: 1,
       pagesize: 10
     })
-    
+
     const total = ref(0)
     const userlist = reactive([{
       _id: '12345',
@@ -152,7 +152,7 @@ export default {
       profession: ['a', 'b'],
       email: 'hello@163.com'
     }])
-    
+
     // add form
     const addFormRef = ref()
     const addDialogVisible = ref(false)
@@ -223,7 +223,8 @@ export default {
     const updateUser = (id) => {
 
     }
-    return { queryInfo, userlist, addFormRef, addDialogVisible, addForm, addFormRules, handleSizeChange, handleCurrentChange, editUserClicked, deleteUserClicked, updateUser }
+    return { queryInfo, userlist, addFormRef, addDialogVisible, addForm, addFormRules, handleSizeChange, handleCurrentChange, editUserClicked, deleteUserClicked, addDialogClosed, updateUser }
+  }
 }
 </script>
 <style lang="less" scoped>
