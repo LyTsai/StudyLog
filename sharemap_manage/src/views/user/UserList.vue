@@ -32,11 +32,11 @@
         <el-table-column label="Profession" prop="profession"></el-table-column>
         <el-table-column label="Email" prop="email"></el-table-column>
         <el-table-column label="Cell" prop="cell"></el-table-column>
-        <el-table-column label="Manage" width="135px">
+        <el-table-column label="Manage" width="145px">
           <template #default="scope">
             <!-- buttons -->
-            <el-button type="primary" @click="editUser(scope.row._id)">Edit</el-button>
-            <el-button type="danger" @click="removeUser(scope.row._id)">Delete</el-button>
+            <el-button type="primary" @click="editUserClicked(scope.row._id)">Edit</el-button>
+            <el-button type="danger" @click="deleteUserClicked(scope.row._id)">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -172,41 +172,7 @@ export default {
     }
   },
   methods: {
-    fullname: function (id) {
-      console.log(id)
-    },
-    getUserList: async function () {
-      // const { data: res } = await this.$http.get('/weatherforecast')
-      // if (res.meta.status !== 200) {
-      //   console.log(res)
-
-      //   return this.$message.error('Failed')
-      // }
-      // console.log(res)
-      // this.userlist = res.data
-      // await this.$http.get('/api/user')
-      // const loginUrl = 'https://localhost:5001/api/user'
-      // fetch(loginUrl, {
-      //   method: 'get',
-      //   headers: {
-      //     'Content-Type': 'application/json'
-      //     // Authorization: token
-      //   }
-      //   // , mode: 'no-cors'
-      // }).then(response => {
-      //   console.log(response)
-      //   if (!response.ok) {
-      //     throw new Error(response.status)
-      //   }
-      //   return response.json()
-      // }).then(result => {
-      // }).catch(error => {
-      //   alert(error)
-      // })
-    },
-    addUser: function () {
-
-    },
+    // page
     handleSizeChange: function (size) {
       this.queryInfo.pagesize = size
       this.getUserList()
@@ -215,14 +181,45 @@ export default {
       this.queryInfo.pagenum = page
       this.getUserList()
     },
-    editUser: function (id) {
+    // user buttons
+    editUserClicked: function (id) {
       console.log(id)
     },
-    removeUser: function (id) {
-
+    deleteUserClicked: async function (id) {
+      const confirmResult = await this.$confirm(
+        'Will Delete this User',
+        'Warning',
+        {
+          confirmButtonText: 'Confirm',
+          cancelButtonText: 'Cancel',
+          type: 'warning'
+        }
+      ).catch(error => error)
+      if (confirmResult !== 'confirm') {
+        // confirm result
+      } else {
+        this.deleteUser(id)
+      }
     },
+    // dialog
     addDialogClosed: function () {
       this.$refs.addFormRef.resetFields()
+    },
+    // api functions
+    getUserList: async function () {
+      const result = await this.$http.get('/api/user', {
+        params: this.queryInfo
+      })
+      console.log(result)
+    },
+    addUser: function () {
+
+    },
+    deleteUser: function (id) {
+
+    },
+    updateUser: function (id) {
+
     }
   },
   computed: {

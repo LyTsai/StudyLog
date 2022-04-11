@@ -5,15 +5,13 @@
     <div class="avator_box">
       <img src="../assets/logo.png" alt="logo">
     </div>
-    <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="0" class="login_form">
+    <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="120" class="login_form" hide-required-asterisk=false>
       <!-- username -->
-      <el-form-item prop="username">
-        <span>UserName</span>
-        <el-input v-model="loginForm.username" placeholder="Please input Email adress" :prefix-icon="Search"/>
+      <el-form-item label = "Username:" prop="username">
+        <el-input v-model="loginForm.username" placeholder="Please input Email address" :prefix-icon="Search"/>
       </el-form-item>
         <!-- password -->
-      <el-form-item prop="password">
-        <span>Password</span>
+      <el-form-item label = "Password:" prop="password">
         <el-input v-model="loginForm.password" type="password" placeholder="Please input password" show-password :prefix-icon="icon-password"/>
       </el-form-item>
         <!-- buttons -->
@@ -27,55 +25,63 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import { getCurrentInstance, reactive, ref, unref } from 'vue'
 export default {
-  data () {
-    return {
-      loginForm: {
-        username: '',
-        password: ''
-      },
-      loginFormRules: {
-        username: [
-          { required: true, message: 'Please input valid account', trigger: 'blur' }
-        ],
-        password: [
-          { required: true, message: 'Please input password', trigger: 'blur' }
-        ]
-      }
-    }
-  },
-  methods: {
-    resetLoginForm () {
-      this.$refs.loginFormRef.resetFields()
-    },
-    login () {
-      this.$refs.loginFormRef.validate(valid => {
-        if (!valid) return
+  setup (props) {
+    const loginFormRef = ref()
+    const loginForm = reactive({
+      username: '',
+      password: ''
+    })
+    const loginFormRules = reactive({
+      username: [
+        { required: true, message: 'Please input a valid account', trigger: 'blur' }
+      ],
+      password: [
+        { required: true, message: 'Please input password', trigger: 'blur' }
+      ]
+    })
 
-        const loginUrl = 'https://annielyticx-gamedataauth.azurewebsites.net/oauth/token'
-        const body = 'username=' + this.loginForm.username + '&password=' + this.loginForm.password + '&grant_type=password'
-        fetch(loginUrl, {
-          method: 'post',
-          body: body,
-          headers: {
-            'Content-Type': 'application/x-www-form-urlencoded'
-          }
-          // , mode: 'no-cors'
-        }).then(response => {
-          console.log(response)
-          if (!response.ok) {
-            throw new Error(response.status)
-          }
-          return response.json()
-        }).then(result => {
-          const token = result.access_token
-          window.sessionStorage.setItem('token', token)
-          this.$router.push('/home')
-        }).catch(error => {
-          alert('Failed to login :' + error)
-        })
+    const resetLoginForm = () => {
+      const formEl = unref(loginFormRef)
+      formEl.resetFields()
+    }
+
+    const { proxy } = getCurrentInstance()
+    const login = async () => {
+      const formEl = unref(loginFormRef)
+      if (!formEl) return
+      await formEl.validate((valid, fields) => {
+        if (valid) {
+          const loginUrl = 'https://annielyticx-gamedataauth.azurewebsites.net/oauth/token'
+          const body = 'username=' + loginForm.username + '&password=' + loginForm.password + '&grant_type=password'
+          fetch(loginUrl, {
+            method: 'post',
+            body: body,
+            headers: {
+              'Content-Type': 'application/x-www-form-urlencoded'
+            }
+          }).then(response => {
+            console.log(response)
+            if (!response.ok) {
+              throw new Error('Failed to login' + response.status)
+            }
+            return response.json()
+          }).then(result => {
+            console.log(result)
+            const token = result.access_token
+            window.sessionStorage.setItem('token', token)
+            proxy.$router.push('/home')
+          }).catch(error => {
+            alert('Failed to login :' + error)
+          })
+        } else {
+          console.log('error submit!', fields)
+        }
       })
+    }
+    return {
+      loginFormRef, loginForm, loginFormRules, resetLoginForm, login
     }
   }
 }
@@ -129,5 +135,6 @@ export default {
 .btns {
     display: flex;
     justify-content: flex-end;
+    float: right;
 }
 </style>

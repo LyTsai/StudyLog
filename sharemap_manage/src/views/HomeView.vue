@@ -36,53 +36,51 @@
 </template>
 
 <script>
+import { getCurrentInstance, ref } from 'vue'
 export default {
-  data () {
-    return {
-      menulist: [{
+  setup () {
+    const menulist = [{
+      icon: '',
+      name: 'User Management',
+      sub: [{
         icon: '',
-        name: 'User Management',
-        sub: [{
-          icon: '',
-          title: 'User List',
-          path: '/userlist'
-        }]
+        title: 'User List',
+        path: '/userlist'
+      }]
+    }, {
+      icon: '',
+      name: 'Visuals',
+      sub: [{
+        icon: '',
+        title: 'Visual Pages',
+        path: '/visualPage'
       }, {
         icon: '',
-        name: 'Visuals',
-        sub: [{
-          icon: '',
-          title: 'Visual Pages',
-          path: '/visualPage'
-        }, {
-          icon: '',
-          title: 'Visual Books',
-          path: '/visualBook'
-        }]
-      }, {
-        icon: '',
-        name: 'Clients',
-        sub: []
-      }],
-      isCollapse: false,
-      activePath: ''
-    }
-  },
-  created () {
-    this.activePath = window.sessionStorage.getItem('activePath')
-  },
-  methods: {
-    logout () {
+        title: 'Visual Books',
+        path: '/visualBook'
+      }]
+    }, {
+      icon: '',
+      name: 'Clients',
+      sub: []
+    }]
+    const isCollapse = ref(false)
+    const activePath = ref(window.sessionStorage.getItem('activePath'))
+
+    const { proxy } = getCurrentInstance()
+    const logout = () => {
       window.sessionStorage.clear()
-      this.$router.push('/login')
-    },
-    toggleSide () {
-      this.isCollapse = !this.isCollapse
-    },
-    saveNavState (path) {
-      window.sessionStorage.setItem('activePath', path)
-      this.activePath = path
+      proxy.$router.push('/login')
     }
+    const toggleSide = () => {
+      isCollapse.value = !isCollapse.value
+    }
+    const saveNavState = (path) => {
+      window.sessionStorage.setItem('activePath', path)
+      activePath.value = path
+    }
+
+    return { menulist, isCollapse, activePath, logout, toggleSide, saveNavState }
   }
 }
 </script>

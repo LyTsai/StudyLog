@@ -1,5 +1,5 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-import LoginView from '../views/LoginView.vue'
+// import LoginView from '../views/LoginView.vue'
 import HomeView from '../views/HomeView.vue'
 import Welcome from '../views/WelcomeView.vue'
 
@@ -7,9 +7,10 @@ import Userlist from '../views/user/UserList.vue'
 
 import VisualPage from '../views/visuals/VisualPageView.vue'
 import VisualBook from '../views/visuals/VisualBookView.vue'
+
 const routes = [
   { path: '/', redirect: '/login' },
-  { path: '/login', component: LoginView },
+  { path: '/login', component: () => import('@/views/LoginView.vue') },
   {
     path: '/home',
     component: HomeView,
