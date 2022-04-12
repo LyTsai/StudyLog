@@ -17,7 +17,7 @@
           </el-input>
         </el-col>
         <el-col :span="4">
-          <el-button type="primary" @click="addDialogVisible = true">Add User</el-button>
+          <el-button type="primary" @click="addUserClicked">Add User</el-button>
         </el-col>
       </el-row>
       <!-- table -->
@@ -32,11 +32,11 @@
         <el-table-column label="Profession" prop="profession"></el-table-column>
         <el-table-column label="Email" prop="email"></el-table-column>
         <el-table-column label="Cell" prop="cell"></el-table-column>
-        <el-table-column label="Manage" width="145px">
+        <el-table-column fixed="right" label="Operations" width="110">
           <template #default="scope">
             <!-- buttons -->
-            <el-button type="primary" @click="editUserClicked(scope.row._id)">Edit</el-button>
-            <el-button type="danger" @click="deleteUserClicked(scope.row._id)">Delete</el-button>
+            <el-button type="text" size="small" @click="editUserClicked(scope.row._id)">Edit</el-button>
+            <el-button type="text" size="small" @click="deleteUserClicked(scope.row._id)">Delete</el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -44,8 +44,8 @@
       <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </el-card>
-    <!-- addUser -->
-    <el-dialog title="Add User" v-model="addDialogVisible" width="50%" @close="addDialogClosed">
+    <!-- add or modify User -->
+    <el-dialog :title="showForAdd ? 'Add User' : 'Modify User'" v-model="dialogVisible" width="50%" @close="dialogClosed">
       <!-- edit -->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
         <el-form-item label="Username" prop="username">
@@ -54,20 +54,24 @@
         <el-form-item label="Password" prop="password">
           <el-input v-model="addForm.password"></el-input>
         </el-form-item>
-        <el-form-item label="Name" prop="name">
+        <el-form-item label="Name">
           <el-col :span="11">
-            <el-input v-model="addForm.first_name" placeholder="first name"></el-input>
+            <el-form-item prop="first_name">
+             <el-input v-model="addForm.first_name" placeholder="first name"></el-input>
+            </el-form-item>
           </el-col>
           <el-col :span="2" class="text-center">
           </el-col>
           <el-col :span="11">
-          <el-input v-model="addForm.last_name" placeholder="last name"></el-input>
+            <el-form-item prop="last_name">
+              <el-input v-model="addForm.last_name" placeholder="last name"></el-input>
+            </el-form-item>
         </el-col>
         </el-form-item>
         <el-form-item label="Address" prop="address">
           <el-input v-model="addForm.address" type="textarea"/>
         </el-form-item>
-        <el-form-item label="Profession">
+        <el-form-item label="Profession" prop="profession">
           <el-checkbox-group v-model="addForm.profession">
             <el-checkbox label = "Medical Professional" name="profession"></el-checkbox>
             <el-checkbox label = "Educator" name="profession"></el-checkbox>
@@ -82,8 +86,8 @@
         </el-form-item>
         <!-- bottom -->
         <el-form-item>
-          <el-button @click="addDialogVisible = false">Cancel</el-button>
-          <el-button type="primary" @click="addUser">Create</el-button>
+          <el-button @click="dialogClosed">Cancel</el-button>
+          <el-button type="primary" @click="createUser">Confirm</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -91,7 +95,7 @@
   </div>
 </template>
 <script>
-import { reactive, ref } from 'vue'
+import { getCurrentInstance, reactive, ref, unref } from 'vue'
 export default {
   setup () {
     const queryInfo = reactive({
@@ -100,7 +104,6 @@ export default {
       pagesize: 10
     })
 
-    const total = ref(0)
     const userlist = reactive([{
       _id: '12345',
       username: 'userOne',
@@ -152,10 +155,12 @@ export default {
       profession: ['a', 'b'],
       email: 'hello@163.com'
     }])
-
+    const total = ref(0)
     // add form
     const addFormRef = ref()
-    const addDialogVisible = ref(false)
+    const showForAdd = ref(true)
+    const userId = ref('')
+    const dialogVisible = ref(false)
     const addForm = reactive({
       username: '',
       password: '',
@@ -166,30 +171,55 @@ export default {
       email: '',
       cell: ''
     })
+    // rules
+    var checkEmail = (rule, value, cb) => {
+      const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
+      if (regEmail.test(value)) {
+        return cb()
+      }
+      cb(new Error('Please input a valid email address'))
+    }
     const addFormRules = reactive({
       username: [
         { required: true, message: 'Input user name', trigger: 'blur' }
       ],
       password: [
         { required: true, message: 'Input user password', trigger: 'blur' }
+      ],
+      email: [
+        // { message: 'Input a valid email address', trigger: 'blur' },
+        { validator: checkEmail, trigger: 'blur' }
       ]
     })
+
     // page
     const handleSizeChange = (size) => {
-      this.queryInfo.pagesize = size
-      this.getUserList()
+      queryInfo.pagesize = size
+      getUserList()
     }
-    const handleCurrentChange = (size) => {
-      this.queryInfo.pagenum = page
-      this.getUserList()
+    const handleCurrentChange = (page) => {
+      queryInfo.pagenum = page
+      getUserList()
     }
     // user buttons
     const editUserClicked = (id) => {
-      console.log(id)
+      showForAdd.value = false
+      userId.value = id
+      const user = getUserInfoByID(id).user
+      addForm.username = user.username
+      addForm.password = user.password
+      addForm.first_name = user.first_name
+      addForm.last_name = user.last_name
+      addForm.address = user.address
+      addForm.profession = user.profession
+      addForm.email = user.email
+      addForm.cell = user.cell
+      dialogVisible.value = true
     }
+    const { proxy } = getCurrentInstance()
     const deleteUserClicked = async (id) => {
-      const confirmResult = await this.$confirm(
-        'Will Delete this User',
+      const confirmResult = await proxy.$confirm(
+        'This User Will be deleted.',
         'Warning',
         {
           confirmButtonText: 'Confirm',
@@ -198,32 +228,110 @@ export default {
         }
       ).catch(error => error)
       if (confirmResult !== 'confirm') {
-        // confirm result
+        // cancel
       } else {
-        this.deleteUser(id)
+        deleteUser(id)
       }
     }
     // dialog
-    const addDialogClosed = () => {
-      addFormRef.value.resetFields()
+    const addUserClicked = () => {
+      addForm.username = ''
+      addForm.password = ''
+      addForm.first_name = ''
+      addForm.last_name = ''
+      addForm.address = ''
+      addForm.profession = []
+      addForm.email = ''
+      addForm.cell = ''
+      showForAdd.value = true
+      dialogVisible.value = true
+    }
+    const dialogClosed = () => {
+      // clear form
+      // addForm.username = ''
+      // addForm.password = ''
+      // addForm.first_name = ''
+      // addForm.last_name = ''
+      // addForm.address = ''
+      // addForm.profession = []
+      // addForm.email = ''
+      // addForm.cell = ''
+      // const form = unref(addFormRef)
+      // form.resetFields()
+      dialogVisible.value = false
+    }
+    const createUser = async () => {
+      const form = unref(addFormRef)
+      if (!form) return
+      await form.validate((valid, fields) => {
+        if (valid) {
+          if (showForAdd.value) {
+            addUser()
+          } else {
+            updateUser()
+          }
+        } else {
+          console.log('error submit!', fields)
+        }
+      })
     }
     // api functions
     const getUserList = async () => {
-      const result = await this.$http.get('/api/user', {
-        params: this.queryInfo
-      })
-      console.log(result)
+      // const result = await proxy.$http.get('/api/user', {
+      //   params: queryInfo
+      // })
+      // console.log(result)
+      total.value = userlist.length
     }
-    const addUser = () => {
+    const addUser = async () => {
+      // name used?
+      // const add = await proxy.$http.post('/api/user', {
+      //   params: addForm.value
+      // })
+      // console.log(add)
+      console.log(addForm)
+      userlist.push(addForm)
+      getUserList()
+      dialogClosed()
+    }
+    async function deleteUser (id) {
+      // delete by id
+      // const deleted = await proxy.$http.delele('/api/user', {
+      //   params: {
+      //     _id: id
+      //   }
+      // })
+      // console.log(deleted)
+      const index = getUserInfoByID(id).index
+      userlist.splice(index, 1)
+      getUserList()
+    }
 
+    function getUserInfoByID (id) {
+      for (let index = 0; index < userlist.length; index++) {
+        const element = userlist[index]
+        if (element._id === id) {
+          return {
+            user: element,
+            index: index
+          }
+        }
+      }
     }
-    const deleteUser = (id) => {
-
+    const updateUser = () => {
+      const id = unref(userId)
+      const user = getUserInfoByID(id).user
+      user.username = addForm.username
+      user.password = addForm.password
+      user.first_name = addForm.first_name
+      user.last_name = addForm.last_name
+      user.address = addForm.address
+      user.profession = addForm.profession
+      user.email = addForm.email
+      user.cell = addForm.cell
+      dialogVisible.value = true
     }
-    const updateUser = (id) => {
-
-    }
-    return { queryInfo, userlist, addFormRef, addDialogVisible, addForm, addFormRules, handleSizeChange, handleCurrentChange, editUserClicked, deleteUserClicked, addDialogClosed, updateUser }
+    return { queryInfo, userlist, total, showForAdd, userId, dialogVisible, addFormRef, addForm, addFormRules, handleSizeChange, handleCurrentChange, addUserClicked, editUserClicked, deleteUserClicked, dialogClosed, createUser, updateUser }
   }
 }
 </script>
