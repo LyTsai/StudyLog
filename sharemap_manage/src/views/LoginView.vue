@@ -33,14 +33,14 @@ export default {
       username: '',
       password: ''
     })
-    const loginFormRules = reactive({
+    const loginFormRules = {
       username: [
         { required: true, message: 'Please input a valid account', trigger: 'blur' }
       ],
       password: [
         { required: true, message: 'Please input password', trigger: 'blur' }
       ]
-    })
+    }
 
     const resetLoginForm = () => {
       const formEl = unref(loginFormRef)

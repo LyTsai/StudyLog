@@ -52,6 +52,10 @@ export default {
       name: 'Visuals',
       sub: [{
         icon: '',
+        title: 'Visuals',
+        path: '/visual'
+      }, {
+        icon: '',
         title: 'Visual Pages',
         path: '/visualPage'
       }, {

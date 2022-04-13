@@ -87,7 +87,7 @@
         <!-- bottom -->
         <el-form-item>
           <el-button @click="dialogClosed">Cancel</el-button>
-          <el-button type="primary" @click="createUser">Confirm</el-button>
+          <el-button type="primary" @click="confirmClicked">Confirm</el-button>
         </el-form-item>
       </el-form>
     </el-dialog>
@@ -247,20 +247,9 @@ export default {
       dialogVisible.value = true
     }
     const dialogClosed = () => {
-      // clear form
-      // addForm.username = ''
-      // addForm.password = ''
-      // addForm.first_name = ''
-      // addForm.last_name = ''
-      // addForm.address = ''
-      // addForm.profession = []
-      // addForm.email = ''
-      // addForm.cell = ''
-      // const form = unref(addFormRef)
-      // form.resetFields()
       dialogVisible.value = false
     }
-    const createUser = async () => {
+    const confirmClicked = async () => {
       const form = unref(addFormRef)
       if (!form) return
       await form.validate((valid, fields) => {
@@ -289,7 +278,7 @@ export default {
       //   params: addForm.value
       // })
       // console.log(add)
-      console.log(addForm)
+      addForm._id = userlist.length + 1
       userlist.push(addForm)
       getUserList()
       dialogClosed()
@@ -318,7 +307,7 @@ export default {
         }
       }
     }
-    const updateUser = () => {
+    function updateUser () {
       const id = unref(userId)
       const user = getUserInfoByID(id).user
       user.username = addForm.username
@@ -331,7 +320,7 @@ export default {
       user.cell = addForm.cell
       dialogVisible.value = true
     }
-    return { queryInfo, userlist, total, showForAdd, userId, dialogVisible, addFormRef, addForm, addFormRules, handleSizeChange, handleCurrentChange, addUserClicked, editUserClicked, deleteUserClicked, dialogClosed, createUser, updateUser }
+    return { queryInfo, userlist, total, showForAdd, userId, dialogVisible, addFormRef, addForm, addFormRules, handleSizeChange, handleCurrentChange, addUserClicked, editUserClicked, deleteUserClicked, dialogClosed, confirmClicked }
   }
 }
 </script>

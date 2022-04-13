@@ -1,25 +1,18 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
-// import LoginView from '../views/LoginView.vue'
-import HomeView from '../views/HomeView.vue'
-import Welcome from '../views/WelcomeView.vue'
-
-import Userlist from '../views/user/UserList.vue'
-
-import VisualPage from '../views/visuals/VisualPageView.vue'
-import VisualBook from '../views/visuals/VisualBookView.vue'
 
 const routes = [
   { path: '/', redirect: '/login' },
   { path: '/login', component: () => import('@/views/LoginView.vue') },
   {
     path: '/home',
-    component: HomeView,
+    component: () => import('@/views/HomeView.vue'),
     redirect: '/welcome',
     children: [
-      { path: '/welcome', component: Welcome },
-      { path: '/userlist', component: Userlist },
-      { path: '/visualPage', component: VisualPage },
-      { path: '/visualBook', component: VisualBook }
+      { path: '/welcome', component: () => import('@/views/WelcomeView.vue') },
+      { path: '/userlist', component: () => import('@/views/user/UserList.vue') },
+      { path: '/visual', component: () => import('@/views/visuals/VisualView.vue') },
+      { path: '/visualPage', component: () => import('@/views/visuals/VisualPageView.vue') },
+      { path: '/visualBook', component: () => import('@/views/visuals/VisualBookView.vue') }
     ]
   }
 ]
