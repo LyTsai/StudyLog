@@ -43,7 +43,7 @@
       </el-pagination> -->
     </el-card>
     <!-- add or modify User -->
-    <el-dialog :title="showForAdd ? 'Add Visual' : 'Modify Visual'" v-model="dialogVisible" width="50%" @close="dialogClosed">
+    <el-dialog :title="showForAdd ? 'Add Visual' : 'Modify Visual'" v-model="dialogVisible" width="50%" @close="dialogClosed" center>
       <!-- edit -->
       <el-form :model="visualForm" :rules="visualFormRules" ref="visualFormRef" label-width="100px">
         <el-form-item label="Title" prop="title">
@@ -137,7 +137,7 @@ export default {
     // tag
     const inputValue = ref('')
     const inputVisible = ref(false)
-    // const InputRef = ref<InstanceType<typeof ElInput>>()
+    const InputRef = ref()
 
     const handleClose = (index) => {
       visualForm.keywords.splice(index, 1)
@@ -146,7 +146,7 @@ export default {
     const showInput = () => {
       inputVisible.value = true
       nextTick(() => {
-        // InputRef.value!.input!.focus()
+        InputRef.value.input.focus()
       })
     }
 
@@ -254,12 +254,12 @@ export default {
       }
     }
 
-    return { queryInfo, visualList, visualForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, handleClose, showInput, handleInputConfirm }
+    return { queryInfo, visualList, visualForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, handleClose, showInput, handleInputConfirm }
   }
 }
 </script>
 <style lang="less" scoped>
-// .mx-1 {
-//   padding: 10px;
-// }
+.mx-1 {
+  margin-right: 5px;
+}
 </style>

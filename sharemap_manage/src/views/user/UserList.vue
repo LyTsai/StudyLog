@@ -45,7 +45,7 @@
       </el-pagination>
     </el-card>
     <!-- add or modify User -->
-    <el-dialog :title="showForAdd ? 'Add User' : 'Modify User'" v-model="dialogVisible" width="50%" @close="dialogClosed">
+    <el-dialog :title="showForAdd ? 'Add User' : 'Modify User'" v-model="dialogVisible" width="50%" @close="dialogClosed" center>
       <!-- edit -->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
         <el-form-item label="Username" prop="username">
@@ -172,7 +172,7 @@ export default {
       cell: ''
     })
     // rules
-    var checkEmail = (rule, value, cb) => {
+    const checkEmail = (rule, value, cb) => {
       const regEmail = /^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(\.[a-zA-Z0-9_-])+/
       if (regEmail.test(value)) {
         return cb()
