@@ -285,7 +285,7 @@ export default {
     }
     async function deleteUser (id) {
       // delete by id
-      // const deleted = await proxy.$http.delele('/api/user', {
+      // const deleted = await proxy.$http.delete('/api/user', {
       //   params: {
       //     _id: id
       //   }

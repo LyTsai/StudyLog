@@ -62,7 +62,6 @@ export default {
               'Content-Type': 'application/x-www-form-urlencoded'
             }
           }).then(response => {
-            console.log(response)
             if (!response.ok) {
               throw new Error('Failed to login' + response.status)
             }

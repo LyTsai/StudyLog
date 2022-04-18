@@ -45,7 +45,7 @@ export default {
       sub: [{
         icon: '',
         title: 'User List',
-        path: '/userlist'
+        path: '/users'
       }]
     }, {
       icon: '',
