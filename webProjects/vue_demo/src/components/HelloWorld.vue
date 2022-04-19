@@ -14,7 +14,7 @@ export default {
   setup() {
     const { counter, doubleCounter } = useCounter()
     const desc = ref(null)
-    watch(() => counter, (val, oldVal) => {
+    watch(counter, (val, oldVal) => {
       console.log(val)
       const p = desc.value
       p.textContent = `counter change from ${oldVal} to ${val}`
@@ -24,7 +24,7 @@ export default {
 }
 
 function useCounter() {
-  https://www.bilibili.com/video/BV1WP4y1T7jS?from=search&seid=4304144511116026744&spm_id_from=333.337.0.0
+  // https://www.bilibili.com/video/BV1WP4y1T7jS?from=search&seid=4304144511116026744&spm_id_from=333.337.0.0
   const data = reactive({
     counter: 1,
     doubleCounter: computed(() => data.counter * 2)
