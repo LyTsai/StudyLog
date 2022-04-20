@@ -1,4 +1,4 @@
-const mongoose = require('./mongoConnect')
+const mongoose = require('../serve/mongoConnect')
 
 // collection rules
 const userSchema = new mongoose.Schema({
@@ -15,6 +15,8 @@ const userSchema = new mongoose.Schema({
     cell: String,
     
     // address: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
-})
+}, { versionKey: false })
 
-module.exports = mongoose.model('User', userSchema)
+// userSchema.query.byName
+
+module.exports = mongoose.model('User', userSchema, 'users')

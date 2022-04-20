@@ -15,7 +15,6 @@ export default {
     const { counter, doubleCounter } = useCounter()
     const desc = ref(null)
     watch(counter, (val, oldVal) => {
-      console.log(val)
       const p = desc.value
       p.textContent = `counter change from ${oldVal} to ${val}`
     })
