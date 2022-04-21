@@ -1,19 +1,22 @@
-const mongoose = require('../serve/mongoConnect')
+const mongoose = require('./mongoConnect')
 
 // collection rules
 const userSchema = new mongoose.Schema({
     username: {
         type: String,
+        required: true,
         unique: true
     },
-    password: String,
+    password: {
+        type: String,
+        required: true
+    },
     first_name: String,
     last_name: String,
     address: String,
     profession: [String],
     email: String,
     cell: String,
-    
     // address: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 }, { versionKey: false })
 
