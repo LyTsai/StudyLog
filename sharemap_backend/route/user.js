@@ -1,4 +1,3 @@
-
 const User = require('../models/users')
 
 // get
@@ -18,10 +17,10 @@ exports.getUsers = async (req, res) => {
 
 exports.getUserByPage= async (req, res) => {
   const query = req.query
-  let condition = { username: query.query }
+  let reg = {$regex: `^.*${query.query}.*$`}
+  let condition = { username: reg}
   // empty, get all
   if (query.query === '') {
-    console.log('empty')
     condition = {}
   }
   let limit = Number(query.pagesize)
@@ -57,10 +56,13 @@ exports.addUser = async (req, res) => {
 // update
 // allow add
 exports.updateUserById = async (req, res) => {
-  const id = req.query.id
+  let id = req.body
+  if (req.query.id) {
+    id = req.query.id
+  }
   const updated = req.body
   try {
-    let update = await User.updateOne({_id: id}, {$set: updated}, {upsert: true})
+    let update = await User.updateOne({_id: updated._id}, {$set: updated}, {upsert: true})
     res.send(update)
   } catch (error) {
     res.status(500).send(error)

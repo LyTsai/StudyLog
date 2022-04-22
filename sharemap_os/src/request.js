@@ -8,4 +8,8 @@ axios.interceptors.request.use(response => {
   return response
 })
 
+function get() {
+  
+}
+
 export default axios

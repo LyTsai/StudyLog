@@ -2,7 +2,7 @@ import { createApp } from 'vue'
 import App from './App.vue'
 import './index.css'
 
-import router from './index'
+import router from './router'
 import request from './request'
 
 // Element plus, icons are missing

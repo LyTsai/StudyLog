@@ -1,18 +1,19 @@
 <template>
-<div class="login_container">
+<div class="login_container" v-loading="loading">
   <div class="login_box">
     <!-- logo image -->
     <div class="avator_box">
       <img src="../assets/logo.png" alt="logo">
     </div>
-    <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="120" class="login_form" hide-required-asterisk=false>
+    <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules" label-width="120" class="login_form" :hide-required-asterisk=true>
       <!-- username -->
       <el-form-item label = "Username:" prop="username">
-        <el-input v-model="loginForm.username" placeholder="Please input Email address" :prefix-icon="Search"/>
+        <el-input v-model="loginForm.username" placeholder="Please input Email address" />
+        <!-- :prefix-icon="Search" -->
       </el-form-item>
         <!-- password -->
       <el-form-item label = "Password:" prop="password">
-        <el-input v-model="loginForm.password" type="password" placeholder="Please input password" show-password :prefix-icon="icon-password"/>
+        <el-input v-model="loginForm.password" type="password" placeholder="Please input password" show-password/>
       </el-form-item>
         <!-- buttons -->
       <el-form-item class="btns">
@@ -26,8 +27,10 @@
 
 <script>
 import { getCurrentInstance, reactive, ref, unref } from 'vue'
+// import { Calendar, Search } from '@element-plus/icons-vue'
 export default {
   setup () {
+    const loading = ref(false)
     const loginFormRef = ref()
     const loginForm = reactive({
       username: '',
@@ -53,6 +56,8 @@ export default {
       if (!formEl) return
       await formEl.validate((valid, fields) => {
         if (valid) {
+          loading.value = true
+          // fetch
           const loginUrl = 'https://annielyticx-gamedataauth.azurewebsites.net/oauth/token'
           const body = 'username=' + loginForm.username + '&password=' + loginForm.password + '&grant_type=password'
           fetch(loginUrl, {
@@ -74,14 +79,16 @@ export default {
             proxy.$router.push('/home')
           }).catch(error => {
             alert('Failed to login :' + error)
-          })
+          }).finally(
+            loading.value = false
+          )
         } else {
           console.log('error submit!', fields)
         }
       })
     }
     return {
-      loginFormRef, loginForm, loginFormRules, resetLoginForm, login
+      loading, loginFormRef, loginForm, loginFormRules, resetLoginForm, login
     }
   }
 }

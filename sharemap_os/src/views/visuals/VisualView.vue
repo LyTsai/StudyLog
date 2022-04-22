@@ -21,7 +21,7 @@
       </el-row>
       <!-- table -->
        <!-- height="50" -->
-      <el-table :data="visualList" border stripe>
+      <el-table :data="visualList" v-loading="listLoading" border stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="Title" prop="title"></el-table-column>
         <el-table-column label="Abstract" prop="abstract"></el-table-column>
@@ -42,32 +42,42 @@
       <!-- <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination> -->
     </el-card>
-    <!-- add or modify User -->
-    <el-dialog :title="showForAdd ? 'Add Visual' : 'Modify Visual'" v-model="dialogVisible" width="50%" @close="dialogClosed" center>
+    <!-- add or modify visual -->
+    <el-dialog :title="addForm._id === '' ? 'Add Visual' : 'Modify Visual'" v-model="dialogVisible" width="50%" @close="dialogClosed" v-loading="formLoading" center>
       <!-- edit -->
-      <el-form :model="visualForm" :rules="visualFormRules" ref="visualFormRef" label-width="100px">
+      <el-form :model="addForm" :rules="visualFormRules" ref="visualFormRef" label-width="100px">
         <el-form-item label="Title" prop="title">
-          <el-input v-model="visualForm.title"></el-input>
+          <el-input v-model="addForm.title"></el-input>
         </el-form-item>
         <el-form-item label="Abstract" prop="abstract">
-          <el-input v-model="visualForm.abstract"></el-input>
+          <el-input v-model="addForm.abstract"></el-input>
         </el-form-item>
         <el-form-item label="Keywords" prop="keywords">
-          <el-tag v-for="(tag, index) in visualForm.keywords" :key="tag" class="mx-1" closable :disable-transitions="false" @close="handleClose(index)">{{ tag }}</el-tag>
+          <el-tag v-for="(tag, index) in addForm.keywords" :key="tag" class="mx-1" closable :disable-transitions="false" @close="handleClose(index)">{{ tag }}</el-tag>
           <el-input v-if="inputVisible" ref="InputRef" v-model="inputValue" class="ml-1 w-20" size="small" @keyup.enter="handleInputConfirm" @blur="handleInputConfirm"/>
           <el-button v-else class="button-new-tag ml-1" size="small" @click="showInput"> + New Keyword </el-button>
         </el-form-item>
         <el-form-item label="Subject" prop="subject">
-          <el-input v-model="visualForm.subject"></el-input>
+          <el-input v-model="addForm.subject"></el-input>
         </el-form-item>
         <el-form-item label="Text" prop="text">
-          <el-input v-model="visualForm.text" type="textarea"/>
+          <el-input v-model="addForm.text" type="textarea"/>
         </el-form-item>
         <el-form-item label="URL" prop="url">
-          <el-input v-model="visualForm.url"></el-input>
+          <el-input v-model="addForm.url"></el-input>
         </el-form-item>
         <el-form-item label="URL scancode" prop="url_scancode">
-          <el-input v-model="visualForm.url_scancode"></el-input>
+          <el-input v-model="addForm.url_scancode"></el-input>
+        </el-form-item>
+        <el-form-item>
+          <el-select v-model="user" filterable placeholder="User">
+            <el-option
+              v-for="item in userList"
+              :key="item.value"
+              :label="item.label"
+              :value="item.value"
+            />
+          </el-select>
         </el-form-item>
         <!-- bottom -->
         <el-form-item>
@@ -79,9 +89,12 @@
   </div>
 </template>
 <script>
-import { getCurrentInstance, reactive, ref, nextTick } from 'vue'
+import { getCurrentInstance, reactive, ref, unref, nextTick, onMounted } from 'vue'
 export default {
   setup () {
+    const listLoading = ref(false)
+    const formLoading = ref(false)
+    
     const queryInfo = reactive({
       query: '',
       pagenum: 1,
@@ -90,57 +103,53 @@ export default {
     // page
     // const handleSizeChange = (size) => {
     //   queryInfo.pagesize = size
-    //   getUserList()
+    //   getVisualList()
     // }
     // const handleCurrentChange = (page) => {
     //   queryInfo.pagenum = page
-    //   getUserList()
+    //   getVisualList()
     // }
     // data
-    const visualList = reactive([{
-      _id: '62390bb33528d814d2c384d5',
-      user_id: '62352300fe3ca8f02b47f2a6',
-      title: 'vitD',
-      abstract: 'poster card about vitD',
-      subject: 'vitD',
-      keywords: ['vtD', 'lifestyle', 'diabetes'],
-      text: 'the detailed text here',
-      url: 'url poiting to the html page',
-      url_scancode: 'url pointing to the scan code.  internal data field.'
-    }])
-
-    const visualForm = reactive({
+    const visualList = ref()
+    const addForm = reactive({
+      _id: '',
       title: '',
       abstract: '',
       keywords: [],
       subject: '',
       text: '',
       url: '',
-      url_scancode: ''
+      url_scancode: '',
       // categories: [],
       // forwarded: 0,
       // likes: 0,
-      // user_id: ''
+      visual_id: ''
     })
     // dialog
     const visualFormRef = ref('')
     const visualFormRules = {
-
+  
     }
     const dialogVisible = ref(false)
-    const showForAdd = ref(true)
-    const visualId = ref('')
-    // methods
-    const getVisualList = () => {
-      // load...
-    }
+// const user = ref('') 
+// const userList = [
+//   {
+//     value: 'Option1',
+//     label: 'Option1',
+//   },
+//   {
+//     value: 'Option2',
+//     label: 'Option2',
+//   }
+// ]
+
     // tag
     const inputValue = ref('')
     const inputVisible = ref(false)
     const InputRef = ref()
 
     const handleClose = (index) => {
-      visualForm.keywords.splice(index, 1)
+      addForm.keywords.splice(index, 1)
     }
 
     const showInput = () => {
@@ -152,7 +161,7 @@ export default {
 
     const handleInputConfirm = () => {
       if (inputValue.value) {
-        visualForm.keywords.push(inputValue.value)
+        addForm.keywords.push(inputValue.value)
       }
       inputVisible.value = false
       inputValue.value = ''
@@ -161,29 +170,27 @@ export default {
     // data action
     const { proxy } = getCurrentInstance()
     const addVisualClicked = () => {
-      visualForm.title = ''
-      visualForm.abstract = ''
-      visualForm.keywords = []
-      visualForm.subject = ''
-      visualForm.text = ''
-      visualForm.url = ''
-      visualForm.url_scancode = ''
-      showForAdd.value = true
+      addForm.title = ''
+      addForm.abstract = ''
+      addForm.keywords = []
+      addForm.subject = ''
+      addForm.text = ''
+      addForm.url = ''
+      addForm.url_scancode = ''
+ 
       dialogVisible.value = true
     }
 
     const editClicked = (id) => {
-      showForAdd.value = false
-      visualId.value = id
       // assign
-      const visual = getVisualByID(id).visual
-      visualForm.title = visual.title
-      visualForm.abstract = visual.abstract
-      visualForm.keywords = visual.keywords
-      visualForm.subject = visual.subject
-      visualForm.text = visual.text
-      visualForm.url = visual.url
-      visualForm.url_scancode = visual.url_scancode
+      const visual = getVisualByID(id)
+      addForm.title = visual.title
+      addForm.abstract = visual.abstract
+      addForm.keywords = visual.keywords
+      addForm.subject = visual.subject
+      addForm.text = visual.text
+      addForm.url = visual.url
+      addForm.url_scancode = visual.url_scancode
       // show
       dialogVisible.value = true
     }
@@ -211,7 +218,7 @@ export default {
 
     const confirmDialog = () => {
       // validate?
-      if (showForAdd.value) {
+      if (addForm._id === '') {
         // add
         addVisual()
       } else {
@@ -219,42 +226,97 @@ export default {
         modifyVisual()
       }
     }
-
-    function modifyVisual () {
-      // modify
-      const visual = getVisualByID(visualId.value).visual
-      visual.title = visualForm.title
-      visual.abstract = visualForm.abstract
-      visual.keywords = visualForm.keywords
-      visual.subject = visualForm.subject
-      visual.text = visualForm.text
-      visual.url = visualForm.url
-      visual.url_scancode = visualForm.url_scancode
-      dialogClosed()
+   // api functions
+    const getVisualList = async () => {
+      listLoading.value = true
+      try {
+        const result = await proxy.$http.get('/api/visual')
+        listLoading.value = false
+        console.log(result)
+        // get list
+        if (result.status === 200) {
+          visualList.value = result.data
+          // total.value = result.data.total
+        }else {
+          alert('Failed to load visuals' + result.message)
+        }
+      } catch (error) {
+        listLoading.value = false
+        alert('Failed to load visuals' + error)
+      }
     }
+    async function addVisual () {
+      // url used?
+      formLoading.value = true
+      try {
+        let upload = addForm
+        delete upload._id
 
-    function addVisual () {
-      visualList.push(visualForm)
-      dialogClosed()
+        const add = await proxy.$http.post('/api/visual', upload)
+        formLoading.value = false
+        if (add.status == 201) {
+          getVisualList()
+          dialogClosed()
+        } else {
+          // alert
+          alert('Failed to add visual:' + add.message)
+        }
+      } catch (error) {
+        console.log('here??')
+        alert('Failed to add visual:' + error)
+      }
     }
-    function deleteVisual (id) {
-      const index = getVisualByID(id).index
-      visualList.splice(index, 1)
+    // update
+    async function modifyVisual () {
+      formLoading.value = true
+      try {
+        const update = await proxy.$http.put('/api/visual', addForm)
+        formLoading.value = false
+        if (update.status == 200) {
+          getVisualList()
+          dialogVisible.value = false
+        } else {
+          alert('Failed to update visual:' + error)
+        }
+      } catch (error) {
+        formLoading.value = false
+        alert('Failed to update visual:' + error)
+      }
     }
-
-    function getVisualByID (id) {
-      for (let index = 0; index < visualList.length; index++) {
-        const element = visualList[index]
-        if (element._id === id) {
-          return {
-            visual: element,
-            index: index
+    // delete
+    async function deleteVisual (id) {
+      // delete by id
+      try {
+        const deleted = await proxy.$http.delete('/api/visual', {
+          params: {
+            id: id
           }
+        })
+        if (deleted.status == 200) {
+          getVisualList()
+        } else {
+          // alert
+          alert('Failed to delete visual:' + add.message)
+        }
+      } catch (error) {
+        alert('Failed to delete visual:' + error)
+      }
+    }
+    // visual model
+    function getVisualByID (id) {
+      let visuals = unref(visualList)
+      for (let index = 0; index < visuals.length; index++) {
+        const element = visuals[index]
+        if (element._id === id) {
+          return element
         }
       }
     }
+    onMounted(() => {
+      getVisualList()
+    })
 
-    return { queryInfo, visualList, visualForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, handleClose, showInput, handleInputConfirm }
+    return { listLoading, formLoading, queryInfo, visualList, addForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, handleClose, showInput, handleInputConfirm }
   }
 }
 </script>

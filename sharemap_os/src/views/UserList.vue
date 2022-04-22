@@ -10,7 +10,7 @@
       <!-- search and add -->
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="Input name" v-model="queryInfo.query" clearable @clear="getUserList">
+          <el-input placeholder="Input name" v-model="queryInfo.query" clearable @keyup.enter="getUserList" @clear="getUserList">
             <template  #append>
               <el-button type="primary" :icon="Search" @click="getUserList">Search</el-button>
             </template>
@@ -22,7 +22,7 @@
       </el-row>
       <!-- table -->
        <!-- height="50" -->
-      <el-table :data="userlist" border stripe>
+      <el-table :data="userlist" v-loading="listLoading" border stripe>
         <el-table-column type="index"></el-table-column>
         <el-table-column label="Username" prop="username"></el-table-column>
         <el-table-column label="Name">
@@ -41,11 +41,11 @@
         </el-table-column>
       </el-table>
       <!-- paging -->
-      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[1, 2, 5, 10]" :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
+      <el-pagination @size-change="handleSizeChange" @current-change="handleCurrentChange" :current-page="queryInfo.pagenum" :page-sizes="[5, 10, 15, 20]" :small=true :background=true :page-size="queryInfo.pagesize" layout="total, sizes, prev, pager, next, jumper" :total="total">
       </el-pagination>
     </el-card>
     <!-- add or modify User -->
-    <el-dialog :title="showForAdd ? 'Add User' : 'Modify User'" v-model="dialogVisible" width="50%" @close="dialogClosed">
+    <el-dialog :title="addForm._id === '' ? 'Add User' : 'Modify User'" v-model="dialogVisible" width="50%" @close="dialogClosed" v-loading="formLoading">
       <!-- edit -->
       <el-form :model="addForm" :rules="addFormRules" ref="addFormRef" label-width="100px">
         <el-form-item label="Username" prop="username">
@@ -91,29 +91,29 @@
         </el-form-item>
       </el-form>
     </el-dialog>
-    <!-- delelte -->
   </div>
 </template>
 <script>
 import { getCurrentInstance, onMounted, reactive, ref, unref } from 'vue'
+
 export default {
   setup () {
+    const listLoading = ref(false)
+    const formLoading = ref(false)
+
     const queryInfo = reactive({
       query: '',
       pagenum: 1,
       pagesize: 10
     })
 
-    const { userlist, total } = reactive({
-      userlist:[],
-      total: 0
-    })
+    const userlist = ref()
+    const total = ref(0)
     // add form
     const addFormRef = ref()
-    const showForAdd = ref(true)
-    const userId = ref('')
     const dialogVisible = ref(false)
     const addForm = reactive({
+      _id: '',
       username: '',
       password: '',
       first_name: '',
@@ -154,9 +154,8 @@ export default {
     }
     // user buttons
     const editUserClicked = (id) => {
-      showForAdd.value = false
-      userId.value = id
-      const user = getUserInfoByID(id).user
+      const user = getUserInfoByID(id)
+      addForm._id = user._id
       addForm.username = user.username
       addForm.password = user.password
       addForm.first_name = user.first_name
@@ -165,6 +164,7 @@ export default {
       addForm.profession = user.profession
       addForm.email = user.email
       addForm.cell = user.cell
+
       dialogVisible.value = true
     }
     const { proxy } = getCurrentInstance()
@@ -178,14 +178,13 @@ export default {
           type: 'warning'
         }
       ).catch(error => error)
-      if (confirmResult !== 'confirm') {
-        // cancel
-      } else {
+      if (confirmResult === 'confirm') {
         deleteUser(id)
       }
     }
     // dialog
     const addUserClicked = () => {
+      addForm._id = ''
       addForm.username = ''
       addForm.password = ''
       addForm.first_name = ''
@@ -194,7 +193,7 @@ export default {
       addForm.profession = []
       addForm.email = ''
       addForm.cell = ''
-      showForAdd.value = true
+
       dialogVisible.value = true
     }
     const dialogClosed = () => {
@@ -205,7 +204,8 @@ export default {
       if (!form) return
       await form.validate((valid, fields) => {
         if (valid) {
-          if (showForAdd.value) {
+          // no id
+          if (addForm._id === '') {
             addUser()
           } else {
             updateUser()
@@ -217,68 +217,99 @@ export default {
     }
     // api functions
     const getUserList = async () => {
-      const result = await proxy.$http.get('/api/userByPage', {
-        params: queryInfo
-      })
-      if (result) {
-        userlist = result.data
-        total = result.total
+      listLoading.value = true
+      try {
+        const result = await proxy.$http.get('/api/userByPage', {
+          params: queryInfo
+        })
+        listLoading.value = false
+        // get list
+        if (result.status === 200) {
+          userlist.value = result.data.data
+          total.value = result.data.total
+        }else {
+          alert('Failed to load users' + result.message)
+        }
+      } catch (error) {
+        listLoading.value = false
+        alert('Failed to load users' + error)
       }
     }
-    const addUser = async () => {
+    async function addUser() {
       // name used?
-      const add = await proxy.$http.post('/api/user', {
-        params: addForm
-      })
-      
-      getUserList()
-      dialogClosed()
+      formLoading.value = true
+      try {
+        let upload = addForm
+        delete upload._id
+
+        const add = await proxy.$http.post('/api/user', upload)
+        formLoading.value = false
+        if (add.status == 201) {
+          getUserList()
+          dialogClosed()
+        } else {
+          // alert
+          alert('Failed to add user:' + add.message)
+        }
+      } catch (error) {
+        console.log('here??')
+        alert('Failed to add user:' + error)
+      }
     }
+    // update
+    async function updateUser () {
+      formLoading.value = true
+      try {
+        const update = await proxy.$http.put('/api/user', addForm)
+        formLoading.value = false
+        if (update.status == 200) {
+          getUserList()
+          dialogVisible.value = false
+        } else {
+          alert('Failed to update user:' + error)
+        }
+      } catch (error) {
+        formLoading.value = false
+        alert('Failed to update user:' + error)
+      }
+    }
+    // delete
     async function deleteUser (id) {
       // delete by id
-      // const deleted = await proxy.$http.delele('/api/user', {
-      //   params: {
-      //     _id: id
-      //   }
-      // })
-      // console.log(deleted)
-      const index = getUserInfoByID(id).index
-      userlist.splice(index, 1)
-      getUserList()
-    }
-
-    function getUserInfoByID (id) {
-      for (let index = 0; index < userlist.length; index++) {
-        const element = userlist[index]
-        if (element._id === id) {
-          return {
-            user: element,
-            index: index
+      try {
+        const deleted = await proxy.$http.delete('/api/user', {
+          params: {
+            id: id
           }
+        })
+        if (deleted.status == 200) {
+          getUserList()
+        } else {
+          // alert
+          alert('Failed to delete user:' + add.message)
+        }
+      } catch (error) {
+        alert('Failed to delete user:' + error)
+      }
+    }
+    // user model
+    function getUserInfoByID (id) {
+      let users = unref(userlist)
+      for (let index = 0; index < users.length; index++) {
+        const element = users[index]
+        if (element._id === id) {
+          return element
         }
       }
     }
-    function updateUser () {
-      const id = unref(userId)
-      const user = getUserInfoByID(id).user
-      user.username = addForm.username
-      user.password = addForm.password
-      user.first_name = addForm.first_name
-      user.last_name = addForm.last_name
-      user.address = addForm.address
-      user.profession = addForm.profession
-      user.email = addForm.email
-      user.cell = addForm.cell
-      dialogVisible.value = true
-    }
-
     onMounted(() => {
       getUserList()
     })
 
-    return { queryInfo, userlist, total, showForAdd, userId, dialogVisible, addFormRef, addForm, addFormRules, handleSizeChange, handleCurrentChange, addUserClicked, editUserClicked, deleteUserClicked, dialogClosed, confirmClicked }
+    return { listLoading, formLoading, queryInfo, userlist, total, getUserList, dialogVisible, addFormRef, addForm, addFormRules, handleSizeChange, handleCurrentChange, addUserClicked, editUserClicked, deleteUserClicked, dialogClosed, confirmClicked }
   }
 }
+
 
 // axios
 
