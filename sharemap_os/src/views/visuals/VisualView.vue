@@ -72,7 +72,7 @@
         <el-form-item>
           <el-select v-model="user" filterable placeholder="User">
             <el-option
-              v-for="item in userList"
+              v-for="item in userlist"
               :key="item.value"
               :label="item.label"
               :value="item.value"
@@ -123,7 +123,7 @@ export default {
       // categories: [],
       // forwarded: 0,
       // likes: 0,
-      visual_id: ''
+      user_id: ''
     })
     // dialog
     const visualFormRef = ref('')
@@ -131,17 +131,8 @@ export default {
   
     }
     const dialogVisible = ref(false)
-// const user = ref('') 
-// const userList = [
-//   {
-//     value: 'Option1',
-//     label: 'Option1',
-//   },
-//   {
-//     value: 'Option2',
-//     label: 'Option2',
-//   }
-// ]
+    const user = ref('') 
+    const userlist = []
 
     // tag
     const inputValue = ref('')
@@ -170,6 +161,7 @@ export default {
     // data action
     const { proxy } = getCurrentInstance()
     const addVisualClicked = () => {
+      addForm._id = ''
       addForm.title = ''
       addForm.abstract = ''
       addForm.keywords = []
@@ -177,13 +169,15 @@ export default {
       addForm.text = ''
       addForm.url = ''
       addForm.url_scancode = ''
- 
+      addForm.user_id = ''
+
       dialogVisible.value = true
     }
 
     const editClicked = (id) => {
       // assign
       const visual = getVisualByID(id)
+      addForm._id = visual._id
       addForm.title = visual.title
       addForm.abstract = visual.abstract
       addForm.keywords = visual.keywords
@@ -191,6 +185,8 @@ export default {
       addForm.text = visual.text
       addForm.url = visual.url
       addForm.url_scancode = visual.url_scancode
+      
+      addForm.user_id = visual._id
       // show
       dialogVisible.value = true
     }
@@ -262,7 +258,6 @@ export default {
           alert('Failed to add visual:' + add.message)
         }
       } catch (error) {
-        console.log('here??')
         alert('Failed to add visual:' + error)
       }
     }
@@ -316,7 +311,7 @@ export default {
       getVisualList()
     })
 
-    return { listLoading, formLoading, queryInfo, visualList, addForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, handleClose, showInput, handleInputConfirm }
+    return { listLoading, formLoading, queryInfo, visualList, addForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, user, userlist, handleClose, showInput, handleInputConfirm }
   }
 }
 </script>

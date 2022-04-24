@@ -1,11 +1,11 @@
 const mongoose = require('./mongoConnect')
 
 // collection rules
-const userSchema = new mongoose.Schema({
+const visualSchema = new mongoose.Schema({
     title: {
         type: String
     },
-    abstrac: {
+    abstract: {
         type: String
     },
     keywords: [String],
@@ -17,10 +17,11 @@ const userSchema = new mongoose.Schema({
       unique: true
     },
     url_scancode: String,
-    user: {
+    // refs
+    user_id: {
       type: mongoose.Schema.Types.ObjectId, 
       ref: 'User'
     }
 }, { versionKey: false })
 
-module.exports = mongoose.model('Visual', userSchema, 'visuals')
+module.exports = mongoose.model('Visual', visualSchema, 'visuals')

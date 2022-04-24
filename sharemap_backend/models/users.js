@@ -20,6 +20,4 @@ const userSchema = new mongoose.Schema({
     // address: {type: mongoose.Schema.Types.ObjectId, ref: 'User'}
 }, { versionKey: false })
 
-// userSchema.query.byName
-
 module.exports = mongoose.model('User', userSchema, 'users')

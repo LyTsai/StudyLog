@@ -14,6 +14,25 @@ app.use(bodyParser.urlencoded({ extended: false }));
 const apiRouter = require('./route/index')
 app.use(apiRouter)
 
+// auth
+const jwt = require('jsonwebtoken')
+const SECRET = 'jasdkljaskldjASKDJASKLJDKL'
+const auth = async (req, res, next) => {
+  if (!String(req.headers.authorization)) {
+    return res.status(425).send({
+      msg: 'Token not exist'
+    })
+  }
+  // get token
+  const getToken = String(req.headers.authorization).split(' ').pop()
+  const { id } = jwt.verify(getToken, SECRET)
+  req.user = await User.findById(id)
+  next()
+}
+app.get('/api/profile', auth, async (req, res) => {
+  res.send(req.user)
+})
+
 // 404
 app.use(function(req, res, next) {
   var err = new Error('Not Found')

@@ -228,11 +228,11 @@ export default {
           userlist.value = result.data.data
           total.value = result.data.total
         }else {
-          alert('Failed to load users' + result.message)
+          alert('Failed to load users:' + result.message)
         }
       } catch (error) {
         listLoading.value = false
-        alert('Failed to load users' + error)
+        alert('Failed to load users:' + error)
       }
     }
     async function addUser() {
