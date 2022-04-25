@@ -11,7 +11,7 @@
         <el-col :span="8">
           <el-input placeholder="Input title" v-model="queryInfo.query" clearable @clear="getVisualList">
             <template #append>
-              <el-button type="primary" :icon="Search" @click="getVisualList">Search</el-button>
+              <el-button type="primary" @click="getVisualList">Search</el-button>
             </template>
           </el-input>
         </el-col>
@@ -70,7 +70,7 @@
           <el-input v-model="addForm.url_scancode"></el-input>
         </el-form-item>
         <el-form-item>
-          <el-select v-model="user" filterable placeholder="User">
+          <el-select v-model="user" filterable remote :remote-method="userSelectInput" :loading="loading" placeholder="User Name">
             <el-option
               v-for="item in userlist"
               :key="item.value"
@@ -82,6 +82,7 @@
         <!-- bottom -->
         <el-form-item>
           <el-button @click="dialogClosed">Cancel</el-button>
+          <!-- <el-button type="primary" :icon="Edit" circle /> -->
           <el-button type="primary" @click="confirmDialog">Confirm</el-button>
         </el-form-item>
       </el-form>
@@ -94,7 +95,8 @@ export default {
   setup () {
     const listLoading = ref(false)
     const formLoading = ref(false)
-    
+    const loading = ref(false)
+
     const queryInfo = reactive({
       query: '',
       pagenum: 1,
@@ -132,8 +134,16 @@ export default {
     }
     const dialogVisible = ref(false)
     const user = ref('') 
-    const userlist = []
-
+    const userlist = ref()
+    const userSelectInput = (query) => {
+      if (query) {
+        loading.value = true
+        setTimeout(() => {
+          // get
+          setupUserList(query)
+        }, 500)
+      }
+    }
     // tag
     const inputValue = ref('')
     const inputVisible = ref(false)
@@ -171,6 +181,7 @@ export default {
       addForm.url_scancode = ''
       addForm.user_id = ''
 
+      user.value = ''
       dialogVisible.value = true
     }
 
@@ -186,9 +197,10 @@ export default {
       addForm.url = visual.url
       addForm.url_scancode = visual.url_scancode
       
-      addForm.user_id = visual._id
-      // show
-      dialogVisible.value = true
+      addForm.user_id = visual.user_id
+      user.value = ''
+
+      getUserOfFormAndDisplay()
     }
 
     const deleteClicked = async (id) => {
@@ -228,7 +240,6 @@ export default {
       try {
         const result = await proxy.$http.get('/api/visual')
         listLoading.value = false
-        console.log(result)
         // get list
         if (result.status === 200) {
           visualList.value = result.data
@@ -241,13 +252,71 @@ export default {
         alert('Failed to load visuals' + error)
       }
     }
+
+    // user
+    // get by user id
+    async function getUserOfFormAndDisplay() {
+      listLoading.value = true
+      try {
+        const result = await proxy.$http.get('/api/user', {
+          params: {id: addForm.user_id}
+        })
+        listLoading.value = false
+        // get list
+        if (result.status === 200) {
+          if (result.data.length == 1) {
+            user.value = result.data[0].username
+          }else {
+            // not exist
+            user.value = ''
+          }
+          dialogVisible.value = true
+        }else {
+          alert('Failed to load user' + result.message)
+        }
+      } catch (error) {
+        listLoading.value = false
+        alert('Failed to load visuals' + error)
+      }
+    }
+    async function setupUserList(keyword) {
+      try {
+        const result = await proxy.$http.get('/api/userByPage', {
+          params: {
+            query: keyword,
+            pagenum: 1,
+            pagesize: 5
+          }
+        })
+
+        loading.value = false
+        // get list
+        if (result.status === 200) {
+          let list = result.data.data
+          let display = []
+          for (let index = 0; index < list.length; index++) {
+            const element = list[index];
+            display.push({
+              value: element._id,
+              label: element.username
+            })
+          }
+          userlist.value = display
+        }else {
+          alert('Failed to load users:' + result.message)
+        }
+      } catch (error) {
+        loading.value = false
+        alert('Failed to load users: ' + error)
+      }
+    }
+
     async function addVisual () {
       // url used?
       formLoading.value = true
       try {
         let upload = addForm
         delete upload._id
-
         const add = await proxy.$http.post('/api/visual', upload)
         formLoading.value = false
         if (add.status == 201) {
@@ -311,7 +380,7 @@ export default {
       getVisualList()
     })
 
-    return { listLoading, formLoading, queryInfo, visualList, addForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, user, userlist, handleClose, showInput, handleInputConfirm }
+    return { listLoading, formLoading, loading, queryInfo, visualList, addForm, visualFormRef, visualFormRules, dialogVisible, getVisualList, addVisualClicked, editClicked, deleteClicked, dialogClosed, confirmDialog, inputVisible, inputValue, InputRef, user, userlist, userSelectInput, handleClose, showInput, handleInputConfirm }
   }
 }
 </script>

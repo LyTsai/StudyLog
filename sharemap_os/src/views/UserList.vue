@@ -12,7 +12,7 @@
         <el-col :span="8">
           <el-input placeholder="Input name" v-model="queryInfo.query" clearable @keyup.enter="getUserList" @clear="getUserList">
             <template  #append>
-              <el-button type="primary" :icon="Search" @click="getUserList">Search</el-button>
+              <el-button type="primary" @click="getUserList">Search</el-button>
             </template>
           </el-input>
         </el-col>

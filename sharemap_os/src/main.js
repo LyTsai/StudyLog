@@ -1,5 +1,7 @@
 import { createApp } from 'vue'
 import App from './App.vue'
+import Vuex from 'vuex'
+
 import './index.css'
 
 import router from './router'
@@ -14,4 +16,4 @@ const app = createApp(App)
 app.config.globalProperties.$http = request
 
 // use
-app.use(ElementPlus).use(router).mount('#app')
+app.use(ElementPlus).use(Vuex).use(router).mount('#app')
