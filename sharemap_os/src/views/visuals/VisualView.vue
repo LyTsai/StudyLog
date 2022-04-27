@@ -9,7 +9,8 @@
       <!-- search and add -->
       <el-row :gutter="20">
         <el-col :span="8">
-          <el-input placeholder="Input title" v-model="queryInfo.query" clearable @clear="getVisualList">
+          <el-input 
+          placeholder="Input title" v-model="queryInfo.query" clearable @clear="getVisualList">
             <template #append>
               <el-button type="primary" @click="getVisualList">Search</el-button>
             </template>

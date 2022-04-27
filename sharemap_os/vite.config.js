@@ -5,15 +5,14 @@ module.exports = {
     '/@/': path.resolve(__dirname, './src')
   },
   hostname: "0.0.0.0",
-  port: '8080',
+  port: '8000',
   open: true,
-  https: false,
   ssr: false,
   base: './',
   outDir: 'dist',
   proxy: {
     '/api': {
-      target: "http://localhost:5001/api",
+      target: "https://sharemap-node-backend.azurewebsites.net/api",
       changeOrigin: true,
       pathRewrite: path => path.replace(/^\/api/, '')
     }

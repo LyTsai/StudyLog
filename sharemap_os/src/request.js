@@ -1,6 +1,6 @@
 import axios from 'axios'
 
-axios.defaults.baseURL = 'http://localhost:5001/'
+axios.defaults.baseURL = 'https://sharemap-node-backend.azurewebsites.net'
 axios.defaults.timeout = 20000
 
 axios.interceptors.request.use(response => {
