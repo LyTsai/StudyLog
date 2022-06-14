@@ -12,6 +12,95 @@
           <p style="position: absolute;top: 50%;left: 50%;transform: translate(-50%, -50%);"><em>文字居中</em></p>
         </div>
       </li>
+      <li>CSS3瀑布流
+        <!-- waterfall -->
+        <div class="waterfall">
+          <div class="waterfall-item">
+            <img src="./images/yys.png" alt="">
+          </div>
+          <div class="waterfall-item">
+            <img src="./images/01.jpg" alt="">
+          </div>
+          <div class="waterfall-item">
+            <img src="./images/icon0.png" alt="">
+          </div>
+          <div class="waterfall-item">
+            <img src="./images/icon1.png" alt="">
+          </div>
+          <div class="waterfall-item">
+            <img src="./images/yys.png" alt="">
+          </div>
+          <div class="waterfall-item">
+            <img src="./images/icon1.png" alt="">
+          </div>
+          <div class="waterfall-item">
+            <img src="./images/02.jpg" alt="">
+          </div>
+        </div>
+      </li>
     </ul>
+    
+    <style>
+      .waterfall {
+        display: flex;
+        flex-flow: column wrap;
+        align-content: space-between;
+        /* 必须设置且大与最高的列 */
+        height: 1000px;
+        /* counter-reset: item-counter; */
+      }
+      .waterfall-item {
+        /* position: relative; */
+        width: 33%;
+        padding: 2px;
+        box-sizing: border-box;
+      }
+
+      .waterfall-item:nth-child(3n+1) {
+        order: 1;
+      }
+      .waterfall-item:nth-child(3n+2) {
+        order: 2;
+      }
+      .waterfall-item:nth-child(3n) {
+        order: 3;
+      }
+      /* 强制换列 */
+      .waterfall::before,
+      .waterfall::after {
+        content: "";
+        flex-basis: 100%;
+        width: 0;
+        order: 2;
+      }
+      /* 
+        竖排，从上到下
+        .waterfall {
+        column-count: 3;
+        column-gap: 0;
+      }
+*/
+
+      /* 标记的index数字 */
+        .waterfall-item::after {
+        position: absolute;
+        display: block;
+        top: 2px;
+        left: 2px;
+        width: 24px;
+        height: 24px;
+        text-align: center;
+        line-height: 24px;
+        background-color: #000;
+        color: #fff;
+        /* counter-increment: item-counter; */
+        content: counter(item-counter);
+      } 
+      .waterfall-item img {
+        display: block;
+        width: 100%;
+        height: auto;
+      } 
+    </style>
   </body>
 </html>
