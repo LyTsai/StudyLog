@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
-print("Hello \\ world")
+array = [1, 2, 3, 4]
+print(array[::2])
 
-print(r"Hello \\ world")
 '''
 tupleA = (2, 4, 5)
 print(tupleA[2:4])  # (5,)
