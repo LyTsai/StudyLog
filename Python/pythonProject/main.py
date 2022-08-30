@@ -1,14 +1,8 @@
-#!/usr/bin/env python3
-array = [1, 2, 3, 4]
-print(array[::2])
-
-'''
-tupleA = (2, 4, 5)
-print(tupleA[2:4])  # (5,)
-print(tupleA[::-1])  # (5, 4, 2)
-print(tupleA[::-2])  # (5, 2)
-print(tupleA[-2:-1:1])  # (4,)
-print(tupleA[-2:-1:])
-'''
-
-
+import requests  # pip install requests
+import pprint  # 内置模块，不需要安装
+url = 'https://yys.res.netease.com/pc/zt/20170731172708/data/picture/20220520/5/2732x2048.jpg'
+response = requests.get(url=url)
+print(response)
+# json_data = response.json()
+# pprint.pprint(json_data)
+video_data = requests.get(url=playurl).content  # 二进制数据
