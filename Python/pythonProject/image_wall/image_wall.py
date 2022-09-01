@@ -22,16 +22,13 @@ height = font_text.get_height()
 scale_size = 100
 image_wall = Image.new('RGB', (width * scale_size, height * scale_size), (255, 255, 255))  # mode, size, color=0
 
-pixel_list = []
 for y in range(0, height):
-    pixel_row_list = []
     for x in range(0, width):
         if font_text.get_at((x, y))[0] != 255:
             source_image = Image.open('images/' + random.choice(os.listdir(r'images')))
             source_image = source_image.resize((scale_size, scale_size), Image.Resampling.LANCZOS)
             image_wall.paste(source_image, (x * scale_size, y * scale_size))
 
-    pixel_list.append(pixel_row_list)
 print('adding....')
 image_wall.save(text + '.jpg')
 print('Add finished.')

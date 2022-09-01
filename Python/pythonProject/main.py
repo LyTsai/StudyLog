@@ -1,37 +1,14 @@
-import pygame
-from PIL import Image  # 图像处理模块 pip install pillow
+import requests
+import pprint
 
-import os
-import random
-
-pygame.init()  # 模块初始化
-
-text = '520'
-font_size = 30
-
-# <pygame.font.Font object at 0x1055d8bd0>
-font = pygame.font.Font('SF-UI-Text-Bold.otf', font_size)  # SF-UI-Text-Bold.otf
-# True：锯齿化, color, background
-font_text = font.render(text, True, (0, 0, 0), (255, 255, 255))
-
-# get_size()
-width = font_text.get_width()
-height = font_text.get_height()
-
-# 获得指定像素点的颜色
-scale_size = 100
-image_wall = Image.new('RGB', (width * scale_size, height * scale_size), (255, 255, 255))  # mode, size, color=0
-
-pixel_list = []
-for y in range(0, height):
-    pixel_row_list = []
-    for x in range(0, width):
-        if font_text.get_at((x, y))[0] != 255:
-            source_image = Image.open('images/' + random.choice(os.listdir(r'image_wall/images')))
-            source_image = source_image.resize((scale_size, scale_size), Image.Resampling.LANCZOS)
-            image_wall.paste(source_image, (x * scale_size, y * scale_size))
-
-    pixel_list.append(pixel_row_list)
-print('adding....')
-image_wall.save(text + '.jpg')
-print('Add finished.')
+url = 'https://www.huya.com/cache.php?m=LiveList&do=getLiveListByPage&gameId=2168&tagAll=0&page=2'
+headers = {
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/104.0.5112.101 Safari/537.36'
+}
+response = requests.get(url=url, headers=headers).json()
+data_list = response['data']['datas']
+for item in data_list:
+    name = item['nick']
+    image_url = item['screenshot']
+    image_content = requests.get(url=image_url, headers=headers).content
+    print(item)
