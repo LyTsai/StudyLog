@@ -27,7 +27,7 @@ for y in range(0, height):
     pixel_row_list = []
     for x in range(0, width):
         if font_text.get_at((x, y))[0] != 255:
-            source_image = Image.open('images/' + random.choice(os.listdir(r'image_wall/images')))
+            source_image = Image.open('images/' + random.choice(os.listdir(r'images')))
             source_image = source_image.resize((scale_size, scale_size), Image.Resampling.LANCZOS)
             image_wall.paste(source_image, (x * scale_size, y * scale_size))
 
