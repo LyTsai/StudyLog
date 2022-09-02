@@ -1,5 +1,6 @@
 import requests
 import pprint
+import os
 
 url = 'https://www.huya.com/cache.php?m=LiveList&do=getLiveListByPage&gameId=2168&tagAll=0&page=2'
 headers = {
@@ -11,4 +12,9 @@ for item in data_list:
     name = item['nick']
     image_url = item['screenshot']
     image_content = requests.get(url=image_url, headers=headers).content
-    print(item)
+
+    filename = 'img/'
+    if not os.path.exists(filename):
+        os.mkdir(filename)
+    with open(filename + name + '.jpg', mode='w') as file:
+        file.write(image_content)
