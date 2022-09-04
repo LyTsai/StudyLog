@@ -16,5 +16,5 @@ for item in data_list:
     filename = 'img/'
     if not os.path.exists(filename):
         os.mkdir(filename)
-    with open(filename + name + '.jpg', mode='w') as file:
+    with open(filename + name + '.jpg', mode='wb') as file:
         file.write(image_content)
