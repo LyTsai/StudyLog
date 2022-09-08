@@ -18,14 +18,15 @@ headers = {
 data = requests.get(url=url, headers=headers).json()['data']
 count = data['count']
 
+hundred_million = 1000000 * 100
 page = 1
 while page * 90 < count:
     url = f'https://xueqiu.com/service/v5/stock/screener/quote/list?page={page}&size=90&order=desc&orderby=current_year_percent&order_by=current_year_percent&market=CN&type=sh_sz&_=1662365361258'
     data = requests.get(url=url, headers=headers).json()['data']
-    list = data['list']
-    for item in list:
+
+    for item in data['list']:
         market_capital = item['market_capital']
-        if market_capital < 5000000000 or market_capital > 20000000000:
+        if market_capital < 50 * hundred_million or market_capital > 200 * hundred_million:
             continue
         symbol = item['symbol']
         name = item['name']
