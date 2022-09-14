@@ -9,6 +9,9 @@ import Foundation
 import UIKit
 
 class FeedListTableView: UITableView, UITableViewDataSource, UITableViewDelegate {
+    var cellIsSelected: ((FeedItem) -> Void)?
+    
+    // init
     override init(frame: CGRect, style: UITableView.Style) {
         super.init(frame: frame, style: style)
         setupBasic()
@@ -24,11 +27,14 @@ class FeedListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
         self.dataSource = self
         self.delegate = self
         
+        self.estimatedRowHeight = 400
+        // padding
         if #available(iOS 15, *) {
             self.sectionHeaderTopPadding = 0
         }
     }
     
+    // setup
     fileprivate var feedResponse = FeedResponse()
     func setupWithFeedResponse(_ feed: FeedResponse) {
         self.feedResponse = feed
@@ -50,6 +56,10 @@ class FeedListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     // delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let feedItem = feedResponse.items[indexPath.row]
+        
+        let detailVC = FeedItemViewController()
+        detailVC.setupWithFeedItem(feedItem)
+        
         
     }
     

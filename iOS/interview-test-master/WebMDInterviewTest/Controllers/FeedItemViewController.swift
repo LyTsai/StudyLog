@@ -9,5 +9,12 @@ import Foundation
 import UIKit
 
 class FeedItemViewController: UIViewController {
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
     
+    func setupWithFeedItem(_ feedItem: FeedItem) {
+        navigationItem.title = feedItem.title
+        
+    }
 }

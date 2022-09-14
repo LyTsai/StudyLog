@@ -3,13 +3,16 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 52;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		0B4B536428D1CC390056FBF0 /* FeedListTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B536328D1CC390056FBF0 /* FeedListTableView.swift */; };
 		0B4B536728D1CC810056FBF0 /* FeedItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B536628D1CC810056FBF0 /* FeedItemCell.swift */; };
 		0B4B536928D1D3650056FBF0 /* FeedItemViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4B536828D1D3650056FBF0 /* FeedItemViewController.swift */; };
+		4C1F23F228D226B3002FB868 /* WebImageDisplayTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C1F23F128D226B3002FB868 /* WebImageDisplayTool.swift */; };
+		4C1F23F528D22882002FB868 /* SDWebImage.xcframework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1F23F428D22882002FB868 /* SDWebImage.xcframework */; };
+		4C1F23F628D22882002FB868 /* SDWebImage.xcframework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4C1F23F428D22882002FB868 /* SDWebImage.xcframework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		F212351225BF56F10003048F /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = F212351125BF56F10003048F /* README.md */; };
 		F218566C25BD6A1300FD50E4 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218566B25BD6A1300FD50E4 /* AppDelegate.swift */; };
 		F218567025BD6A1300FD50E4 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F218566F25BD6A1300FD50E4 /* FeedViewController.swift */; };
@@ -34,10 +37,26 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4C1F23F728D22882002FB868 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				4C1F23F628D22882002FB868 /* SDWebImage.xcframework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		0B4B536328D1CC390056FBF0 /* FeedListTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedListTableView.swift; sourceTree = "<group>"; };
 		0B4B536628D1CC810056FBF0 /* FeedItemCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemCell.swift; sourceTree = "<group>"; };
 		0B4B536828D1D3650056FBF0 /* FeedItemViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedItemViewController.swift; sourceTree = "<group>"; };
+		4C1F23F128D226B3002FB868 /* WebImageDisplayTool.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WebImageDisplayTool.swift; sourceTree = "<group>"; };
+		4C1F23F428D22882002FB868 /* SDWebImage.xcframework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcframework; name = SDWebImage.xcframework; path = Carthage/Build/SDWebImage.xcframework; sourceTree = "<group>"; };
 		F212351125BF56F10003048F /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		F218566825BD6A1300FD50E4 /* WebMDInterviewTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = WebMDInterviewTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F218566B25BD6A1300FD50E4 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -61,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4C1F23F528D22882002FB868 /* SDWebImage.xcframework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -83,6 +103,14 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		4C1F23F328D22882002FB868 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4C1F23F428D22882002FB868 /* SDWebImage.xcframework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		F218565F25BD6A1300FD50E4 = {
 			isa = PBXGroup;
 			children = (
@@ -90,6 +118,7 @@
 				F218566A25BD6A1300FD50E4 /* WebMDInterviewTest */,
 				F21856DE25BD815A00FD50E4 /* WebMDInterviewTest-UnitTests */,
 				F218566925BD6A1300FD50E4 /* Products */,
+				4C1F23F328D22882002FB868 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -150,6 +179,7 @@
 			isa = PBXGroup;
 			children = (
 				F218569425BD760900FD50E4 /* ResourceReader.swift */,
+				4C1F23F128D226B3002FB868 /* WebImageDisplayTool.swift */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -181,6 +211,7 @@
 				F218566425BD6A1300FD50E4 /* Sources */,
 				F218566525BD6A1300FD50E4 /* Frameworks */,
 				F218566625BD6A1300FD50E4 /* Resources */,
+				4C1F23F728D22882002FB868 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
@@ -280,6 +311,7 @@
 				0B4B536428D1CC390056FBF0 /* FeedListTableView.swift in Sources */,
 				F218568C25BD6CE900FD50E4 /* FeedResponse.swift in Sources */,
 				0B4B536928D1D3650056FBF0 /* FeedItemViewController.swift in Sources */,
+				4C1F23F228D226B3002FB868 /* WebImageDisplayTool.swift in Sources */,
 				F21856D625BD794600FD50E4 /* FeedProvider.swift in Sources */,
 				F218566C25BD6A1300FD50E4 /* AppDelegate.swift in Sources */,
 			);
@@ -445,7 +477,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8LTG3VGR5L;
+				DEVELOPMENT_TEAM = 8D66FRV9W5;
 				INFOPLIST_FILE = WebMDInterviewTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -465,7 +497,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 8LTG3VGR5L;
+				DEVELOPMENT_TEAM = 8D66FRV9W5;
 				INFOPLIST_FILE = WebMDInterviewTest/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (

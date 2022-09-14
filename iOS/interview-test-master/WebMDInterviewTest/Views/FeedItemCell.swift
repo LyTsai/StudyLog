@@ -40,7 +40,7 @@ class FeedItemCell: UITableViewCell {
     }
     
     fileprivate func configureWithItem(_ item: FeedItem) {
-        
+        itemImage.loadWebImage(item.imageUrl)
         textLabel?.text = item.title
         detailTextLabel?.text = item.description
     }
@@ -48,5 +48,6 @@ class FeedItemCell: UITableViewCell {
     override func layoutSubviews() {
         super.layoutSubviews()
         
+        itemImage.frame = CGRect(x: 0, y: 0, width: bounds.width, height: 100)
     }
 }

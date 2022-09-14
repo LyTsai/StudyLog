@@ -16,7 +16,7 @@ class FeedItem: Codable {
     /**
      image_url
      */
-    var imageUrl: String?
+    var imageUrl: URL?
     /**
      detail
      */
