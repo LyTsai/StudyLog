@@ -18,12 +18,31 @@ class FeedViewController: UIViewController {
             
      */
 
+    @IBOutlet weak var feedListTableView: FeedListTableView!
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         
-        let responseData = FeedProvider.getFeedResponse()
-        print("hello")
+        navigationItem.title = "Reading..."
+        
+        FeedProvider.getFeedResponse { feedResponse, message in
+            if feedResponse != nil {
+                self.navigationItem.title = "Feed Response"
+                self.feedListTableView.setupWithFeedResponse(feedResponse!)
+            }else {
+                let cancelAction = UIAlertAction(title: "Got It", style: .default, handler: nil)
+                // add reload?
+                
+                // alert
+                let alert = UIAlertController(title: nil, message: message, preferredStyle: .alert)
+                alert.addAction(cancelAction)
+                self.present(alert, animated: true, completion: nil)
+            }
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
     }
 }

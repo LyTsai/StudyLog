@@ -10,21 +10,28 @@ struct FeedProvider {
      Note that this function should be used by FeedViewController to get the array of filtered and sorted FeedItem objects.
      */
     
-    public static func getFeedResponse(_ completion: (Bool, ReaderError)) {
-
+    public static func getFeedResponse(_ completion: ((FeedResponse?, String?) -> Void)?) {
         DispatchQueue.global().async {
             do {
-                let resourceData: String = try ResourceReader.read(resource: "data", ofType: "json")
-                print(resourceData)
+                let feedResponse: FeedResponse = try ResourceReader.read(resource: "data", ofType: "json")
+                // filter and sort
+                var items = [String: FeedItem]()
+                for item in feedResponse.items {
+                    items[item.title ?? ""] = item
+                }
+                feedResponse.items = items.values.sorted(by: {$0.title ?? "" < $1.title ?? ""})
+                // sort
+//                feedResponse.items.sort(by: {$0.title ?? "" < $1.title ?? ""})
+                
+                // finish
                 DispatchQueue.main.async {
-                    completion?(true, result, nil)
+                    completion?(feedResponse, "Success")
                 }
             } catch {
-    //            ReaderError.resourceNotFound
-                print("error")
+                DispatchQueue.main.async {
+                    completion?(nil, "Failed to Parse: \(error.localizedDescription)")
+                }
             }
         }
-        
-        return FeedResponse()
     }
 }

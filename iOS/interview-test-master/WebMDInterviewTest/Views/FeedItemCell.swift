@@ -11,6 +11,7 @@ import UIKit
 let FeedItemCellID = "Feed Item Cell Identifier"
 class FeedItemCell: UITableViewCell {
     fileprivate let itemImage = UIImageView()
+    fileprivate let detailTextView = UITextView()
     
     class func cellWithTable(_ table: FeedListTableView, item: FeedItem) -> FeedItemCell {
         var itemCell = table.dequeueReusableCell(withIdentifier: FeedItemCellID) as? FeedItemCell
@@ -25,16 +26,27 @@ class FeedItemCell: UITableViewCell {
     }
     
     fileprivate func setupSubviews() {
+        self.backgroundColor = UIColor.clear
+        self.selectionStyle = .none
         
+        // subviews
+        itemImage.contentMode = .scaleAspectFit
+        
+        detailTextView.backgroundColor = UIColor.clear
+        detailTextView.isEditable = false
+        
+        self.contentView.addSubview(itemImage)
+        self.contentView.addSubview(detailTextView)
     }
     
     fileprivate func configureWithItem(_ item: FeedItem) {
         
+        textLabel?.text = item.title
+        detailTextLabel?.text = item.description
     }
     
     override func layoutSubviews() {
         super.layoutSubviews()
         
-        // adjust?
     }
 }

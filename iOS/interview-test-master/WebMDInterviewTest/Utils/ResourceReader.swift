@@ -12,6 +12,7 @@ struct ResourceReader {
         }
         
         let data = try Data(contentsOf: URL(fileURLWithPath: resourcePath), options: .mappedIfSafe)
+        
         let result = try JSONDecoder().decode(T.self, from: data)
         
         return result

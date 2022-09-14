@@ -37,11 +37,11 @@ class FeedListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     
     // data source
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return feedResponse.feedItems.count
+        return feedResponse.items.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let feedItem = feedResponse.feedItems[indexPath.row]
+        let feedItem = feedResponse.items[indexPath.row]
         let feedCell = FeedItemCell.cellWithTable(self, item: feedItem)
         
         return feedCell
@@ -49,7 +49,11 @@ class FeedListTableView: UITableView, UITableViewDataSource, UITableViewDelegate
     
     // delegate
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let feedItem = feedResponse.feedItems[indexPath.row]
+        let feedItem = feedResponse.items[indexPath.row]
         
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return UITableView.automaticDimension
     }
 }

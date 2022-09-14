@@ -4,7 +4,7 @@ import Foundation
  Create a model that will represent the feed item from the data.json file.
  */
 
-class FeedItem: NSObject {
+class FeedItem: Codable {
     /**
      title
      */
@@ -12,7 +12,7 @@ class FeedItem: NSObject {
     /**
      description
      */
-    var descriptionString: String?
+    var description: String?
     /**
      image_url
      */
@@ -21,4 +21,11 @@ class FeedItem: NSObject {
      detail
      */
     var detail: String?
+}
+
+extension FeedItem {
+    enum CodingKeys: String, CodingKey {
+        case title, description, detail
+        case imageUrl = "image_url"
+    }
 }

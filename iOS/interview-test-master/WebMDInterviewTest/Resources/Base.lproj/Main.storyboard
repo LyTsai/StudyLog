@@ -32,10 +32,25 @@
                     <view key="view" contentMode="scaleToFill" id="hEB-WZ-huC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" translatesAutoresizingMaskIntoConstraints="NO" id="xBc-qW-a6w" customClass="FeedListTableView" customModule="WebMDInterviewTest" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
+                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                            </tableView>
+                        </subviews>
                         <viewLayoutGuide key="safeArea" id="tw5-JB-CVh"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="xBc-qW-a6w" firstAttribute="leading" secondItem="tw5-JB-CVh" secondAttribute="leading" id="Rf5-QT-77C"/>
+                            <constraint firstItem="tw5-JB-CVh" firstAttribute="bottom" secondItem="xBc-qW-a6w" secondAttribute="bottom" id="aoj-zy-HmS"/>
+                            <constraint firstItem="tw5-JB-CVh" firstAttribute="trailing" secondItem="xBc-qW-a6w" secondAttribute="trailing" id="efu-Yt-713"/>
+                            <constraint firstItem="xBc-qW-a6w" firstAttribute="top" secondItem="tw5-JB-CVh" secondAttribute="top" id="wG1-WL-fsj"/>
+                        </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="8sT-XM-ygo"/>
+                    <connections>
+                        <outlet property="feedListTableView" destination="xBc-qW-a6w" id="VZo-M9-bsM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XGY-mm-WRS" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
