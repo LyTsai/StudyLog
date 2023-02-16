@@ -2,13 +2,15 @@ from jqdata import *
 
 def initialize(context):
     # 每日运行
-    run_daily(period, time="every_bar")
     # 基准收益，运行后的红线，和策略进行比较
     set_benchmark('000300.XSHG')
-    # 股票池
-    g.security = get_index_stocks('000300.XSHG')
     set_option('use_real_price', True)
     set_order_cost(OrderCost(open_tax=0, close_tax=0.001, open_commission=0.0003, close_commission=0.0003, close_today_commission=0, min_commission=5), type="stock")
+    # 股票池
+    g.security = get_index_stocks('000300.XSHG')
+    # run_daily(方法名, time参数：'before_open'， 'open'， 'after_close')
+    run_daily(period, time="every_bar")
+
 
 def period(context):
     # 先卖后买，假设平均买
@@ -27,7 +29,6 @@ def period(context):
             # 止盈和止损
             if p >= cost * 1.25 or p <= cost * 0.9:
                 order_target(stock, 0)
-
     cash_per_stock = context.portfolio.available_cash / len(tobuy)
     for stock in tobuy:
         order_value(stock, cash_per_stock)
