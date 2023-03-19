@@ -10,9 +10,6 @@ global_frame = None
 def index():
     return render_template('index.html')
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='8080', threaded=True)
-
 @app.route('/video_viewer')
 def video_viewer():
     return Response(video_stream(),mimetype='multipart/x-mixed-replace; boundary=frame')
@@ -51,3 +48,7 @@ def record_status():
     else:
         video_camera.stop_record()
         return jsonify(result="stopped")
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port='8080', threaded=True)
