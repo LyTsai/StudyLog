@@ -16,3 +16,5 @@ Python/pythonProject/.idea/misc.xml
 Python/pythonProject/.idea/misc.xml
 Python/pythonProject/.idea/misc.xml
 Python/pythonProject/.idea/pythonProject.iml
+.DS_Store
+*.pyc
