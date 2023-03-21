@@ -9,12 +9,7 @@ UserInterface.xcuserstate
 .DS_Store
 */.DS_Store
 
-
 */node_modules
-Python/pythonProject/.idea/pythonProject.iml
-Python/pythonProject/.idea/misc.xml
-Python/pythonProject/.idea/misc.xml
-Python/pythonProject/.idea/misc.xml
-Python/pythonProject/.idea/pythonProject.iml
-.DS_Store
-*.pyc
+*.iml
+*.xml
+*/__pycache__
