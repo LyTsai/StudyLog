@@ -1,6 +1,7 @@
 import cv2 as cv
 import numpy as np
 import matplotlib.pyplot as plt
+import os
 
 def rescaleFrame(frame, scale=0.75):
     width = int(frame.shape[1] * scale)
@@ -70,7 +71,7 @@ img = cv.imread('Photos/三贵子.jpg')
 # cv.waitKey(0)
 
 gray = cv.cvtColor(img, cv.COLOR_BGR2GRAY)
-cv.imshow('Gray', gray)
+# cv.imshow('Gray', gray)
 
 # blur = cv.GaussianBlur(img, (5, 5), cv.BORDER_DEFAULT)
 # cv.imshow('Blur', blur)
@@ -104,7 +105,7 @@ cv.imshow('Gray', gray)
 # cropped = img[0:600, 1700:2700]
 # cv.imshow('Cropped', cropped)
 
-translated = translate(img, 100, 100)
+# translated = translate(img, 100, 100)
 # cv.imshow('Img', img)
 # cv.imshow('Translated', translated)
 
@@ -118,7 +119,7 @@ translated = translate(img, 100, 100)
 # flip = cv.flip(img, 0)
 # cv.imshow('Flip', flip)
 
-grayscale = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
+# grayscale = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
 
 # blur = cv.GaussianBlur(grayscale, (3, 3), cv.BORDER_DEFAULT)
 # canny = cv.Canny(blur, 125, 175)
@@ -139,13 +140,148 @@ grayscale = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
 # plt.imshow(rgbImage)
 # plt.show()
 
-b,g,r = cv.split(img)
+# b,g,r = cv.split(img)
 
-merged = cv.merge([b, g, r])
-cv.imshow('Merged', merged)
+# merged = cv.merge([b, g, r])
+# cv.imshow('Merged', merged)
 
-blank = np.zeros(img.shape[:2], dtype="uint8")
-blue = cv.merge([b, blank, blank])
-cv.imshow('Blue', blue)
+# blank = np.zeros(img.shape[:2], dtype="uint8")
+# blue = cv.merge([b, blank, blank])
+# cv.imshow('Blue', blue)
 
-cv.waitKey(0)
+# average = cv.blur(img, (7, 7))
+# cv.imshow('Average Blur', average)
+
+# guassian = cv.GaussianBlur(img, (7, 7), cv.BORDER_DEFAULT)
+# cv.imshow('Guassian', guassian)
+
+# meidan = cv.medianBlur(img, 7)
+# cv.imshow('Median', meidan)
+
+# def bilateralFilter(src: cv2.typing.MatLike, d: int, sigmaColor: float, sigmaSpace: float, dst: cv2.typing.MatLike | None = ..., borderType: int = ...) -> cv2.typing.MatLike: ...
+# bilateral = cv.bilateralFilter(img, 5, 5, 2)
+# cv.imshow('Bilateral', bilateral)
+
+blank = np.zeros(img.shape, dtype='uint8')
+# rectangle = cv.rectangle(blank.copy(), (20, 20), (380, 380), 255, thickness=-1)
+circle = cv.circle(blank.copy(), (1800, 200), 200, (255, 255, 255), -1)
+
+# 交集intersection
+# bitwise_and = cv.bitwise_and(rectangle, circle)
+# # 并集 union
+# bitwise_or = cv.bitwise_or(rectangle, circle)
+# # exclusive OR, non-intersection region
+# bitwise_xor = cv.bitwise_xor(rectangle, circle)
+# bitwise_not = cv.bitwise_not(rectangle)
+
+# cv.imshow('and', bitwise_and)
+# cv.imshow('or', bitwise_or)
+# cv.imshow('xor', bitwise_xor)
+# cv.imshow('not', bitwise_not)
+
+# images, channels, mask, histSize, ranges, hist, accumulate,
+
+mask = np.zeros(img.shape[:2], dtype='uint8')
+cv.circle(mask, (1800, 200), 200, 255, -1)
+# gray_hist = cv.calcHist([gray], [0],mask, [256], [0, 256])
+# plt.figure()
+# plt.title('Gray scale Histogram')
+# plt.xlabel('Bins')
+# plt.ylabel('# of pixels')
+# plt.plot(gray_hist)
+# plt.xlim([0, 256])
+
+# plt.show()
+
+# masked = cv.bitwise_and(img, img, mask=mask)
+# cv.imshow('ma', masked)
+# colors = ('b', 'g', 'r')
+# for i,col in enumerate(colors):
+#     hist = cv.calcHist([img], [i], mask, [256], [0, 256])
+#     plt.plot(hist, color=col)
+# plt.show()
+
+# ret, thres = cv.threshold(gray, 160, 255, cv.THRESH_BINARY)
+# adaptive_threshold = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 11, 3)
+
+# adaptive_threshold1 = cv.adaptiveThreshold(gray, 255, cv.ADAPTIVE_THRESH_MEAN_C, cv.THRESH_BINARY, 11, 1)
+
+# print(ret)
+
+# cv.imshow('Threshold', adaptive_threshold1)
+# cv.imshow('ada', adaptive_threshold)
+
+# lap = cv.Laplacian(gray, cv.CV_64F)
+# lap = np.uint8(np.absolute(lap))
+# cv.imshow('Laplacian', lap)
+
+# sobelx = cv.Sobel(gray, cv.CV_64F, 1, 0)
+# sobely = cv.Sobel(gray, cv.CV_64F, 0, 1)
+# combined = cv.bitwise_or(sobelx, sobely)
+
+# cv.imshow('X', sobelx)
+# cv.imshow('Y', sobely)
+# cv.imshow('Combined', combined)
+
+# haarcascade & local binary patterns (more advanced)
+# haar_cascade = cv.CascadeClassifier('haar_face.xml')
+# faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=4)
+# for (x, y, w, h) in faces_rect:
+#     cv.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+# cv.imshow('Image', img)
+
+# trainFoloderPath/name1/xxx.jpg
+# /Users/lydiretsai/Pictures/yys/
+people = ['Satomi', 'Jennifer']
+DIR = r'/Users/lydiretsai/Pictures/people'
+
+features = []
+labels = []
+
+def is_valid_iamge(filepath):
+    try:
+        image = cv.imread(filepath)
+        if image is not None and len(image.shape) == 3:
+            return True
+        else:
+            return False
+    except Exception as e:
+        print(f'Error occured while reading the file: {filepath}, {str(e)}')
+        return False
+
+def create_train():
+    for person in people:
+        path = os.path.join(DIR, person)
+        label = people.index(person)
+
+        for filename in os.listdir(path):
+            # some maybe not img (.DS_Store), check first
+            img_path = os.path.join(path, filename)
+
+            if is_valid_iamge(img_path):
+                img = cv.imread(img_path)
+                gray = cv.cvtColor(img, cv.COLOR_RGB2GRAY)
+
+                haar_cascade = cv.CascadeClassifier('haar_face.xml')
+                faces_rect = haar_cascade.detectMultiScale(gray, scaleFactor=1.1, minNeighbors=5)
+
+                for (x, y, w, h) in faces_rect:
+                    faces_roi = gray[y: y+h, x:x+w]
+                    # cv.rectangle(img, (x, y), (x + w, y + h), (0, 255, 0), 2)
+
+                    features.append(faces_roi)
+                    labels.append(label)
+create_train()
+
+print(f'length of the features = { len(features)}')
+
+features = np.array(features, dtype='object')
+labels = np.array(labels)
+
+face_recognizer = cv.face.LBPHFaceRecognizer_create()
+# train the recognizer
+face_recognizer.train(features, labels)
+
+face_recognizer.save('face_trained.yml')
+np.save('features.npy', features)
+np.save('labels.npy', labels)
